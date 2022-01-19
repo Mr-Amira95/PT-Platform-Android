@@ -1,4 +1,4 @@
-package com.qtechnetworks.ptplatform.View.Activity.TraineeSignIn;
+package com.qtechnetworks.ptplatform.View.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,33 +8,33 @@ import android.view.View;
 import android.widget.Button;
 
 import com.qtechnetworks.ptplatform.R;
-import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 
-public class EmailVerifyTraineeActivity extends AppCompatActivity {
+public class OtpActivity extends AppCompatActivity {
 
     Button next_verify_trainee_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_email_verify_trainee);
+        setContentView(R.layout.activity_otp);
 
         initial();
+
+        next_verify_trainee_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(OtpActivity.this, SignInActivity.class);
+                i.putExtra("type", "trainee");
+                startActivity(i);
+
+            }
+        });
 
     }
 
     private void initial(){
 
-        next_verify_trainee_button=findViewById(R.id.next_verify_trainee_button);
-
-        next_verify_trainee_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                startActivity(new Intent(EmailVerifyTraineeActivity.this, MainActivity.class));
-
-            }
-        });
+        next_verify_trainee_button=findViewById(R.id.next_button);
 
     }
 

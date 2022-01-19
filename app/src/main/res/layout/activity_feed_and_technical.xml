@@ -42,7 +42,8 @@
         android:layout_marginStart="@dimen/_15sdp"
         android:layout_marginTop="@dimen/_28sdp"
         android:padding="@dimen/_10sdp"
-        android:background="@drawable/backgroundtextsmall"
+        android:background="@drawable/background_radius_10"
+        android:backgroundTint="@color/white"
         android:textColor="@color/textcolor" />
 
     <EditText
@@ -55,7 +56,8 @@
         android:layout_marginStart="@dimen/_15sdp"
         android:layout_marginTop="@dimen/_18sdp"
         android:padding="@dimen/_10sdp"
-        android:background="@drawable/backgroundtextsmall"
+        android:background="@drawable/background_radius_10"
+        android:backgroundTint="@color/white"
         android:textColor="@color/textcolor" />
 
     <EditText
@@ -68,7 +70,8 @@
         android:layout_marginStart="@dimen/_15sdp"
         android:layout_marginTop="@dimen/_18sdp"
         android:padding="@dimen/_10sdp"
-        android:background="@drawable/backgroundtextsmall"
+        android:background="@drawable/background_radius_10"
+        android:backgroundTint="@color/white"
         android:textColor="@color/textcolor"/>
 
     <EditText
@@ -79,7 +82,8 @@
         android:inputType="textPersonName"
         android:gravity="start"
         android:textColor="@color/textcolor"
-        android:background="@drawable/backgroundtext"
+        android:background="@drawable/background_radius_10"
+        android:backgroundTint="@color/white"
         android:padding="@dimen/_10sdp"
         android:textColorHint="@color/textcolor"
         android:layout_marginEnd="@dimen/_15sdp"
@@ -93,7 +97,7 @@
         android:layout_width="@dimen/_290sdp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@drawable/ic_button_login"
+        android:background="@drawable/button_background"
         android:textColor="@color/white"
         android:fontFamily="@font/aeonikregular"
         android:layout_marginTop="@dimen/_45sdp"

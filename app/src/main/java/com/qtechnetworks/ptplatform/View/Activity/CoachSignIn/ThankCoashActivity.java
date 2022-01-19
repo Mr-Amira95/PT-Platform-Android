@@ -5,15 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.qtechnetworks.ptplatform.R;
-import com.qtechnetworks.ptplatform.View.Activity.ChoosingActivity;
-import com.qtechnetworks.ptplatform.View.Activity.SplashActivity;
-import com.qtechnetworks.ptplatform.View.Activity.TraineeSignIn.SignInTraineeActivity;
+import com.qtechnetworks.ptplatform.View.Activity.SignInActivity;
 
 public class ThankCoashActivity extends AppCompatActivity {
 
     public static int SPLASH_TIME_OUT=4000;
+    LinearLayout thankYouLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,22 +23,30 @@ public class ThankCoashActivity extends AppCompatActivity {
 
         initial();
 
-
-    }
-
-    public void initial(){
-
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-
-                startActivity(new Intent(ThankCoashActivity.this, SignInTraineeActivity.class).putExtra("button","true"));
+                Intent i = new Intent(ThankCoashActivity.this, SignInActivity.class);
+                i.putExtra("type","coach");
+                startActivity(i);
                 finish();
 
             }
         },SPLASH_TIME_OUT);
 
+        thankYouLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ThankCoashActivity.this, SignInActivity.class);
+                i.putExtra("type","coach");
+                startActivity(i);
+                finish();
+            }
+        });
+    }
+
+    public void initial(){
+        thankYouLayout = findViewById(R.id.thank_you_layout);
     }
 
 

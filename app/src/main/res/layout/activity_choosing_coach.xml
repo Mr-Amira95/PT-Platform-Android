@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/back"
+    android:background="@drawable/background_three"
     tools:context=".View.Activity.ChoosingCoachActivity">
 
 
@@ -34,7 +34,8 @@ Trainer:"
             android:layout_height="@dimen/_35sdp"
             android:layout_below="@id/title_text"
             android:layout_marginHorizontal="@dimen/_20sdp"
-            android:background="@drawable/bordered_background"
+            android:background="@drawable/background_radius_20"
+            android:backgroundTint="@color/white"
             android:drawableEnd="@drawable/ic_search"
             android:hint="SEARCH TRAINER"
             android:padding="@dimen/_3sdp"

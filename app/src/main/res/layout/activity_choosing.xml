@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background1"
+    android:orientation="vertical"
+    tools:context=".View.Activity.ChoosingActivity">
+
+    <ImageView
+        android:layout_width="@dimen/_160sdp"
+        android:layout_height="@dimen/_100sdp"
+        android:layout_gravity="center"
+        android:src="@drawable/logo"
+        android:layout_marginTop="@dimen/_20sdp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tell us"
+        android:fontFamily="@font/aeonikbold"
+        android:textColor="@color/white"
+        android:layout_marginTop="@dimen/_190sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:textSize="@dimen/_16sdp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="About You"
+        android:fontFamily="@font/aeonikbold"
+        android:textColor="@color/white"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:textSize="@dimen/_27sdp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_2sdp"
+        android:layout_marginEnd="@dimen/_2sdp"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:layout_marginBottom="@dimen/_2sdp"
+        android:orientation="horizontal">
+
+
+        <RelativeLayout
+            android:layout_width="@dimen/_230sdp"
+            android:layout_height="@dimen/_150sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_weight="1">
+
+
+            <ImageView
+                android:id="@+id/imageView_coach"
+                android:layout_width="@dimen/_230sdp"
+                android:layout_height="@dimen/_150sdp"
+                app:srcCompat="@drawable/notcheck" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="112dp"
+                android:layout_height="69dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="58dp"
+                android:layout_marginBottom="55dp"
+                android:fontFamily="@font/aeonikbold"
+                android:text="I am a
+Coach"
+                android:textColor="#8DC63F"
+                android:textSize="@dimen/_20sdp" />
+
+    </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="@dimen/_230sdp"
+            android:layout_height="@dimen/_150sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_weight="1">
+
+
+            <ImageView
+                android:id="@+id/imageView_trainee"
+                android:layout_width="@dimen/_230sdp"
+                android:layout_height="@dimen/_150sdp"
+                app:srcCompat="@drawable/notcheck" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="112dp"
+                android:layout_height="69dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="58dp"
+                android:layout_marginBottom="55dp"
+                android:fontFamily="@font/aeonikbold"
+                android:text="I am a
+Trainee"
+                android:textColor="#8DC63F"
+                android:textSize="@dimen/_20sdp" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/next_button"
+        android:layout_width="@dimen/_270sdp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/ic_button_login"
+        android:textColor="@color/white"
+        android:fontFamily="@font/aeonikregular"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:text="Next" />
+
+
+</LinearLayout>

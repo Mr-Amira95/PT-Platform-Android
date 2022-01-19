@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/backapp"
+    tools:context=".View.Activity.FeedAndTechnicalActivity">
+
+    <TextView
+        android:id="@+id/title_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="#8DC63F"
+        android:textSize="@dimen/_20sdp"
+        android:fontFamily="@font/aeonikbold"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginStart="@dimen/_15sdp"/>
+
+
+    <TextView
+        android:id="@+id/desc_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Need help or have a question? Get in touch with us!"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_16sdp"
+        android:fontFamily="@font/aeonikbold"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_55sdp"/>
+
+    <EditText
+        android:id="@+id/editTextTextPersonName"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_28sdp"
+        android:padding="@dimen/_10sdp"
+        android:background="@drawable/backgroundtextsmall"
+        android:textColor="@color/textcolor" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_18sdp"
+        android:padding="@dimen/_10sdp"
+        android:background="@drawable/backgroundtextsmall"
+        android:textColor="@color/textcolor" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonName3"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_18sdp"
+        android:padding="@dimen/_10sdp"
+        android:background="@drawable/backgroundtextsmall"
+        android:textColor="@color/textcolor"/>
+
+    <EditText
+        android:id="@+id/editTextTextPersonName4"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_200sdp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:gravity="start"
+        android:textColor="@color/textcolor"
+        android:background="@drawable/backgroundtext"
+        android:padding="@dimen/_10sdp"
+        android:textColorHint="@color/textcolor"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_18sdp"
+        android:hint="Message" />
+
+
+    <Button
+        android:id="@+id/send_button"
+        android:layout_width="@dimen/_290sdp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/ic_button_login"
+        android:textColor="@color/white"
+        android:fontFamily="@font/aeonikregular"
+        android:layout_marginTop="@dimen/_45sdp"
+        android:text="Send"
+        android:textSize="@dimen/_14sdp"
+        android:textAllCaps="false"/>
+
+
+</LinearLayout>

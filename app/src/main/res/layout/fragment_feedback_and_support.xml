@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".View.Fragment.FeedbackAndSupportFragment"
+    android:orientation="vertical"
+    android:background="@color/backapp">
+
+    <TextView
+        android:id="@+id/title_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Title"
+        android:textColor="@color/primary_color"
+        android:textSize="@dimen/_20sdp"
+        android:fontFamily="@font/aeonikbold"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginHorizontal="@dimen/_20sdp"/>
+
+    <TextView
+        android:id="@+id/desc_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Need help or have a question? Get in touch with us!"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_16sdp"
+        android:fontFamily="@font/aeonikbold"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginHorizontal="@dimen/_20sdp"/>
+
+    <EditText
+        android:id="@+id/name_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:maxLines="1"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_25sdp"
+        android:padding="@dimen/_10sdp"
+        android:background="@drawable/background_radius_10"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/backapp"
+        android:hint="Name"/>
+
+    <EditText
+        android:id="@+id/phone_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:padding="@dimen/_10sdp"
+        android:background="@drawable/background_radius_10"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/backapp"
+        android:hint="Phone Number"
+        android:maxLines="1"/>
+
+    <EditText
+        android:id="@+id/email_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:padding="@dimen/_10sdp"
+        android:background="@drawable/background_radius_10"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/backapp"
+        android:hint="Email Address"
+        android:maxLines="1"/>
+
+    <EditText
+        android:id="@+id/message_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_200sdp"
+        android:inputType="textPersonName"
+        android:gravity="start"
+        android:textColor="@color/backapp"
+        android:background="@drawable/background_radius_10"
+        android:backgroundTint="@color/white"
+        android:padding="@dimen/_10sdp"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:hint="Message" />
+
+    <Button
+        android:id="@+id/send_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/button_background"
+        android:textColor="@color/white"
+        android:fontFamily="@font/aeonikregular"
+        android:layout_marginTop="@dimen/_25sdp"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:text="Send"
+        android:textSize="@dimen/_14sdp"
+        android:textAllCaps="false"/>
+
+</LinearLayout>

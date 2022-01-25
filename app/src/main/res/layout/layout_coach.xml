@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/coach_layout">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/trainer_image"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_175sdp"
+        android:padding="10dp"
+        android:scaleType="centerCrop"
+        app:riv_corner_radius="@dimen/_15sdp"
+        android:src="@drawable/follwous"/>
+
+    <TextView
+        android:id="@+id/trainer_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:gravity="center"
+        android:text="PT Platform"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12sdp"
+        android:textStyle="bold"/>
+
+</LinearLayout>

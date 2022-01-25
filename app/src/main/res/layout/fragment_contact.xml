@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".View.Fragment.ContactFragment"
+    android:orientation="vertical"
+    android:background="@color/backapp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Contact Us"
+        android:textColor="@color/primary_color"
+        android:textSize="@dimen/_20sdp"
+        android:fontFamily="@font/aeonikbold"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginStart="@dimen/_15sdp"/>
+
+    <Button
+        android:id="@+id/technical_support_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/button_background"
+        android:textColor="@color/white"
+        android:fontFamily="@font/aeonikregular"
+        android:text="Technical Support"
+        android:textSize="@dimen/_14sdp"
+        android:textAllCaps="false"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_120sdp"/>
+
+    <Button
+        android:id="@+id/feedback_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/button_background"
+        android:textColor="@color/white"
+        android:fontFamily="@font/aeonikregular"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:text="Submit Feedback"
+        android:textSize="@dimen/_14sdp"
+        android:textAllCaps="false"
+        android:layout_marginHorizontal="@dimen/_20sdp"/>
+
+</LinearLayout>

@@ -12,7 +12,11 @@
     <color name="textcolor">#8DC63F</color>
     <color name="primary_color">#8DC63F</color>
     <color name="google_red">#C63F3F</color>
+    <color name="red">#FF0000</color>
+    <color name="blue">#1EB1FC</color>
     <color name="facebook_blue">#086DAC</color>
     <color name="color_hint">#707070</color>
+    <color name="txt_grey">#939393</color>
+    <color name="dark_grey">#404040</color>
 
 </resources>

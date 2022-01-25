@@ -1,120 +1,103 @@
 package com.qtechnetworks.ptplatform.Controller.adapters;
 
-import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.PagerAdapter;
 
 import com.bumptech.glide.Glide;
-import com.makeramen.roundedimageview.RoundedImageView;
 import com.qtechnetworks.ptplatform.R;
-import com.qtechnetworks.ptplatform.View.Activity.ChoosingCoachActivity;
-import com.qtechnetworks.ptplatform.View.Activity.ContactUsActivity;
-import com.qtechnetworks.ptplatform.View.Activity.FollowusActivity;
-import com.qtechnetworks.ptplatform.View.Activity.NewsActivity;
+import com.qtechnetworks.ptplatform.View.Fragment.ChooseCoachFragment;
+import com.qtechnetworks.ptplatform.View.Fragment.ContactFragment;
+import com.qtechnetworks.ptplatform.View.Fragment.FollowUsFragment;
+import com.qtechnetworks.ptplatform.View.Fragment.NewsFragment;
 
 import java.util.List;
 
-
-public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder>  {
+public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
     private Context context;
-    private View view;
     private List<String> list;
-    private List<Integer> listpic;
+    private List<Integer> listPic;
 
-    public CategoryAdapter(List<String> list, List<Integer> listpic, Context context) {
+    public CategoryAdapter(List<String> list, List<Integer> listPic, Activity context) {
 
         this.list = list;
         this.context=context;
-        this.listpic=listpic;
-
+        this.listPic=listPic;
     }
-
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        view= LayoutInflater.from(parent.getContext()).inflate(R.layout.category_layout,parent,false);
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_category,parent,false);
 
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull CategoryAdapter.ViewHolder holder, int position) {
+        Glide.with(context).load(listPic.get(holder.getAdapterPosition())).into(holder.categoryImg);
+        holder.categoryTitle.setText(list.get(holder.getAdapterPosition()));
 
-        try {
-            Glide.with(context).load(listpic.get(position)).into(holder.cate_image);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-        holder.categ_name.setText(list.get(position));
-
-
-        holder.category_lienear.setOnClickListener(new View.OnClickListener() {
+        holder.categoryLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (position==2){
-
-                    context.startActivity(new Intent(context.getApplicationContext(), ContactUsActivity.class));
-
+                switch (holder.getAdapterPosition()){
+                    case 0:
+                        setFragment(R.id.home_frame ,new FollowUsFragment(), (AppCompatActivity) v.getContext());
+                        break;
+                    case 1:
+                        setFragment(R.id.home_frame ,new ChooseCoachFragment(), (AppCompatActivity) v.getContext());
+                        break;
+                    case 2:
+                        setFragment(R.id.home_frame ,new ContactFragment(), (AppCompatActivity) v.getContext());
+                        break;
+                    case 3:
+                        setFragment(R.id.home_frame ,new NewsFragment(), (AppCompatActivity) v.getContext());
+                        break;
                 }
-                if (position==1){
-
-                    context.startActivity(new Intent(context.getApplicationContext(), ChoosingCoachActivity.class));
-
-                }
-
-                if (position==0){
-
-                    context.startActivity(new Intent(context.getApplicationContext(), FollowusActivity.class));
-
-                }
-
-                if (position==3){
-
-                    context.startActivity(new Intent(context.getApplicationContext(), NewsActivity .class));
-
-
-                }
-
             }
         });
+    }
 
+    private void setFragment(int frameLayout, Fragment fragment, AppCompatActivity activity) {
+        FragmentTransaction fragmentTransaction= activity.getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(frameLayout, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
 
     }
 
-
     @Override
     public int getItemCount() {
-
-        return 3;
-
+        return listPic.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView categ_name;
-        public RoundedImageView cate_image;
-        private LinearLayout category_lienear;
+        public TextView categoryTitle;
+        public ImageView categoryImg;
+        public LinearLayout categoryLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            categ_name=itemView.findViewById(R.id.categ_name);
-            cate_image=itemView.findViewById(R.id.cate_image);
-            category_lienear=itemView.findViewById(R.id.category_lienear);
-
+            categoryImg = itemView.findViewById(R.id.cate1_image);
+            categoryTitle = itemView.findViewById(R.id.categ1_name);
+            categoryLayout = itemView.findViewById(R.id.category_layout);
         }
     }
 

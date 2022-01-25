@@ -4,56 +4,54 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.makeramen.roundedimageview.RoundedImageView;
 import com.qtechnetworks.ptplatform.R;
-import com.qtechnetworks.ptplatform.View.Fragment.ContactFragment;
-import com.qtechnetworks.ptplatform.View.Fragment.MainFragment;
+import com.qtechnetworks.ptplatform.View.Fragment.ExercisesSingleFragment;
+import com.qtechnetworks.ptplatform.View.Fragment.WorkoutSingleFragment;
 
 import java.util.List;
 
-
-public class CoachAdapter extends RecyclerView.Adapter<CoachAdapter.ViewHolder>  {
+public class ChestAndBicepsAdapter extends RecyclerView.Adapter<ChestAndBicepsAdapter.ViewHolder>  {
 
     private Context context;
-    private View view;
     private List<String> list;
     private List<Integer> listpic;
+    private String flag;
 
-    public CoachAdapter(Context context) {
-
+    public ChestAndBicepsAdapter(Context context, String flag) {
         this.list = list;
-        this.context=context;
-        this.listpic=listpic;
-
+        this.context = context;
+        this.listpic = listpic;
+        this.flag = flag;
     }
 
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        view= LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_coach,parent,false);
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_img_txt,parent,false);
 
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.coachLayout.setOnClickListener(new View.OnClickListener() {
+        holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setFragment(R.id.home_frame ,new MainFragment(), (AppCompatActivity) v.getContext());
+                if (flag.equals("Exercises"))
+                    setFragment(R.id.home_frame, new ExercisesSingleFragment(), (AppCompatActivity) v.getContext());
+                else if (flag.equals("Workout"))
+                    setFragment(R.id.home_frame, new WorkoutSingleFragment(), (AppCompatActivity) v.getContext());
             }
         });
-
     }
 
     private void setFragment(int frameLayout, Fragment fragment, AppCompatActivity activity) {
@@ -65,24 +63,21 @@ public class CoachAdapter extends RecyclerView.Adapter<CoachAdapter.ViewHolder> 
 
     @Override
     public int getItemCount() {
-
-        return 10;
-
+        return 5;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView trainerName;
-        public RoundedImageView trainerImage;
-        public LinearLayout coachLayout;
+        public TextView title;
+        public ImageView img;
+        private LinearLayout layout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            trainerImage=itemView.findViewById(R.id.trainer_image);
-            trainerName=itemView.findViewById(R.id.trainer_name);
-            coachLayout=itemView.findViewById(R.id.coach_layout);
-
+            title=itemView.findViewById(R.id.title);
+            img=itemView.findViewById(R.id.img);
+            layout=itemView.findViewById(R.id.layout);
         }
     }
 

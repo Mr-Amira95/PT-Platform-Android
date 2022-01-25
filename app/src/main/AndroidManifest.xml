@@ -20,25 +20,7 @@
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".View.Activity.ChoosingCoachActivity"
-            android:exported="false" />
-        <activity
-            android:name=".View.Activity.NewsDetailsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".View.Activity.NewsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".View.Activity.FollowusActivity"
-            android:exported="false" />
-        <activity
-            android:name=".View.Activity.FeedAndTechnicalActivity"
-            android:exported="false" />
-        <activity
-            android:name=".View.Activity.ContactUsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".View.Activity.CoachSignIn.ThankCoashActivity"
+            android:name=".View.Activity.ThankCoashActivity"
             android:exported="false" />
         <activity
             android:name=".View.Activity.OtpActivity"
@@ -54,6 +36,9 @@
             android:exported="false" />
         <activity
             android:name=".View.Activity.SplashActivity"
+            android:exported="false" />
+        <activity
+            android:name=".View.Activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -61,9 +46,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".View.Activity.MainActivity"
-            android:exported="false" />
     </application>
 
 </manifest>

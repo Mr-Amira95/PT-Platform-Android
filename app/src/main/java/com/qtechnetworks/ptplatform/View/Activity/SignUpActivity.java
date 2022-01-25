@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.qtechnetworks.ptplatform.R;
-import com.qtechnetworks.ptplatform.View.Activity.CoachSignIn.ThankCoashActivity;
 
 public class SignUpActivity extends AppCompatActivity {
 

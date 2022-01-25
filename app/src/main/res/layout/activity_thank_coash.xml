@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_two"
     android:orientation="vertical"
-    tools:context=".View.Activity.CoachSignIn.ThankCoashActivity">
+    tools:context=".View.Activity.ThankCoashActivity">
 
     <LinearLayout
         android:id="@+id/thank_you_layout"

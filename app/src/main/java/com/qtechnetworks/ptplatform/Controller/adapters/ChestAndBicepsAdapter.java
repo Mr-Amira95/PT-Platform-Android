@@ -14,6 +14,8 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Fragment.ExercisesSingleFragment;
+import com.qtechnetworks.ptplatform.View.Fragment.PlansSingleFragment;
+import com.qtechnetworks.ptplatform.View.Fragment.SupplementSingleFragment;
 import com.qtechnetworks.ptplatform.View.Fragment.WorkoutSingleFragment;
 
 import java.util.List;
@@ -50,6 +52,10 @@ public class ChestAndBicepsAdapter extends RecyclerView.Adapter<ChestAndBicepsAd
                     setFragment(R.id.home_frame, new ExercisesSingleFragment(), (AppCompatActivity) v.getContext());
                 else if (flag.equals("Workout"))
                     setFragment(R.id.home_frame, new WorkoutSingleFragment(), (AppCompatActivity) v.getContext());
+                else if (flag.equals("Supplements"))
+                    setFragment(R.id.home_frame, new SupplementSingleFragment(), (AppCompatActivity) v.getContext());
+                else if (flag.equals("Recipes and Diet Plans"))
+                    setFragment(R.id.home_frame, new PlansSingleFragment(), (AppCompatActivity) v.getContext());
             }
         });
     }

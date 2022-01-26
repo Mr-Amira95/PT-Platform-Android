@@ -45,7 +45,10 @@ public class SupplementsDietPlansFragment extends Fragment {
         title.setText(flag);
 
         searchBar = view.findViewById(R.id.search_bar);
-        searchBar.setHint("");
+        if(flag.equals("Supplements"))
+            searchBar.setHint("SEARCH FOR SUPLEMENTS");
+        else if (flag.equals("Recipes and Diet Plans"))
+            searchBar.setHint("SEARCH FOR RECIPES");
 
         recyclerView = view.findViewById(R.id.recyclerView);
 

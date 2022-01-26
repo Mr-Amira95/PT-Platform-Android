@@ -274,7 +274,6 @@
             android:id="@+id/calorie_calculator_icon"
             android:layout_width="@dimen/_75sdp"
             android:layout_height="wrap_content"
-            android:maxLines="1"
             android:text="Calorie Calculator"
             android:textSize="@dimen/_10sdp"
             android:textColor="@color/primary_color"
@@ -296,7 +295,7 @@
             android:id="@+id/Recipes_Diet_Plans__title"
             android:layout_width="@dimen/_75sdp"
             android:layout_height="@dimen/_75sdp"
-            android:src="@drawable/ic_suplements_icon"
+            android:src="@drawable/ic_recips_diet_plans_icon"
             android:padding="@dimen/_20sdp"
             android:background="@drawable/background_main_category"/>
 
@@ -304,8 +303,7 @@
             android:id="@+id/Recipes_Diet_Plans_icon"
             android:layout_width="@dimen/_75sdp"
             android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:text="Suplements"
+            android:text="Recipes and Diet Plans"
             android:textSize="@dimen/_10sdp"
             android:textColor="@color/primary_color"
             android:gravity="center"/>

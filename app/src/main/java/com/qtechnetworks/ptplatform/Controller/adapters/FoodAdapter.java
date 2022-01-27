@@ -17,20 +17,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Fragment.NewsSingleFragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
-public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.ViewHolder>  {
+public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder>  {
 
     private Context context;
-    private List<String> list;
-    private List<TextView> textViewList = new ArrayList<>();
-    private String flag;
 
-    public TitleAdapter(Context context, String flag) {
-        this.flag = flag;
-        this.list = list;
+    public FoodAdapter(Context context) {
         this.context=context;
     }
 
@@ -38,33 +32,14 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.ViewHolder> 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_title,parent,false);
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_food,parent,false);
 
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        textViewList.add(holder.title);
 
-        if (flag.equals("Workout")||flag.equals("Exercises") && position == 1){
-            holder.title.setBackgroundResource(R.drawable.background_radius_20_title);
-        }
-
-        holder.title.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (flag.equals("Workout")||flag.equals("Exercises") ){
-                    for (int i=0; i<textViewList.size(); i++){
-                        if (i == holder.getAdapterPosition()){
-                            textViewList.get(i).setBackgroundResource(R.drawable.background_radius_20_title);
-                        } else {
-                            textViewList.get(i).setBackgroundResource(R.drawable.background_empty);
-                        }
-                    }
-                }
-            }
-        });
     }
 
     private void setFragment(int frameLayout, Fragment fragment, AppCompatActivity activity) {
@@ -81,12 +56,8 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.ViewHolder> 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView title;
-
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
-            title=itemView.findViewById(R.id.title);
 
         }
     }

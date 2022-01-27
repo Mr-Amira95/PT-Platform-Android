@@ -41,7 +41,7 @@
             android:layout_width="@dimen/_20sdp"
             android:layout_height="@dimen/_20sdp"
             android:layout_gravity="center"
-            android:src="@color/white"
+            android:src="@drawable/ic_heart_icon"
             android:layout_marginStart="@dimen/_20sdp"/>
     </LinearLayout>
 
@@ -79,7 +79,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ingredients_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"/>
 
     <TextView
         android:layout_width="match_parent"

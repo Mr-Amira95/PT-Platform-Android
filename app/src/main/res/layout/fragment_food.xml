@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".View.Fragment.FoodFragment"
+    android:orientation="vertical"
+    android:background="@color/backapp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="News"
+            android:textColor="@color/primary_color"
+            android:textSize="@dimen/_20sdp"
+            android:fontFamily="@font/aeonikbold"
+            android:layout_margin="@dimen/_20sdp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="@dimen/_20sdp">
+
+            <TextView
+                android:id="@+id/four_days_before"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="3/10"
+                android:textSize="@dimen/_12sdp"
+                android:textColor="@color/white"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/three_days_before"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="4/10"
+                android:textSize="@dimen/_12sdp"
+                android:textColor="@color/white"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/two_days_before"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="5/10"
+                android:textSize="@dimen/_12sdp"
+                android:textColor="@color/white"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/one_days_before"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="6/10"
+                android:textSize="@dimen/_12sdp"
+                android:textColor="@color/white"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/today"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Today"
+                android:textSize="@dimen/_12sdp"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:background="@drawable/background_radius_10"
+                android:backgroundTint="@color/primary_color"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="11"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_20sdp">
+
+        <TextView
+            android:id="@+id/target_value"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:text="2840"
+            android:textSize="@dimen/_18sdp"
+            android:textColor="@color/white"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="-"
+            android:textSize="@dimen/_18sdp"
+            android:textColor="@color/white"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/food_value"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:text="310"
+            android:textSize="@dimen/_18sdp"
+            android:textColor="@color/white"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="+"
+            android:textSize="@dimen/_18sdp"
+            android:textColor="@color/white"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/exercise_value"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="@dimen/_18sdp"
+            android:textColor="@color/white"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="="
+            android:textSize="@dimen/_18sdp"
+            android:textColor="@color/white"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:text="2530"
+            android:textSize="@dimen/_18sdp"
+            android:textColor="@color/primary_color"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="11"
+        android:layout_marginHorizontal="@dimen/_20sdp">
+
+        <TextView
+            android:id="@+id/target_title"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:text="Target"
+            android:textSize="@dimen/_12sdp"
+            android:textColor="@color/white"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="@dimen/_12sdp"
+            android:textColor="@color/white"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/food_title"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:text="Food"
+            android:textSize="@dimen/_12sdp"
+            android:textColor="@color/white"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="@dimen/_12sdp"
+            android:textColor="@color/white"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/exercise_title"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:text="Exercise"
+            android:textSize="@dimen/_12sdp"
+            android:textColor="@color/white"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="@dimen/_18sdp"
+            android:textColor="@color/white"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:text="Remaining"
+            android:textSize="@dimen/_12sdp"
+            android:textColor="@color/primary_color"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp">
+
+            <TextView
+                android:id="@+id/breakfast_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Breakfast"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16sdp"/>
+
+            <TextView
+                android:id="@+id/breakfast_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="310"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16sdp"
+                android:gravity="end"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+
+        <TextView
+        android:id="@+id/breakfast_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Carbs 1g, Fat 2g, Protein 22g"
+        android:textColor="@color/primary_color"
+        android:textSize="@dimen/_10sdp"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:visibility="gone"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/breakfast_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+        <TextView
+        android:id="@+id/add_breakfast"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/_20sdp"
+        android:paddingVertical="@dimen/_5sdp"
+        android:background="@color/txt_grey"
+        android:text="Add Food"
+        android:textColor="@color/primary_color"
+        android:textSize="@dimen/_12sdp"
+        android:drawablePadding="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:drawableStartCompat="@drawable/ic_baseline_add_24" />
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_20sdp">
+
+        <TextView
+            android:id="@+id/lunch_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lunch"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_16sdp"/>
+
+        <TextView
+            android:id="@+id/lunch_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="310"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_16sdp"
+            android:gravity="end"/>
+
+    </LinearLayout>
+
+        <TextView
+            android:id="@+id/lunch_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Carbs 1g, Fat 2g, Protein 22g"
+            android:textColor="@color/primary_color"
+            android:textSize="@dimen/_10sdp"
+            android:layout_marginHorizontal="@dimen/_20sdp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/lunch_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+        android:id="@+id/add_lunch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/_20sdp"
+        android:paddingVertical="@dimen/_5sdp"
+        android:background="@color/txt_grey"
+        android:text="Add Lunch"
+        android:textColor="@color/primary_color"
+        android:textSize="@dimen/_12sdp"
+        android:drawablePadding="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:drawableStartCompat="@drawable/ic_baseline_add_24" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp">
+
+            <TextView
+                android:id="@+id/dinner_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dinner"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16sdp"/>
+
+            <TextView
+                android:id="@+id/dinner_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="310"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16sdp"
+                android:gravity="end"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/dinner_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Carbs 1g, Fat 2g, Protein 22g"
+            android:textColor="@color/primary_color"
+            android:textSize="@dimen/_10sdp"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:visibility="gone"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/dinner_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/add_dinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/_20sdp"
+            android:paddingVertical="@dimen/_5sdp"
+            android:background="@color/txt_grey"
+            android:text="Add Dinner"
+            android:textColor="@color/primary_color"
+            android:textSize="@dimen/_12sdp"
+            android:drawablePadding="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:drawableStartCompat="@drawable/ic_baseline_add_24" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp">
+
+            <TextView
+                android:id="@+id/snacks_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Snacks"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16sdp"/>
+
+            <TextView
+                android:id="@+id/snacks_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="310"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16sdp"
+                android:gravity="end"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/snacks_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Carbs 1g, Fat 2g, Protein 22g"
+            android:textColor="@color/primary_color"
+            android:textSize="@dimen/_10sdp"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:visibility="gone"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/snacks_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/add_snacks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/_20sdp"
+            android:paddingVertical="@dimen/_5sdp"
+            android:background="@color/txt_grey"
+            android:text="Add Snacks"
+            android:textColor="@color/primary_color"
+            android:textSize="@dimen/_12sdp"
+            android:drawablePadding="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:drawableStartCompat="@drawable/ic_baseline_add_24" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp">
+
+            <TextView
+                android:id="@+id/supplements_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Supplements"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16sdp"/>
+
+            <TextView
+                android:id="@+id/supplements_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="310"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16sdp"
+                android:gravity="end"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/supplements_details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Carbs 1g, Fat 2g, Protein 22g"
+            android:textColor="@color/primary_color"
+            android:textSize="@dimen/_10sdp"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:visibility="gone"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/supplements_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/add_supplements"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/_20sdp"
+            android:paddingVertical="@dimen/_5sdp"
+            android:background="@color/txt_grey"
+            android:text="Add Supplements"
+            android:textColor="@color/primary_color"
+            android:textSize="@dimen/_12sdp"
+            android:drawablePadding="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:drawableStartCompat="@drawable/ic_baseline_add_24" />
+    </LinearLayout>
+</ScrollView>

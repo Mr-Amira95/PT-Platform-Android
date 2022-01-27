@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".View.Fragment.FoodSingleFragment"
+    android:orientation="vertical"
+    android:background="@color/backapp">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Breakfast"
+        android:textColor="@color/primary_color"
+        android:textSize="@dimen/_20sdp"
+        android:fontFamily="@font/aeonikbold"
+        android:layout_margin="@dimen/_20sdp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginHorizontal="@dimen/_20sdp">
+
+        <TextView
+            android:id="@+id/all_category"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="All"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"
+            android:gravity="center"
+            android:background="@drawable/background_radius_10"
+            android:backgroundTint="@color/primary_color"/>
+
+        <TextView
+            android:id="@+id/recipes_category"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Recipes"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/meals_category"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Meals"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableEnd="@drawable/ic_search"
+        android:background="@drawable/background_radius_20"
+        android:backgroundTint="@color/white"
+        android:layout_margin="@dimen/_20sdp"
+        android:paddingHorizontal="@dimen/_20sdp"
+        android:paddingVertical="@dimen/_10sdp"
+        android:hint="SEARCH FOR A FOOD"
+        android:textColorHint="@color/primary_color"
+        android:textSize="@dimen/_12sdp"
+        android:textColor="@color/backapp"/>
+
+    <TextView
+        android:id="@+id/recent_item_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Recent Items"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_16sdp"
+        android:layout_marginHorizontal="@dimen/_20sdp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recent_item_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"/>
+
+</LinearLayout>

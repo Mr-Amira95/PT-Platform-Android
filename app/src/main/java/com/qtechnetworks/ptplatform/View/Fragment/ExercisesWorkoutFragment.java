@@ -74,7 +74,7 @@ public class ExercisesWorkoutFragment extends Fragment {
         chestRecyclerview.setAdapter(adapter);
         bicepsRecyclerview.setAdapter(adapter);
 
-        titleAdapter = new TitleAdapter(getContext());
+        titleAdapter = new TitleAdapter(getContext(), flag);
         categoryRecyclerView.setAdapter(titleAdapter);
 
 

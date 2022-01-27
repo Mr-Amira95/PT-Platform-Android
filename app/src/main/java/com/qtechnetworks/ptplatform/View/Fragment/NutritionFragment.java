@@ -52,6 +52,15 @@ public class NutritionFragment extends Fragment {
                 setFragment(R.id.home_frame, new SupplementsDietPlansFragment("Recipes and Diet Plans"));
             }
         });
+
+        foodLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setFragment(R.id.home_frame, new FoodFragment());
+            }
+        });
+
+
         // Inflate the layout for this fragment
         return view;
     }

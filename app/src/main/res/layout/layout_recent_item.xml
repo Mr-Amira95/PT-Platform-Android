@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingHorizontal="@dimen/_20sdp"
+    android:background="@color/backapp"
+    android:paddingBottom="@dimen/_20sdp">
+
+    <TextView
+        android:id="@+id/recent_item_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chicken"
+        android:textSize="@dimen/_12sdp"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/recent_item_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="100"
+        android:textSize="@dimen/_12sdp"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageView
+        android:layout_width="@dimen/_15sdp"
+        android:layout_height="@dimen/_15sdp"
+        android:background="@drawable/ic_heart_icon"
+        android:backgroundTint="@color/red"
+        app:layout_constraintEnd_toStartOf="@id/recent_item_value"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="@dimen/_10sdp"/>
+    <TextView
+        android:id="@+id/recent_item_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Grilled chicken, 4.0 oz"
+        android:textSize="@dimen/_12sdp"
+        android:textColor="@color/primary_color"
+        app:layout_constraintTop_toBottomOf="@id/recent_item_title"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

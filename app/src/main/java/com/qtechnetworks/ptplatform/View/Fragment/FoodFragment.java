@@ -19,6 +19,7 @@ import com.qtechnetworks.ptplatform.R;
 public class FoodFragment extends Fragment {
 
     RecyclerView breakfastRecyclerview, lunchRecyclerview, dinnerRecyclerview, snacksRecyclerview, supplemnetsRecyclerview;
+    TextView addBreakfast, addLunch, addDinner, addSnack, addSupplement;
     FoodAdapter foodAdapter;
     TextView breakfast, lunch, dinner, snacks, supplement;
 
@@ -64,6 +65,41 @@ public class FoodFragment extends Fragment {
             }
         });
 
+        addBreakfast.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setFragment(R.id.home_frame, new FoodAddFragment("Breakfast"));
+            }
+        });
+
+        addLunch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setFragment(R.id.home_frame, new FoodAddFragment("Lunch"));
+            }
+        });
+
+        addDinner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setFragment(R.id.home_frame, new FoodAddFragment("Dinner"));
+            }
+        });
+
+        addSnack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setFragment(R.id.home_frame, new FoodAddFragment("Snack"));
+            }
+        });
+
+        addSupplement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setFragment(R.id.home_frame, new FoodAddFragment("Supplement"));
+            }
+        });
+
         // Inflate the layout for this fragment
         return view;
     }
@@ -82,6 +118,12 @@ public class FoodFragment extends Fragment {
         dinner = view.findViewById(R.id.dinner_title);
         snacks = view.findViewById(R.id.snacks_title);
         supplement = view.findViewById(R.id.supplements_title);
+
+        addBreakfast = view.findViewById(R.id.add_breakfast);
+        addLunch = view.findViewById(R.id.add_lunch);
+        addDinner = view.findViewById(R.id.add_dinner);
+        addSnack = view.findViewById(R.id.add_snacks);
+        addSupplement = view.findViewById(R.id.add_supplements);
 
         lunchRecyclerview= view.findViewById(R.id.lunch_recyclerview);
 

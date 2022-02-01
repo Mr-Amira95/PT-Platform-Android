@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,99 +8,104 @@
     android:background="@color/backapp"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Recipes and Diet Plans"
-        android:textColor="@color/primary_color"
-        android:textSize="@dimen/_20sdp"
-        android:fontFamily="@font/aeonikbold"
-        android:layout_margin="@dimen/_20sdp"/>
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_150sdp"
-        android:src="@drawable/demoslider"
-        android:scaleType="centerCrop"
-        android:layout_marginTop="@dimen/_20sdp"/>
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="@dimen/_20sdp">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recipes and Diet Plans"
+            android:textColor="@color/primary_color"
+            android:textSize="@dimen/_20sdp"
+            android:fontFamily="@font/aeonikbold"
+            android:layout_margin="@dimen/_20sdp"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_150sdp"
+            android:src="@drawable/demoslider"
+            android:scaleType="centerCrop"
+            android:layout_marginTop="@dimen/_20sdp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="@dimen/_20sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Recipe Title"
+                android:textSize="@dimen/_18sdp"
+                android:textColor="@color/white"/>
+
+            <ImageView
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_heart_icon"
+                android:layout_marginStart="@dimen/_20sdp"/>
+        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Recipe Title"
-            android:textSize="@dimen/_18sdp"
-            android:textColor="@color/white"/>
+            android:text="321 Calories, Carbs 8g, Fat 5g, Protein 23g"
+            android:textSize="@dimen/_10sdp"
+            android:textColor="@color/primary_color"
+            android:layout_marginHorizontal="@dimen/_20sdp"/>
 
-        <ImageView
-            android:layout_width="@dimen/_20sdp"
-            android:layout_height="@dimen/_20sdp"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_heart_icon"
-            android:layout_marginStart="@dimen/_20sdp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="20 minutes"
+            android:textSize="@dimen/_10sdp"
+            android:textColor="@color/primary_color"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:drawableStart="@drawable/ic_time_icon"
+            android:drawableTint="@color/primary_color"
+            android:drawablePadding="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ingredients"
+            android:background="@color/txt_grey"
+            android:paddingHorizontal="@dimen/_20sdp"
+            android:paddingVertical="@dimen/_10sdp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14sdp"
+            android:layout_marginTop="@dimen/_20sdp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ingredients_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="How to make it"
+            android:background="@color/txt_grey"
+            android:paddingHorizontal="@dimen/_20sdp"
+            android:paddingVertical="@dimen/_10sdp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14sdp"
+            android:layout_marginTop="@dimen/_20sdp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"
+            android:layout_margin="@dimen/_20sdp"/>
+
     </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="321 Calories, Carbs 8g, Fat 5g, Protein 23g"
-        android:textSize="@dimen/_10sdp"
-        android:textColor="@color/primary_color"
-        android:layout_marginHorizontal="@dimen/_20sdp"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="20 minutes"
-        android:textSize="@dimen/_10sdp"
-        android:textColor="@color/primary_color"
-        android:layout_marginHorizontal="@dimen/_20sdp"
-        android:drawableStart="@drawable/ic_time_icon"
-        android:drawableTint="@color/primary_color"
-        android:drawablePadding="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_5sdp"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Ingredients"
-        android:background="@color/txt_grey"
-        android:paddingHorizontal="@dimen/_20sdp"
-        android:paddingVertical="@dimen/_10sdp"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_14sdp"
-        android:layout_marginTop="@dimen/_20sdp"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/ingredients_recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_10sdp"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="How to make it"
-        android:background="@color/txt_grey"
-        android:paddingHorizontal="@dimen/_20sdp"
-        android:paddingVertical="@dimen/_10sdp"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_14sdp"
-        android:layout_marginTop="@dimen/_20sdp"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
-        android:paddingHorizontal="@dimen/_20sdp"
-        android:textColor="@color/white"
-        android:textSize="@dimen/_12sdp"
-        android:layout_marginTop="@dimen/_20sdp"/>
-
-</LinearLayout>
+</ScrollView>

@@ -6,7 +6,10 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.widget.FrameLayout;
 import com.qtechnetworks.ptplatform.R;
+import com.qtechnetworks.ptplatform.View.Fragment.CalendarFragment;
 import com.qtechnetworks.ptplatform.View.Fragment.ExercisesWorkoutFragment;
+import com.qtechnetworks.ptplatform.View.Fragment.HomeFragment;
+import com.qtechnetworks.ptplatform.View.Fragment.MainFragment;
 import com.qtechnetworks.ptplatform.View.Fragment.NutritionFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,17 +22,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initials();
-        setFragment(new NutritionFragment());
+        setInitialFragment(new MainFragment());
     }
 
     private void initials() {
         frameLayout = findViewById(R.id.home_frame);
     }
 
-    private void setFragment(Fragment fragment) {
+    private void setInitialFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(frameLayout.getId(), fragment);
-        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.addToBackStack("Home");
         fragmentTransaction.commit();
     }
 

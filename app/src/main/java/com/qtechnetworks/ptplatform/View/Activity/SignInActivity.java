@@ -35,16 +35,6 @@ public class SignInActivity extends AppCompatActivity {
                 Intent i = new Intent(SignInActivity.this, SignUpActivity.class);
                 i.putExtra("type", type);
                 startActivity(i);
-
-/*
-                if (button.equalsIgnoreCase("true")) {
-
-                }else {
-
-                    startActivity(new Intent(SignInActivity.this, TraineeInfoSignupActivity.class));
-
-                }
-*/
             }
         });
 

@@ -88,4 +88,5 @@ public class HomeFragment extends Fragment {
         sliderViewPager=view.findViewById(R.id.slider_viewPager);
         sliderCircleIndicator=view.findViewById(R.id.slider_indicator_unselected);
     }
+
 }

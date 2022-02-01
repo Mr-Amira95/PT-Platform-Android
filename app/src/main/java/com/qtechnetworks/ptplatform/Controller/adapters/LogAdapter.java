@@ -15,80 +15,68 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.qtechnetworks.ptplatform.R;
+import com.qtechnetworks.ptplatform.View.Fragment.ExercisesSingleFragment;
 import com.qtechnetworks.ptplatform.View.Fragment.NewsSingleFragment;
+import com.qtechnetworks.ptplatform.View.Fragment.WorkoutSingleFragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
-public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.ViewHolder>  {
+public class LogAdapter extends RecyclerView.Adapter<LogAdapter.ViewHolder>  {
 
     private Context context;
-    private List<String> list;
-    private List<TextView> textViewList = new ArrayList<>();
     private String flag;
 
-    public TitleAdapter(Context context, String flag) {
-        this.flag = flag;
-        this.list = list;
+    public LogAdapter(Context context, String flag) {
         this.context=context;
+        this.flag = flag;
     }
 
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_title,parent,false);
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_log_item,parent,false);
 
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        textViewList.add(holder.title);
 
-        if (flag.equals("Workout")||flag.equals("Exercises")||flag.equals("Calendar")&& position == 1){
-            holder.title.setBackgroundResource(R.drawable.background_radius_20_title);
-        }
-        if (flag.equals("Calendar")){
-            holder.title.setText("6:00PM");
-        }
-
-        holder.title.setOnClickListener(new View.OnClickListener() {
+        holder.logLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (flag.equals("Workout")||flag.equals("Exercises")||flag.equals("Calendar")){
-                    for (int i=0; i<textViewList.size(); i++){
-                        if (i == holder.getAdapterPosition()){
-                            textViewList.get(i).setBackgroundResource(R.drawable.background_radius_20_title);
-                        } else {
-                            textViewList.get(i).setBackgroundResource(R.drawable.background_empty);
-                        }
-                    }
-                }
+                setFragment(R.id.home_frame ,new ExercisesSingleFragment(), (AppCompatActivity) v.getContext());
             }
         });
+
     }
 
     private void setFragment(int frameLayout, Fragment fragment, AppCompatActivity activity) {
         FragmentTransaction fragmentTransaction= activity.getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(frameLayout, fragment).commit();
+        fragmentTransaction.replace(frameLayout, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 
     @Override
     public int getItemCount() {
-        return 3;
+        return 8;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView title;
+        public TextView logTitle;
+        public ImageView logImg;
+        private ConstraintLayout logLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            title=itemView.findViewById(R.id.title);
-
+            logTitle=itemView.findViewById(R.id.log_title);
+            logImg=itemView.findViewById(R.id.log_img);
+            logLayout=itemView.findViewById(R.id.log_layout);
         }
     }
 

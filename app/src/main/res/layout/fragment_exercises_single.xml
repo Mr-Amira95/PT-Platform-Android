@@ -12,11 +12,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <View
+        <ImageView
             android:id="@+id/video_view"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_250sdp"
+            android:src="@drawable/test_video"
             android:background="@color/white"
+            android:scaleType="centerCrop"
             app:layout_constraintTop_toTopOf="parent"/>
 
         <ImageView
@@ -110,6 +112,7 @@
         android:id="@+id/video_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:listitem="@layout/layout_video_item"/>
+        tools:listitem="@layout/layout_video_item"
+        android:layout_marginHorizontal="@dimen/_20sdp"/>
 
 </LinearLayout>

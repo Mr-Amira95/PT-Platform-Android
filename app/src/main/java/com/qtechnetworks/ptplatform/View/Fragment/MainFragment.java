@@ -88,7 +88,7 @@ public class MainFragment extends Fragment {
         personalLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setFragment(R.id.home_frame, new PersonalTrainingFragment());
+                setFragment(R.id.home_frame, new PersonalTrainingUnsubscribedFragment());
             }
         });
 

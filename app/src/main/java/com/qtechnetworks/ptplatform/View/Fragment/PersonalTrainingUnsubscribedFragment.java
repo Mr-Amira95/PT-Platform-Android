@@ -10,11 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.qtechnetworks.ptplatform.Controller.adapters.FoodAdapter;
 import com.qtechnetworks.ptplatform.Controller.adapters.PackageAdapter;
 import com.qtechnetworks.ptplatform.R;
 
-public class PersonalTrainingFragment extends Fragment {
+public class PersonalTrainingUnsubscribedFragment extends Fragment {
 
     RecyclerView packageRecyclerview;
     PackageAdapter packageAdapter;
@@ -23,7 +22,7 @@ public class PersonalTrainingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_personal_training, container, false);
+        View view = inflater.inflate(R.layout.fragment_personal_training_unsubscribed, container, false);
 
         initials(view);
         // Inflate the layout for this fragment

@@ -4,15 +4,19 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.qtechnetworks.ptplatform.R;
+import com.qtechnetworks.ptplatform.View.Fragment.NewsSingleFragment;
+import com.qtechnetworks.ptplatform.View.Fragment.SinglePackageFragment;
 
 
 public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHolder>  {
@@ -42,6 +46,13 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHold
         holder.featureRecyclerview.setLayoutManager(layoutManagerhorizantalleader);
 
         holder.featureRecyclerview.setAdapter(titleAdapter);
+
+        holder.buyNowBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setFragment(R.id.home_frame ,new SinglePackageFragment(), (AppCompatActivity) v.getContext());
+            }
+        });
     }
 
     private void setFragment(int frameLayout, Fragment fragment, AppCompatActivity activity) {
@@ -59,11 +70,13 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         RecyclerView featureRecyclerview;
+        Button buyNowBtn;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             featureRecyclerview = itemView.findViewById(R.id.features_recuclerview);
+            buyNowBtn = itemView.findViewById(R.id.buy_now);
 
         }
     }

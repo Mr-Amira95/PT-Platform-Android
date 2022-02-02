@@ -5,7 +5,8 @@
     android:layout_height="@dimen/_400sdp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="@dimen/_20sdp"
-    android:layout_marginEnd="@dimen/_10sdp">
+    android:layout_marginEnd="@dimen/_10sdp"
+    android:id="@+id/package_layout">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

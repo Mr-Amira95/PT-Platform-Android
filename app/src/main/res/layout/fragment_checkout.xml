@@ -123,8 +123,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="PayPal"
-            android:textColor="@color/white"
-            android:enabled="false"/>
+            android:textColor="@color/white"/>
 
         <RadioButton
             android:id="@+id/in_app_radiobutton"
@@ -132,8 +131,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="In-App Purchase"
-            android:textColor="@color/white"
-            android:enabled="false"/>
+            android:textColor="@color/white"/>
 
     </RadioGroup>
 
@@ -145,7 +143,8 @@
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/payment_method_layout">
+        app:layout_constraintTop_toBottomOf="@id/payment_method_layout"
+        android:visibility="gone">
 
         <RadioButton
             android:id="@+id/google_pay_radiobutton"

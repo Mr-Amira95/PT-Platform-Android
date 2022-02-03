@@ -29,6 +29,8 @@ public class MainFragment extends Fragment {
     personalLayout, challengesLayout, favouriteLayout, todayWorkoutLayout, contactUsLayout,
     shopLayout, videoChatLayout, liveChatLayout;
 
+    private boolean Subscribed = true;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -57,20 +59,14 @@ public class MainFragment extends Fragment {
                 setFragment(R.id.home_frame, new NutritionFragment());
             }
         });
-
-        personalLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setFragment(R.id.home_frame, new CalendarFragment());
-            }
-        });
-
+        
         challengesLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 setFragment(R.id.home_frame, new LogFragment("Log"));
             }
         });
+
         favouriteLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,7 +84,11 @@ public class MainFragment extends Fragment {
         personalLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setFragment(R.id.home_frame, new PersonalTrainingUnsubscribedFragment());
+                if (Subscribed){
+                    setFragment(R.id.home_frame, new PersonalTrainingSubscribedFragment());
+                } else {
+                    setFragment(R.id.home_frame, new PersonalTrainingUnsubscribedFragment());
+                }
             }
         });
 
@@ -96,6 +96,13 @@ public class MainFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 setFragment(R.id.home_frame, new ShopFragment());
+            }
+        });
+
+        challengesLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setFragment(R.id.home_frame, new ChallengesFragment());
             }
         });
 

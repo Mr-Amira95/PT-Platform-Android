@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initials();
-        setInitialFragment(new MainFragment());
+        setInitialFragment(new HomeFragment());
     }
 
     private void initials() {

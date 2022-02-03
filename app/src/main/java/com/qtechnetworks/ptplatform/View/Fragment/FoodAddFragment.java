@@ -4,10 +4,12 @@ import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.qtechnetworks.ptplatform.R;
 
@@ -18,6 +20,7 @@ public class FoodAddFragment extends Fragment {
 
     PieChart pieChart;
     String flag;
+    ImageView doneIcon;
 
     public FoodAddFragment(String flag) {
         this.flag = flag;
@@ -29,6 +32,14 @@ public class FoodAddFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_food_add, container, false);
 
         initials(view);
+
+        doneIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setFragment(R.id.home_frame, new FoodFragment());
+            }
+        });
+
         setData();
 
         // Inflate the layout for this fragment
@@ -37,6 +48,15 @@ public class FoodAddFragment extends Fragment {
 
     private void initials(View view) {
         pieChart = view.findViewById(R.id.pie_chart);
+        doneIcon = view.findViewById(R.id.done_icon);
+
+    }
+
+    private void setFragment(int frameLayout, Fragment fragment) {
+        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(frameLayout, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 
     private void setData() {

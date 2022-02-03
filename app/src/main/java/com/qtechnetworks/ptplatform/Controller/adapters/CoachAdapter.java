@@ -24,23 +24,16 @@ import java.util.List;
 public class CoachAdapter extends RecyclerView.Adapter<CoachAdapter.ViewHolder>  {
 
     private Context context;
-    private View view;
-    private List<String> list;
-    private List<Integer> listpic;
 
     public CoachAdapter(Context context) {
-
-        this.list = list;
         this.context=context;
-        this.listpic=listpic;
-
     }
 
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        view= LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_coach,parent,false);
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_coach,parent,false);
 
         return new ViewHolder(view);
     }

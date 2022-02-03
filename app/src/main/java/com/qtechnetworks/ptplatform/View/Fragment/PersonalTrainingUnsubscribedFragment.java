@@ -25,6 +25,7 @@ public class PersonalTrainingUnsubscribedFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_personal_training_unsubscribed, container, false);
 
         initials(view);
+
         // Inflate the layout for this fragment
         return view;
     }

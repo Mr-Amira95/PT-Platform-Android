@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/backapp"
+    android:layout_marginTop="@dimen/_20sdp">
+
+    <TextView
+        android:id="@+id/nutrition_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lunch"
+        android:textSize="@dimen/_14sdp"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="@dimen/_20sdp"/>
+
+    <TextView
+        android:id="@+id/nutrition_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Carbs 1g, Fat 2g, Protein 22g"
+        android:textSize="@dimen/_10sdp"
+        android:textColor="@color/primary_color"
+        app:layout_constraintTop_toBottomOf="@id/nutrition_title"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="@dimen/_20sdp"/>
+
+    <TextView
+        android:id="@+id/nutrition_calories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="310"
+        android:textSize="@dimen/_14sdp"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_20sdp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:background="@color/txt_grey"
+        app:layout_constraintTop_toBottomOf="@id/nutrition_desc"
+        android:layout_marginTop="@dimen/_20sdp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

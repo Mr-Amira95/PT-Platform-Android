@@ -92,6 +92,13 @@ public class MainFragment extends Fragment {
             }
         });
 
+        progressLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setFragment(R.id.home_frame, new ProgressFragment());
+            }
+        });
+
         shopLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

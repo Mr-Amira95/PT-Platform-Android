@@ -1,0 +1,769 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".View.Fragment.ProgressFragment"
+    android:background="@color/backapp">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_200sdp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/personal_training_header"
+        android:scaleType="centerCrop"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_200sdp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/background_obacity"/>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Progress"
+        android:textColor="@color/primary_color"
+        android:textSize="@dimen/_20sdp"
+        android:fontFamily="@font/aeonikbold"
+        android:layout_margin="@dimen/_20sdp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/header">
+
+        <TextView
+            android:id="@+id/weight_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Weight"
+            android:textColor="@color/primary_color"
+            android:textSize="@dimen/_12sdp"
+            android:background="#505050"
+            android:paddingHorizontal="@dimen/_20sdp"
+            android:paddingVertical="@dimen/_10sdp"
+            app:drawableEndCompat="@drawable/ic_arrow_up_icon"/>
+
+        <TextView
+            android:id="@+id/weight_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="78kg"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"
+            android:gravity="center"
+            android:paddingVertical="@dimen/_20sdp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_3sdp"
+            android:background="@color/backapp"/>
+
+        <TextView
+            android:id="@+id/muscle_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Muscle"
+            android:textColor="@color/primary_color"
+            android:textSize="@dimen/_12sdp"
+            android:background="#505050"
+            android:paddingHorizontal="@dimen/_20sdp"
+            android:paddingVertical="@dimen/_10sdp"
+            app:drawableEndCompat="@drawable/ic_arrow_up_icon"/>
+
+        <TextView
+            android:id="@+id/muscle_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="78kg"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"
+            android:gravity="center"
+            android:paddingVertical="@dimen/_20sdp"
+            android:visibility="gone"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_3sdp"
+            android:background="@color/backapp"/>
+
+        <TextView
+            android:id="@+id/fat_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Fat"
+            android:textColor="@color/primary_color"
+            android:textSize="@dimen/_12sdp"
+            android:background="#505050"
+            android:paddingHorizontal="@dimen/_20sdp"
+            android:paddingVertical="@dimen/_10sdp"
+            app:drawableEndCompat="@drawable/ic_arrow_up_icon"/>
+
+        <TextView
+            android:id="@+id/fat_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="78kg"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"
+            android:gravity="center"
+            android:paddingVertical="@dimen/_20sdp"
+            android:visibility="gone"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_3sdp"
+            android:background="@color/backapp"/>
+
+        <TextView
+            android:id="@+id/water_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Water"
+            android:textColor="@color/primary_color"
+            android:textSize="@dimen/_12sdp"
+            android:background="#505050"
+            android:paddingHorizontal="@dimen/_20sdp"
+            android:paddingVertical="@dimen/_10sdp"
+            app:drawableEndCompat="@drawable/ic_arrow_up_icon"/>
+
+        <TextView
+            android:id="@+id/water_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="78kg"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"
+            android:gravity="center"
+            android:paddingVertical="@dimen/_20sdp"
+            android:visibility="gone"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_3sdp"
+            android:background="@color/backapp"/>
+
+        <TextView
+            android:id="@+id/active_calories_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Active Calories"
+            android:textColor="@color/primary_color"
+            android:textSize="@dimen/_12sdp"
+            android:background="#505050"
+            android:paddingHorizontal="@dimen/_20sdp"
+            android:paddingVertical="@dimen/_10sdp"
+            app:drawableEndCompat="@drawable/ic_arrow_up_icon"/>
+
+        <TextView
+            android:id="@+id/active_calories_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="78kg"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"
+            android:gravity="center"
+            android:paddingVertical="@dimen/_20sdp"
+            android:visibility="gone"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_3sdp"
+            android:background="@color/backapp"/>
+
+        <TextView
+            android:id="@+id/steps_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Steps"
+            android:textColor="@color/primary_color"
+            android:textSize="@dimen/_12sdp"
+            android:background="#505050"
+            android:paddingHorizontal="@dimen/_20sdp"
+            android:paddingVertical="@dimen/_10sdp"
+            app:drawableEndCompat="@drawable/ic_arrow_up_icon"/>
+
+        <TextView
+            android:id="@+id/steps_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="78kg"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"
+            android:gravity="center"
+            android:paddingVertical="@dimen/_20sdp"
+            android:visibility="gone"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_3sdp"
+            android:background="@color/backapp"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/body_measurements"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Body Measurements"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_20sdp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/info"
+        android:layout_margin="@dimen/_20sdp"/>
+
+    <LinearLayout
+        android:id="@+id/body_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        app:layout_constraintTop_toBottomOf="@id/body_measurements"
+        android:layout_marginTop="@dimen/_20sdp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_background"
+                android:text="Before"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DATE: "
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp"
+                android:background="@drawable/background_white_border"
+                android:paddingVertical="@dimen/_2sdp"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_20sdp"/>
+
+            <TextView
+                android:id="@+id/neck"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="NECK: "
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp"
+                android:background="@drawable/background_white_border"
+                android:paddingVertical="@dimen/_2sdp"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"/>
+
+            <TextView
+                android:id="@+id/chest"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Chest: "
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp"
+                android:background="@drawable/background_white_border"
+                android:paddingVertical="@dimen/_2sdp"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"/>
+
+            <TextView
+                android:id="@+id/left_arm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Left Arm: "
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp"
+                android:background="@drawable/background_white_border"
+                android:paddingVertical="@dimen/_2sdp"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"/>
+
+            <TextView
+                android:id="@+id/right_arm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Right Arm: "
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp"
+                android:background="@drawable/background_white_border"
+                android:paddingVertical="@dimen/_2sdp"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"/>
+
+            <TextView
+                android:id="@+id/waist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Waist: "
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp"
+                android:background="@drawable/background_white_border"
+                android:paddingVertical="@dimen/_2sdp"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"/>
+
+            <TextView
+                android:id="@+id/hips"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Hips: "
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp"
+                android:background="@drawable/background_white_border"
+                android:paddingVertical="@dimen/_2sdp"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"/>
+
+            <TextView
+                android:id="@+id/left_thigh"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Left Thigh: "
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp"
+                android:background="@drawable/background_white_border"
+                android:paddingVertical="@dimen/_2sdp"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"/>
+
+            <TextView
+                android:id="@+id/left_calf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Left Calf: "
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp"
+                android:background="@drawable/background_white_border"
+                android:paddingVertical="@dimen/_2sdp"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"/>
+
+            <TextView
+                android:id="@+id/right_calf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Right Calf: "
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp"
+                android:background="@drawable/background_white_border"
+                android:paddingVertical="@dimen/_2sdp"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"/>
+
+            <TextView
+                android:id="@+id/weight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Weight: "
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp"
+                android:background="@drawable/background_white_border"
+                android:paddingVertical="@dimen/_2sdp"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_body_background_image"
+            android:layout_gravity="center"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_background"
+                android:text="After"
+                android:textSize="@dimen/_12sdp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:id="@+id/date_after"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DATE: "
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp"
+                android:background="@drawable/background_white_border"
+                android:paddingVertical="@dimen/_2sdp"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_20sdp"/>
+
+            <TextView
+                android:id="@+id/neck_after"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="NECK: "
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp"
+                android:background="@drawable/background_white_border"
+                android:paddingVertical="@dimen/_2sdp"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"/>
+
+            <TextView
+                android:id="@+id/chest_after"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Chest: "
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp"
+                android:background="@drawable/background_white_border"
+                android:paddingVertical="@dimen/_2sdp"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"/>
+
+            <TextView
+                android:id="@+id/left_arm_after"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Left Arm: "
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp"
+                android:background="@drawable/background_white_border"
+                android:paddingVertical="@dimen/_2sdp"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"/>
+
+            <TextView
+                android:id="@+id/right_arm_after"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Right Arm: "
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp"
+                android:background="@drawable/background_white_border"
+                android:paddingVertical="@dimen/_2sdp"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"/>
+
+            <TextView
+                android:id="@+id/waist_after"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Waist: "
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp"
+                android:background="@drawable/background_white_border"
+                android:paddingVertical="@dimen/_2sdp"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"/>
+
+            <TextView
+                android:id="@+id/hips_after"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Hips: "
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp"
+                android:background="@drawable/background_white_border"
+                android:paddingVertical="@dimen/_2sdp"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"/>
+
+            <TextView
+                android:id="@+id/left_thigh_after"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Left Thigh: "
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp"
+                android:background="@drawable/background_white_border"
+                android:paddingVertical="@dimen/_2sdp"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"/>
+
+            <TextView
+                android:id="@+id/left_calf_after"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Left Calf: "
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp"
+                android:background="@drawable/background_white_border"
+                android:paddingVertical="@dimen/_2sdp"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"/>
+
+            <TextView
+                android:id="@+id/right_calf_after"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Right Calf: "
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp"
+                android:background="@drawable/background_white_border"
+                android:paddingVertical="@dimen/_2sdp"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"/>
+
+            <TextView
+                android:id="@+id/weight_after"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Weight: "
+                android:textColor="@color/white"
+                android:textSize="@dimen/_10sdp"
+                android:background="@drawable/background_white_border"
+                android:paddingVertical="@dimen/_2sdp"
+                android:paddingHorizontal="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_10sdp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/body_history_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_background"
+        android:text="Body Measurements History"
+        android:textSize="@dimen/_12sdp"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/body_section"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/_25sdp"
+        android:paddingHorizontal="@dimen/_10sdp"
+        android:paddingVertical="@dimen/_5sdp"/>
+
+    <TextView
+        android:id="@+id/workout_history"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Workout History"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_20sdp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/body_history_title"
+        android:layout_margin="@dimen/_20sdp"/>
+
+    <LinearLayout
+        android:id="@+id/workout_days"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/workout_history"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp">
+
+        <TextView
+            android:id="@+id/sunday"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Sun"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"
+            android:gravity="center"
+            android:background="@drawable/button_background"/>
+
+        <TextView
+            android:id="@+id/monday"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Mon"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/tuesday"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Tue"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/wednesday"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Wed"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/thursday"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Thu"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/friday"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Fri"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/saterday"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Sat"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/workout_history_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/workout_days"
+        android:layout_marginTop="@dimen/_10sdp"
+        tools:listitem="@layout/layout_workout_history"
+        tools:itemCount="2"/>
+
+    <TextView
+        android:id="@+id/nutrition_history_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nutrition History"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_20sdp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/workout_history_recyclerview"
+        android:layout_margin="@dimen/_20sdp"/>
+
+    <LinearLayout
+        android:id="@+id/nutrition_days"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/nutrition_history_title"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp">
+
+        <TextView
+            android:id="@+id/sunday_nutrition"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Sun"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"
+            android:gravity="center"
+            android:background="@drawable/button_background"/>
+
+        <TextView
+            android:id="@+id/monday_nutrition"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Mon"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/tuesday_nutrition"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Tue"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/wednesday_nutrition"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Wed"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/thursday_nutrition"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Thu"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/friday_nutrition"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Fri"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/saterday_nutrition"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Sat"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/nutrition_history_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/nutrition_days"
+        android:layout_marginTop="@dimen/_10sdp"
+        tools:listitem="@layout/layout_nutrition_history"
+        tools:itemCount="3"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

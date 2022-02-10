@@ -115,7 +115,8 @@
             android:layout_height="wrap_content"
             android:text="Credit Card"
             android:textColor="@color/white"
-            android:checked="true"/>
+            android:checked="true"
+            android:buttonTint="@color/primary_color"/>
 
         <RadioButton
             android:id="@+id/paypal_radiobutton"
@@ -123,7 +124,8 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="PayPal"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:buttonTint="@color/primary_color"/>
 
         <RadioButton
             android:id="@+id/in_app_radiobutton"
@@ -131,7 +133,8 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="In-App Purchase"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:buttonTint="@color/primary_color"/>
 
     </RadioGroup>
 
@@ -144,6 +147,7 @@
         android:layout_marginTop="@dimen/_10sdp"
         android:gravity="center"
         app:layout_constraintTop_toBottomOf="@id/payment_method_layout"
+        android:buttonTint="@color/primary_color"
         android:visibility="gone">
 
         <RadioButton
@@ -151,7 +155,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Credit Card"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:buttonTint="@color/primary_color"/>
 
         <RadioButton
             android:id="@+id/apple_pay_radiobutton"
@@ -159,7 +164,8 @@
             android:layout_height="wrap_content"
             android:text="PayPal"
             android:textColor="@color/white"
-            android:layout_marginStart="@dimen/_20sdp"/>
+            android:layout_marginStart="@dimen/_20sdp"
+            android:buttonTint="@color/primary_color"/>
 
     </RadioGroup>
 
@@ -171,13 +177,17 @@
         app:hintTextColor="@color/txt_grey"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_20sdp"
-        app:layout_constraintTop_toBottomOf="@id/in_app_layout">
+        app:layout_constraintTop_toBottomOf="@id/in_app_layout"
+        android:textColorHint="@color/color_hint">
 
-        <AutoCompleteTextView
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none"
-            android:textColor="@color/white" />
+            android:textCursorDrawable="@color/white"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/white"
+            android:textColorHint="@color/color_hint"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -189,13 +199,17 @@
         app:hintTextColor="@color/txt_grey"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_20sdp"
-        app:layout_constraintTop_toBottomOf="@id/card_number">
+        app:layout_constraintTop_toBottomOf="@id/card_number"
+        android:textColorHint="@color/color_hint">
 
         <AutoCompleteTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none"
-            android:textColor="@color/white"/>
+            android:textCursorDrawable="@color/white"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/white"
+            android:textColorHint="@color/color_hint"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -206,7 +220,8 @@
         android:orientation="horizontal"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_20sdp"
-        app:layout_constraintTop_toBottomOf="@id/cardholder_name">
+        app:layout_constraintTop_toBottomOf="@id/cardholder_name"
+        android:textColorHint="@color/color_hint">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/month"
@@ -215,13 +230,17 @@
             android:layout_height="wrap_content"
             android:hint="Month"
             app:hintTextColor="@color/txt_grey"
-            android:layout_marginEnd="@dimen/_10sdp">
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:textColorHint="@color/color_hint">
 
             <AutoCompleteTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="none"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                android:textCursorDrawable="@color/white"
+                android:backgroundTint="@color/white"
+                android:textColorHint="@color/color_hint"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -232,13 +251,17 @@
             android:layout_height="wrap_content"
             android:hint="Year"
             app:hintTextColor="@color/txt_grey"
-            android:layout_marginStart="@dimen/_10sdp">
+            android:layout_marginStart="@dimen/_10sdp"
+            android:textColorHint="@color/color_hint">
 
             <AutoCompleteTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="none"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                android:textCursorDrawable="@color/white"
+                android:backgroundTint="@color/white"
+                android:textColorHint="@color/color_hint"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -252,13 +275,17 @@
         app:hintTextColor="@color/txt_grey"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_20sdp"
-        app:layout_constraintTop_toBottomOf="@id/card_date">
+        app:layout_constraintTop_toBottomOf="@id/card_date"
+        android:textColorHint="@color/color_hint">
 
         <AutoCompleteTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:textCursorDrawable="@color/white"
+            android:backgroundTint="@color/white"
+            android:textColorHint="@color/color_hint"/>
 
     </com.google.android.material.textfield.TextInputLayout>
 

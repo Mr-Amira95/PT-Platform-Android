@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.qtechnetworks.ptplatform.Controller.adapters.ChestAndBicepsAdapter;
 import com.qtechnetworks.ptplatform.Controller.adapters.CoachAdapter;
+import com.qtechnetworks.ptplatform.Controller.adapters.SupplementsAndDietPlansAdapter;
 import com.qtechnetworks.ptplatform.R;
 
 public class SupplementsDietPlansFragment extends Fragment {
@@ -22,7 +23,7 @@ public class SupplementsDietPlansFragment extends Fragment {
     EditText searchBar;
     TextView title;
     RecyclerView recyclerView;
-    ChestAndBicepsAdapter adapter;
+    SupplementsAndDietPlansAdapter adapter;
     String flag;
 
     public SupplementsDietPlansFragment(String flag) {
@@ -57,7 +58,7 @@ public class SupplementsDietPlansFragment extends Fragment {
         recyclerView.setLayoutManager(gridLayoutManager);
 
 
-        adapter = new ChestAndBicepsAdapter(getContext(), flag);
+        adapter = new SupplementsAndDietPlansAdapter(getContext(), flag);
         recyclerView.setAdapter(adapter);
     }
 }

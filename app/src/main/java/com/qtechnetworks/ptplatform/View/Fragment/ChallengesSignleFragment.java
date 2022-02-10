@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.qtechnetworks.ptplatform.Controller.adapters.CoachAdapter;
 import com.qtechnetworks.ptplatform.R;
@@ -18,6 +19,7 @@ public class ChallengesSignleFragment extends Fragment {
 
     private RecyclerView challengesRecyclerview;
     private CoachAdapter adapter;
+    Button finishBtn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -31,6 +33,7 @@ public class ChallengesSignleFragment extends Fragment {
     }
 
     private void initials(View view) {
+        finishBtn = view.findViewById(R.id.finish_btn);
         challengesRecyclerview = view.findViewById(R.id.challenges_recyclerview);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);

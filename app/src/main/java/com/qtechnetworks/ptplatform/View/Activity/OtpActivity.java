@@ -23,7 +23,7 @@ public class OtpActivity extends AppCompatActivity {
         next_verify_trainee_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(OtpActivity.this, SignInActivity.class);
+                Intent i = new Intent(OtpActivity.this, MainActivity.class);
                 i.putExtra("type", "trainee");
                 startActivity(i);
 

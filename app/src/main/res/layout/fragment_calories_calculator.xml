@@ -75,7 +75,8 @@
             android:layout_height="wrap_content"
             android:text="Male"
             android:textColor="@color/white"
-            android:checked="true"/>
+            android:checked="true"
+            android:buttonTint="@color/primary_color"/>
 
         <RadioButton
             android:id="@+id/female"
@@ -83,7 +84,8 @@
             android:layout_height="wrap_content"
             android:text="Female"
             android:textColor="@color/white"
-            android:layout_marginStart="@dimen/_20sdp"/>
+            android:layout_marginStart="@dimen/_20sdp"
+            android:buttonTint="@color/primary_color"/>
 
     </RadioGroup>
 

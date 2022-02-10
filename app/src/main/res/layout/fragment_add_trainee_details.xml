@@ -28,13 +28,17 @@
         app:hintTextColor="@color/txt_grey"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_20sdp"
-        app:layout_constraintTop_toBottomOf="@id/header">
+        app:layout_constraintTop_toBottomOf="@id/header"
+        android:textColorHint="@color/color_hint">
 
         <AutoCompleteTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textCursorDrawable="@color/white"
+            android:backgroundTint="@color/white"
+            android:textColorHint="@color/color_hint" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -46,13 +50,17 @@
         app:hintTextColor="@color/txt_grey"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_20sdp"
-        app:layout_constraintTop_toBottomOf="@id/age">
+        app:layout_constraintTop_toBottomOf="@id/age"
+        android:textColorHint="@color/color_hint">
 
         <AutoCompleteTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textCursorDrawable="@color/white"
+            android:backgroundTint="@color/white"
+            android:textColorHint="@color/color_hint"  />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -64,13 +72,17 @@
         app:hintTextColor="@color/txt_grey"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_20sdp"
-        app:layout_constraintTop_toBottomOf="@id/weight">
+        app:layout_constraintTop_toBottomOf="@id/weight"
+        android:textColorHint="@color/color_hint">
 
         <AutoCompleteTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textCursorDrawable="@color/white"
+            android:backgroundTint="@color/white"
+            android:textColorHint="@color/color_hint" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -82,13 +94,17 @@
         app:hintTextColor="@color/txt_grey"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_20sdp"
-        app:layout_constraintTop_toBottomOf="@id/diseases">
+        app:layout_constraintTop_toBottomOf="@id/diseases"
+        android:textColorHint="@color/color_hint">
 
         <AutoCompleteTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textCursorDrawable="@color/white"
+            android:backgroundTint="@color/white"
+            android:textColorHint="@color/color_hint"  />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -100,13 +116,17 @@
         app:hintTextColor="@color/txt_grey"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_20sdp"
-        app:layout_constraintTop_toBottomOf="@id/medication">
+        app:layout_constraintTop_toBottomOf="@id/medication"
+        android:textColorHint="@color/color_hint">
 
         <AutoCompleteTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textCursorDrawable="@color/white"
+            android:backgroundTint="@color/white"
+            android:textColorHint="@color/color_hint" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

@@ -11,9 +11,21 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.qtechnetworks.ptplatform.Controller.adapters.NewsAdapter;
+import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
+import com.qtechnetworks.ptplatform.Model.Beans.News.News;
+import com.qtechnetworks.ptplatform.Model.Beans.RegisterAndLogin.Register;
+import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
+import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.R;
 
-public class NewsFragment extends Fragment {
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+
+import io.reactivex.disposables.Disposable;
+
+public class NewsFragment extends Fragment implements CallBack {
 
     RecyclerView newsRecyclerview;
     NewsAdapter newsAdapter;
@@ -35,9 +47,43 @@ public class NewsFragment extends Fragment {
         layoutManagerhorizantalleader.setOrientation(LinearLayoutManager.VERTICAL);
         newsRecyclerview.setLayoutManager(layoutManagerhorizantalleader);
 
+        getnews();
 
-        newsAdapter = new NewsAdapter(getContext());
+
+    }
+
+
+    private void getnews(){
+
+        HashMap<String,Object> params=new HashMap<>();
+
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.news_URL, AppConstants.news_TAG, News.class, params);
+
+    }
+
+    @Override
+    public void onSubscribe(Disposable d) {
+
+    }
+
+    @Override
+    public void onNext(int tag, boolean isSuccess, Object result) {
+
+        News news=(News) result;
+
+        newsAdapter = new NewsAdapter(getContext(),news.getData());
         newsRecyclerview.setAdapter(newsAdapter);
+
+    }
+
+    @Override
+    public void onError(Throwable e) {
+
+    }
+
+    @Override
+    public void onComplete() {
 
     }
 }

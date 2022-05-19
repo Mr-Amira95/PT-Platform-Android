@@ -1,6 +1,7 @@
 package com.qtechnetworks.ptplatform.Controller.adapters;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +16,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.qtechnetworks.ptplatform.Model.Beans.News.Datum;
 import com.qtechnetworks.ptplatform.R;
+import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 import com.qtechnetworks.ptplatform.View.Fragment.ContactFragment;
 import com.qtechnetworks.ptplatform.View.Fragment.NewsSingleFragment;
 
@@ -26,14 +30,12 @@ import java.util.List;
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>  {
 
     private Context context;
-    private List<String> list;
-    private List<Integer> listpic;
+    private List<Datum> data;
 
-    public NewsAdapter(Context context) {
+    public NewsAdapter(Context context, List<Datum> data) {
 
-        this.list = list;
+        this.data = data;
         this.context=context;
-        this.listpic=listpic;
 
     }
 
@@ -49,25 +51,41 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>  {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
+        Datum current= data.get(position);
+
+
+        try{
+
+            Glide.with(context).load(current.getImage()).placeholder(R.drawable.logo).into(holder.newsImg);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        holder.newsTitle.setText(current.getTitle());
+
+
         holder.newsLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setFragment(R.id.home_frame ,new NewsSingleFragment(), (AppCompatActivity) v.getContext());
+                setFragment(new NewsSingleFragment());
             }
         });
 
     }
 
-    private void setFragment(int frameLayout, Fragment fragment, AppCompatActivity activity) {
-        FragmentTransaction fragmentTransaction= activity.getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(frameLayout, fragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+    private void setFragment(Fragment fragment) {
+
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
+
+        ((MainActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.home_frame, fragment, "OptionsFragment").addToBackStack(null).commit();
+
     }
 
     @Override
     public int getItemCount() {
-        return 3;
+        return data.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

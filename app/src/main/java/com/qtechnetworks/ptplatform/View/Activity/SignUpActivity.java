@@ -9,9 +9,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
+import com.qtechnetworks.ptplatform.Model.Beans.RegisterAndLogin.Register;
+import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
+import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
+import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
 
-public class SignUpActivity extends AppCompatActivity {
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+
+import io.reactivex.disposables.Disposable;
+
+public class SignUpActivity extends AppCompatActivity implements CallBack {
 
     EditText firstName, lastName, email, mobile, password, socialLink, PotentialClients;
     TextView accountType;
@@ -28,7 +40,14 @@ public class SignUpActivity extends AppCompatActivity {
         submit_coach_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (type.equals("coach")){
+
+                try {
+                    register();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                /*if (type.equals("coach")){
                     startActivity(new Intent(SignUpActivity.this, ThankCoashActivity.class));
                     finish();
                 } else if (type.equals("trainee")){
@@ -36,7 +55,7 @@ public class SignUpActivity extends AppCompatActivity {
                     i.putExtra("email", email.getText().toString());
                     startActivity(i);
                     finish();
-                }
+                }*/
             }
         });
 
@@ -70,4 +89,57 @@ public class SignUpActivity extends AppCompatActivity {
         }
     }
 
+    private void register() throws JSONException {
+
+        JSONObject jsonObject=new JSONObject();
+
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("email", email.getText().toString());
+        params.put("first_name","");
+        params.put("last_name","");
+        params.put("password", password.getText().toString());
+        params.put("password_confirmation",password.getText().toString());
+        params.put("device",jsonObject);
+
+
+        jsonObject.accumulate("player_id", "device_player_id");//You can parameterize these values by passing them
+        jsonObject.accumulate("platform", "android");
+        jsonObject.accumulate("timezone", "Asin/Amman");
+        jsonObject.accumulate("app_version", "1.0");
+
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().postLogin(this, AppConstants.signup_URL, AppConstants.signup_TAG, Register.class, params);
+
+    }
+
+    @Override
+    public void onSubscribe(Disposable d) {
+
+    }
+
+    @Override
+    public void onNext(int tag, boolean isSuccess, Object result) {
+
+        Register register=(Register) result;
+
+        PreferencesUtils.setUserToken(register.getData().getToken());
+
+        PreferencesUtils.setUser(register.getData().getUser(),SignUpActivity.this);
+
+
+        startActivity(new Intent(SignUpActivity.this,MainActivity.class));
+        finish();
+
+
+    }
+
+    @Override
+    public void onError(Throwable e) {
+
+    }
+
+    @Override
+    public void onComplete() {
+
+    }
 }

@@ -6,13 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.bumptech.glide.Glide;
+import com.qtechnetworks.ptplatform.Model.Beans.Banner.Datum;
 import com.qtechnetworks.ptplatform.R;
 
 import java.util.List;
@@ -22,12 +22,16 @@ public class SliderAdapter extends PagerAdapter {
 
     private Context context;
     private LayoutInflater inflater;
-    private List<Integer> listPic;
+    private List<Datum> listPic;
 
-    public SliderAdapter(List<Integer> listPic, Activity context) {
+    public SliderAdapter(List<Datum> listPic, Activity context) {
         this.context=context;
         this.listPic=listPic;
         this.inflater = context.getLayoutInflater();
+    }
+
+    public SliderAdapter(List<Integer> listPic, FragmentActivity activity) {
+
     }
 
     @Override

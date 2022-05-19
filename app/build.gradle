@@ -28,12 +28,12 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField "String", "API_URL", "\"https://min-api.cryptocompare.com/data/all/\""
+            buildConfigField "String", "API_URL", "\"https://qtechnetworks.co/pt-backend/public/api/v1/\""
         }
         release {
             minifyEnabled false
             multiDexEnabled true
-            buildConfigField "String", "API_URL", "\"https://min-api.cryptocompare.com/data/all/\""
+            buildConfigField "String", "API_URL", "\"https://qtechnetworks.co/pt-backend/public/api/v1/\""
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

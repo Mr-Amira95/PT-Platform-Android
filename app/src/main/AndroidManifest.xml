@@ -19,6 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
         android:usesCleartextTraffic="true">
+
+
         <activity
             android:name=".View.Activity.ThankCoashActivity"
             android:exported="false"

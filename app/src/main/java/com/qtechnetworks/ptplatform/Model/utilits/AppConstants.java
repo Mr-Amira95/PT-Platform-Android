@@ -14,8 +14,17 @@ public class AppConstants {
     public static final String PUSH_NOTIFICATION = "pushNotification";
     public static String version= String.valueOf(BuildConfig.VERSION_CODE);
 
-    public static final String signuptalent_URL = "auth/register/talent";
-    public static final int signuptalent_TAG = 0;
+    public static final String login_URL = "auth/login";
+    public static final int login_TAG = 0;
+
+    public static final String signup_URL = "auth/register-user";
+    public static final int signup_TAG = 1;
+
+    public static final String news_URL = "news-feed";
+    public static final int news_TAG = 2;
+
+    public static final String banner_URL = "banners";
+    public static final int banner_TAG = 3;
 
 
     public static void Trace(String tag, String msg) {

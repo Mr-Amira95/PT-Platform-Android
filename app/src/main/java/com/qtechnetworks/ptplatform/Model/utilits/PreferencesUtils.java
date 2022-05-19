@@ -13,6 +13,7 @@ import android.util.DisplayMetrics;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.qtechnetworks.ptplatform.Model.Beans.RegisterAndLogin.User;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 
 
@@ -145,6 +146,34 @@ public class PreferencesUtils {
             Trace("Set Default: " + key, "" + value);
         } catch (Exception ex) {
             ex.printStackTrace();
+        }
+    }
+
+
+    public static User getUser(Context c) {
+
+        try {
+            GsonBuilder gsb = new GsonBuilder();
+            Gson gn = gsb.create();
+            return gn.fromJson(getDefaults("user", c), User.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Trace("getting user ", "");
+            return null;
+        }
+    }
+
+    public static void setUser(User value, Context c) {
+        String json = "";
+        try {
+            GsonBuilder gsb = new GsonBuilder();
+            Gson gn = gsb.create();
+            json = gn.toJson(value);
+            setDefaults("user", json, c);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Trace("setting user", json);
+
         }
     }
 

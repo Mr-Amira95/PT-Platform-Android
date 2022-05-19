@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
         initials();
         setInitialFragment(new HomeFragment());
+
     }
 
     private void initials() {

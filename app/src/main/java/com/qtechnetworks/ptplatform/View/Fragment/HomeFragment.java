@@ -14,16 +14,23 @@ import android.view.ViewGroup;
 
 import com.qtechnetworks.ptplatform.Controller.adapters.CategoryAdapter;
 import com.qtechnetworks.ptplatform.Controller.adapters.SliderAdapter;
+import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
+import com.qtechnetworks.ptplatform.Model.Beans.Banner.Banner;
+import com.qtechnetworks.ptplatform.Model.Beans.News.News;
+import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
+import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import io.reactivex.disposables.Disposable;
 import me.relex.circleindicator.CircleIndicator;
 import ss.com.bannerslider.Slider;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements CallBack {
 
     private ViewPager sliderViewPager;
     private RecyclerView categoryRecyclerView;
@@ -78,9 +85,8 @@ public class HomeFragment extends Fragment {
             add(R.drawable.contactus);
         }};
 
-        sliderAdapter = new SliderAdapter(sliderList , getActivity());
-        sliderViewPager.setAdapter(sliderAdapter);
-        sliderCircleIndicator.setViewPager(sliderViewPager);
+        getbanner();
+
     }
 
     private void initial(View view) {
@@ -89,4 +95,40 @@ public class HomeFragment extends Fragment {
         sliderCircleIndicator=view.findViewById(R.id.slider_indicator_unselected);
     }
 
+
+    private void getbanner(){
+
+        HashMap<String,Object> params=new HashMap<>();
+
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.banner_URL, AppConstants.banner_TAG, Banner.class, params);
+
+    }
+
+
+    @Override
+    public void onSubscribe(Disposable d) {
+
+    }
+
+    @Override
+    public void onNext(int tag, boolean isSuccess, Object result) {
+
+        Banner banner=(Banner) result;
+
+        sliderAdapter = new SliderAdapter(banner.getData() , getActivity());
+        sliderViewPager.setAdapter(sliderAdapter);
+        sliderCircleIndicator.setViewPager(sliderViewPager);
+
+    }
+
+    @Override
+    public void onError(Throwable e) {
+
+    }
+
+    @Override
+    public void onComplete() {
+
+    }
 }

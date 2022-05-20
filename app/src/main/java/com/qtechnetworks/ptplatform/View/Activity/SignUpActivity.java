@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.gson.JsonObject;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.RegisterAndLogin.Register;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
@@ -91,21 +92,23 @@ public class SignUpActivity extends AppCompatActivity implements CallBack {
 
     private void register() throws JSONException {
 
-        JSONObject jsonObject=new JSONObject();
 
-        HashMap<String, Object> params = new HashMap<>();
-        params.put("email", email.getText().toString());
-        params.put("first_name","");
-        params.put("last_name","");
-        params.put("password", password.getText().toString());
-        params.put("password_confirmation",password.getText().toString());
-        params.put("device",jsonObject);
+        JsonObject jsonObject=new JsonObject();
+
+        jsonObject.addProperty("player_id", "device_player_id");//You can parameterize these values by passing them
+        jsonObject.addProperty("platform", "android");
+        jsonObject.addProperty("timezone", "Asin/Amman");
+        jsonObject.addProperty("app_version", "1.0");
 
 
-        jsonObject.accumulate("player_id", "device_player_id");//You can parameterize these values by passing them
-        jsonObject.accumulate("platform", "android");
-        jsonObject.accumulate("timezone", "Asin/Amman");
-        jsonObject.accumulate("app_version", "1.0");
+        JsonObject params = new JsonObject();
+        params.addProperty("email", email.getText().toString());
+        params.addProperty("first_name","");
+        params.addProperty("last_name","");
+        params.addProperty("password", password.getText().toString());
+        params.addProperty("password_confirmation",password.getText().toString());
+        params.add("device",jsonObject);
+
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);
         MyApplication.getInstance().getHttpHelper().postLogin(this, AppConstants.signup_URL, AppConstants.signup_TAG, Register.class, params);

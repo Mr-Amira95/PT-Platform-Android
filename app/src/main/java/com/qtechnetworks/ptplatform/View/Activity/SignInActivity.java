@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.gson.JsonObject;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.RegisterAndLogin.Register;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
@@ -22,6 +23,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 
 import io.reactivex.disposables.Disposable;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 public class SignInActivity extends AppCompatActivity implements CallBack {
 
@@ -85,18 +88,19 @@ public class SignInActivity extends AppCompatActivity implements CallBack {
 
     private void checkLogin() throws JSONException {
 
-        JSONObject jsonObject=new JSONObject();
+        JsonObject jsonObject=new JsonObject();
 
-        HashMap<String, Object> params = new HashMap<>();
-        params.put("email", email_login_edittext.getText().toString());
-        params.put("password", password_login_edittext.getText().toString());
-        params.put("device",jsonObject);
+        jsonObject.addProperty("player_id", "device_player_id");//You can parameterize these values by passing them
+        jsonObject.addProperty("platform", "android");
+        jsonObject.addProperty("timezone", "Asin/Amman");
+        jsonObject.addProperty("app_version", "1.0");
 
 
-        jsonObject.accumulate("player_id", "device_player_id");//You can parameterize these values by passing them
-        jsonObject.accumulate("platform", "android");
-        jsonObject.accumulate("timezone", "Asin/Amman");
-        jsonObject.accumulate("app_version", "1.0");
+        JsonObject params = new JsonObject();
+        params.addProperty("email", email_login_edittext.getText().toString());
+        params.addProperty("password", password_login_edittext.getText().toString());
+        params.add("device",jsonObject);
+
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);
         MyApplication.getInstance().getHttpHelper().postLogin(this, AppConstants.login_URL, AppConstants.login_TAG, Register.class, params);

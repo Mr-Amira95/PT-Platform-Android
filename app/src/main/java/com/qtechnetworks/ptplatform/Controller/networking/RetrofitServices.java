@@ -1,6 +1,10 @@
 package com.qtechnetworks.ptplatform.Controller.networking;
 
 
+import com.google.gson.JsonObject;
+
+import org.json.JSONObject;
+
 import java.util.Map;
 
 import io.reactivex.Observable;
@@ -28,22 +32,20 @@ public interface RetrofitServices {
 
     @GET
     @Headers({"Accept: application/json"})
-    Observable<ResponseBody> get(@Url String url, @QueryMap Map<String, Object> params);
+    Observable<ResponseBody> get(@Url String url, @Body JsonObject params);
 
     @Headers({"Accept: application/json"})
-    @FormUrlEncoded
     @POST
-    Observable<ResponseBody> post(@Url String url, @FieldMap Map<String, Object> params);
+    Observable<ResponseBody> post(@Url String url, @Body JsonObject params);
 
     @Headers("Accept: application/json")
-    @FormUrlEncoded
     @POST
-    Observable<ResponseBody> postLogin(@Url String url, @FieldMap Map<String, Object> params);
+    Observable<ResponseBody> postLogin(@Url String url, @Body JsonObject params);
+
 
     @Headers({"Accept: application/json"})
-    @FormUrlEncoded
     @PUT
-    Observable<ResponseBody> put(@Url String url, @FieldMap Map<String, Object> params);
+    Observable<ResponseBody> put(@Url String url,@Body JsonObject params);
 
 
     @Headers({"Accept: application/json"})

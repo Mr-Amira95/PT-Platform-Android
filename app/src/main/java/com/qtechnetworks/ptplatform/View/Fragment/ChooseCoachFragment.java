@@ -12,9 +12,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.qtechnetworks.ptplatform.Controller.adapters.CoachAdapter;
+import com.qtechnetworks.ptplatform.Controller.adapters.CoachUserAdapter;
+import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
+import com.qtechnetworks.ptplatform.Model.Beans.Coach.Coach;
+import com.qtechnetworks.ptplatform.Model.Beans.News.News;
+import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
+import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.R;
 
-public class ChooseCoachFragment extends Fragment {
+import java.util.HashMap;
+
+import io.reactivex.disposables.Disposable;
+
+public class ChooseCoachFragment extends Fragment implements CallBack {
 
     RecyclerView coachRecyclerview;
 
@@ -36,8 +46,43 @@ public class ChooseCoachFragment extends Fragment {
         gridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         coachRecyclerview.setLayoutManager(gridLayoutManager);
 
+        getCoach();
 
-        CoachAdapter coachAdapter = new CoachAdapter(getContext());
+    }
+
+    private void getCoach(){
+
+        HashMap<String ,Object> params=new HashMap<>();
+
+        params.put("skip","0");
+
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.users_coaches_URL, AppConstants.users_coaches_TAG, Coach.class, params);
+
+    }
+
+    @Override
+    public void onSubscribe(Disposable d) {
+
+    }
+
+    @Override
+    public void onNext(int tag, boolean isSuccess, Object result) {
+
+        Coach coach=(Coach) result;
+
+        CoachUserAdapter coachAdapter = new CoachUserAdapter(getContext(),coach.getData());
         coachRecyclerview.setAdapter(coachAdapter);
+
+    }
+
+    @Override
+    public void onError(Throwable e) {
+
+    }
+
+    @Override
+    public void onComplete() {
+
     }
 }

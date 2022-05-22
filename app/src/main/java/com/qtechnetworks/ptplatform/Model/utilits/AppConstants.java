@@ -26,6 +26,17 @@ public class AppConstants {
     public static final String banner_URL = "banners";
     public static final int banner_TAG = 3;
 
+    public static final String exercise_videos_URL = "section-exercise/videos";
+    public static final int exercise_videos_TAG = 4;
+
+    public static final String section_exercise_URL = "section-exercise";
+    public static final int section_exercise_TAG = 5;
+
+    public static final String section_workout_URL = "section-workout";
+    public static final int section_workout_TAG = 6;
+
+    public static final String users_coaches_URL = "users/coaches";
+    public static final int users_coaches_TAG = 7;
 
     public static void Trace(String tag, String msg) {
 

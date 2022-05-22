@@ -30,6 +30,9 @@ public class NewsFragment extends Fragment implements CallBack {
 
     RecyclerView newsRecyclerview;
     NewsAdapter newsAdapter;
+
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -57,6 +60,8 @@ public class NewsFragment extends Fragment implements CallBack {
     private void getnews(){
 
         HashMap<String ,Object> params=new HashMap<>();
+
+        params.put("skip","0");
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);
         MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.news_URL, AppConstants.news_TAG, News.class, params);

@@ -103,8 +103,8 @@ public class SignUpActivity extends AppCompatActivity implements CallBack {
 
         JsonObject params = new JsonObject();
         params.addProperty("email", email.getText().toString());
-        params.addProperty("first_name","");
-        params.addProperty("last_name","");
+        params.addProperty("first_name",firstName.getText().toString());
+        params.addProperty("last_name",lastName.getText().toString());
         params.addProperty("password", password.getText().toString());
         params.addProperty("password_confirmation",password.getText().toString());
         params.add("device",jsonObject);

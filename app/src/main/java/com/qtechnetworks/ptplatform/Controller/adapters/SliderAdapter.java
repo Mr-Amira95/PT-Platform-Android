@@ -36,7 +36,12 @@ public class SliderAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return listPic.size();
+        try{
+            return listPic.size();
+        }catch (Exception e){
+            return 0;
+        }
+
     }
 
     @Override
@@ -51,7 +56,7 @@ public class SliderAdapter extends PagerAdapter {
         assert SliderLayout != null;
 
         ImageView img = SliderLayout.findViewById(R.id.slider_img);
-        Glide.with(context).load(listPic.get(position)).into(img);
+        Glide.with(context).load(listPic.get(position).getImage().toString()).into(img);
 
         img.setOnClickListener(new View.OnClickListener() {
             @Override

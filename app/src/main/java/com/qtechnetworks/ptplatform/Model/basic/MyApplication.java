@@ -10,6 +10,7 @@ import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.qtechnetworks.ptplatform.BuildConfig;
 import com.qtechnetworks.ptplatform.Controller.networking.HttpHelper;
 import com.qtechnetworks.ptplatform.Controller.networking.RetrofitServices;
+import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 
 import java.io.IOException;
 import java.util.concurrent.Executors;
@@ -28,7 +29,6 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-
 
 public class MyApplication extends Application {
 
@@ -66,18 +66,18 @@ public class MyApplication extends Application {
 
     public OkHttpClient createClient() {
         OkHttpClient okHttpClient = new OkHttpClient().newBuilder().addInterceptor(new Interceptor() {
-            @Override
-            public okhttp3.Response intercept(@NonNull Chain chain) throws IOException {
-                Request originalRequest = chain.request();
+                    @Override
+                    public okhttp3.Response intercept(@NonNull Chain chain) throws IOException {
+                        Request originalRequest = chain.request();
 
-                Request.Builder builder = originalRequest.newBuilder().header("Authorization",
-                        Credentials.basic("aUsername", "aPassword"));
+                        Request.Builder builder = originalRequest.newBuilder().header("Authorization",
+                                "Bearer "+ PreferencesUtils.getUserToken()).header("Accept-Language",PreferencesUtils.getUserlanguage());
 
 
-                Request newRequest = builder.build();
-                return chain.proceed(newRequest);
-            }
-        }).readTimeout(1, TimeUnit.MINUTES).
+                        Request newRequest = builder.build();
+                        return chain.proceed(newRequest);
+                    }
+                }).readTimeout(1, TimeUnit.MINUTES).
                 connectTimeout(1, TimeUnit.MINUTES).build();
 
 
@@ -97,7 +97,6 @@ public class MyApplication extends Application {
         instance = this;
     }
 
-
     public synchronized HttpHelper getHttpHelper() {
         if (httpHelper == null)
             httpHelper = new HttpHelper();
@@ -109,7 +108,6 @@ public class MyApplication extends Application {
             preferences = PreferenceManager.getDefaultSharedPreferences(this);
         return preferences;
     }
-
 
     public synchronized Gson getGson() {
         if (gson == null)

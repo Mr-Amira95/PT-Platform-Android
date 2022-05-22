@@ -1,6 +1,7 @@
 package com.qtechnetworks.ptplatform.Controller.adapters;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,16 +16,23 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.qtechnetworks.ptplatform.Model.Beans.videoExercises.Datum;
 import com.qtechnetworks.ptplatform.R;
+import com.qtechnetworks.ptplatform.View.Fragment.ExercisesSingleFragment;
 
 import java.util.List;
 
 public class VideoItemAdapter extends RecyclerView.Adapter<VideoItemAdapter.ViewHolder>  {
 
     private Context context;
+    private List<Datum> data;
+    private ExercisesSingleFragment exercisesSingleFragment;
 
-    public VideoItemAdapter (Context context) {
+    public VideoItemAdapter(Context context, List<Datum> data, ExercisesSingleFragment exercisesSingleFragment) {
         this.context = context;
+        this.data=data;
+        this.exercisesSingleFragment=exercisesSingleFragment;
     }
 
     @NonNull
@@ -37,34 +45,64 @@ public class VideoItemAdapter extends RecyclerView.Adapter<VideoItemAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Datum current= data.get(position);
+
+        holder.title.setText(current.getTitle().toString());
+       // holder.time.setText();
+
+
+        try{
+
+            Glide.with(context).load(current.getImage()).placeholder(R.drawable.logo).into(holder.video_view);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        holder.video_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                try{
+
+                    Glide.with(context).load(current.getImage()).placeholder(R.drawable.logo).into(exercisesSingleFragment.video_view);
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                    exercisesSingleFragment.desc.setText(Html.fromHtml(current.getDescription().toString(),Html.FROM_HTML_MODE_LEGACY));
+                } else {
+                    exercisesSingleFragment.desc.setText(Html.fromHtml(current.getDescription().toString()));
+                }
+
+
+            }
+        });
+
 
     }
 
-    private void setFragment(int frameLayout, Fragment fragment, AppCompatActivity activity) {
-        FragmentTransaction fragmentTransaction= activity.getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(frameLayout, fragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
-    }
 
     @Override
     public int getItemCount() {
-        return 5;
+        return data.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView title, time;
-        public View view;
-        private ConstraintLayout videoLayout;
+        public ImageView video_view;
+        private ConstraintLayout video_layout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             title=itemView.findViewById(R.id.title);
             time=itemView.findViewById(R.id.time);
-            view=itemView.findViewById(R.id.video_view);
-            videoLayout=itemView.findViewById(R.id.video_layout);
+            video_view=itemView.findViewById(R.id.video_view);
+            video_layout=itemView.findViewById(R.id.video_layout);
         }
     }
 

@@ -7,7 +7,7 @@
     android:layout_marginBottom="@dimen/_10sdp"
     android:id="@+id/video_layout">
 
-    <View
+    <ImageView
         android:id="@+id/video_view"
         android:layout_width="@dimen/_100sdp"
         android:layout_height="@dimen/_60sdp"

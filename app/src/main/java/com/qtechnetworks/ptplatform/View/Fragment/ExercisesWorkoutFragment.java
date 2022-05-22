@@ -13,9 +13,18 @@ import android.widget.TextView;
 
 import com.qtechnetworks.ptplatform.Controller.adapters.ChestAndBicepsAdapter;
 import com.qtechnetworks.ptplatform.Controller.adapters.TitleAdapter;
+import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
+import com.qtechnetworks.ptplatform.Model.Beans.Exercises.Exercise;
+import com.qtechnetworks.ptplatform.Model.Beans.News.News;
+import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
+import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.R;
 
-public class ExercisesWorkoutFragment extends Fragment {
+import java.util.HashMap;
+
+import io.reactivex.disposables.Disposable;
+
+public class ExercisesWorkoutFragment extends Fragment implements CallBack {
 
     RecyclerView categoryRecyclerView, chestRecyclerview, bicepsRecyclerview, crossFitRecyclerview, homeWorkoutsRecyclerview;
     ChestAndBicepsAdapter adapter;
@@ -24,8 +33,18 @@ public class ExercisesWorkoutFragment extends Fragment {
 
     String flag = "";
 
+    String coachid;
+
     public ExercisesWorkoutFragment(String flag) {
         this.flag = flag;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            coachid=getArguments().getString("coachid");
+        }
     }
 
     @Override
@@ -53,9 +72,11 @@ public class ExercisesWorkoutFragment extends Fragment {
         if (flag.equals("Workout")){
             chestCrosTxt.setText("Cross Fit");
             bicepsHomeWorkoutsTxt.setText("Home Workouts");
+            getWorkout(coachid);
         } else if (flag.equals("Exercises")){
             chestCrosTxt.setText("Chest");
             bicepsHomeWorkoutsTxt.setText("Biceps");
+            getExercises(coachid);
         }
 
         LinearLayoutManager layoutManagerhorizantalleader = new LinearLayoutManager(getContext());
@@ -70,6 +91,45 @@ public class ExercisesWorkoutFragment extends Fragment {
         linearLayoutManager3.setOrientation(LinearLayoutManager.HORIZONTAL);
         categoryRecyclerView.setLayoutManager(linearLayoutManager3);
 
+
+
+    }
+
+    private void getExercises(String coachid){
+
+        HashMap<String ,Object> params=new HashMap<>();
+
+        params.put("coach_id",coachid);
+
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.section_exercise_URL, AppConstants.section_exercise_TAG, Exercise.class, params);
+
+    }
+
+
+    private void getWorkout(String coachid){
+
+        HashMap<String ,Object> params=new HashMap<>();
+
+        params.put("coach_id",coachid);
+
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.section_exercise_URL, AppConstants.section_exercise_TAG, Exercise.class, params);
+
+    }
+
+
+
+    @Override
+    public void onSubscribe(Disposable d) {
+
+    }
+
+    @Override
+    public void onNext(int tag, boolean isSuccess, Object result) {
+
+        Exercise exercise=(Exercise) result;
+
         adapter = new ChestAndBicepsAdapter(getContext(), flag);
         chestRecyclerview.setAdapter(adapter);
         bicepsRecyclerview.setAdapter(adapter);
@@ -80,4 +140,13 @@ public class ExercisesWorkoutFragment extends Fragment {
 
     }
 
+    @Override
+    public void onError(Throwable e) {
+
+    }
+
+    @Override
+    public void onComplete() {
+
+    }
 }

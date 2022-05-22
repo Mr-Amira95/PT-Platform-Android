@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.JsonObject;
 import com.qtechnetworks.ptplatform.Controller.adapters.NewsAdapter;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.News.News;
@@ -55,7 +56,7 @@ public class NewsFragment extends Fragment implements CallBack {
 
     private void getnews(){
 
-        HashMap<String,Object> params=new HashMap<>();
+        HashMap<String ,Object> params=new HashMap<>();
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);
         MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.news_URL, AppConstants.news_TAG, News.class, params);

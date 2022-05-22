@@ -8,6 +8,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
 
 import java.util.Locale;
@@ -35,8 +36,15 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-                startActivity(new Intent(SplashActivity.this,ChoosingActivity.class));
-                finish();
+                if (PreferencesUtils.getUserToken().equalsIgnoreCase("-1")){
+                    startActivity(new Intent(SplashActivity.this,ChoosingActivity.class));
+                    finish();
+                }else {
+                    startActivity(new Intent(SplashActivity.this,MainActivity.class));
+                    finish();
+                }
+
+
 
             }
         },SPLASH_TIME_OUT);

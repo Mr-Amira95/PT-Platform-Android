@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.JsonObject;
 import com.qtechnetworks.ptplatform.Controller.adapters.CategoryAdapter;
 import com.qtechnetworks.ptplatform.Controller.adapters.SliderAdapter;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
@@ -98,7 +99,7 @@ public class HomeFragment extends Fragment implements CallBack {
 
     private void getbanner(){
 
-        HashMap<String,Object> params=new HashMap<>();
+        HashMap<String ,Object> params=new HashMap<>();
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);
         MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.banner_URL, AppConstants.banner_TAG, Banner.class, params);

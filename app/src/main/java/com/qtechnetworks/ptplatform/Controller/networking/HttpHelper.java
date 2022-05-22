@@ -35,7 +35,7 @@ public class HttpHelper {
 
     ProgressDialog dialog;
 
-    public void Post(Context context,final String url, final int tag, final Class clazz, final JsonObject params) {
+    public void Post(Context context,final String url, final int tag, final Class clazz, final Map<String, Object> params) {
 
         dialog=new ProgressDialog(context);
         dialog.setMessage("Loading ...");
@@ -119,7 +119,7 @@ public class HttpHelper {
                 } );
     }
 
-    public void get(Context context,String url, final int tag, final Class clazz, JsonObject params) {
+    public void get(Context context,String url, final int tag, final Class clazz, HashMap<String, Object> map) {
 
         dialog=new ProgressDialog(context);
         dialog.setMessage("Loading ...");
@@ -128,7 +128,7 @@ public class HttpHelper {
 
         RetrofitServices service = MyApplication.getInstance().getHttpMethods();
 
-        service.get(url, params)
+        service.get(url, map)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ResponseBody>() {
@@ -272,7 +272,7 @@ public class HttpHelper {
 
     }
 
-    public void put(Context context,String url, final int tag, final Class clazz, JsonObject params) {
+    public void put(Context context,String url, final int tag, final Class clazz,HashMap<String, Object> map) {
 
         dialog=new ProgressDialog(context);
         dialog.setMessage("Loading ...");
@@ -281,7 +281,7 @@ public class HttpHelper {
 
         RetrofitServices service = MyApplication.getInstance().getHttpMethods();
 
-        service.put(url,params)
+        service.put(url,map)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ResponseBody>() {

@@ -32,20 +32,21 @@ public interface RetrofitServices {
 
     @GET
     @Headers({"Accept: application/json"})
-    Observable<ResponseBody> get(@Url String url, @Body JsonObject params);
+    Observable<ResponseBody> get(@Url String url, @QueryMap Map<String, Object> params);
 
     @Headers({"Accept: application/json"})
+    @FormUrlEncoded
     @POST
-    Observable<ResponseBody> post(@Url String url, @Body JsonObject params);
+    Observable<ResponseBody> post(@Url String url, @FieldMap Map<String, Object> params);
 
     @Headers("Accept: application/json")
     @POST
     Observable<ResponseBody> postLogin(@Url String url, @Body JsonObject params);
 
-
     @Headers({"Accept: application/json"})
+    @FormUrlEncoded
     @PUT
-    Observable<ResponseBody> put(@Url String url,@Body JsonObject params);
+    Observable<ResponseBody> put(@Url String url, @FieldMap Map<String, Object> params);
 
 
     @Headers({"Accept: application/json"})
@@ -56,7 +57,6 @@ public interface RetrofitServices {
     @POST
     @Multipart
     Observable<ResponseBody> uploadfile(@Url String url, @PartMap Map<String, RequestBody> params, @Part MultipartBody.Part[] part);
-
 
 }
 

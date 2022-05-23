@@ -41,6 +41,12 @@ public class AppConstants {
     public static final String workout_videos_URL = "section-workout/videos";
     public static final int workout_videos_TAG = 8;
 
+    public static final String category_exercise_URL = "section-exercise/categories";
+    public static final int category_exercise_TAG = 9;
+
+    public static final String category_Workout_URL = "section-workout/categories";
+    public static final int category_Workout_TAG = 10;
+
     public static void Trace(String tag, String msg) {
 
         if (BuildConfig.DEBUG) {

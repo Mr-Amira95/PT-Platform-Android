@@ -100,14 +100,17 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
     public void playinitial(String videourl) {
 
 
-        player = new SimpleExoPlayer.Builder(requireContext()).build();
+        player = new SimpleExoPlayer.Builder(getContext()).build();
 
         video_view.setPlayer(player);
         video_view.setUseController(false);
 
         MediaItem mediaItem = MediaItem.fromUri(videourl);
 
-        player.setRepeatMode(Player.REPEAT_MODE_ALL);
+        //player.setRepeatMode(Player.REPEAT_MODE_ALL);
+
+        video_view.setControllerHideOnTouch(true);
+        video_view.showController();
 
         // Set the media item to be played.
         player.setMediaItem(mediaItem);

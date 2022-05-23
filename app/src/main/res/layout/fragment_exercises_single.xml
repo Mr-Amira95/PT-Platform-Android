@@ -20,10 +20,11 @@
             android:scaleType="centerCrop"
             app:layout_constraintTop_toTopOf="parent"
             app:repeat_toggle_modes="none"
-            app:resize_mode="fixed_width"
+            app:resize_mode="fill"
             app:show_timeout="4500000"
             app:surface_type="texture_view"
-            app:use_artwork="true"/>
+            app:use_artwork="true"
+            />
 
 
         <ImageView

@@ -12,9 +12,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.qtechnetworks.ptplatform.Model.Beans.Exercises.Category;
 import com.qtechnetworks.ptplatform.Model.Beans.Exercises.Datum;
 import com.qtechnetworks.ptplatform.R;
+import com.qtechnetworks.ptplatform.View.Fragment.ExercisesWorkoutFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,12 +27,14 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.ViewHolder> 
     private List<TextView> textViewList = new ArrayList<>();
     RecyclerView home_exir_work_recyclerview;
     private String flag;
+    ExercisesWorkoutFragment exercisesWorkoutFragment;
 
-    public TitleAdapter(Context context, String flag, List<Datum> datum, RecyclerView home_exir_work_recyclerview) {
+    public TitleAdapter(Context context, String flag, List<Datum> datum, RecyclerView home_exir_work_recyclerview, ExercisesWorkoutFragment exercisesWorkoutFragment) {
         this.flag = flag;
         this.datum = datum;
         this.context=context;
         this.home_exir_work_recyclerview=home_exir_work_recyclerview;
+        this.exercisesWorkoutFragment=exercisesWorkoutFragment;
     }
 
 
@@ -53,6 +55,7 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.ViewHolder> 
 
         textViewList.add(holder.title);
 
+
         if (flag.equals("Workout")||flag.equals("Exercises")||flag.equals("Calendar")&& position == 1){
             holder.title.setBackgroundResource(R.drawable.background_radius_20_title);
         }
@@ -67,6 +70,8 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.ViewHolder> 
         holder.title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                exercisesWorkoutFragment.groupid=current.getId().toString();
 
                 WorkoutAndExsircisesAdapter workoutAndExsircisesAdapter=new WorkoutAndExsircisesAdapter(context,flag,current.getCategory());
                 home_exir_work_recyclerview.setAdapter(workoutAndExsircisesAdapter);

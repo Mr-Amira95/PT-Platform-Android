@@ -8,14 +8,12 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.qtechnetworks.ptplatform.R;
-import com.qtechnetworks.ptplatform.View.Fragment.NewsSingleFragment;
 import com.qtechnetworks.ptplatform.View.Fragment.SinglePackageFragment;
 
 
@@ -26,7 +24,7 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHold
 
     public PackageAdapter(Context context) {
         this.context=context;
-        titleAdapter = new TitleAdapter(this.context, "Features");
+        //titleAdapter = new TitleAdapter(this.context, "Features", exercise.getData().get(0));
     }
 
 

@@ -52,8 +52,8 @@ public class CalendarFragment extends Fragment {
         linearLayoutManager3.setOrientation(LinearLayoutManager.HORIZONTAL);
         timesRecyclerview.setLayoutManager(linearLayoutManager3);
 
-        timesAdapter = new TitleAdapter(getContext(), "Calendar");
-        timesRecyclerview.setAdapter(timesAdapter);
+       /* timesAdapter = new TitleAdapter(getContext(), "Calendar", exercise.getData().get(0));
+        timesRecyclerview.setAdapter(timesAdapter);*/
     }
 
     private void setFragment(int frameLayout, Fragment fragment) {

@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.qtechnetworks.ptplatform.Controller.adapters.RecentItemAdapter;
 import com.qtechnetworks.ptplatform.Controller.adapters.TitleAdapter;
 import com.qtechnetworks.ptplatform.R;
 
@@ -57,8 +56,8 @@ public class SinglePackageFragment extends Fragment {
         layoutManagerhorizantalleader.setOrientation(LinearLayoutManager.VERTICAL);
         featuresRecyclerview.setLayoutManager(layoutManagerhorizantalleader);
 
-        featuresAdapter = new TitleAdapter(getContext(), "Features");
-        featuresRecyclerview.setAdapter(featuresAdapter);
+       /* featuresAdapter = new TitleAdapter(getContext(), "Features", exercise.getData().get(0));
+        featuresRecyclerview.setAdapter(featuresAdapter);*/
 
     }
 }

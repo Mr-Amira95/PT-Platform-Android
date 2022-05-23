@@ -228,9 +228,13 @@ public class MainFragment extends Fragment implements CallBack {
 
         Banner banner=(Banner) result;
 
-        sliderAdapter = new SliderAdapter(banner.getData() , getActivity());
-        sliderViewPager.setAdapter(sliderAdapter);
-        sliderCircleIndicator.setViewPager(sliderViewPager);
+        try {
+            sliderAdapter = new SliderAdapter(banner.getData(), getActivity());
+            sliderViewPager.setAdapter(sliderAdapter);
+            sliderCircleIndicator.setViewPager(sliderViewPager);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
 

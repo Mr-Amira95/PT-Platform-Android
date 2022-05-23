@@ -13,8 +13,10 @@ import android.widget.TextView;
 
 import com.qtechnetworks.ptplatform.Controller.adapters.ChestAndBicepsAdapter;
 import com.qtechnetworks.ptplatform.Controller.adapters.TitleAdapter;
+import com.qtechnetworks.ptplatform.Controller.adapters.WorkoutAndExsircisesAdapter;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.Exercises.Exercise;
+import com.qtechnetworks.ptplatform.Model.Beans.Exercises.Exercises;
 import com.qtechnetworks.ptplatform.Model.Beans.News.News;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
@@ -26,10 +28,12 @@ import io.reactivex.disposables.Disposable;
 
 public class ExercisesWorkoutFragment extends Fragment implements CallBack {
 
-    RecyclerView categoryRecyclerView, chestRecyclerview, bicepsRecyclerview, crossFitRecyclerview, homeWorkoutsRecyclerview;
-    ChestAndBicepsAdapter adapter;
+    RecyclerView categoryRecyclerView,home_exir_work_recyclerview;
+
+    WorkoutAndExsircisesAdapter workoutAndExsircisesAdapter;
+
     TitleAdapter titleAdapter;
-    TextView title, chestCrosTxt, bicepsHomeWorkoutsTxt;
+    TextView title;
 
     String flag = "";
 
@@ -59,33 +63,27 @@ public class ExercisesWorkoutFragment extends Fragment implements CallBack {
     }
 
     private void initial(View view) {
-        chestRecyclerview= view.findViewById(R.id.chest_cross_recyclerview);
-        bicepsRecyclerview= view.findViewById(R.id.biceps_homeworkout_recyclerview);
+        home_exir_work_recyclerview= view.findViewById(R.id.home_exir_work_recyclerview);
 
-        chestCrosTxt = view.findViewById(R.id.chest_cross_title);
-        bicepsHomeWorkoutsTxt = view.findViewById(R.id.biceps_homeworkout_title);
         categoryRecyclerView= view.findViewById(R.id.category_recyclerView);
 
         title= view.findViewById(R.id.title);
         title.setText(flag);
 
         if (flag.equals("Workout")){
-            chestCrosTxt.setText("Cross Fit");
-            bicepsHomeWorkoutsTxt.setText("Home Workouts");
+
             getWorkout(coachid);
+
         } else if (flag.equals("Exercises")){
-            chestCrosTxt.setText("Chest");
-            bicepsHomeWorkoutsTxt.setText("Biceps");
+
             getExercises(coachid);
+
         }
 
-        LinearLayoutManager layoutManagerhorizantalleader = new LinearLayoutManager(getContext());
-        layoutManagerhorizantalleader.setOrientation(LinearLayoutManager.HORIZONTAL);
-        chestRecyclerview.setLayoutManager(layoutManagerhorizantalleader);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        bicepsRecyclerview.setLayoutManager(linearLayoutManager);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        home_exir_work_recyclerview.setLayoutManager(linearLayoutManager);
 
         LinearLayoutManager linearLayoutManager3 = new LinearLayoutManager(getContext());
         linearLayoutManager3.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -102,7 +100,7 @@ public class ExercisesWorkoutFragment extends Fragment implements CallBack {
         params.put("coach_id",coachid);
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);
-        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.section_exercise_URL, AppConstants.section_exercise_TAG, Exercise.class, params);
+        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.section_exercise_URL, AppConstants.section_exercise_TAG, Exercises.class, params);
 
     }
 
@@ -114,7 +112,7 @@ public class ExercisesWorkoutFragment extends Fragment implements CallBack {
         params.put("coach_id",coachid);
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);
-        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.section_exercise_URL, AppConstants.section_exercise_TAG, Exercise.class, params);
+        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.section_workout_URL, AppConstants.section_workout_TAG, Exercises.class, params);
 
     }
 
@@ -128,13 +126,12 @@ public class ExercisesWorkoutFragment extends Fragment implements CallBack {
     @Override
     public void onNext(int tag, boolean isSuccess, Object result) {
 
-        Exercise exercise=(Exercise) result;
+        Exercises exercise=(Exercises) result;
 
-        adapter = new ChestAndBicepsAdapter(getContext(), flag);
-        chestRecyclerview.setAdapter(adapter);
-        bicepsRecyclerview.setAdapter(adapter);
+        WorkoutAndExsircisesAdapter workoutAndExsircisesAdapter=new WorkoutAndExsircisesAdapter(getContext(),flag,exercise.getData().get(0).getCategory());
+        home_exir_work_recyclerview.setAdapter(workoutAndExsircisesAdapter);
 
-        titleAdapter = new TitleAdapter(getContext(), flag);
+        titleAdapter = new TitleAdapter(getContext(), flag,exercise.getData(),home_exir_work_recyclerview);
         categoryRecyclerView.setAdapter(titleAdapter);
 
 

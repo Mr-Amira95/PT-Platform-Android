@@ -83,39 +83,11 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/chest_cross_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Chest"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_20sdp"
-                android:textStyle="bold"
-                android:layout_marginHorizontal="@dimen/_20sdp"/>
-
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/chest_cross_recyclerview"
+                android:id="@+id/home_exir_work_recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_10sdp"/>
-
-            <TextView
-                android:id="@+id/biceps_homeworkout_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Biceps"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_20sdp"
-                android:textStyle="bold"
-                android:layout_marginHorizontal="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_20sdp"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/biceps_homeworkout_recyclerview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:layout_marginHorizontal="@dimen/_5sdp"
                 android:layout_marginTop="@dimen/_10sdp"/>
 
         </LinearLayout>

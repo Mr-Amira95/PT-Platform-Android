@@ -35,8 +35,8 @@ public class PlansSingleFragment extends Fragment {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         ingredientsRecyclerview.setLayoutManager(linearLayoutManager);
 
-        titleAdapter = new TitleAdapter(getContext(), "Recipe");
-        ingredientsRecyclerview.setAdapter(titleAdapter);
+      /*  titleAdapter = new TitleAdapter(getContext(), "Recipe", exercise.getData().get(0));
+        ingredientsRecyclerview.setAdapter(titleAdapter);*/
 
     }
 }

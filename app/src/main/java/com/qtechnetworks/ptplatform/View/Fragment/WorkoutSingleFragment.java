@@ -10,11 +10,36 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.bumptech.glide.Glide;
+import com.qtechnetworks.ptplatform.Controller.adapters.VideoItemAdapter;
+import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
+import com.qtechnetworks.ptplatform.Model.Beans.WorkoutVideo.VideoWorkout;
+import com.qtechnetworks.ptplatform.Model.Beans.videoExercises.VideoExercises;
+import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
+import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.R;
+import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 
-public class WorkoutSingleFragment extends Fragment {
+import java.util.HashMap;
+
+import io.reactivex.disposables.Disposable;
+
+public class WorkoutSingleFragment extends Fragment implements CallBack {
 
     Button explore;
+
+    String title,description;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+
+            title=getArguments().getString("title");
+            description=getArguments().getString("description");
+
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -26,7 +51,7 @@ public class WorkoutSingleFragment extends Fragment {
         explore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setFragment(R.id.home_frame, new ExercisesSingleFragment());
+                setFragment( new ExercisesSingleFragment(),"Workout");
             }
         });
 
@@ -36,13 +61,69 @@ public class WorkoutSingleFragment extends Fragment {
 
     private void initials(View view) {
         explore = view.findViewById(R.id.explore_btn);
+        getWorkout("2736");
     }
 
-    private void setFragment(int frameLayout, Fragment fragment) {
-        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(frameLayout, fragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+    private void setFragment(Fragment fragment,String flag) {
+
+        Bundle args=new Bundle();
+        args.putString("flag",flag);
+        fragment.setArguments(args);
+
+        ((MainActivity) getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.home_frame, fragment, "OptionsFragment").addToBackStack(null).commit();
+
     }
+
+
+    private void getWorkout(String Exid){
+
+        HashMap<String ,Object> params=new HashMap<>();
+
+        params.put("exercise_id",Exid);
+        params.put("skip","0");
+
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.workout_videos_URL, AppConstants.workout_videos_TAG, VideoWorkout.class, params);
+
+    }
+
+
+    @Override
+    public void onSubscribe(Disposable d) {
+
+    }
+
+    @Override
+    public void onNext(int tag, boolean isSuccess, Object result) {
+
+        VideoWorkout videoWorkout=(VideoWorkout) result;
+
+
+       /* try{
+
+            Glide.with(getContext()).load(videoExercises.getData().get(0).getImage()).placeholder(R.drawable.logo).into(video_view);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }*/
+
+      /*  desc.setText(videoExercises.getData().get(0).getDescription());
+
+
+        videoAdapter = new VideoItemAdapter(getContext(),videoExercises.getData(),ExercisesSingleFragment.this);
+        videoRecyclerview.setAdapter(videoAdapter);*/
+
+    }
+
+    @Override
+    public void onError(Throwable e) {
+
+    }
+
+    @Override
+    public void onComplete() {
+
+    }
+
 
 }

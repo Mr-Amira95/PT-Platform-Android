@@ -38,6 +38,9 @@ public class AppConstants {
     public static final String users_coaches_URL = "users/coaches";
     public static final int users_coaches_TAG = 7;
 
+    public static final String workout_videos_URL = "section-workout/videos";
+    public static final int workout_videos_TAG = 8;
+
     public static void Trace(String tag, String msg) {
 
         if (BuildConfig.DEBUG) {

@@ -4,18 +4,17 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.qtechnetworks.ptplatform.Model.Beans.Exercises.Category;
+import com.qtechnetworks.ptplatform.Model.Beans.Exercises.Datum;
 import com.qtechnetworks.ptplatform.R;
-import com.qtechnetworks.ptplatform.View.Fragment.NewsSingleFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,14 +23,16 @@ import java.util.List;
 public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.ViewHolder>  {
 
     private Context context;
-    private List<String> list;
+    private List<Datum> datum;
     private List<TextView> textViewList = new ArrayList<>();
+    RecyclerView home_exir_work_recyclerview;
     private String flag;
 
-    public TitleAdapter(Context context, String flag) {
+    public TitleAdapter(Context context, String flag, List<Datum> datum, RecyclerView home_exir_work_recyclerview) {
         this.flag = flag;
-        this.list = list;
+        this.datum = datum;
         this.context=context;
+        this.home_exir_work_recyclerview=home_exir_work_recyclerview;
     }
 
 
@@ -45,6 +46,11 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
+        Datum current= datum.get(position);
+
+        holder.title.setText(current.getTitle().toString());
+
         textViewList.add(holder.title);
 
         if (flag.equals("Workout")||flag.equals("Exercises")||flag.equals("Calendar")&& position == 1){
@@ -54,9 +60,17 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.ViewHolder> 
             holder.title.setText("6:00PM");
         }
 
+        textViewList.get(position).setBackgroundResource(R.drawable.background_empty);
+
+        textViewList.get(0).setBackgroundResource(R.drawable.background_radius_20_title);
+
         holder.title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                WorkoutAndExsircisesAdapter workoutAndExsircisesAdapter=new WorkoutAndExsircisesAdapter(context,flag,current.getCategory());
+                home_exir_work_recyclerview.setAdapter(workoutAndExsircisesAdapter);
+
                 if (flag.equals("Workout")||flag.equals("Exercises")||flag.equals("Calendar")){
                     for (int i=0; i<textViewList.size(); i++){
                         if (i == holder.getAdapterPosition()){
@@ -77,7 +91,7 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return 3;
+        return datum.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

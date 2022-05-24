@@ -25,16 +25,12 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.ViewHolder> 
     private Context context;
     private List<Datum> datum;
     private List<TextView> textViewList = new ArrayList<>();
-    RecyclerView home_exir_work_recyclerview;
     private String flag;
-    ExercisesWorkoutFragment exercisesWorkoutFragment;
 
-    public TitleAdapter(Context context, String flag, List<Datum> datum, RecyclerView home_exir_work_recyclerview, ExercisesWorkoutFragment exercisesWorkoutFragment) {
+    public TitleAdapter(Context context, String flag, List<Datum> datum) {
         this.flag = flag;
         this.datum = datum;
         this.context=context;
-        this.home_exir_work_recyclerview=home_exir_work_recyclerview;
-        this.exercisesWorkoutFragment=exercisesWorkoutFragment;
     }
 
 
@@ -55,31 +51,18 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.ViewHolder> 
 
         textViewList.add(holder.title);
 
-
-        if (flag.equals("Workout")||flag.equals("Exercises")||flag.equals("Calendar")&& position == 1){
-            holder.title.setBackgroundResource(R.drawable.background_radius_20_title);
-        }
-        if (flag.equals("Calendar")){
-            holder.title.setText("6:00PM");
-        }
-
-        textViewList.get(position).setBackgroundResource(R.drawable.background_empty);
-
         textViewList.get(0).setBackgroundResource(R.drawable.background_radius_20_title);
 
         holder.title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                exercisesWorkoutFragment.groupid=current.getId().toString();
-
-                WorkoutAndExsircisesAdapter workoutAndExsircisesAdapter=new WorkoutAndExsircisesAdapter(context,flag,current.getCategory());
-                home_exir_work_recyclerview.setAdapter(workoutAndExsircisesAdapter);
-
-                if (flag.equals("Workout")||flag.equals("Exercises")||flag.equals("Calendar")){
+                if (flag.equals("Workout")){
                     for (int i=0; i<textViewList.size(); i++){
                         if (i == holder.getAdapterPosition()){
                             textViewList.get(i).setBackgroundResource(R.drawable.background_radius_20_title);
+                            ExercisesWorkoutFragment.setItems(current.getId().toString(), context, flag);
+                            ExercisesWorkoutFragment.groupID = current.getId();
                         } else {
                             textViewList.get(i).setBackgroundResource(R.drawable.background_empty);
                         }

@@ -69,6 +69,12 @@ public class AppConstants {
     public static final int Supplement_TAG = 17;
 
 
+    public static final String exercise_URL = "section-workout/exercises";
+    public static final int exercise_TAG = 11;
+
+    public static final String workout_URL = "section-exercise/exercises";
+    public static final int workout_TAG = 12;
+
     public static void Trace(String tag, String msg) {
 
         if (BuildConfig.DEBUG) {

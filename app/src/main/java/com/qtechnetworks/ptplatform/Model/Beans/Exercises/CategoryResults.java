@@ -1,14 +1,15 @@
 package com.qtechnetworks.ptplatform.Model.Beans.Exercises;
 
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Exercises {
+import java.util.List;
+
+public class CategoryResults {
 
     @SerializedName("data")
     @Expose
-    private List<Datum> data = null;
+    private List<Category> data = null;
     @SerializedName("success")
     @Expose
     private Boolean success;
@@ -16,11 +17,11 @@ public class Exercises {
     @Expose
     private Object errors;
 
-    public List<Datum> getData() {
+    public List<Category> getData() {
         return data;
     }
 
-    public void setData(List<Datum> data) {
+    public void setData(List<Category> data) {
         this.data = data;
     }
 

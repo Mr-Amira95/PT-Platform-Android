@@ -15,8 +15,6 @@ import android.widget.TextView;
 
 import com.qtechnetworks.ptplatform.Controller.adapters.SupplementsAndDietPlansAdapter;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
-import com.qtechnetworks.ptplatform.Model.Beans.Exercises.Exercises;
-import com.qtechnetworks.ptplatform.Model.Beans.Food.Food;
 import com.qtechnetworks.ptplatform.Model.Beans.Supplement.Supplement;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;

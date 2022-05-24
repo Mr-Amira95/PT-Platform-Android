@@ -42,7 +42,6 @@ public class ChestAndBicepsAdapter extends RecyclerView.Adapter<ChestAndBicepsAd
 
     }
 
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

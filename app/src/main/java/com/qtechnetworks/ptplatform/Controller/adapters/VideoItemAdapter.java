@@ -52,6 +52,8 @@ public class VideoItemAdapter extends RecyclerView.Adapter<VideoItemAdapter.View
        // holder.time.setText();
 
 
+        exercisesSingleFragment.VideoID=current.getId().toString();
+
         try{
 
             Glide.with(context).load(current.getImage()).placeholder(R.drawable.logo).into(holder.video_view);
@@ -63,6 +65,8 @@ public class VideoItemAdapter extends RecyclerView.Adapter<VideoItemAdapter.View
         holder.video_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                exercisesSingleFragment.VideoID=current.getId().toString();
 
                 try {
                    exercisesSingleFragment.video_view.setDefaultArtwork(exercisesSingleFragment.drawableFromUrl(current.getImage()));

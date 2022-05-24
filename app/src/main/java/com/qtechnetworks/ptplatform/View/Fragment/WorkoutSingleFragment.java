@@ -28,7 +28,7 @@ public class WorkoutSingleFragment extends Fragment implements CallBack {
 
     Button explore;
 
-    String title,description;
+    String title,description,id;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,6 +37,7 @@ public class WorkoutSingleFragment extends Fragment implements CallBack {
 
             title=getArguments().getString("title");
             description=getArguments().getString("description");
+            id=getArguments().getString("ID");
 
         }
     }
@@ -61,7 +62,7 @@ public class WorkoutSingleFragment extends Fragment implements CallBack {
 
     private void initials(View view) {
         explore = view.findViewById(R.id.explore_btn);
-        getWorkout("2736");
+        getWorkout(id);
     }
 
     private void setFragment(Fragment fragment,String flag) {

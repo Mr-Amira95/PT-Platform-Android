@@ -191,8 +191,7 @@ public class ExercisesWorkoutFragment extends Fragment implements CallBack {
                 workoutAndExsircisesAdapter=new WorkoutAndExsircisesAdapter(getContext(),flag,exercise.getData().get(0).getCategory());
                 home_exir_work_recyclerview.setAdapter(workoutAndExsircisesAdapter);
 
-                exdata.addAll(exercise.getData().get(0).getCategory());
-
+               // exdata.addAll(exercise.getData().get(0).getCategory());
 
                 break;
 
@@ -202,10 +201,9 @@ public class ExercisesWorkoutFragment extends Fragment implements CallBack {
                 exdata.addAll(exercise.getData());
 
 
-                workoutAndExsircisesAdapter=new WorkoutAndExsircisesAdapter(getContext(),flag,exdata);
+              /*  workoutAndExsircisesAdapter=new WorkoutAndExsircisesAdapter(getContext(),flag,exdata);
                 home_exir_work_recyclerview.setAdapter(workoutAndExsircisesAdapter);
-
-
+*/
                 break;
 
         }
@@ -224,4 +222,5 @@ public class ExercisesWorkoutFragment extends Fragment implements CallBack {
     public void onComplete() {
 
     }
+
 }

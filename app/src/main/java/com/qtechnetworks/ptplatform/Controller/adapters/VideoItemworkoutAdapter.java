@@ -49,6 +49,7 @@ public class VideoItemworkoutAdapter extends RecyclerView.Adapter<VideoItemworko
         holder.title.setText(current.getTitle().toString());
        // holder.time.setText();
 
+        exercisesSingleFragment.VideoID=current.getId().toString();
 
         try{
 
@@ -61,6 +62,8 @@ public class VideoItemworkoutAdapter extends RecyclerView.Adapter<VideoItemworko
         holder.video_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                exercisesSingleFragment.VideoID=current.getId().toString();
 
                 try {
                     exercisesSingleFragment.video_view.setDefaultArtwork(exercisesSingleFragment.drawableFromUrl(current.getImage()));

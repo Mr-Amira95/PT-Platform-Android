@@ -14,9 +14,17 @@ import android.widget.TextView;
 
 import com.qtechnetworks.ptplatform.Controller.adapters.FoodAdapter;
 import com.qtechnetworks.ptplatform.Controller.adapters.NewsAdapter;
+import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
+import com.qtechnetworks.ptplatform.Model.Beans.Food.Food;
+import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
+import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.R;
 
-public class FoodFragment extends Fragment {
+import java.util.HashMap;
+
+import io.reactivex.disposables.Disposable;
+
+public class FoodFragment extends Fragment implements CallBack {
 
     RecyclerView breakfastRecyclerview, lunchRecyclerview, dinnerRecyclerview, snacksRecyclerview, supplemnetsRecyclerview;
     TextView addBreakfast, addLunch, addDinner, addSnack, addSupplement;
@@ -131,9 +139,45 @@ public class FoodFragment extends Fragment {
         layoutManagerhorizantalleader.setOrientation(LinearLayoutManager.VERTICAL);
         lunchRecyclerview.setLayoutManager(layoutManagerhorizantalleader);
 
+        getFood();
 
-        foodAdapter = new FoodAdapter(getContext());
+
+    }
+
+    private void getFood(){
+
+        HashMap<String ,Object> params=new HashMap<>();
+
+        params.put("skip","0");
+
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.food_URL, AppConstants.food_TAG, Food.class, params);
+
+    }
+
+
+    @Override
+    public void onSubscribe(Disposable d) {
+
+    }
+
+    @Override
+    public void onNext(int tag, boolean isSuccess, Object result) {
+
+        Food food=(Food) result;
+
+        foodAdapter = new FoodAdapter(getContext(),food.getData());
         lunchRecyclerview.setAdapter(foodAdapter);
+
+    }
+
+    @Override
+    public void onError(Throwable e) {
+
+    }
+
+    @Override
+    public void onComplete() {
 
     }
 }

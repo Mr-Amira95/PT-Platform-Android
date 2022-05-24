@@ -17,6 +17,9 @@ public class PlansSingleFragment extends Fragment {
 
     TitleAdapter titleAdapter;
     RecyclerView ingredientsRecyclerview;
+
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

@@ -10,21 +10,41 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.qtechnetworks.ptplatform.Controller.adapters.LogAdapter;
 import com.qtechnetworks.ptplatform.Controller.adapters.NewsAdapter;
+import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
+import com.qtechnetworks.ptplatform.Model.Beans.FavoriteandWorkout.FavoriteandWorkout;
+import com.qtechnetworks.ptplatform.Model.Beans.videoExercises.VideoExercises;
+import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
+import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.R;
 
-public class LogFragment extends Fragment {
+import java.util.HashMap;
+
+import io.reactivex.disposables.Disposable;
+
+public class LogFragment extends Fragment implements CallBack {
 
     RecyclerView logRecyclerview;
     LogAdapter logAdapter;
     String flag;
     TextView title;
 
+    String coachid;
+
     public LogFragment(String flag) {
         this.flag = flag;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            coachid=getArguments().getString("coachid");
+        }
     }
 
     @Override
@@ -47,8 +67,88 @@ public class LogFragment extends Fragment {
         gridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         logRecyclerview.setLayoutManager(gridLayoutManager);
 
-        logAdapter = new LogAdapter(getContext(), flag);
-        logRecyclerview.setAdapter(logAdapter);
+        if (flag.equalsIgnoreCase("Favourite")){
+
+            getFavorite(coachid);
+
+        }else if (flag.equalsIgnoreCase("Log")){
+            getLog(coachid,"2022-05-24");
+        }else if (flag.equalsIgnoreCase("Today’s Workouts")){
+            getWorkout(coachid);
+        }
+
+
     }
 
+    private void getWorkout(String Coachid){
+
+        HashMap<String ,Object> params=new HashMap<>();
+
+        params.put("coach_id",Coachid);
+        params.put("skip","0");
+
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.Add_Workout_URL, AppConstants.Add_Workout_TAG, FavoriteandWorkout.class, params);
+
+    }
+
+    private void getFavorite(String Coachid){
+
+        HashMap<String ,Object> params=new HashMap<>();
+
+        params.put("coach_id",Coachid);
+        params.put("skip","0");
+
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.Add_Favorite_URL, AppConstants.Add_Favorite_TAG, FavoriteandWorkout.class, params);
+
+    }
+
+
+    private void getLog(String Coachid,String date){
+
+        HashMap<String ,Object> params=new HashMap<>();
+
+        params.put("coach_id",Coachid);
+        params.put("date",date);
+
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.Add_Log_URL, AppConstants.Add_Log_TAG, FavoriteandWorkout.class, params);
+
+    }
+
+    @Override
+    public void onSubscribe(Disposable d) {
+
+    }
+
+    @Override
+    public void onNext(int tag, boolean isSuccess, Object result) {
+
+        switch(tag){
+
+            case AppConstants.Add_Favorite_TAG:
+            case AppConstants.Add_Workout_TAG:
+            case AppConstants.Add_Log_TAG:
+
+                FavoriteandWorkout favoriteandWorkout=(FavoriteandWorkout) result;
+
+                logAdapter = new LogAdapter(getContext(), flag,favoriteandWorkout.getData());
+                logRecyclerview.setAdapter(logAdapter);
+
+                break;
+
+        }
+
+    }
+
+    @Override
+    public void onError(Throwable e) {
+
+    }
+
+    @Override
+    public void onComplete() {
+
+    }
 }

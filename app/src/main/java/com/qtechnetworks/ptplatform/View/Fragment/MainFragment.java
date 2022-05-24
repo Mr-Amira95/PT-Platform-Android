@@ -84,28 +84,28 @@ public class MainFragment extends Fragment implements CallBack {
         nutritionLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setFragment(R.id.home_frame, new NutritionFragment());
+                setFragment( new NutritionFragment());
             }
         });
         
         challengesLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setFragment(R.id.home_frame, new LogFragment("Log"));
+                setFragment( new LogFragment("Log"),coachid);
             }
         });
 
         favouriteLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setFragment(R.id.home_frame, new LogFragment("Favourite"));
+                setFragment( new LogFragment("Favourite"),coachid);
             }
         });
 
         todayWorkoutLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setFragment(R.id.home_frame, new LogFragment("Today’s Workouts"));
+                setFragment( new LogFragment("Today’s Workouts"),coachid);
             }
         });
 
@@ -113,9 +113,9 @@ public class MainFragment extends Fragment implements CallBack {
             @Override
             public void onClick(View view) {
                 if (Subscribed){
-                    setFragment(R.id.home_frame, new PersonalTrainingSubscribedFragment());
+                    setFragment( new PersonalTrainingSubscribedFragment());
                 } else {
-                    setFragment(R.id.home_frame, new PersonalTrainingUnsubscribedFragment());
+                    setFragment( new PersonalTrainingUnsubscribedFragment());
                 }
             }
         });
@@ -123,21 +123,21 @@ public class MainFragment extends Fragment implements CallBack {
         progressLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setFragment(R.id.home_frame, new ProgressFragment());
+                setFragment( new ProgressFragment());
             }
         });
 
         shopLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setFragment(R.id.home_frame, new ShopFragment());
+                setFragment(new ShopFragment());
             }
         });
 
         challengesLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setFragment(R.id.home_frame, new ChallengesFragment());
+                setFragment( new ChallengesFragment());
             }
         });
 
@@ -146,11 +146,10 @@ public class MainFragment extends Fragment implements CallBack {
         return view;
     }
 
-    private void setFragment(int frameLayout, Fragment fragment) {
-        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(frameLayout, fragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+    private void setFragment(Fragment fragment ) {
+
+        ((MainActivity) requireContext()).getSupportFragmentManager().beginTransaction().replace(R.id.home_frame, fragment, "OptionsFragment").addToBackStack(null).commit();
+
     }
 
     private void setFragment(Fragment fragment,String coachid) {

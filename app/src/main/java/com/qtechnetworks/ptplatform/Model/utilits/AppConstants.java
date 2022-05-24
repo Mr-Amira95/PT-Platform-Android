@@ -47,6 +47,28 @@ public class AppConstants {
     public static final String category_Workout_URL = "section-workout/categories";
     public static final int category_Workout_TAG = 10;
 
+    public static final String Add_Favorite_URL = "video-favourites";
+    public static final int Add_Favorite_TAG = 11;
+
+    public static final String Add_Workout_URL = "video-workout";
+    public static final int Add_Workout_TAG = 12;
+
+    public static final String Add_Log_URL = "video-logs";
+    public static final int Add_Log_TAG = 13;
+
+    public static final String support_URL = "ticket/technical_support";
+    public static final int support_TAG = 14;
+
+    public static final String feedback_URL = "ticket/feedback";
+    public static final int feedback_TAG = 15;
+
+    public static final String food_URL = "foods";
+    public static final int food_TAG = 16;
+
+    public static final String Supplement_URL = "supplements";
+    public static final int Supplement_TAG = 17;
+
+
     public static void Trace(String tag, String msg) {
 
         if (BuildConfig.DEBUG) {

@@ -13,12 +13,20 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.qtechnetworks.ptplatform.Controller.adapters.ChestAndBicepsAdapter;
-import com.qtechnetworks.ptplatform.Controller.adapters.CoachAdapter;
 import com.qtechnetworks.ptplatform.Controller.adapters.SupplementsAndDietPlansAdapter;
+import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
+import com.qtechnetworks.ptplatform.Model.Beans.Exercises.Exercises;
+import com.qtechnetworks.ptplatform.Model.Beans.Food.Food;
+import com.qtechnetworks.ptplatform.Model.Beans.Supplement.Supplement;
+import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
+import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.R;
 
-public class SupplementsDietPlansFragment extends Fragment {
+import java.util.HashMap;
+
+import io.reactivex.disposables.Disposable;
+
+public class SupplementsDietPlansFragment extends Fragment implements CallBack {
 
     EditText searchBar;
     TextView title;
@@ -46,10 +54,17 @@ public class SupplementsDietPlansFragment extends Fragment {
         title.setText(flag);
 
         searchBar = view.findViewById(R.id.search_bar);
-        if(flag.equals("Supplements"))
+        if(flag.equals("Supplements")){
+
             searchBar.setHint("SEARCH FOR SUPLEMENTS");
-        else if (flag.equals("Recipes and Diet Plans"))
+            getSupplement();
+
+        }else if (flag.equals("Recipes and Diet Plans")) {
             searchBar.setHint("SEARCH FOR RECIPES");
+
+
+        }
+
 
         recyclerView = view.findViewById(R.id.recyclerView);
 
@@ -58,7 +73,49 @@ public class SupplementsDietPlansFragment extends Fragment {
         recyclerView.setLayoutManager(gridLayoutManager);
 
 
-        adapter = new SupplementsAndDietPlansAdapter(getContext(), flag);
-        recyclerView.setAdapter(adapter);
+    }
+
+    private void getSupplement(){
+
+        HashMap<String ,Object> params=new HashMap<>();
+
+
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.Supplement_URL, AppConstants.Supplement_TAG, Supplement.class, params);
+
+    }
+
+
+    @Override
+    public void onSubscribe(Disposable d) {
+
+    }
+
+    @Override
+    public void onNext(int tag, boolean isSuccess, Object result) {
+
+        switch (tag){
+
+            case AppConstants.Supplement_TAG:
+
+                Supplement supplement=(Supplement) result;
+
+                adapter = new SupplementsAndDietPlansAdapter(getContext(), flag,supplement.getData());
+                recyclerView.setAdapter(adapter);
+
+                break;
+        }
+
+
+    }
+
+    @Override
+    public void onError(Throwable e) {
+
+    }
+
+    @Override
+    public void onComplete() {
+
     }
 }

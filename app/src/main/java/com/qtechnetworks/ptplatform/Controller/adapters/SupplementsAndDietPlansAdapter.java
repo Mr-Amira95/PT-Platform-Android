@@ -1,6 +1,7 @@
 package com.qtechnetworks.ptplatform.Controller.adapters;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.qtechnetworks.ptplatform.Model.Beans.Supplement.Datum;
 import com.qtechnetworks.ptplatform.R;
+import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 import com.qtechnetworks.ptplatform.View.Fragment.ExercisesSingleFragment;
 import com.qtechnetworks.ptplatform.View.Fragment.PlansSingleFragment;
 import com.qtechnetworks.ptplatform.View.Fragment.SupplementSingleFragment;
@@ -25,15 +29,15 @@ import java.util.List;
 public class SupplementsAndDietPlansAdapter extends RecyclerView.Adapter<SupplementsAndDietPlansAdapter.ViewHolder>  {
 
     private Context context;
-    private List<String> list;
-    private List<Integer> listpic;
     private String flag;
 
-    public SupplementsAndDietPlansAdapter(Context context, String flag) {
-        this.list = list;
+    List<Datum> data;
+
+    public SupplementsAndDietPlansAdapter(Context context, String flag, List<Datum> data) {
+
         this.context = context;
-        this.listpic = listpic;
         this.flag = flag;
+        this.data=data;
     }
 
 
@@ -47,6 +51,22 @@ public class SupplementsAndDietPlansAdapter extends RecyclerView.Adapter<Supplem
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
+        Datum current= data.get(position);
+
+        holder.title.setText(current.getTitle().toString());
+
+
+        try{
+
+            Glide.with(context).load(current.getImage()).placeholder(R.drawable.logo).into(holder.img);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,9 +75,9 @@ public class SupplementsAndDietPlansAdapter extends RecyclerView.Adapter<Supplem
                 else if (flag.equals("Workout"))
                     setFragment(R.id.home_frame, new WorkoutSingleFragment(), (AppCompatActivity) v.getContext());
                 else if (flag.equals("Supplements"))
-                    setFragment(R.id.home_frame, new SupplementSingleFragment(), (AppCompatActivity) v.getContext());
+                    setFragment(new SupplementSingleFragment(), current.getTitle(), current.getImage(), current.getDescription());
                 else if (flag.equals("Recipes and Diet Plans"))
-                    setFragment(R.id.home_frame, new PlansSingleFragment(), (AppCompatActivity) v.getContext());
+                    setFragment(R.id.home_frame,new PlansSingleFragment(), (AppCompatActivity) v.getContext());
             }
         });
     }
@@ -69,9 +89,23 @@ public class SupplementsAndDietPlansAdapter extends RecyclerView.Adapter<Supplem
         fragmentTransaction.commit();
     }
 
+
+    private void setFragment(Fragment fragment,String title,String image,String desc) {
+
+        Bundle args = new Bundle();
+        args.putString("title",title);
+        args.putString("image",image);
+        args.putString("descrip",desc);
+
+        fragment.setArguments(args);
+
+        ((MainActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.home_frame, fragment, "OptionsFragment").addToBackStack(null).commit();
+
+    }
+
     @Override
     public int getItemCount() {
-        return 5;
+        return data.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

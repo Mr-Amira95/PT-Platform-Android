@@ -113,9 +113,9 @@ public class WorkoutAndExsircisesAdapter extends RecyclerView.Adapter<WorkoutAnd
 
     private void getCategoryExercises(String categoryID, int skip) {
 
-        HashMap<String ,Object> params=new HashMap<>();
-        params.put("category_id",categoryID);
-        params.put("skip",skip);
+        HashMap<String ,Object> params = new HashMap<>();
+        params.put("category_id", categoryID);
+        params.put("skip", skip);
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);
         MyApplication.getInstance().getHttpHelper().get(context, AppConstants.exercise_URL, AppConstants.exercise_TAG, ExercisesResults.class, params);
@@ -130,7 +130,6 @@ public class WorkoutAndExsircisesAdapter extends RecyclerView.Adapter<WorkoutAnd
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);
         MyApplication.getInstance().getHttpHelper().get(context, AppConstants.workout_URL, AppConstants.workout_TAG, ExercisesResults.class, params);
-
     }
 
     @Override

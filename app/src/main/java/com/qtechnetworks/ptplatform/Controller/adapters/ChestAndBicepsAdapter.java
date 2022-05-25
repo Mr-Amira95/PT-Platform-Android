@@ -35,11 +35,9 @@ public class ChestAndBicepsAdapter extends RecyclerView.Adapter<ChestAndBicepsAd
     private String flag;
 
     public ChestAndBicepsAdapter(Context context, String flag, List<Exercise> category) {
-
         this.context = context;
         this.flag = flag;
         this.category=category;
-
     }
 
     @NonNull

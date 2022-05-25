@@ -183,7 +183,7 @@ public class ExercisesWorkoutFragment extends Fragment implements CallBack {
     }
 
     public void setGroupName(){
-        titleAdapter = new TitleAdapter(getContext(), "Workout", exercise.getData());
+        titleAdapter = new TitleAdapter(getContext(), flag, exercise.getData());
         categoryRecyclerView.setAdapter(titleAdapter);
     }
 

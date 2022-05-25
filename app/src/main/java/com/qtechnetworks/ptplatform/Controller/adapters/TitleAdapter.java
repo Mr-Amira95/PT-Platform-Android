@@ -57,7 +57,7 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.ViewHolder> 
             @Override
             public void onClick(View v) {
 
-                if (flag.equals("Workout")){
+                if (flag.equals("Workout") || flag.equals("Exercises")){
                     for (int i=0; i<textViewList.size(); i++){
                         if (i == holder.getAdapterPosition()){
                             textViewList.get(i).setBackgroundResource(R.drawable.background_radius_20_title);

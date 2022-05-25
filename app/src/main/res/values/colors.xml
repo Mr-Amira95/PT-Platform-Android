@@ -8,6 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="tran">#00212121</color>
+
     <color name="backapp">#212121</color>
     <color name="textcolor">#8DC63F</color>
     <color name="primary_color">#8DC63F</color>

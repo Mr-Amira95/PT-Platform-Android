@@ -6,25 +6,36 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 
+import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
+import com.qtechnetworks.ptplatform.Model.utilits.UtilisMethods;
 import com.qtechnetworks.ptplatform.R;
 
+import io.reactivex.disposables.Disposable;
 
-public class AddLogDialog extends Dialog {
+
+public class AddLogDialog extends Dialog implements CallBack {
+
+    Spinner setNumber, weightUnit;
+    EditText repeat, weight, note;
+    Button save_btn;
 
     Context mContext;
 
-    public AddLogDialog(@NonNull Context context) {
-        super(context);
+    public AddLogDialog(@NonNull Context mContext) {
+        super(mContext);
         this.mContext = mContext;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.dialog_languages);
+        setContentView(R.layout.dialog_add_log);
 
         getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         getWindow().setBackgroundDrawableResource(android.R.color.transparent);
@@ -35,36 +46,50 @@ public class AddLogDialog extends Dialog {
     }
 
     private void clicks() {
-        closeIcon.setOnClickListener(new View.OnClickListener() {
+
+        save_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dismiss();
+                saveLog();
             }
         });
 
-        english.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                Intent i = new Intent(mContext, MainActivity.class);
-                mContext.startActivity(i);
-            }
-        });
+    }
 
-        arabic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(mContext, MainActivity.class);
-                mContext.startActivity(i);
-            }
-        });
+    private void saveLog() {
 
     }
 
     private void initials() {
-        english = findViewById(R.id.english);
-        arabic = findViewById(R.id.arabic);
-        closeIcon = findViewById(R.id.close_icon);
+        setNumber = findViewById(R.id.set_number);
+        weightUnit = findViewById(R.id.weight_unit);
+        weight = findViewById(R.id.weight);
+        repeat = findViewById(R.id.repeat);
+        note = findViewById(R.id.note);
+        save_btn = findViewById(R.id.save_btn);
+
+
     }
 
+    @Override
+    public void onSubscribe(Disposable d) {
+
+    }
+
+    @Override
+    public void onNext(int tag, boolean isSuccess, Object result) {
+
+
+    }
+
+    @Override
+    public void onError(Throwable e) {
+
+    }
+
+    @Override
+    public void onComplete() {
+
+    }
 }

@@ -157,6 +157,8 @@ public class FoodFragment extends Fragment implements CallBack {
         layoutManagerhorizantalsnak.setOrientation(LinearLayoutManager.VERTICAL);
         snacksRecyclerview.setLayoutManager(layoutManagerhorizantalsnak);
 
+
+
         getFood("2022-5-25");
 
 

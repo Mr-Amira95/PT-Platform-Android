@@ -24,7 +24,7 @@ public class AddLogDialog extends Dialog {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.dialog_languages);
+        setContentView(R.layout.dialog_add_log);
 
         getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         getWindow().setBackgroundDrawableResource(android.R.color.transparent);
@@ -35,36 +35,12 @@ public class AddLogDialog extends Dialog {
     }
 
     private void clicks() {
-        closeIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dismiss();
-            }
-        });
 
-        english.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent i = new Intent(mContext, MainActivity.class);
-                mContext.startActivity(i);
-            }
-        });
-
-        arabic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(mContext, MainActivity.class);
-                mContext.startActivity(i);
-            }
-        });
 
     }
 
     private void initials() {
-        english = findViewById(R.id.english);
-        arabic = findViewById(R.id.arabic);
-        closeIcon = findViewById(R.id.close_icon);
+
     }
 
 }

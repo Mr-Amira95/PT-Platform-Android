@@ -92,4 +92,5 @@ public class AddLogDialog extends Dialog implements CallBack {
     public void onComplete() {
 
     }
+
 }

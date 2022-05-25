@@ -57,8 +57,29 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
     String flag,ID;
 
     public String VideoID;
+    boolean secondPlay = false;
 
     String videolink,title,descrip;
+
+    @Override
+    public void onStop() {
+        player.pause();
+        super.onStop();
+    }
+
+    @Override
+    public void onPause() {
+        player.pause();
+        super.onPause();
+    }
+
+    @Override
+    public void onStart() {
+        if (secondPlay){
+            player.play();
+        }
+        super.onStart();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -75,7 +96,6 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
 
                title=getArguments().getString("title");
                descrip=getArguments().getString("description");
-
 
             }
 
@@ -160,8 +180,7 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
 
     }
 
-    public void playinitial(String videourl) {
-
+    public void playinitial (String videourl) {
 
         player = new SimpleExoPlayer.Builder(getContext()).build();
 
@@ -183,6 +202,7 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
 
         // Start the playback.
         player.play();
+        secondPlay = true;
 
     }
 

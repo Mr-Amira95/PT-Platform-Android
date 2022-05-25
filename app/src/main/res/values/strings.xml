@@ -10,4 +10,6 @@
     <string name="request_sent">Request Sent!</string>
     <string name="terms_condiditions"><![CDATA[Terms & Condiditions]]></string>
     <string name="finish">Finish</string>
+    <string name="set_number">Set Number</string>
+    <string name="weight_unit">Weight Unit</string>
 </resources>

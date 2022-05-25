@@ -75,6 +75,9 @@ public class AppConstants {
     public static final String workout_URL = "section-exercise/exercises";
     public static final int workout_TAG = 12;
 
+    public static final String target_URL = "users/target";
+    public static final int target_TAG = 13;
+
     public static void Trace(String tag, String msg) {
 
         if (BuildConfig.DEBUG) {

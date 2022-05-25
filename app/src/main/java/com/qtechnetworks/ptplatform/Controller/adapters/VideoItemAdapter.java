@@ -65,6 +65,7 @@ public class VideoItemAdapter extends RecyclerView.Adapter<VideoItemAdapter.View
         holder.video_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                exercisesSingleFragment.player.pause();
 
                 exercisesSingleFragment.VideoID=current.getId().toString();
 

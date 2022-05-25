@@ -32,6 +32,7 @@
         android:layout_marginTop="@dimen/_10sdp"/>
 
     <EditText
+        android:id="@+id/valueCal_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/white"

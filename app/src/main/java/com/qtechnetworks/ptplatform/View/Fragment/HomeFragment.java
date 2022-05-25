@@ -91,9 +91,11 @@ public class HomeFragment extends Fragment implements CallBack {
     }
 
     private void initial(View view) {
+
         categoryRecyclerView=view.findViewById(R.id.category_recyclerView);
         sliderViewPager=view.findViewById(R.id.slider_viewPager);
         sliderCircleIndicator=view.findViewById(R.id.slider_indicator_unselected);
+
     }
 
 

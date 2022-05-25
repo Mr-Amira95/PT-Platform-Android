@@ -74,6 +74,7 @@
         android:scaleType="centerCrop"/>
 
     <TextView
+        android:id="@+id/cal_text"
         android:layout_width="@dimen/_50sdp"
         android:layout_height="@dimen/_50sdp"
         android:text="@string/_100_cal"

@@ -13,9 +13,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.qtechnetworks.ptplatform.Controller.adapters.FoodAdapter;
+import com.qtechnetworks.ptplatform.Controller.adapters.FoodDinnerAdapter;
+import com.qtechnetworks.ptplatform.Controller.adapters.FoodSnackAdapter;
 import com.qtechnetworks.ptplatform.Controller.adapters.NewsAdapter;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.Food.Food;
+import com.qtechnetworks.ptplatform.Model.Beans.FoodHome.Foodhome;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.R;
@@ -134,24 +137,39 @@ public class FoodFragment extends Fragment implements CallBack {
         addSupplement = view.findViewById(R.id.add_supplements);
 
         lunchRecyclerview= view.findViewById(R.id.lunch_recyclerview);
+        breakfastRecyclerview=view.findViewById(R.id.breakfast_recyclerview);
+        dinnerRecyclerview=view.findViewById(R.id.dinner_recyclerview);
+        snacksRecyclerview=view.findViewById(R.id.snacks_recyclerview);
 
         LinearLayoutManager layoutManagerhorizantalleader = new LinearLayoutManager(getContext());
         layoutManagerhorizantalleader.setOrientation(LinearLayoutManager.VERTICAL);
         lunchRecyclerview.setLayoutManager(layoutManagerhorizantalleader);
 
-        getFood();
+        LinearLayoutManager layoutManagerhorizantalbreakfast = new LinearLayoutManager(getContext());
+        layoutManagerhorizantalbreakfast.setOrientation(LinearLayoutManager.VERTICAL);
+        breakfastRecyclerview.setLayoutManager(layoutManagerhorizantalbreakfast);
+
+        LinearLayoutManager layoutManagerhorizantaldiner = new LinearLayoutManager(getContext());
+        layoutManagerhorizantaldiner.setOrientation(LinearLayoutManager.VERTICAL);
+        dinnerRecyclerview.setLayoutManager(layoutManagerhorizantaldiner);
+
+        LinearLayoutManager layoutManagerhorizantalsnak = new LinearLayoutManager(getContext());
+        layoutManagerhorizantalsnak.setOrientation(LinearLayoutManager.VERTICAL);
+        snacksRecyclerview.setLayoutManager(layoutManagerhorizantalsnak);
+
+        getFood("2022-5-25");
 
 
     }
 
-    private void getFood(){
+    private void getFood(String Date){
 
         HashMap<String ,Object> params=new HashMap<>();
 
-        params.put("skip","0");
+        params.put("date",Date);
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);
-        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.food_URL, AppConstants.food_TAG, Food.class, params);
+        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.fooduser_URL, AppConstants.fooduser_TAG, Foodhome.class, params);
 
     }
 
@@ -164,10 +182,17 @@ public class FoodFragment extends Fragment implements CallBack {
     @Override
     public void onNext(int tag, boolean isSuccess, Object result) {
 
-        Food food=(Food) result;
+        Foodhome food=(Foodhome) result;
 
-        foodAdapter = new FoodAdapter(getContext(),food.getData());
-        lunchRecyclerview.setAdapter(foodAdapter);
+        foodAdapter = new FoodAdapter(getContext(),food.getData().getFood().getBreakfast());
+        breakfastRecyclerview.setAdapter(foodAdapter);
+
+        FoodDinnerAdapter foodAdapterdine = new FoodDinnerAdapter(getContext(),food.getData().getFood().getDinner());
+        dinnerRecyclerview.setAdapter(foodAdapterdine);
+
+        FoodSnackAdapter foodsnackAdapter = new FoodSnackAdapter(getContext(),food.getData().getFood().getSnack());
+        snacksRecyclerview.setAdapter(foodsnackAdapter);
+
 
     }
 

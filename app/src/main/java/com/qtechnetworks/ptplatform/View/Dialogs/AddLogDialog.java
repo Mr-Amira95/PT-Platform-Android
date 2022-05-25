@@ -14,11 +14,11 @@ import com.qtechnetworks.ptplatform.R;
 
 public class AddLogDialog extends Dialog {
 
-    Context mContext;
+    Context context;
 
     public AddLogDialog(@NonNull Context context) {
         super(context);
-        this.mContext = mContext;
+        this.context = context;
     }
 
     @Override

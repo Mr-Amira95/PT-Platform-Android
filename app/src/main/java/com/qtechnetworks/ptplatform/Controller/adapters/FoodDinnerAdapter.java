@@ -4,32 +4,29 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.qtechnetworks.ptplatform.Model.Beans.Food.Datum;
 import com.qtechnetworks.ptplatform.Model.Beans.FoodHome.Breakfast;
+import com.qtechnetworks.ptplatform.Model.Beans.FoodHome.Dinner;
 import com.qtechnetworks.ptplatform.R;
-import com.qtechnetworks.ptplatform.View.Fragment.NewsSingleFragment;
 
 import java.util.List;
-import java.util.Locale;
 
 
-public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder>  {
+public class FoodDinnerAdapter extends RecyclerView.Adapter<FoodDinnerAdapter.ViewHolder>  {
 
     private Context context;
-    List<Breakfast> data;
+    List<Dinner> data;
 
 
-    public FoodAdapter(Context context, List<Breakfast> data) {
+    public FoodDinnerAdapter(Context context, List<Dinner> data) {
         this.context=context;
         this.data=data;
     }
@@ -45,7 +42,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder>  {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Breakfast current= data.get(position);
+        Dinner current= data.get(position);
 
         holder.food_title.setText(current.getTitle().toString());
         holder.food_details.setText(current.getName().toString());

@@ -9,28 +9,73 @@
     android:layout_marginTop="50dp"
     android:background="@color/primary_color"
     android:gravity="bottom"
-    android:paddingVertical="@dimen/_15sdp"
-    android:layout_marginHorizontal="@dimen/_15sdp"
+    android:paddingVertical="@dimen/_25sdp"
+    android:paddingHorizontal="@dimen/_15sdp"
+    android:layout_marginHorizontal="@dimen/_50sdp"
     android:layout_gravity="center">
 
-    <TextView
+    <Spinner
         android:id="@+id/set_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/set_number"
         android:textColor="@color/white"
-        android:textSize="@dimen/_14sdp"
+        android:textSize="@dimen/_12sdp"
         android:padding="@dimen/_15sdp"/>
 
-    <TextView
+    <Spinner
         android:id="@+id/weight_unit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/weight_unit"
         android:textColor="@color/white"
-        android:textSize="@dimen/_14sdp"
-        android:padding="@dimen/_15sdp"/>
+        android:textSize="@dimen/_12sdp"
+        android:padding="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_15sdp"/>
 
+    <EditText
+        android:id="@+id/weight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:hint="Weight"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_12sdp"
+        android:paddingVertical="@dimen/_5sdp"
+        android:paddingHorizontal="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_15sdp"/>
 
+    <EditText
+        android:id="@+id/repititions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:hint="@string/repititions"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_12sdp"
+        android:paddingVertical="@dimen/_5sdp"
+        android:paddingHorizontal="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_15sdp"/>
+
+    <EditText
+        android:id="@+id/note"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:hint="@string/note"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_12sdp"
+        android:paddingVertical="@dimen/_5sdp"
+        android:paddingHorizontal="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_15sdp"/>
+
+    <Button
+        android:id="@+id/save_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
+        android:textColor="@color/white"
+        android:background="@color/tran"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_gravity="end"/>
 
 </LinearLayout>

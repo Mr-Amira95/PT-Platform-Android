@@ -12,4 +12,8 @@
     <string name="finish">Finish</string>
     <string name="set_number">Set Number</string>
     <string name="weight_unit">Weight Unit</string>
+    <string name="weight">Weight</string>
+    <string name="repititions">Repititions</string>
+    <string name="note">Note</string>
+    <string name="save">Save</string>
 </resources>

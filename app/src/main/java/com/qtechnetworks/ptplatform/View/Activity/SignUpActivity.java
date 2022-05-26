@@ -26,10 +26,10 @@ import io.reactivex.disposables.Disposable;
 
 public class SignUpActivity extends AppCompatActivity implements CallBack {
 
-    EditText firstName, lastName, email, mobile, password, socialLink, PotentialClients;
+    EditText firstName, lastName, mobile, password, socialLink, PotentialClients;
     TextView accountType;
     Button submit_coach_button;
-    String type;
+    String type, email, flag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +37,7 @@ public class SignUpActivity extends AppCompatActivity implements CallBack {
         setContentView(R.layout.activity_sign_up);
 
         initial();
+        getArguments();
 
         submit_coach_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,11 +75,11 @@ public class SignUpActivity extends AppCompatActivity implements CallBack {
     private void initial(){
         Bundle bundle = getIntent().getExtras();
         type = bundle.getString("type");
+        email = bundle.getString("email");
 
         submit_coach_button=findViewById(R.id.submit_coach_button);
         firstName = findViewById(R.id.firstname_coach_edittext);
         lastName = findViewById(R.id.lastname_coach_edittext);
-        email = findViewById(R.id.email_coach_signup_edittext);
         password = findViewById(R.id.password_signup_edittext);
         socialLink = findViewById(R.id.socialmedia_coach_signup_edittext);
         mobile = findViewById(R.id.mobilenumber_coach_signup_edittext);
@@ -88,6 +89,11 @@ public class SignUpActivity extends AppCompatActivity implements CallBack {
         if (type.equals("trainee")){
             traineeDesign();
         }
+    }
+
+    private void getArguments() {
+        flag = getIntent().getStringExtra("flag");
+        type = getIntent().getStringExtra("type");
     }
 
     private void register() throws JSONException {
@@ -102,7 +108,7 @@ public class SignUpActivity extends AppCompatActivity implements CallBack {
 
 
         JsonObject params = new JsonObject();
-        params.addProperty("email", email.getText().toString());
+        params.addProperty("email", email);
         params.addProperty("first_name",firstName.getText().toString());
         params.addProperty("last_name",lastName.getText().toString());
         params.addProperty("password", password.getText().toString());

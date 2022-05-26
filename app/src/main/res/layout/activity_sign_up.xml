@@ -104,7 +104,8 @@
                 android:layout_gravity="start"
                 android:layout_marginHorizontal="@dimen/_20sdp"
                 android:textColorHint="@color/white"
-                app:hintTextAppearance="@style/Widget.Design.TextInputLayout">
+                app:hintTextAppearance="@style/Widget.Design.TextInputLayout"
+                android:visibility="gone">
 
                 <EditText
                     android:id="@+id/email_coach_signup_edittext"
@@ -119,7 +120,7 @@
                     android:textCursorDrawable="@color/white"
                     android:textColor="@color/white"
                     android:backgroundTint="@color/white"
-                    android:textColorHint="@color/white" />
+                    android:textColorHint="@color/white"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 

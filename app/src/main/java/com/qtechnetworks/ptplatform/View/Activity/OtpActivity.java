@@ -12,6 +12,7 @@ import com.qtechnetworks.ptplatform.R;
 public class OtpActivity extends AppCompatActivity {
 
     Button next_verify_trainee_button;
+    String flag, type, email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,17 +20,34 @@ public class OtpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_otp);
 
         initial();
+        getArguments();
 
         next_verify_trainee_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(OtpActivity.this, MainActivity.class);
-                i.putExtra("type", "trainee");
-                startActivity(i);
+
+                if (flag.equalsIgnoreCase("SignUp")) {
+                    Intent i = new Intent(OtpActivity.this, SignUpActivity.class);
+                    i.putExtra("type", type);
+                    i.putExtra("flag", flag);
+                    i.putExtra("email", email);
+                    startActivity(i);
+                } else if (flag.equalsIgnoreCase("ForgotPassword")) {
+                    Intent i = new Intent(OtpActivity.this, ResetPasswordActivity.class);
+                    i.putExtra("type", type);
+                    i.putExtra("flag", flag);
+                    i.putExtra("email", email);
+                    startActivity(i);
+                }
 
             }
         });
 
+}
+    private void getArguments() {
+        flag = getIntent().getStringExtra("flag");
+        type = getIntent().getStringExtra("type");
+        email = getIntent().getStringExtra("email");
     }
 
     private void initial(){
@@ -37,6 +55,5 @@ public class OtpActivity extends AppCompatActivity {
         next_verify_trainee_button=findViewById(R.id.next_button);
 
     }
-
 
 }

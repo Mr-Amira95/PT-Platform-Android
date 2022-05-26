@@ -28,7 +28,7 @@ import okhttp3.RequestBody;
 
 public class SignInActivity extends AppCompatActivity implements CallBack {
 
-    TextView signup_textview;
+    TextView signup_textview, forgotPassword;
 
     EditText email_login_edittext,password_login_edittext;
 
@@ -50,9 +50,11 @@ public class SignInActivity extends AppCompatActivity implements CallBack {
         signup_textview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(SignInActivity.this, SignUpActivity.class);
-                i.putExtra("type", type);
-                startActivity(i);
+
+                    Intent i = new Intent(SignInActivity.this, EmailActivity.class);
+                    i.putExtra("type", type);
+                    i.putExtra("flag", "SignUp");
+                    startActivity(i);
             }
         });
 
@@ -70,6 +72,16 @@ public class SignInActivity extends AppCompatActivity implements CallBack {
             }
         });
 
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(SignInActivity.this, EmailActivity.class);
+                i.putExtra("type", type);
+                i.putExtra("flag", "ForgotPassword");
+                startActivity(i);
+            }
+        });
+
     }
 
     private void initial(){
@@ -83,6 +95,7 @@ public class SignInActivity extends AppCompatActivity implements CallBack {
         login_button=findViewById(R.id.login_button);
         email_login_edittext=findViewById(R.id.email_login_edittext);
         password_login_edittext=findViewById(R.id.password_login_edittext);
+        forgotPassword = findViewById(R.id.forgot_password);
     }
 
 

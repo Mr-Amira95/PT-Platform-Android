@@ -309,7 +309,36 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/today_workout_layout"
+                    android:id="@+id/calendar_layout"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_gravity="center">
+
+                    <ImageView
+                        android:id="@+id/calendar_title"
+                        android:layout_width="@dimen/_75sdp"
+                        android:layout_height="@dimen/_75sdp"
+                        android:src="@drawable/ic_calender"
+                        android:padding="@dimen/_20sdp"
+                        android:background="@drawable/background_main_category"/>
+
+                    <TextView
+                        android:id="@+id/calendar_icon"
+                        android:layout_width="@dimen/_75sdp"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="@string/calendar"
+                        android:textSize="@dimen/_10sdp"
+                        android:textColor="@color/white"
+                        android:gravity="center"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/today_layout"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
@@ -321,7 +350,7 @@
                         android:id="@+id/TodayWorkout_title"
                         android:layout_width="@dimen/_75sdp"
                         android:layout_height="@dimen/_75sdp"
-                        android:src="@drawable/ic_today_workout"
+                        android:src="@drawable/ic_todays_workout"
                         android:padding="@dimen/_20sdp"
                         android:background="@drawable/background_main_category"/>
 
@@ -330,36 +359,7 @@
                         android:layout_width="@dimen/_75sdp"
                         android:layout_height="wrap_content"
                         android:maxLines="1"
-                        android:text="Today’s Workout"
-                        android:textSize="@dimen/_10sdp"
-                        android:textColor="@color/white"
-                        android:gravity="center"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/contact_us_layout"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:layout_gravity="center">
-
-                    <ImageView
-                        android:id="@+id/ContactUS_title"
-                        android:layout_width="@dimen/_75sdp"
-                        android:layout_height="@dimen/_75sdp"
-                        android:src="@drawable/ic_contact_us"
-                        android:padding="@dimen/_20sdp"
-                        android:background="@drawable/background_main_category"/>
-
-                    <TextView
-                        android:id="@+id/ContactUS_icon"
-                        android:layout_width="@dimen/_75sdp"
-                        android:layout_height="wrap_content"
-                        android:maxLines="1"
-                        android:text="Contact Us"
+                        android:text="Today's Workout"
                         android:textSize="@dimen/_10sdp"
                         android:textColor="@color/white"
                         android:gravity="center"/>
@@ -461,6 +461,103 @@
                         android:gravity="center"/>
 
                 </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_10sdp">
+
+                <LinearLayout
+                    android:id="@+id/history_layout"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_gravity="center">
+
+                    <ImageView
+                        android:id="@+id/history_title"
+                        android:layout_width="@dimen/_75sdp"
+                        android:layout_height="@dimen/_75sdp"
+                        android:src="@drawable/ic_history"
+                        android:padding="@dimen/_20sdp"
+                        android:background="@drawable/background_main_category"/>
+
+                    <TextView
+                        android:id="@+id/history_icon"
+                        android:layout_width="@dimen/_75sdp"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="History"
+                        android:textSize="@dimen/_10sdp"
+                        android:textColor="@color/white"
+                        android:gravity="center"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/kyc_layout"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_gravity="center">
+
+                    <ImageView
+                        android:id="@+id/kyc_title"
+                        android:layout_width="@dimen/_75sdp"
+                        android:layout_height="@dimen/_75sdp"
+                        android:src="@drawable/ic_kyc"
+                        android:padding="@dimen/_20sdp"
+                        android:background="@drawable/background_main_category"/>
+
+                    <TextView
+                        android:id="@+id/kyc_icon"
+                        android:layout_width="@dimen/_75sdp"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="KYC"
+                        android:textSize="@dimen/_10sdp"
+                        android:textColor="@color/white"
+                        android:gravity="center"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/contact_us_layout"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_gravity="center">
+
+                    <ImageView
+                        android:id="@+id/ContactUS_title"
+                        android:layout_width="@dimen/_75sdp"
+                        android:layout_height="@dimen/_75sdp"
+                        android:src="@drawable/ic_contact_us"
+                        android:padding="@dimen/_20sdp"
+                        android:background="@drawable/background_main_category"/>
+
+                    <TextView
+                        android:id="@+id/ContactUS_icon"
+                        android:layout_width="@dimen/_75sdp"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="Contact Us"
+                        android:textSize="@dimen/_10sdp"
+                        android:textColor="@color/white"
+                        android:gravity="center"/>
+
+                </LinearLayout>
+
 
             </LinearLayout>
 

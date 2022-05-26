@@ -1,9 +1,9 @@
-package com.qtechnetworks.ptplatform.Model.Beans.WorkoutVideo;
+package com.qtechnetworks.ptplatform.Model.Beans.addto;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Datum {
+public class Data {
 
     @SerializedName("id")
     @Expose

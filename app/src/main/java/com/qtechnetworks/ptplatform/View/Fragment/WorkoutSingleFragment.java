@@ -24,7 +24,7 @@ import java.util.HashMap;
 
 import io.reactivex.disposables.Disposable;
 
-public class WorkoutSingleFragment extends Fragment implements CallBack {
+public class WorkoutSingleFragment extends Fragment  {
 
     Button explore;
 
@@ -52,7 +52,7 @@ public class WorkoutSingleFragment extends Fragment implements CallBack {
         explore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setFragment( new ExercisesSingleFragment(),"Workout");
+                setFragment( new ExercisesSingleFragment(),"Workout",id);
             }
         });
 
@@ -62,13 +62,14 @@ public class WorkoutSingleFragment extends Fragment implements CallBack {
 
     private void initials(View view) {
         explore = view.findViewById(R.id.explore_btn);
-        getWorkout(id);
+
     }
 
-    private void setFragment(Fragment fragment,String flag) {
+    private void setFragment(Fragment fragment,String flag,String id) {
 
         Bundle args=new Bundle();
         args.putString("flag",flag);
+        args.putString("ID",id);
         fragment.setArguments(args);
 
         ((MainActivity) getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.home_frame, fragment, "OptionsFragment").addToBackStack(null).commit();
@@ -76,55 +77,6 @@ public class WorkoutSingleFragment extends Fragment implements CallBack {
     }
 
 
-    private void getWorkout(String Exid){
-
-        HashMap<String ,Object> params=new HashMap<>();
-
-        params.put("exercise_id",Exid);
-        params.put("skip","0");
-
-        MyApplication.getInstance().getHttpHelper().setCallback(this);
-        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.workout_videos_URL, AppConstants.workout_videos_TAG, VideoWorkout.class, params);
-
-    }
-
-
-    @Override
-    public void onSubscribe(Disposable d) {
-
-    }
-
-    @Override
-    public void onNext(int tag, boolean isSuccess, Object result) {
-
-        VideoWorkout videoWorkout=(VideoWorkout) result;
-
-
-       /* try{
-
-            Glide.with(getContext()).load(videoExercises.getData().get(0).getImage()).placeholder(R.drawable.logo).into(video_view);
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }*/
-
-      /*  desc.setText(videoExercises.getData().get(0).getDescription());
-
-
-        videoAdapter = new VideoItemAdapter(getContext(),videoExercises.getData(),ExercisesSingleFragment.this);
-        videoRecyclerview.setAdapter(videoAdapter);*/
-
-    }
-
-    @Override
-    public void onError(Throwable e) {
-
-    }
-
-    @Override
-    public void onComplete() {
-
-    }
 
 
 }

@@ -28,6 +28,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -180,6 +181,21 @@ public class UtilisMethods {
 
         for (int i = 0; i < data.length; i++) {
             modifiedData[i] = captilizeFirstLetter(data[i]);
+        }//end for.
+
+        ArrayAdapter<String> gameKindArray = new ArrayAdapter<>(activity, android.R.layout.simple_spinner_item, modifiedData);
+
+
+        gameKindArray.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(gameKindArray);
+    }
+
+    public static void fillSpinnerData(Activity activity, ArrayList data, Spinner spinner) {
+
+        String[] modifiedData = new String[data.size()];
+
+        for (int i = 0; i < data.size(); i++) {
+            modifiedData[i] = captilizeFirstLetter(data.get(i).toString());
         }//end for.
 
         ArrayAdapter<String> gameKindArray = new ArrayAdapter<>(activity, android.R.layout.simple_spinner_item, modifiedData);

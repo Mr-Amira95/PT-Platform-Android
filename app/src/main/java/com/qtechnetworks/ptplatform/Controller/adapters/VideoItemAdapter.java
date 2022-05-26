@@ -29,11 +29,17 @@ public class VideoItemAdapter extends RecyclerView.Adapter<VideoItemAdapter.View
     private Context context;
     private List<Datum> data;
     private ExercisesSingleFragment exercisesSingleFragment;
+    TextView add_to_favourite; TextView add_to_workout; TextView add_to_log;
 
-    public VideoItemAdapter(Context context, List<Datum> data, ExercisesSingleFragment exercisesSingleFragment) {
+    public VideoItemAdapter(Context context, List<Datum> data, ExercisesSingleFragment exercisesSingleFragment, TextView add_to_favourite, TextView add_to_workout, TextView add_to_log) {
+
         this.context = context;
         this.data=data;
         this.exercisesSingleFragment=exercisesSingleFragment;
+        this.add_to_favourite=add_to_favourite;
+        this.add_to_log=add_to_log;
+        this.add_to_workout=add_to_workout;
+
     }
 
     @NonNull
@@ -50,6 +56,16 @@ public class VideoItemAdapter extends RecyclerView.Adapter<VideoItemAdapter.View
 
         holder.title.setText(current.getTitle().toString());
        // holder.time.setText();
+
+        if (current.getIsFavourite()){
+            add_to_favourite.setText("Remove from favourite");
+        }
+        if (current.getIsTodayLog()){
+            add_to_log.setText("Remove from log");
+        }
+        if (current.getIsWorkout()){
+            add_to_workout.setText("Remove from Workout");
+        }
 
 
         exercisesSingleFragment.VideoID=current.getId().toString();

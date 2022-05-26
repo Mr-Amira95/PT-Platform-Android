@@ -31,6 +31,7 @@ import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.General;
 import com.qtechnetworks.ptplatform.Model.Beans.News.News;
 import com.qtechnetworks.ptplatform.Model.Beans.WorkoutVideo.VideoWorkout;
+import com.qtechnetworks.ptplatform.Model.Beans.addto.Adtofavlog;
 import com.qtechnetworks.ptplatform.Model.Beans.videoExercises.VideoExercises;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
@@ -213,7 +214,7 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
         params.put("video_id",Videoid);
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);
-        MyApplication.getInstance().getHttpHelper().Post(getContext(), AppConstants.Add_Log_URL, AppConstants.Add_Log_TAG, General.class, params);
+        MyApplication.getInstance().getHttpHelper().Post(getContext(), AppConstants.Add_Log_URL, AppConstants.Add_Log_TAG, Adtofavlog.class, params);
 
     }
 
@@ -249,7 +250,7 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
         params.put("skip","0");
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);
-        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.workout_videos_URL, AppConstants.workout_videos_TAG, VideoWorkout.class, params);
+        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.workout_videos_URL, AppConstants.workout_videos_TAG, General.class, params);
 
     }
 
@@ -275,11 +276,54 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
     @Override
     public void onNext(int tag, boolean isSuccess, Object result) {
 
+        General general;
 
         switch (tag){
 
+            case AppConstants.Add_Favorite_TAG:
+                general=(General) result;
+
+                Toast.makeText(getContext(),general.getData().toString(),Toast.LENGTH_LONG).show();
+
+                break;
+
+            case AppConstants.Add_Log_TAG:
+
+                Adtofavlog adtofavlog=(Adtofavlog) result;
+
+                if (adtofavlog.getData().getIsFavourite()){
+                    add_to_favourite.setText("Remove from favourite");
+                }
+                if (adtofavlog.getData().getIsTodayLog()){
+                    add_to_log.setText("Remove from log");
+                }
+                if (adtofavlog.getData().getIsWorkout()){
+                    add_to_workout.setText("Remove from Workout");
+                }
+
+                break;
+
+            case AppConstants.Add_Workout_TAG:
+
+                general=(General) result;
+
+                Toast.makeText(getContext(),general.getData().toString(),Toast.LENGTH_LONG).show();
+
+                break;
+
             case AppConstants.exercise_videos_TAG:
+
                 VideoExercises videoExercises=(VideoExercises) result;
+
+                if (videoExercises.getData().get(0).getIsFavourite()){
+                    add_to_favourite.setText("Remove from favourite");
+                }
+                if (videoExercises.getData().get(0).getIsTodayLog()){
+                    add_to_log.setText("Remove from log");
+                }
+                if (videoExercises.getData().get(0).getIsWorkout()){
+                    add_to_workout.setText("Remove from Workout");
+                }
 
                 try {
                     video_view.setDefaultArtwork(drawableFromUrl(videoExercises.getData().get(0).getImage()));
@@ -296,16 +340,27 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
 
                 playinitial(videoExercises.getData().get(0).getVideo());
 
-                videoAdapter = new VideoItemAdapter(getContext(),videoExercises.getData(),ExercisesSingleFragment.this);
+                videoAdapter = new VideoItemAdapter(getContext(),videoExercises.getData(),ExercisesSingleFragment.this,add_to_favourite,add_to_workout,add_to_log);
                 videoRecyclerview.setAdapter(videoAdapter);
 
                 VideoID=videoExercises.getData().get(0).getId().toString();
+
 
                 break;
 
             case AppConstants.workout_videos_TAG:
 
                 VideoWorkout videoWorkout=(VideoWorkout) result;
+
+                if (videoWorkout.getData().get(0).getIsFavourite()){
+                    add_to_favourite.setText("Remove from favourite");
+                }
+                if (videoWorkout.getData().get(0).getIsTodayLog()){
+                    add_to_log.setText("Remove from log");
+                }
+                if (videoWorkout.getData().get(0).getIsWorkout()){
+                    add_to_workout.setText("Remove from Workout");
+                }
 
                 try {
                     video_view.setDefaultArtwork(drawableFromUrl(videoWorkout.getData().get(0).getImage()));
@@ -321,26 +376,12 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
 
                 playinitial(videoWorkout.getData().get(0).getVideo());
 
-                VideoItemworkoutAdapter videoAdapter = new VideoItemworkoutAdapter(getContext(),videoWorkout.getData(),ExercisesSingleFragment.this);
+                VideoItemworkoutAdapter videoAdapter = new VideoItemworkoutAdapter(getContext(),videoWorkout.getData(),ExercisesSingleFragment.this,add_to_favourite,add_to_workout,add_to_log);
                 videoRecyclerview.setAdapter(videoAdapter);
 
                 VideoID=videoWorkout.getData().get(0).getId().toString();
 
                 break;
-
-
-            case AppConstants.Add_Favorite_TAG:
-            case AppConstants.Add_Log_TAG:
-            case AppConstants.Add_Workout_TAG:
-
-                General general=(General) result;
-
-                Toast.makeText(getContext(),general.getData().toString(),Toast.LENGTH_LONG).show();
-
-                break;
-
-
-
 
         }
 

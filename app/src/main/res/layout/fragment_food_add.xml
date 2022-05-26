@@ -37,10 +37,18 @@
         android:background="@color/txt_grey"
         android:layout_marginTop="@dimen/_30sdp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
+
+    <Spinner
+        android:id="@+id/Foodname_spinner"
+        style="@style/Widget.AppCompat.DropDownItem.Spinner"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Chicken (Grilled Chicken)"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        android:gravity="center"
+        android:minHeight="48dp"
+        android:paddingVertical="10dp"
+        android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="@dimen/_14sdp"
         app:layout_constraintTop_toBottomOf="@id/line_one"
@@ -102,6 +110,7 @@
         android:layout_marginHorizontal="@dimen/_20sdp"/>
 
     <EditText
+        android:id="@+id/weightnumber_edit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="4.0 oz"
@@ -162,6 +171,7 @@
                 android:gravity="center"/>
 
             <TextView
+                android:id="@+id/carb_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="1g"
@@ -195,6 +205,7 @@
                 android:gravity="center"/>
 
             <TextView
+                android:id="@+id/fat_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="2g"
@@ -228,6 +239,7 @@
                 android:gravity="center"/>
 
             <TextView
+                android:id="@+id/protine_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="22g"

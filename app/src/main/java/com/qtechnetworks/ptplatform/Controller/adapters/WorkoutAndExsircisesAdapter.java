@@ -44,15 +44,6 @@ public class WorkoutAndExsircisesAdapter extends RecyclerView.Adapter<WorkoutAnd
         this.data = data;
     }
 
-    /*public WorkoutAndExsircisesAdapter(Context context, String flag,List<Datum> exdata) {
-
-        this.context = context;
-        this.flag = flag;
-
-        *//*data.addAll(exdata);*//*
-
-
-    }*/
 
 
     @NonNull

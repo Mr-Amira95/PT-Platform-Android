@@ -31,6 +31,7 @@ public class FoodFragment extends Fragment implements CallBack {
 
     RecyclerView breakfastRecyclerview, lunchRecyclerview, dinnerRecyclerview, snacksRecyclerview, supplemnetsRecyclerview;
     TextView addBreakfast, addLunch, addDinner, addSnack, addSupplement;
+    TextView target_value,food_value,exercise_value,total_val;
     FoodAdapter foodAdapter;
     TextView breakfast, lunch, dinner, snacks, supplement;
 
@@ -141,6 +142,11 @@ public class FoodFragment extends Fragment implements CallBack {
         dinnerRecyclerview=view.findViewById(R.id.dinner_recyclerview);
         snacksRecyclerview=view.findViewById(R.id.snacks_recyclerview);
 
+        target_value=view.findViewById(R.id.target_value);
+        food_value=view.findViewById(R.id.food_value);
+        exercise_value=view.findViewById(R.id.exercise_value);
+        total_val=view.findViewById(R.id.total_val);
+
         LinearLayoutManager layoutManagerhorizantalleader = new LinearLayoutManager(getContext());
         layoutManagerhorizantalleader.setOrientation(LinearLayoutManager.VERTICAL);
         lunchRecyclerview.setLayoutManager(layoutManagerhorizantalleader);
@@ -185,6 +191,12 @@ public class FoodFragment extends Fragment implements CallBack {
     public void onNext(int tag, boolean isSuccess, Object result) {
 
         Foodhome food=(Foodhome) result;
+
+        target_value.setText(food.getData().getFoodTarget().toString());
+        food_value.setText(food.getData().getUserTarget().toString());
+        exercise_value.setText(food.getData().getExerciseTarget().toString());
+
+        total_val.setText(String.valueOf((food.getData().getFoodTarget()-food.getData().getUserTarget())+food.getData().getExerciseTarget()));
 
         foodAdapter = new FoodAdapter(getContext(),food.getData().getFood().getBreakfast());
         breakfastRecyclerview.setAdapter(foodAdapter);

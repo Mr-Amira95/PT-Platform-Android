@@ -150,12 +150,12 @@
             android:gravity="center"/>
 
         <TextView
+            android:id="@+id/total_val"
             android:layout_width="0dp"
             android:layout_weight="2"
             android:layout_height="wrap_content"
-            android:text="2530"
             android:textSize="@dimen/_18sdp"
-            android:textColor="@color/primary_color"
+            android:textColor="#8DC63F"
             android:gravity="center"/>
 
     </LinearLayout>

@@ -20,6 +20,15 @@ public class Datum {
     @SerializedName("video")
     @Expose
     private String video;
+    @SerializedName("is_favourite")
+    @Expose
+    private Boolean isFavourite;
+    @SerializedName("is_today_log")
+    @Expose
+    private Boolean isTodayLog;
+    @SerializedName("is_workout")
+    @Expose
+    private Boolean isWorkout;
 
     public Integer getId() {
         return id;
@@ -59,6 +68,30 @@ public class Datum {
 
     public void setVideo(String video) {
         this.video = video;
+    }
+
+    public Boolean getIsFavourite() {
+        return isFavourite;
+    }
+
+    public void setIsFavourite(Boolean isFavourite) {
+        this.isFavourite = isFavourite;
+    }
+
+    public Boolean getIsTodayLog() {
+        return isTodayLog;
+    }
+
+    public void setIsTodayLog(Boolean isTodayLog) {
+        this.isTodayLog = isTodayLog;
+    }
+
+    public Boolean getIsWorkout() {
+        return isWorkout;
+    }
+
+    public void setIsWorkout(Boolean isWorkout) {
+        this.isWorkout = isWorkout;
     }
 
 }

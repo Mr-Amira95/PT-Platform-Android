@@ -19,6 +19,7 @@ import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.Banner.Banner;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
+import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 import com.qtechnetworks.ptplatform.View.Dialogs.CoachesDialog;
@@ -48,16 +49,14 @@ public class MainFragment extends Fragment implements CallBack {
 
     RoundedImageView cate1_image;
 
-    String coachid,name,image;
+    String name;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
 
-            coachid =getArguments().getString("coachid");
             name = getArguments().getString("name");
-            image =getArguments().getString("image");
 
         }
     }
@@ -80,14 +79,14 @@ public class MainFragment extends Fragment implements CallBack {
         exercisesLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setFragment(new ExercisesWorkoutFragment("Exercises"),coachid);
+                setFragment(new ExercisesWorkoutFragment("Exercises"), PreferencesUtils.getCoach(getContext()).getId().toString());
             }
         });
 
         workoutsLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setFragment(new ExercisesWorkoutFragment("Workout"),coachid);
+                setFragment(new ExercisesWorkoutFragment("Workout"),PreferencesUtils.getCoach(getContext()).getId().toString());
             }
         });
 
@@ -101,21 +100,21 @@ public class MainFragment extends Fragment implements CallBack {
         challengesLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setFragment( new LogFragment("Log"),coachid);
+                setFragment( new LogFragment("Log"),PreferencesUtils.getCoach(getContext()).getId().toString());
             }
         });
 
         favouriteLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setFragment( new LogFragment("Favourite"),coachid);
+                setFragment( new LogFragment("Favourite"),PreferencesUtils.getCoach(getContext()).getId().toString());
             }
         });
 
         calenderLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setFragment( new LogFragment("Today’s Workouts"),coachid);
+                setFragment( new LogFragment("Today’s Workouts"),PreferencesUtils.getCoach(getContext()).getId().toString());
             }
         });
 
@@ -214,23 +213,23 @@ public class MainFragment extends Fragment implements CallBack {
 
         nametext= view.findViewById(R.id.name);
 
-        nametext.setText(name);
+        nametext.setText(PreferencesUtils.getCoach(getContext()).getFirstName() + " " + PreferencesUtils.getCoach(getContext()).getLastName());
 
         try{
-            Glide.with(getContext()).load(image).placeholder(R.drawable.logo).into(cate1_image);
+            Glide.with(getContext()).load(PreferencesUtils.getCoach(getContext()).getAvatar()).placeholder(R.drawable.logo).into(cate1_image);
         }catch (Exception e){
             e.printStackTrace();
         }
 
-        getbanner(coachid);
+        getbanner();
 
     }
 
-    private void getbanner(String coachid){
+    private void getbanner(){
 
         HashMap<String ,Object> params=new HashMap<>();
 
-        params.put("user_id",coachid);
+        params.put("user_id",PreferencesUtils.getCoach(getContext()).getId().toString());
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);
         MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.banner_URL, AppConstants.banner_TAG, Banner.class, params);

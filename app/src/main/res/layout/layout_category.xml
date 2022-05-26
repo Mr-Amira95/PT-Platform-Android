@@ -5,13 +5,14 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:id="@+id/category_layout"
-    android:layout_marginHorizontal="@dimen/_10sdp">
+    android:layout_marginHorizontal="@dimen/_10sdp"
+    android:layout_marginBottom="@dimen/_25sdp">
 
         <com.makeramen.roundedimageview.RoundedImageView
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/cate1_image"
-            android:layout_width="@dimen/_80sdp"
-            android:layout_height="@dimen/_120sdp"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"
             android:scaleType="centerCrop"
             app:riv_corner_radius="10dp"
             android:src="@drawable/follwous"/>

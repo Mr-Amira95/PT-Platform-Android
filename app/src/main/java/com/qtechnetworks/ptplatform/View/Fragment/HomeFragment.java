@@ -67,13 +67,13 @@ public class HomeFragment extends Fragment implements CallBack {
             add(R.drawable.follwous);
         }};
 
-        LinearLayoutManager linearLayoutManager= new LinearLayoutManager(getActivity());
-        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        categoryRecyclerView.setLayoutManager(linearLayoutManager);
+//        LinearLayoutManager linearLayoutManager= new LinearLayoutManager(getActivity());
+//        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+//        categoryRecyclerView.setLayoutManager(linearLayoutManager);
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),3);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),2);
         gridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        //categoryRecyclerView.setLayoutManager(gridLayoutManager);
+        categoryRecyclerView.setLayoutManager(gridLayoutManager);
 
         categoryAdapter = new CategoryAdapter(list,listpic , getActivity());
         categoryRecyclerView.setAdapter(categoryAdapter);

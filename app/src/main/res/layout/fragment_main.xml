@@ -62,7 +62,9 @@
             android:text="Yuri-Fit"
             android:textColor="@color/white"
             android:textSize="@dimen/_18sdp"
-            android:layout_marginTop="@dimen/_10sdp"/>
+            android:layout_marginTop="@dimen/_10sdp"
+            android:drawableEnd="@drawable/ic_arrow_down_icon"
+            android:drawablePadding="@dimen/_10sdp"/>
 
     </LinearLayout>
 

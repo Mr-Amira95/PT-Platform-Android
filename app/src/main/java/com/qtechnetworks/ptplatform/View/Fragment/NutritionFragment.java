@@ -2,11 +2,9 @@ package com.qtechnetworks.ptplatform.View.Fragment;
 
 import android.os.Build;
 import android.os.Bundle;
-
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
-import com.qtechnetworks.ptplatform.Model.Beans.Banner.Banner;
-import com.qtechnetworks.ptplatform.Model.Beans.Target.Target;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.R;
@@ -111,8 +106,8 @@ public class NutritionFragment extends Fragment implements CallBack {
 
         HashMap<String ,Object> params=new HashMap<>();
 
-        MyApplication.getInstance().getHttpHelper().setCallback(this);
-        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.target_URL, AppConstants.target_TAG, Target.class, params);
+//        MyApplication.getInstance().getHttpHelper().setCallback(this);
+//        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.target_URL, AppConstants.target_TAG, Target.class, params);
 
     }
 
@@ -124,7 +119,7 @@ public class NutritionFragment extends Fragment implements CallBack {
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onNext(int tag, boolean isSuccess, Object result) {
-
+/*
         Target target=(Target) result;
 
         progressBar.setProgress(target.getData().getTargetCalorie(),true);
@@ -133,7 +128,7 @@ public class NutritionFragment extends Fragment implements CallBack {
         carbs_title.setText(target.getData().getTargetCarb().toString());
         fat_title.setText(target.getData().getTargetFat().toString());
         protein_title.setText(target.getData().getTargetProtein().toString());
-
+*/
 
     }
 

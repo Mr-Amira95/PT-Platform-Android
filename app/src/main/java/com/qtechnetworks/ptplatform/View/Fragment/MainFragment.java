@@ -21,6 +21,7 @@ import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
+import com.qtechnetworks.ptplatform.View.Dialogs.CoachesDialog;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,6 +39,8 @@ public class MainFragment extends Fragment implements CallBack {
     private LinearLayout exercisesLayout, workoutsLayout, nutritionLayout, progressLayout,
     personalLayout, challengesLayout, favouriteLayout, todayWorkoutLayout, contactUsLayout,
     shopLayout, videoChatLayout, liveChatLayout;
+
+    CoachesDialog coachesDialog;
 
     private boolean Subscribed = true;
 
@@ -65,7 +68,14 @@ public class MainFragment extends Fragment implements CallBack {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
         initial(view);
+        clicks();
         fillSliderViewPager();
+
+        // Inflate the layout for this fragment
+        return view;
+    }
+
+    private void clicks() {
 
         exercisesLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,7 +97,7 @@ public class MainFragment extends Fragment implements CallBack {
                 setFragment( new NutritionFragment());
             }
         });
-        
+
         challengesLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -141,9 +151,13 @@ public class MainFragment extends Fragment implements CallBack {
             }
         });
 
-
-        // Inflate the layout for this fragment
-        return view;
+        nametext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                coachesDialog.setCancelable(true);
+                coachesDialog.show();
+            }
+        });
     }
 
     private void setFragment(Fragment fragment ) {
@@ -191,6 +205,8 @@ public class MainFragment extends Fragment implements CallBack {
         videoChatLayout = view.findViewById(R.id.video_chat_layout);
         liveChatLayout = view.findViewById(R.id.live_chat_layout);
         cate1_image=view.findViewById(R.id.cate1_image);
+
+        coachesDialog = new CoachesDialog(getContext());
 
         nametext= view.findViewById(R.id.name);
 

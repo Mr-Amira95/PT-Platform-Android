@@ -103,7 +103,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>  {
             super(itemView);
 
             newsTitle=itemView.findViewById(R.id.news_title);
-            newsSubtitle=itemView.findViewById(R.id.news_sub_title);
             newsTime=itemView.findViewById(R.id.news_time);
             newsImg=itemView.findViewById(R.id.news_img);
             newsLayout=itemView.findViewById(R.id.news_layout);

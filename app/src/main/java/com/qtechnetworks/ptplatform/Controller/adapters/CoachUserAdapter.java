@@ -61,7 +61,6 @@ public class CoachUserAdapter extends RecyclerView.Adapter<CoachUserAdapter.View
             e.printStackTrace();
         }
 
-
         holder.trainerName.setText(current.getFirstName()+" "+current.getLastName());
 
 

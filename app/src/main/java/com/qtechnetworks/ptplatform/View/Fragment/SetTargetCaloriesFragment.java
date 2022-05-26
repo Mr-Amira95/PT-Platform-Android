@@ -13,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
-import com.qtechnetworks.ptplatform.Model.Beans.Target.Target;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.R;
@@ -69,8 +68,8 @@ public class SetTargetCaloriesFragment extends Fragment implements CallBack {
         params.put("key","target_calorie");
         params.put("value",value);
 
-        MyApplication.getInstance().getHttpHelper().setCallback(this);
-        MyApplication.getInstance().getHttpHelper().Post(getContext(), AppConstants.target_URL, AppConstants.target_TAG, Target.class, params);
+        //MyApplication.getInstance().getHttpHelper().setCallback(this);
+        //MyApplication.getInstance().getHttpHelper().Post(getContext(), AppConstants.target_URL, AppConstants.target_TAG, Target.class, params);
 
     }
 
@@ -90,11 +89,10 @@ public class SetTargetCaloriesFragment extends Fragment implements CallBack {
 
     @Override
     public void onNext(int tag, boolean isSuccess, Object result) {
-
+/*
         Target target=(Target) result;
-
         setFragment(new NutritionFragment());
-
+*/
     }
 
     @Override

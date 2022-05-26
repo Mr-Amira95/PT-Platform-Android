@@ -52,7 +52,8 @@ public class CoachUserAdapter extends RecyclerView.Adapter<CoachUserAdapter.View
         holder.coachLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PreferencesUtils.putString(PrefKeys.coachid,current.getId().toString());
+
+                PreferencesUtils.setCoach(current, context);
                 setFragment(new MainFragment(),current.getId().toString(),current.getFirstName()+" "+current.getLastName(),String.valueOf(current.getAvatar()));
             }
         });

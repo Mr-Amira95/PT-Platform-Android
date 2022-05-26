@@ -55,9 +55,9 @@ public class MainFragment extends Fragment implements CallBack {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
 
-            coachid=getArguments().getString("coachid");
-            name= getArguments().getString("name");
-            image=getArguments().getString("image");
+            coachid =getArguments().getString("coachid");
+            name = getArguments().getString("name");
+            image =getArguments().getString("image");
 
         }
     }

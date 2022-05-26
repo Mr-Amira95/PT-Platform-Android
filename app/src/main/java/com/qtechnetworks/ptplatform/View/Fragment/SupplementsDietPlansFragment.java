@@ -63,7 +63,7 @@ public class SupplementsDietPlansFragment extends Fragment implements CallBack {
         }else if (flag.equals("Recipes and Diet Plans")) {
             searchBar.setHint("SEARCH FOR RECIPES");
 
-            getRecipes("0", PreferencesUtils.getCoachID());
+            getRecipes("0", PreferencesUtils.getCoach(getContext()).getId().toString());
 
         }
 

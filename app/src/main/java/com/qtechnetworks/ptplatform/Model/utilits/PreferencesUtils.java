@@ -13,6 +13,7 @@ import android.util.DisplayMetrics;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.qtechnetworks.ptplatform.Model.Beans.Coach.Datum;
 import com.qtechnetworks.ptplatform.Model.Beans.RegisterAndLogin.User;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 
@@ -70,10 +71,7 @@ public class PreferencesUtils {
 
     }
 
-    public static String getCoachID() {
-        return PreferencesUtils.getString(PrefKeys.coachid, "-1");
 
-    }
 
     public static String getUserToken() {
         return PreferencesUtils.getString(PrefKeys.userToken, "-1");
@@ -173,6 +171,33 @@ public class PreferencesUtils {
         } catch (Exception e) {
             e.printStackTrace();
             Trace("setting user", json);
+
+        }
+    }
+
+    public static Datum getCoach(Context c) {
+
+        try {
+            GsonBuilder gsb = new GsonBuilder();
+            Gson gn = gsb.create();
+            return gn.fromJson(getDefaults("coach", c), Datum.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Trace("getting Coach ", "");
+            return null;
+        }
+    }
+
+    public static void setCoach(Datum value, Context c) {
+        String json = "";
+        try {
+            GsonBuilder gsb = new GsonBuilder();
+            Gson gn = gsb.create();
+            json = gn.toJson(value);
+            setDefaults("coach", json, c);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Trace("setting Coach", json);
 
         }
     }

@@ -73,8 +73,8 @@ public class ChestAndBicepsAdapter extends RecyclerView.Adapter<ChestAndBicepsAd
                     setFragment( new WorkoutSingleFragment(),current.getTitle().toString(),current.getDescription().toString(),current.getId().toString());
                 else if (flag.equals("Supplements"))
                     setFragment( new SupplementSingleFragment());
-                else if (flag.equals("Recipes and Diet Plans"))
-                    setFragment( new PlansSingleFragment());
+               // else if (flag.equals("Recipes and Diet Plans"))
+                   // setFragment( new PlansSingleFragment());
             }
         });
     }

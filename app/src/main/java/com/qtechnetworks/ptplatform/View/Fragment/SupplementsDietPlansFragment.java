@@ -13,11 +13,14 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.qtechnetworks.ptplatform.Controller.adapters.RecipesAdapter;
 import com.qtechnetworks.ptplatform.Controller.adapters.SupplementsAndDietPlansAdapter;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
+import com.qtechnetworks.ptplatform.Model.Beans.Recipes.Recipes;
 import com.qtechnetworks.ptplatform.Model.Beans.Supplement.Supplement;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
+import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
 
 import java.util.HashMap;
@@ -60,6 +63,7 @@ public class SupplementsDietPlansFragment extends Fragment implements CallBack {
         }else if (flag.equals("Recipes and Diet Plans")) {
             searchBar.setHint("SEARCH FOR RECIPES");
 
+            getRecipes("0", PreferencesUtils.getCoachID());
 
         }
 
@@ -70,6 +74,18 @@ public class SupplementsDietPlansFragment extends Fragment implements CallBack {
         gridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(gridLayoutManager);
 
+
+    }
+
+    private void getRecipes(String skip,String coachid){
+
+        HashMap<String ,Object> params=new HashMap<>();
+
+        params.put("skip",skip);
+        params.put("coach_id",coachid);
+
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.recipes_URL, AppConstants.recipes_TAG, Recipes.class, params);
 
     }
 
@@ -102,6 +118,16 @@ public class SupplementsDietPlansFragment extends Fragment implements CallBack {
                 recyclerView.setAdapter(adapter);
 
                 break;
+
+            case AppConstants.recipes_TAG:
+
+                Recipes recipes=(Recipes) result;
+
+                RecipesAdapter recipesAdapter=new RecipesAdapter(getContext(),flag,recipes.getData());
+                recyclerView.setAdapter(recipesAdapter);
+
+                break;
+
         }
 
 

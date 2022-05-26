@@ -196,7 +196,7 @@ public class FoodAddFragment extends Fragment implements CallBack {
                     arrayListfood.add(food.getData().get(i).getName().toString());
                 }
 
-                UtilisMethods.fillSpinnerData(getActivity(),arrayListfood,Foodname_spinner);
+                UtilisMethods.fillSpinnerData(getContext(),arrayListfood,Foodname_spinner);
 
                 foodid=food.getData().get(Foodname_spinner.getSelectedItemPosition()).getId().toString();
 

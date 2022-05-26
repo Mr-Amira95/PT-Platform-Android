@@ -84,6 +84,9 @@ public class AppConstants {
     public static final String addfood_URL = "foods/user";
     public static final int addfood_TAG = 15;
 
+    public static final String recipes_URL = "recipes";
+    public static final int recipes_TAG = 16;
+
     public static void Trace(String tag, String msg) {
 
         if (BuildConfig.DEBUG) {

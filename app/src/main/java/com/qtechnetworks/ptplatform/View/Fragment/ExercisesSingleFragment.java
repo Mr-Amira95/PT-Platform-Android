@@ -36,6 +36,7 @@ import com.qtechnetworks.ptplatform.Model.Beans.videoExercises.VideoExercises;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.R;
+import com.qtechnetworks.ptplatform.View.Dialogs.AddLogDialog;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -61,6 +62,8 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
     boolean secondPlay = false;
 
     String videolink,title,descrip;
+
+    AddLogDialog addLogDialog;
 
     @Override
     public void onStop() {
@@ -128,6 +131,8 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
         add_to_workout=view.findViewById(R.id.add_to_workout);
         add_to_log=view.findViewById(R.id.add_to_log);
 
+        addLogDialog=new AddLogDialog(getContext(),ExercisesSingleFragment.this);
+
         LinearLayoutManager layoutManagerhorizantalleader = new LinearLayoutManager(getContext());
         layoutManagerhorizantalleader.setOrientation(LinearLayoutManager.VERTICAL);
         videoRecyclerview.setLayoutManager(layoutManagerhorizantalleader);
@@ -173,7 +178,7 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
             @Override
             public void onClick(View v) {
 
-                addToLog(VideoID);
+                addLogDialog.show();
 
             }
         });
@@ -207,11 +212,16 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
 
     }
 
-    private void addToLog(String Videoid){
+    public void addToLog(String Videoid,String number,String weight,String weightunit,String repetition,String note){
 
         HashMap<String ,Object> params=new HashMap<>();
 
         params.put("video_id",Videoid);
+        params.put("number",number);
+        params.put("weight",weight);
+        params.put("weight_unit",weightunit);
+        params.put("repetition",repetition);
+        params.put("note",note);
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);
         MyApplication.getInstance().getHttpHelper().Post(getContext(), AppConstants.Add_Log_URL, AppConstants.Add_Log_TAG, Adtofavlog.class, params);

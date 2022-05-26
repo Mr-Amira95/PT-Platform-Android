@@ -17,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.qtechnetworks.ptplatform.Model.Beans.Coach.Datum;
+import com.qtechnetworks.ptplatform.Model.utilits.PrefKeys;
+import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 import com.qtechnetworks.ptplatform.View.Fragment.MainFragment;
@@ -50,6 +52,7 @@ public class CoachUserAdapter extends RecyclerView.Adapter<CoachUserAdapter.View
         holder.coachLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                PreferencesUtils.putString(PrefKeys.coachid,current.getId().toString());
                 setFragment(new MainFragment(),current.getId().toString(),current.getFirstName()+" "+current.getLastName(),String.valueOf(current.getAvatar()));
             }
         });

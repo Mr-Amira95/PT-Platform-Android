@@ -70,8 +70,8 @@ public class PreferencesUtils {
 
     }
 
-    public static String getCurrenny() {
-        return PreferencesUtils.getString(PrefKeys.currency, "SAR");
+    public static String getCoachID() {
+        return PreferencesUtils.getString(PrefKeys.coachid, "-1");
 
     }
 

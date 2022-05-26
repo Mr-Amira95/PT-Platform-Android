@@ -175,7 +175,7 @@ public class UtilisMethods {
         }
     }
 
-    public static void fillSpinnerData(Activity activity, String[] data, Spinner spinner) {
+    public static void fillSpinnerData(Context activity, String[] data, Spinner spinner) {
 
         String[] modifiedData = new String[data.length];
 
@@ -190,7 +190,7 @@ public class UtilisMethods {
         spinner.setAdapter(gameKindArray);
     }
 
-    public static void fillSpinnerData(Activity activity, ArrayList data, Spinner spinner) {
+    public static void fillSpinnerData(Context activity, ArrayList<String> data, Spinner spinner) {
 
         String[] modifiedData = new String[data.size()];
 

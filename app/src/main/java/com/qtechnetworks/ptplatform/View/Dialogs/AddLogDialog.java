@@ -6,19 +6,36 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 
+import com.qtechnetworks.ptplatform.Model.utilits.UtilisMethods;
 import com.qtechnetworks.ptplatform.R;
+import com.qtechnetworks.ptplatform.View.Fragment.ExercisesSingleFragment;
 
 
 public class AddLogDialog extends Dialog {
 
-    Context mContext;
+    Context context;
+    Button save_btn;
+    ExercisesSingleFragment exercisesSingleFragment;
 
-    public AddLogDialog(@NonNull Context context) {
+    EditText weight,repititions,note;
+
+    Spinner set_number,weight_unit;
+
+    String [] number={"1","2","3","4","5","6","7","8","9","10"};
+    String [] weightspi={"Pounds (lb)","Kilograms (kg)","Stones (st)"};
+
+    public AddLogDialog(@NonNull Context context, ExercisesSingleFragment exercisesSingleFragment) {
         super(context);
-        this.mContext = mContext;
+
+        this.context = context;
+        this.exercisesSingleFragment=exercisesSingleFragment;
+
     }
 
     @Override
@@ -30,16 +47,39 @@ public class AddLogDialog extends Dialog {
         getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
         initials();
-        clicks();
-
-    }
-
-    private void clicks() {
-
 
     }
 
     private void initials() {
+
+        save_btn=findViewById(R.id.save_btn);
+        weight=findViewById(R.id.weight);
+        repititions=findViewById(R.id.repititions);
+        set_number=findViewById(R.id.set_number);
+        weight_unit=findViewById(R.id.weight_unit);
+        note=findViewById(R.id.note);
+
+        UtilisMethods.fillSpinnerData(context,number,set_number);
+        UtilisMethods.fillSpinnerData(context,weightspi,weight_unit);
+
+
+        save_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                dismiss();
+
+                exercisesSingleFragment.addToLog(
+                        exercisesSingleFragment.VideoID,
+                        set_number.getSelectedItem().toString(),
+                        weight.getText().toString(),
+                        weight_unit.getSelectedItem().toString(),
+                        repititions.getText().toString(),
+                        note.getText().toString()
+                );
+
+            }
+        });
 
     }
 

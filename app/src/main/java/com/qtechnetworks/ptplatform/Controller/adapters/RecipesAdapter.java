@@ -16,7 +16,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.qtechnetworks.ptplatform.Model.Beans.Supplement.Datum;
+import com.qtechnetworks.ptplatform.Model.Beans.Recipes.Datum;
 import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 import com.qtechnetworks.ptplatform.View.Fragment.ExercisesSingleFragment;
@@ -26,14 +26,14 @@ import com.qtechnetworks.ptplatform.View.Fragment.WorkoutSingleFragment;
 
 import java.util.List;
 
-public class SupplementsAndDietPlansAdapter extends RecyclerView.Adapter<SupplementsAndDietPlansAdapter.ViewHolder>  {
+public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHolder>  {
 
     private Context context;
     private String flag;
 
     List<Datum> data;
 
-    public SupplementsAndDietPlansAdapter(Context context, String flag, List<Datum> data) {
+    public RecipesAdapter(Context context, String flag, List<Datum> data) {
 
         this.context = context;
         this.flag = flag;
@@ -76,8 +76,8 @@ public class SupplementsAndDietPlansAdapter extends RecyclerView.Adapter<Supplem
                     setFragment(R.id.home_frame, new WorkoutSingleFragment(), (AppCompatActivity) v.getContext());
                 else if (flag.equals("Supplements"))
                     setFragment(new SupplementSingleFragment(), current.getTitle(), current.getImage(), current.getDescription());
-                //else if (flag.equals("Recipes and Diet Plans"))
-                   // setFragment(R.id.home_frame,new PlansSingleFragment(), (AppCompatActivity) v.getContext());
+                else if (flag.equals("Recipes and Diet Plans"))
+                    setFragment(new PlansSingleFragment(current));
             }
         });
     }
@@ -87,6 +87,16 @@ public class SupplementsAndDietPlansAdapter extends RecyclerView.Adapter<Supplem
         fragmentTransaction.replace(frameLayout, fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+    }
+
+    private void setFragment(Fragment fragment ) {
+
+        Bundle args = new Bundle();
+
+        fragment.setArguments(args);
+
+        ((MainActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.home_frame, fragment, "OptionsFragment").addToBackStack(null).commit();
+
     }
 
 

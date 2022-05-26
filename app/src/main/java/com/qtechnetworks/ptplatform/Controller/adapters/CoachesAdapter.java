@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.qtechnetworks.ptplatform.Model.Beans.Coach.Datum;
+import com.qtechnetworks.ptplatform.Model.utilits.PrefKeys;
+import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 import com.qtechnetworks.ptplatform.View.Dialogs.CoachesDialog;
@@ -56,6 +58,8 @@ public class CoachesAdapter extends RecyclerView.Adapter<CoachesAdapter.ViewHold
         holder.coachName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                PreferencesUtils.putString(PrefKeys.coachid,current.getId().toString());
 
                 Bundle bundle = new Bundle();
                 bundle.putString("coachid", current.getId().toString());

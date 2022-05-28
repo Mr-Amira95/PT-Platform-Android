@@ -15,6 +15,7 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Activity.ChoosingActivity;
+import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 
 public class ProfileFragment extends Fragment {
 
@@ -59,6 +60,42 @@ public class ProfileFragment extends Fragment {
             e.printStackTrace();
         }
 
+        assigned_coaches.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                setFragment(new AssignedCoachesFragment());
+
+            }
+        });
+
+        progress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                setFragment(new ProgressFragment());
+
+            }
+        });
+
+        subscriptions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                setFragment(new ShopFragment());
+
+            }
+        });
+
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                setFragment(new SettingsFragment());
+
+            }
+        });
+
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,6 +113,16 @@ public class ProfileFragment extends Fragment {
         username.setText(
                 PreferencesUtils.getUser(getContext()).getFirstName()
                         +" "+PreferencesUtils.getUser(getContext()).getLastName());
+
+    }
+
+    private void setFragment(Fragment fragment ) {
+
+        Bundle args = new Bundle();
+
+        fragment.setArguments(args);
+
+        ((MainActivity) getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.home_frame, fragment, "OptionsFragment").addToBackStack(null).commit();
 
     }
 

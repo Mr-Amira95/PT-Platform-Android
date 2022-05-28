@@ -20,7 +20,7 @@
         android:layout_marginHorizontal="@dimen/_20sdp"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/coaches_recyclerview"
+        android:id="@+id/assigendcoaches_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_50sdp"/>

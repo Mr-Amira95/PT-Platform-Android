@@ -31,7 +31,9 @@ public class AssignedCoachesFragment extends Fragment {
     }
 
     private void initials(View view) {
-        coachRecyclerview = view.findViewById(R.id.coach_recyclerview);
+        coachRecyclerview = view.findViewById(R.id.assigendcoaches_recyclerview);
+
+
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
         gridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);

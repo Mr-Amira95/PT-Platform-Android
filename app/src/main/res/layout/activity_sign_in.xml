@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/background_two"
-    tools:context=".View.Activity.SignInActivity">
+    android:layout_gravity="center"
+    android:gravity="center_vertical">
 
     <TextView
         android:layout_width="wrap_content"
@@ -15,7 +16,6 @@
         android:text="sign in"
         android:fontFamily="@font/aeonikbold"
         android:textColor="@color/white"
-        android:layout_marginTop="@dimen/_80sdp"
         android:layout_marginStart="@dimen/_20sdp"
         android:textSize="@dimen/_32sdp"/>
 

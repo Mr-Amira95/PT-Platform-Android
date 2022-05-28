@@ -34,9 +34,9 @@ public class MainActivity extends AppCompatActivity {
         clicks();
 
         if (PreferencesUtils.getCoach(MainActivity.this) != null){
-            setFragment(new MainFragment());
+            setFragmentwithoutBack(new MainFragment());
         } else {
-            setFragment(new HomeFragment());
+            setFragmentwithoutBack(new HomeFragment());
         }
 
     }
@@ -78,7 +78,12 @@ public class MainActivity extends AppCompatActivity {
     private void setFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(frameLayout.getId(), fragment);
-        fragmentTransaction.addToBackStack("Home");
+        fragmentTransaction.commit();
+    }
+
+    private void setFragmentwithoutBack(Fragment fragment) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(frameLayout.getId(), fragment);
         fragmentTransaction.commit();
     }
 

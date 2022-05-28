@@ -2,7 +2,9 @@ package com.qtechnetworks.ptplatform.View.Fragment;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,6 +13,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.google.gson.JsonObject;
 import com.qtechnetworks.ptplatform.Controller.adapters.CategoryAdapter;
@@ -34,10 +37,10 @@ import ss.com.bannerslider.Slider;
 public class HomeFragment extends Fragment implements CallBack {
 
     private ViewPager sliderViewPager;
-    private RecyclerView categoryRecyclerView;
     private CircleIndicator sliderCircleIndicator;
-    private CategoryAdapter categoryAdapter;
     private SliderAdapter sliderAdapter;
+
+    LinearLayout followUs, contactUs, news, coaches;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,59 +48,65 @@ public class HomeFragment extends Fragment implements CallBack {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         initial(view);
-        fillCategoriesViewPager();
-        fillSliderViewPager();
+        clicks();
+        getbanner();
 
         // Inflate the layout for this fragment
         return view;
     }
 
-    private void fillCategoriesViewPager() {
-        List<String> list = new ArrayList<String>() {{
-            add("Follow Us");
-            add("Coaches");
-            add("Contact Us");
-            add("News");
-        }};
+    private void clicks() {
 
-        List<Integer> listpic = new ArrayList<Integer>() {{
-            add(R.drawable.follwous);
-            add(R.drawable.coaches);
-            add(R.drawable.contactus);
-            add(R.drawable.follwous);
-        }};
+        followUs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setFragment(new FollowUsFragment());
+            }
+        });
 
-//        LinearLayoutManager linearLayoutManager= new LinearLayoutManager(getActivity());
-//        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-//        categoryRecyclerView.setLayoutManager(linearLayoutManager);
+        contactUs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setFragment(new ContactFragment());
+            }
+        });
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),2);
-        gridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        categoryRecyclerView.setLayoutManager(gridLayoutManager);
+        news.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setFragment(new NewsFragment());
+            }
+        });
 
-        categoryAdapter = new CategoryAdapter(list,listpic , getActivity());
-        categoryRecyclerView.setAdapter(categoryAdapter);
+        coaches.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setFragment(new ChooseCoachFragment());
+            }
+        });
+
     }
 
-    private void fillSliderViewPager() {
-        List<Integer> sliderList = new ArrayList<Integer>() {{
-            add(R.drawable.follwous);
-            add(R.drawable.coaches);
-            add(R.drawable.contactus);
-        }};
+    private void setFragment(Fragment fragment) {
 
-        getbanner();
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
+
+        ((MainActivity) getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.home_frame, fragment, "OptionsFragment").addToBackStack(null).commit();
 
     }
 
     private void initial(View view) {
 
-        categoryRecyclerView=view.findViewById(R.id.category_recyclerView);
         sliderViewPager=view.findViewById(R.id.slider_viewPager);
         sliderCircleIndicator=view.findViewById(R.id.slider_indicator_unselected);
 
-    }
+        followUs = view.findViewById(R.id.category_one_layout);
+        coaches = view.findViewById(R.id.category_two_layout);
+        news = view.findViewById(R.id.category_three_layout);
+        contactUs = view.findViewById(R.id.category_four_layout);
 
+    }
 
     private void getbanner(){
 

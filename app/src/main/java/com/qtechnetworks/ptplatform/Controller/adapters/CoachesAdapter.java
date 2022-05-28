@@ -62,10 +62,6 @@ public class CoachesAdapter extends RecyclerView.Adapter<CoachesAdapter.ViewHold
                 PreferencesUtils.putString(PrefKeys.coachid,current.getId().toString());
 
                 Bundle bundle = new Bundle();
-                bundle.putString("coachid", current.getId().toString());
-                bundle.putString("name", current.getFirstName() + " " + current.getLastName());
-                bundle.putString("image", String.valueOf(current.getAvatar()));
-
                 coachesDialog.dismiss();
 
                 setFragment(new MainFragment(), bundle);

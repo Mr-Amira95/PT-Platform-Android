@@ -26,7 +26,7 @@ import io.reactivex.disposables.Disposable;
 
 public class SignUpActivity extends AppCompatActivity implements CallBack {
 
-    EditText firstName, lastName, mobile, password, socialLink, PotentialClients;
+    EditText firstName, lastName, mobile, password, confirmPassword, socialLink, PotentialClients, emailEditText;
     TextView accountType;
     Button submit_coach_button;
     String type, email, flag;
@@ -81,10 +81,12 @@ public class SignUpActivity extends AppCompatActivity implements CallBack {
         firstName = findViewById(R.id.firstname_coach_edittext);
         lastName = findViewById(R.id.lastname_coach_edittext);
         password = findViewById(R.id.password_signup_edittext);
+        confirmPassword = findViewById(R.id.confirm_password_signup_edittext);
         socialLink = findViewById(R.id.socialmedia_coach_signup_edittext);
         mobile = findViewById(R.id.mobilenumber_coach_signup_edittext);
         PotentialClients = findViewById(R.id.potential_coach_signup_edittext);
         accountType = findViewById(R.id.account_type);
+        emailEditText = findViewById(R.id.email_coach_signup_edittext);
 
         if (type.equals("trainee")){
             traineeDesign();
@@ -108,11 +110,11 @@ public class SignUpActivity extends AppCompatActivity implements CallBack {
 
 
         JsonObject params = new JsonObject();
-        params.addProperty("email", email);
+        params.addProperty("email", emailEditText.getText().toString());
         params.addProperty("first_name",firstName.getText().toString());
         params.addProperty("last_name",lastName.getText().toString());
         params.addProperty("password", password.getText().toString());
-        params.addProperty("password_confirmation",password.getText().toString());
+        params.addProperty("password_confirmation",confirmPassword.getText().toString());
         params.add("device",jsonObject);
 
 

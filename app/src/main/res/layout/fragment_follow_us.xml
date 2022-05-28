@@ -29,7 +29,8 @@
         android:gravity="center_vertical"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_20sdp"
-        android:text="username"
+        android:text="PT Platform"
+        android:textAllCaps="false"
         android:paddingHorizontal="@dimen/_20sdp"
         android:paddingVertical="@dimen/_10sdp"/>
 
@@ -44,7 +45,8 @@
         android:gravity="center_vertical"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_15sdp"
-        android:text="username"
+        android:text="PT Platform"
+        android:textAllCaps="false"
         android:paddingHorizontal="@dimen/_20sdp"
         android:paddingVertical="@dimen/_10sdp"/>
 
@@ -59,7 +61,8 @@
         android:gravity="center_vertical"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_15sdp"
-        android:text="username"
+        android:text="PT Platform"
+        android:textAllCaps="false"
         android:paddingHorizontal="@dimen/_20sdp"
         android:paddingVertical="@dimen/_10sdp"/>
 

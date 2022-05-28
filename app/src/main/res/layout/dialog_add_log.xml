@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="50dp"
     android:background="@drawable/background_radius_20_title"
     android:gravity="bottom"
-    android:paddingVertical="@dimen/_25sdp"
+    android:paddingVertical="@dimen/_15sdp"
     android:paddingHorizontal="@dimen/_15sdp"
-    android:layout_marginHorizontal="@dimen/_50sdp"
+    android:layout_marginHorizontal="@dimen/_25sdp"
     android:layout_gravity="center">
 
     <Spinner

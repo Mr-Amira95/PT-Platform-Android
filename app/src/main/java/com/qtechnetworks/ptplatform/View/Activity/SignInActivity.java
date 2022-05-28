@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
@@ -41,20 +42,30 @@ public class SignInActivity extends AppCompatActivity implements CallBack {
         setContentView(R.layout.activity_sign_in);
 
         initial();
+        clicks();
 
         if (type.equalsIgnoreCase("coach")){
             facebooklogin_button.setVisibility(View.GONE);
             googlelogin_button.setVisibility(View.GONE);
         }
 
+    }
+
+    private void clicks() {
         signup_textview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                    Intent i = new Intent(SignInActivity.this, EmailActivity.class);
-                    i.putExtra("type", type);
-                    i.putExtra("flag", "SignUp");
-                    startActivity(i);
+                Intent i = new Intent(SignInActivity.this, SignUpActivity.class);
+                i.putExtra("type", type);
+                i.putExtra("flag", "SignUp");
+                startActivity(i);
+
+
+//                    Intent i = new Intent(SignInActivity.this, EmailActivity.class);
+//                    i.putExtra("type", type);
+//                    i.putExtra("flag", "SignUp");
+//                    startActivity(i);
             }
         });
 
@@ -79,6 +90,20 @@ public class SignInActivity extends AppCompatActivity implements CallBack {
                 i.putExtra("type", type);
                 i.putExtra("flag", "ForgotPassword");
                 startActivity(i);
+            }
+        });
+
+        googlelogin_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(SignInActivity.this, "Later", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        facebooklogin_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(SignInActivity.this, "Later", Toast.LENGTH_LONG).show();
             }
         });
 

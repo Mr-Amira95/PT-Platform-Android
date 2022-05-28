@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.qtechnetworks.ptplatform.R;
 
@@ -48,7 +49,8 @@ public class ChoosingActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (!trainee){
-                    startActivity(new Intent(ChoosingActivity.this, SignInActivity.class).putExtra("type","coach"));
+                    Toast.makeText(ChoosingActivity.this, "Later", Toast.LENGTH_LONG).show();
+                    //startActivity(new Intent(ChoosingActivity.this, SignInActivity.class).putExtra("type","coach"));
                 }else if (trainee){
                     startActivity(new Intent(ChoosingActivity.this, SignInActivity.class).putExtra("type","trainee"));
                 }

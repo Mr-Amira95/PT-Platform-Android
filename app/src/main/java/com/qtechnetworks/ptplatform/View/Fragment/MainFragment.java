@@ -49,14 +49,10 @@ public class MainFragment extends Fragment implements CallBack {
 
     RoundedImageView cate1_image;
 
-    String name;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-
-            name = getArguments().getString("name");
 
         }
     }
@@ -155,6 +151,13 @@ public class MainFragment extends Fragment implements CallBack {
             public void onClick(View view) {
                 coachesDialog.setCancelable(true);
                 coachesDialog.show();
+            }
+        });
+
+        historyLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setFragment(new HistoryFragment());
             }
         });
     }

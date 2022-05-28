@@ -3,7 +3,6 @@ package com.qtechnetworks.ptplatform.View.Fragment;
 import android.os.Bundle;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,11 +12,22 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.qtechnetworks.ptplatform.Controller.adapters.CategoryAdapter;
 import com.qtechnetworks.ptplatform.Controller.adapters.CoachAdapter;
+import com.qtechnetworks.ptplatform.Controller.adapters.PersonalMealsHomeAdapter;
+import com.qtechnetworks.ptplatform.Controller.adapters.PersonalWorkoutHomeAdapter;
+import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
+import com.qtechnetworks.ptplatform.Model.Beans.MealsPersonal.MealsPersonal;
+import com.qtechnetworks.ptplatform.Model.Beans.WorkoutPersonal.WorkoutPersonal;
+import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
+import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
+import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
 
-public class PersonalTrainingSubscribedFragment extends Fragment {
+import java.util.HashMap;
+
+import io.reactivex.disposables.Disposable;
+
+public class PersonalTrainingSubscribedFragment extends Fragment implements CallBack {
 
     private ConstraintLayout noContentLayout;
     private LinearLayout contentLayout, homeCategoryLayout, PersonalizedCategoryLayout;
@@ -26,6 +36,8 @@ public class PersonalTrainingSubscribedFragment extends Fragment {
 
     private RecyclerView assignedWorkoutsRecyclerview, assignedMealsRecyclerview, videosRecyclerview, imagesRecyclerview, notesRecyclerview;
     private CoachAdapter adapter;
+
+    int tag;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -103,10 +115,90 @@ public class PersonalTrainingSubscribedFragment extends Fragment {
         notesRecyclerview.setLayoutManager(linearLayoutManager4);
 
         adapter = new CoachAdapter(getContext());
-        assignedWorkoutsRecyclerview.setAdapter(adapter);
-        assignedMealsRecyclerview.setAdapter(adapter);
+
         videosRecyclerview.setAdapter(adapter);
         imagesRecyclerview.setAdapter(adapter);
         notesRecyclerview.setAdapter(adapter);
+
+        getworkout();
+
+    }
+
+    private void getworkout(){
+
+        HashMap<String ,Object> params=new HashMap<>();
+
+        params.put("coach_id", PreferencesUtils.getCoach(getContext()).getId());
+        params.put("skip","0");
+
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.personalWorkout_URL, AppConstants.personalWorkout_TAG, WorkoutPersonal.class, params);
+
+    }
+
+
+    private void getMeals(){
+
+        HashMap<String ,Object> params=new HashMap<>();
+
+        params.put("coach_id", PreferencesUtils.getCoach(getContext()).getId());
+        params.put("skip","0");
+
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.personalMeals_URL, AppConstants.personalMeals_TAG, MealsPersonal.class, params);
+
+    }
+
+
+    @Override
+    public void onSubscribe(Disposable d) {
+
+    }
+
+    @Override
+    public void onNext(int tag, boolean isSuccess, Object result) {
+        this.tag=tag;
+
+        switch (tag){
+
+            case AppConstants.personalWorkout_TAG:
+
+                WorkoutPersonal workoutPersonal =(WorkoutPersonal) result;
+
+                PersonalWorkoutHomeAdapter personalHomeAdapter=new PersonalWorkoutHomeAdapter(getContext(),workoutPersonal.getData());
+
+                assignedWorkoutsRecyclerview.setAdapter(personalHomeAdapter);
+
+
+                break;
+
+            case AppConstants.personalMeals_TAG:
+
+                MealsPersonal mealsPersonal=(MealsPersonal) result;
+
+                PersonalMealsHomeAdapter personalMealsHomeAdapter=new PersonalMealsHomeAdapter(getContext(),mealsPersonal.getData());
+
+                assignedMealsRecyclerview.setAdapter(personalMealsHomeAdapter);
+
+                break;
+
+
+
+        }
+
+    }
+
+    @Override
+    public void onError(Throwable e) {
+
+    }
+
+    @Override
+    public void onComplete() {
+
+        if (tag==AppConstants.personalWorkout_TAG){
+            getMeals();
+        }
+
     }
 }

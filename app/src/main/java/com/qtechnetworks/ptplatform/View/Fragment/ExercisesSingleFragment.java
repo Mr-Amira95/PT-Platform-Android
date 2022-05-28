@@ -260,7 +260,7 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
         params.put("skip","0");
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);
-        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.workout_videos_URL, AppConstants.workout_videos_TAG, General.class, params);
+        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.workout_videos_URL, AppConstants.workout_videos_TAG, VideoWorkout.class, params);
 
     }
 

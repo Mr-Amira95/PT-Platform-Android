@@ -42,13 +42,21 @@ public class HistoryExerciseFragment extends Fragment {
 
     @Override
     public void onStop() {
-        player.pause();
+        try {
+            player.pause();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         super.onStop();
     }
 
     @Override
     public void onPause() {
-        player.pause();
+        try{
+
+        }catch (Exception e){
+            player.pause();
+        }
         super.onPause();
     }
 
@@ -173,9 +181,8 @@ public class HistoryExerciseFragment extends Fragment {
 
         videoRecyclerview= view.findViewById(R.id.video_recyclerView);
 
-        video_view=view.findViewById(R.id.video_view);
+        video_view=view.findViewById(R.id.video_viewex);
 
-        video_view=view.findViewById(R.id.video_view);
         desc=view.findViewById(R.id.desc);
 
         LinearLayoutManager layoutManagerhorizantalleader = new LinearLayoutManager(getContext());

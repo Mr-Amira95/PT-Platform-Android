@@ -114,7 +114,7 @@
         android:layout_marginTop="@dimen/_15sdp">
 
         <com.google.android.exoplayer2.ui.PlayerView
-            android:id="@+id/video_view"
+            android:id="@+id/video_viewex"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_200sdp"
             android:background="@color/white"

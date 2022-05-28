@@ -50,7 +50,11 @@ public class ProfileFragment extends Fragment {
         logout=v.findViewById(R.id.logout);
 
         try{
-            Glide.with(getContext()).load(PreferencesUtils.getUser(getContext()).getAvatar()).placeholder(R.drawable.logo).into(profile_img);
+
+            Glide.with(getContext()).load(
+                    PreferencesUtils.getUser(getContext()).getAvatar()).
+                    placeholder(R.drawable.logo).into(profile_img);
+
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -66,9 +70,12 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        joining_date.setText(PreferencesUtils.getUser(getContext()).getEmail());
+        joining_date.setText(
+                PreferencesUtils.getUser(getContext()).getEmail());
 
-        username.setText(PreferencesUtils.getUser(getContext()).getFirstName()+" "+PreferencesUtils.getUser(getContext()).getLastName());
+        username.setText(
+                PreferencesUtils.getUser(getContext()).getFirstName()
+                        +" "+PreferencesUtils.getUser(getContext()).getLastName());
 
     }
 

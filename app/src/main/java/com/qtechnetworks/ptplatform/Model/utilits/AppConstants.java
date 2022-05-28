@@ -68,24 +68,29 @@ public class AppConstants {
     public static final String Supplement_URL = "supplements";
     public static final int Supplement_TAG = 17;
 
-
     public static final String exercise_URL = "section-workout/exercises";
-    public static final int exercise_TAG = 11;
+    public static final int exercise_TAG = 18;
 
     public static final String workout_URL = "section-exercise/exercises";
-    public static final int workout_TAG = 12;
+    public static final int workout_TAG = 19;
 
     public static final String target_URL = "users/target";
-    public static final int target_TAG = 13;
+    public static final int target_TAG = 20;
 
     public static final String fooduser_URL = "foods/user";
-    public static final int fooduser_TAG = 14;
+    public static final int fooduser_TAG = 21;
 
     public static final String addfood_URL = "foods/user";
-    public static final int addfood_TAG = 15;
+    public static final int addfood_TAG = 22;
 
     public static final String recipes_URL = "recipes";
-    public static final int recipes_TAG = 16;
+    public static final int recipes_TAG = 23;
+
+    public static final String personalWorkout_URL = "users/training/workout";
+    public static final int personalWorkout_TAG = 24;
+
+    public static final String personalMeals_URL = "users/training/recipe";
+    public static final int personalMeals_TAG = 25;
 
     public static void Trace(String tag, String msg) {
 

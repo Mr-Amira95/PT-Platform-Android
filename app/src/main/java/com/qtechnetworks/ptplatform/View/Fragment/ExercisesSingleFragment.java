@@ -198,6 +198,7 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
         //player.setRepeatMode(Player.REPEAT_MODE_ALL);
 
         video_view.setControllerHideOnTouch(true);
+        video_view.setUseController(true);
         video_view.showController();
 
         // Set the media item to be played.

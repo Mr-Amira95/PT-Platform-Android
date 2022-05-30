@@ -10,7 +10,7 @@
         android:name=".Model.basic.MyApplication"
         android:allowBackup="true"
         android:duplicateParentState="true"
-        android:hardwareAccelerated="false"
+        android:hardwareAccelerated="true"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:largeHeap="true"

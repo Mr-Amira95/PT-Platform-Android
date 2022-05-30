@@ -110,7 +110,10 @@ public class MainFragment extends Fragment implements CallBack {
         calenderLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setFragment( new LogFragment("Today’s Workouts"),PreferencesUtils.getCoach(getContext()).getId().toString());
+
+                setFragment(new CalendarFragment());
+
+                //setFragment( new LogFragment("Today’s Workouts"),PreferencesUtils.getCoach(getContext()).getId().toString());
             }
         });
 

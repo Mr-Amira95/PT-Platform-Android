@@ -33,7 +33,6 @@ public class WorkoutAndExsircisesAdapter extends RecyclerView.Adapter<WorkoutAnd
     private String flag;
     List<Category> data;
     int selectedCategory;
-    RecyclerView recyclerView;
 
     ChestAndBicepsAdapter adapter;
 

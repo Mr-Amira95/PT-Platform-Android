@@ -18,6 +18,7 @@ import com.qtechnetworks.ptplatform.Model.Beans.RegisterAndLogin.Register;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.R;
+import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -68,6 +69,12 @@ public class NewsFragment extends Fragment implements CallBack {
 
     }
 
+    private void setFragmentWithoutBack(Fragment fragment ) {
+
+        ((MainActivity) requireContext()).getSupportFragmentManager().beginTransaction().replace(R.id.home_frame, fragment, "OptionsFragment").commit();
+
+    }
+
     @Override
     public void onSubscribe(Disposable d) {
 
@@ -76,11 +83,14 @@ public class NewsFragment extends Fragment implements CallBack {
     @Override
     public void onNext(int tag, boolean isSuccess, Object result) {
 
-        News news=(News) result;
+        try {
+            News news=(News) result;
 
-        newsAdapter = new NewsAdapter(getContext(),news.getData());
-        newsRecyclerview.setAdapter(newsAdapter);
-
+            newsAdapter = new NewsAdapter(getContext(),news.getData());
+            newsRecyclerview.setAdapter(newsAdapter);
+        } catch (Exception e){
+            setFragmentWithoutBack(new NewsFragment());
+        }
     }
 
     @Override

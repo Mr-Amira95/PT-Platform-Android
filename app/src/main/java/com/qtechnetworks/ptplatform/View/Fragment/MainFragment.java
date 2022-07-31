@@ -82,7 +82,7 @@ public class MainFragment extends Fragment implements CallBack {
         workoutsLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setFragment(new ExercisesWorkoutFragment("Workout"),PreferencesUtils.getCoach(getContext()).getId().toString());
+                setFragment(new WorkoutFragment(),PreferencesUtils.getCoach(getContext()).getId().toString());
             }
         });
 
@@ -110,7 +110,7 @@ public class MainFragment extends Fragment implements CallBack {
         calenderLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setFragment( new LogFragment("Today’s Workouts"),PreferencesUtils.getCoach(getContext()).getId().toString());
+                //setFragment( new LogFragment("Today’s Workouts"),PreferencesUtils.getCoach(getContext()).getId().toString());
             }
         });
 
@@ -165,6 +165,12 @@ public class MainFragment extends Fragment implements CallBack {
     private void setFragment(Fragment fragment ) {
 
         ((MainActivity) requireContext()).getSupportFragmentManager().beginTransaction().replace(R.id.home_frame, fragment, "OptionsFragment").addToBackStack(null).commit();
+
+    }
+
+    private void setFragmentWithoutBack(Fragment fragment ) {
+
+        ((MainActivity) requireContext()).getSupportFragmentManager().beginTransaction().replace(R.id.home_frame, fragment, "OptionsFragment").commit();
 
     }
 
@@ -247,13 +253,15 @@ public class MainFragment extends Fragment implements CallBack {
     @Override
     public void onNext(int tag, boolean isSuccess, Object result) {
 
-        Banner banner=(Banner) result;
 
         try {
+            Banner banner=(Banner) result;
+
             sliderAdapter = new SliderAdapter(banner.getData(), getActivity());
             sliderViewPager.setAdapter(sliderAdapter);
             sliderCircleIndicator.setViewPager(sliderViewPager);
         }catch (Exception e){
+            setFragmentWithoutBack(new MainFragment());
             e.printStackTrace();
         }
 

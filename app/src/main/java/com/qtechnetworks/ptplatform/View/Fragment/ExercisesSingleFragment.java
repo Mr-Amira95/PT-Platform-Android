@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.MediaItem;
 import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
@@ -51,10 +52,10 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
     RecyclerView videoRecyclerview;
     VideoItemAdapter videoAdapter;
     public PlayerView video_view;
+    public static ExoPlayer player;
 
-    public TextView desc,add_to_favourite,add_to_workout,add_to_log;
+    public static TextView desc,add_to_favourite,add_to_workout,add_to_log;
 
-    public static SimpleExoPlayer player;
 
     String flag,ID;
 
@@ -67,13 +68,21 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
 
     @Override
     public void onStop() {
-        player.pause();
+        try {
+            player.pause();
+        } catch (Exception e){
+
+        }
         super.onStop();
     }
 
     @Override
     public void onPause() {
-        player.pause();
+        try {
+            player.pause();
+        } catch (Exception e){
+
+        }
         super.onPause();
     }
 
@@ -121,8 +130,6 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
 
     private void initial(View view) {
         videoRecyclerview= view.findViewById(R.id.video_recyclerView);
-
-        video_view=view.findViewById(R.id.video_view);
 
         video_view=view.findViewById(R.id.video_view);
         desc=view.findViewById(R.id.desc);
@@ -183,18 +190,18 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
             }
         });
 
-
     }
 
     public void playinitial (String videourl) {
 
-        player = new SimpleExoPlayer.Builder(getContext()).build();
+        player = new ExoPlayer.Builder(getContext()).build();
 
         video_view.setPlayer(player);
-        video_view.setUseController(false);
+        video_view.setUseController(true);
 
         MediaItem mediaItem = MediaItem.fromUri(videourl);
 
+//        player.addMediaItems();
         //player.setRepeatMode(Player.REPEAT_MODE_ALL);
 
         video_view.setControllerHideOnTouch(true);
@@ -274,7 +281,6 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);
         MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.exercise_videos_URL, AppConstants.exercise_videos_TAG, VideoExercises.class, params);
-
     }
 
 
@@ -325,36 +331,40 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
 
                 VideoExercises videoExercises=(VideoExercises) result;
 
-                if (videoExercises.getData().get(0).getIsFavourite()){
-                    add_to_favourite.setText("Remove from favourite");
-                }
-                if (videoExercises.getData().get(0).getIsTodayLog()){
-                    add_to_log.setText("Remove from log");
-                }
-                if (videoExercises.getData().get(0).getIsWorkout()){
-                    add_to_workout.setText("Remove from Workout");
-                }
+                if (videoExercises.getData().size()>0){
+                    if (videoExercises.getData().get(0).getIsFavourite()){
+                        add_to_favourite.setText("Remove from favourite");
+                    }
+                    if (videoExercises.getData().get(0).getIsTodayLog()){
+                        add_to_log.setText("Remove from log");
+                    }
+                    if (videoExercises.getData().get(0).getIsWorkout()){
+                        add_to_workout.setText("Remove from Workout");
+                    }
 
-                try {
-                    video_view.setDefaultArtwork(drawableFromUrl(videoExercises.getData().get(0).getImage()));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                    try {
+                        video_view.setDefaultArtwork(drawableFromUrl(videoExercises.getData().get(0).getImage()));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
 
 
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                    desc.setText(Html.fromHtml(videoExercises.getData().get(0).getDescription(),Html.FROM_HTML_MODE_LEGACY));
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                        desc.setText(Html.fromHtml(videoExercises.getData().get(0).getDescription(),Html.FROM_HTML_MODE_LEGACY));
+                    } else {
+                        desc.setText(Html.fromHtml(videoExercises.getData().get(0).getDescription()));
+                    }
+
+                    playinitial(videoExercises.getData().get(0).getVideo());
+
+                    videoAdapter = new VideoItemAdapter(getContext(),videoExercises.getData(),ExercisesSingleFragment.this,add_to_favourite,add_to_workout,add_to_log);
+                    videoRecyclerview.setAdapter(videoAdapter);
+
+                    VideoID=videoExercises.getData().get(0).getId().toString();
+
                 } else {
-                    desc.setText(Html.fromHtml(videoExercises.getData().get(0).getDescription()));
+                    Toast.makeText(getContext(), "No Videos", Toast.LENGTH_SHORT).show();
                 }
-
-                playinitial(videoExercises.getData().get(0).getVideo());
-
-                videoAdapter = new VideoItemAdapter(getContext(),videoExercises.getData(),ExercisesSingleFragment.this,add_to_favourite,add_to_workout,add_to_log);
-                videoRecyclerview.setAdapter(videoAdapter);
-
-                VideoID=videoExercises.getData().get(0).getId().toString();
-
 
                 break;
 
@@ -368,29 +378,27 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
                 if (videoWorkout.getData().get(0).getIsTodayLog()){
                     add_to_log.setText("Remove from log");
                 }
+
                 if (videoWorkout.getData().get(0).getIsWorkout()){
                     add_to_workout.setText("Remove from Workout");
                 }
 
-                try {
-                    video_view.setDefaultArtwork(drawableFromUrl(videoWorkout.getData().get(0).getImage()));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                if (videoWorkout.getData().size() > 0){
+                    try {
+                        video_view.setDefaultArtwork(drawableFromUrl(videoWorkout.getData().get(0).getImage()));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
 
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                    desc.setText(Html.fromHtml(videoWorkout.getData().get(0).getDescription(),Html.FROM_HTML_MODE_LEGACY));
-                } else {
                     desc.setText(Html.fromHtml(videoWorkout.getData().get(0).getDescription()));
+
+                    playinitial(videoWorkout.getData().get(0).getVideo());
+
+                    VideoItemworkoutAdapter videoAdapter = new VideoItemworkoutAdapter(getContext(),videoWorkout.getData(),ExercisesSingleFragment.this);
+                    videoRecyclerview.setAdapter(videoAdapter);
+
+                    VideoID=videoWorkout.getData().get(0).getId().toString();
                 }
-
-                playinitial(videoWorkout.getData().get(0).getVideo());
-
-                VideoItemworkoutAdapter videoAdapter = new VideoItemworkoutAdapter(getContext(),videoWorkout.getData(),ExercisesSingleFragment.this,add_to_favourite,add_to_workout,add_to_log);
-                videoRecyclerview.setAdapter(videoAdapter);
-
-                VideoID=videoWorkout.getData().get(0).getId().toString();
-
                 break;
 
         }

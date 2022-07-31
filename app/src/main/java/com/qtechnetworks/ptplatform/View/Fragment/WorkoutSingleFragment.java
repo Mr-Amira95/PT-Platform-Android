@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.qtechnetworks.ptplatform.Controller.adapters.VideoItemAdapter;
@@ -27,8 +29,10 @@ import io.reactivex.disposables.Disposable;
 public class WorkoutSingleFragment extends Fragment  {
 
     Button explore;
+    TextView titleTxt, desc;
+    ImageView img;
 
-    String title,description,id;
+    String title,description,id, imgUrl;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,7 @@ public class WorkoutSingleFragment extends Fragment  {
 
             title=getArguments().getString("title");
             description=getArguments().getString("description");
+            imgUrl=getArguments().getString("img");
             id=getArguments().getString("ID");
 
         }
@@ -48,6 +53,11 @@ public class WorkoutSingleFragment extends Fragment  {
         View view = inflater.inflate(R.layout.fragment_workout_single, container, false);
 
         initials(view);
+
+        titleTxt.setText(title);
+        desc.setText(description);
+        Glide.with(getContext()).load(imgUrl).placeholder(R.drawable.logo).into(img);
+
 
         explore.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +71,10 @@ public class WorkoutSingleFragment extends Fragment  {
     }
 
     private void initials(View view) {
+        img = view.findViewById(R.id.img);
         explore = view.findViewById(R.id.explore_btn);
+        titleTxt = view.findViewById(R.id.title);
+        desc = view.findViewById(R.id.desc);
 
     }
 

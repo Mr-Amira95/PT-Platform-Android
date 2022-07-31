@@ -19,6 +19,7 @@ import com.qtechnetworks.ptplatform.Model.Beans.News.News;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.R;
+import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 
 import java.util.HashMap;
 
@@ -61,6 +62,12 @@ public class ChooseCoachFragment extends Fragment implements CallBack {
 
     }
 
+    private void setFragmentWithoutBack(Fragment fragment ) {
+
+        ((MainActivity) requireContext()).getSupportFragmentManager().beginTransaction().replace(R.id.home_frame, fragment, "OptionsFragment").commit();
+
+    }
+
     @Override
     public void onSubscribe(Disposable d) {
 
@@ -69,11 +76,14 @@ public class ChooseCoachFragment extends Fragment implements CallBack {
     @Override
     public void onNext(int tag, boolean isSuccess, Object result) {
 
-        Coach coach=(Coach) result;
+        try {
+            Coach coach=(Coach) result;
 
-        CoachUserAdapter coachAdapter = new CoachUserAdapter(getContext(),coach.getData());
-        coachRecyclerview.setAdapter(coachAdapter);
-
+            CoachUserAdapter coachAdapter = new CoachUserAdapter(getContext(),coach.getData());
+            coachRecyclerview.setAdapter(coachAdapter);
+        } catch (Exception e){
+            setFragmentWithoutBack(new ChooseCoachFragment());
+        }
     }
 
     @Override

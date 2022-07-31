@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".View.Fragment.ExercisesSingleFragment"
-    android:background="@color/backapp"
-    android:orientation="vertical">
+    tools:context=".View.Fragment.WorkoutVideosFragment"
+    android:orientation="vertical"
+    android:background="@color/backapp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -16,11 +17,15 @@
             android:id="@+id/video_view"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_200sdp"
-            android:background="@color/backapp"
+            android:background="@color/white"
             android:scaleType="centerCrop"
             app:layout_constraintTop_toTopOf="parent"
             app:repeat_toggle_modes="none"
+            app:resize_mode="fill"
+            app:show_timeout="4500000"
+            app:surface_type="texture_view"
             app:use_artwork="true" />
+
 
         <ImageView
             android:layout_width="@dimen/_20sdp"
@@ -28,8 +33,7 @@
             android:src="@drawable/ic_expand"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_margin="@dimen/_10sdp"
-            android:visibility="gone"/>
+            android:layout_margin="@dimen/_10sdp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -6,32 +6,29 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.qtechnetworks.ptplatform.Model.Beans.videoExercises.Datum;
+import com.qtechnetworks.ptplatform.Model.Beans.WorkoutVideo.Datum;
 import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Fragment.ExercisesSingleFragment;
 
 import java.io.IOException;
 import java.util.List;
 
-public class VideoItemAdapter extends RecyclerView.Adapter<VideoItemAdapter.ViewHolder>  {
+public class VideoItemWorkoutAdapterWorkout extends RecyclerView.Adapter<VideoItemWorkoutAdapterWorkout.ViewHolder>  {
 
     private Context context;
     private List<Datum> data;
     private ExercisesSingleFragment exercisesSingleFragment;
     TextView add_to_favourite; TextView add_to_workout; TextView add_to_log;
 
-    public VideoItemAdapter(Context context, List<Datum> data, ExercisesSingleFragment exercisesSingleFragment, TextView add_to_favourite, TextView add_to_workout, TextView add_to_log) {
+
+    public VideoItemWorkoutAdapterWorkout(Context context, List<Datum> data, ExercisesSingleFragment exercisesSingleFragment, TextView add_to_favourite, TextView add_to_workout, TextView add_to_log) {
 
         this.context = context;
         this.data=data;
@@ -55,13 +52,7 @@ public class VideoItemAdapter extends RecyclerView.Adapter<VideoItemAdapter.View
         Datum current= data.get(position);
 
         holder.title.setText(current.getTitle().toString());
-        try{
-            Glide.with(context).load(current.getImage()).placeholder(R.drawable.logo).into(holder.video_view);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-        // holder.time.setText();
+       // holder.time.setText();
 
         if (current.getIsFavourite()){
             add_to_favourite.setText("Remove from favourite");
@@ -73,19 +64,24 @@ public class VideoItemAdapter extends RecyclerView.Adapter<VideoItemAdapter.View
             add_to_workout.setText("Remove from Workout");
         }
 
-
         exercisesSingleFragment.VideoID=current.getId().toString();
 
+        try{
+
+            Glide.with(context).load(current.getImage()).placeholder(R.drawable.logo).into(holder.video_view);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         holder.video_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                exercisesSingleFragment.player.pause();
 
                 exercisesSingleFragment.VideoID=current.getId().toString();
 
                 try {
-                   exercisesSingleFragment.video_view.setDefaultArtwork(exercisesSingleFragment.drawableFromUrl(current.getImage()));
+                    exercisesSingleFragment.video_view.setDefaultArtwork(exercisesSingleFragment.drawableFromUrl(current.getImage()));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -97,6 +93,7 @@ public class VideoItemAdapter extends RecyclerView.Adapter<VideoItemAdapter.View
                 }
 
                 exercisesSingleFragment.playinitial(current.getVideo());
+
 
             }
         });

@@ -25,18 +25,13 @@ public class VideoItemworkoutAdapter extends RecyclerView.Adapter<VideoItemworko
     private Context context;
     private List<Datum> data;
     private ExercisesSingleFragment exercisesSingleFragment;
-    TextView add_to_favourite; TextView add_to_workout; TextView add_to_log;
 
 
-    public VideoItemworkoutAdapter(Context context, List<Datum> data, ExercisesSingleFragment exercisesSingleFragment, TextView add_to_favourite, TextView add_to_workout, TextView add_to_log) {
+    public VideoItemworkoutAdapter(Context context, List<Datum> data, ExercisesSingleFragment exercisesSingleFragment) {
 
         this.context = context;
         this.data=data;
         this.exercisesSingleFragment=exercisesSingleFragment;
-        this.add_to_favourite=add_to_favourite;
-        this.add_to_log=add_to_log;
-        this.add_to_workout=add_to_workout;
-
     }
 
     @NonNull
@@ -55,13 +50,13 @@ public class VideoItemworkoutAdapter extends RecyclerView.Adapter<VideoItemworko
        // holder.time.setText();
 
         if (current.getIsFavourite()){
-            add_to_favourite.setText("Remove from favourite");
+            ExercisesSingleFragment.add_to_favourite.setText("Remove from favourite");
         }
         if (current.getIsTodayLog()){
-            add_to_log.setText("Remove from log");
+            ExercisesSingleFragment.add_to_log.setText("Remove from log");
         }
         if (current.getIsWorkout()){
-            add_to_workout.setText("Remove from Workout");
+            ExercisesSingleFragment.add_to_workout.setText("Remove from Workout");
         }
 
         exercisesSingleFragment.VideoID=current.getId().toString();
@@ -86,15 +81,8 @@ public class VideoItemworkoutAdapter extends RecyclerView.Adapter<VideoItemworko
                     e.printStackTrace();
                 }
 
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                    exercisesSingleFragment.desc.setText(Html.fromHtml(current.getDescription().toString(),Html.FROM_HTML_MODE_LEGACY));
-                } else {
-                    exercisesSingleFragment.desc.setText(Html.fromHtml(current.getDescription().toString()));
-                }
-
+                exercisesSingleFragment.desc.setText(Html.fromHtml(current.getDescription().toString()));
                 exercisesSingleFragment.playinitial(current.getVideo());
-
-
             }
         });
 

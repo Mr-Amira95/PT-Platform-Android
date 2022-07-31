@@ -198,12 +198,12 @@ public class FoodAddFragment extends Fragment implements CallBack {
 
                 UtilisMethods.fillSpinnerData(getContext(),arrayListfood,Foodname_spinner);
 
-                foodid=food.getData().get(Foodname_spinner.getSelectedItemPosition()).getId().toString();
-
-
-                fat_text.setText(food.getData().get(Foodname_spinner.getSelectedItemPosition()).getFat().toString());
-                carb_text.setText(food.getData().get(Foodname_spinner.getSelectedItemPosition()).getCarb().toString());
-                protine_text.setText(food.getData().get(Foodname_spinner.getSelectedItemPosition()).getProtein().toString());
+//                foodid=food.getData().get(Foodname_spinner.getSelectedItemPosition()).getId().toString();
+//
+//
+//                fat_text.setText(food.getData().get(Foodname_spinner.getSelectedItemPosition()).getFat().toString());
+//                carb_text.setText(food.getData().get(Foodname_spinner.getSelectedItemPosition()).getCarb().toString());
+//                protine_text.setText(food.getData().get(Foodname_spinner.getSelectedItemPosition()).getProtein().toString());
 
 
                 break;

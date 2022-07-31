@@ -28,12 +28,12 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField "String", "API_URL", "\"https://qtechnetworks.co/pt-backend/public/api/v1/\""
+            buildConfigField "String", "API_URL", "\"https://pt.qtechnetworks.co/public/api/v1/\""
         }
         release {
             minifyEnabled false
             multiDexEnabled true
-            buildConfigField "String", "API_URL", "\"https://qtechnetworks.co/pt-backend/public/api/v1/\""
+            buildConfigField "String", "API_URL", "\"https://pt.qtechnetworks.co/public/api/v1/\""
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -126,7 +126,7 @@ dependencies {
     ///video player
     //implementation 'com.github.HamidrezaAmz:MagicalExoPlayer:1.0.16'
 
-    implementation 'com.google.android.exoplayer:exoplayer:2.17.1'
+    implementation 'com.google.android.exoplayer:exoplayer:2.18.1'
 
 
 }

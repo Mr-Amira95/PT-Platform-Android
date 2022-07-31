@@ -13,7 +13,8 @@
         android:layout_height="@dimen/_60sdp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@drawable/demoslider"/>
+        android:src="@drawable/demoslider"
+        android:scaleType="centerCrop"/>
 
     <TextView
         android:id="@+id/title"
@@ -36,6 +37,7 @@
         app:layout_constraintStart_toEndOf="@id/video_view"
         app:layout_constraintTop_toBottomOf="@id/title"
         android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_5sdp"/>
+        android:layout_marginTop="@dimen/_5sdp"
+        android:visibility="gone"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -96,6 +96,15 @@ public class HomeFragment extends Fragment implements CallBack {
 
     }
 
+    private void setFragmentWithoutBack(Fragment fragment) {
+
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
+
+        ((MainActivity) getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.home_frame, fragment, "OptionsFragment").commit();
+
+    }
+
     private void initial(View view) {
 
         sliderViewPager=view.findViewById(R.id.slider_viewPager);
@@ -126,11 +135,16 @@ public class HomeFragment extends Fragment implements CallBack {
     @Override
     public void onNext(int tag, boolean isSuccess, Object result) {
 
-        Banner banner=(Banner) result;
+        try {
+            Banner banner=(Banner) result;
 
-        sliderAdapter = new SliderAdapter(banner.getData() , getActivity());
-        sliderViewPager.setAdapter(sliderAdapter);
-        sliderCircleIndicator.setViewPager(sliderViewPager);
+            sliderAdapter = new SliderAdapter(banner.getData() , getActivity());
+            sliderViewPager.setAdapter(sliderAdapter);
+            sliderCircleIndicator.setViewPager(sliderViewPager);
+        } catch (Exception e) {
+            setFragmentWithoutBack(new HomeFragment());
+        }
+
 
     }
 

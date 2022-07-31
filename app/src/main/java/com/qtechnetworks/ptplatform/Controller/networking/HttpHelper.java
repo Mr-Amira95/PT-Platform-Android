@@ -40,7 +40,7 @@ public class HttpHelper {
         dialog=new ProgressDialog(context);
         dialog.setMessage("Loading ...");
         dialog.setCancelable(false);
-
+        dialog.show();
 
         RetrofitServices service = MyApplication.getInstance().getHttpMethods();
 
@@ -51,8 +51,6 @@ public class HttpHelper {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
 
-                        dialog.show();
-
                         callback.onSubscribe(d);
 
                     }
@@ -60,6 +58,7 @@ public class HttpHelper {
                     @Override
                     public void onNext(@NonNull ResponseBody responseBody) {
 
+                        dialog.dismiss();
 
                         try {
 
@@ -124,7 +123,7 @@ public class HttpHelper {
         dialog=new ProgressDialog(context);
         dialog.setMessage("Loading ...");
         dialog.setCancelable(false);
-
+        dialog.show();
 
         RetrofitServices service = MyApplication.getInstance().getHttpMethods();
 
@@ -135,8 +134,6 @@ public class HttpHelper {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
 
-                        dialog.show();
-
                         callback.onSubscribe(d);
 
                     }
@@ -145,7 +142,7 @@ public class HttpHelper {
                     public void onNext(@NonNull ResponseBody responseBody) {
 
                         try {
-
+                            dialog.dismiss();
                             result(clazz, responseBody.source().readUtf8().toString(), tag, true);
 
                         } catch (IOException e) {
@@ -197,6 +194,7 @@ public class HttpHelper {
         dialog=new ProgressDialog(context);
         dialog.setMessage("Loading ...");
         dialog.setCancelable(false);
+        dialog.show();
 
 
         RetrofitServices service = MyApplication.getInstance().getHttpMethods();
@@ -208,14 +206,14 @@ public class HttpHelper {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
 
-                        dialog.show();
-
                         callback.onSubscribe(d);
 
                     }
 
                     @Override
                     public void onNext(@NonNull ResponseBody responseBody) {
+                        dialog.dismiss();
+
                         try {
 
                             result(clazz, responseBody.source().readUtf8().toString(), tag, true);
@@ -277,6 +275,7 @@ public class HttpHelper {
         dialog=new ProgressDialog(context);
         dialog.setMessage("Loading ...");
         dialog.setCancelable(false);
+        dialog.show();
 
 
         RetrofitServices service = MyApplication.getInstance().getHttpMethods();
@@ -288,14 +287,14 @@ public class HttpHelper {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
 
-                        dialog.show();
-
                         callback.onSubscribe(d);
 
                     }
 
                     @Override
                     public void onNext(@NonNull ResponseBody responseBody) {
+
+                        dialog.dismiss();
 
                         try {
 
@@ -361,7 +360,7 @@ public class HttpHelper {
         dialog=new ProgressDialog(context);
         dialog.setMessage("Loading ...");
         dialog.setCancelable(false);
-
+        dialog.show();
 
         RetrofitServices service = MyApplication.getInstance().getHttpMethods();
 
@@ -372,14 +371,14 @@ public class HttpHelper {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
 
-                        dialog.show();
-
                         callback.onSubscribe(d);
 
                     }
 
                     @Override
                     public void onNext(@NonNull ResponseBody responseBody) {
+
+                        dialog.dismiss();
 
                         try {
 
@@ -444,7 +443,7 @@ public class HttpHelper {
         dialog=new ProgressDialog(context);
         dialog.setMessage("Loading ...");
         dialog.setCancelable(false);
-
+        dialog.show();
 
         RetrofitServices service = MyApplication.getInstance().getHttpMethods();
 
@@ -455,8 +454,6 @@ public class HttpHelper {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
 
-                        dialog.show();
-
                         callback.onSubscribe(d);
 
                     }
@@ -464,6 +461,7 @@ public class HttpHelper {
                     @Override
                     public void onNext(@NonNull ResponseBody responseBody) {
 
+                        dialog.dismiss();
 
                         try {
 

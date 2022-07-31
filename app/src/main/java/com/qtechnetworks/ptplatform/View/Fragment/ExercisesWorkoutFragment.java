@@ -14,10 +14,12 @@ import android.widget.TextView;
 
 import com.qtechnetworks.ptplatform.Controller.adapters.TitleAdapter;
 import com.qtechnetworks.ptplatform.Controller.adapters.WorkoutAndExsircisesAdapter;
+import com.qtechnetworks.ptplatform.Controller.adapters.WorkoutTitleAdapter;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.Exercises.CategoryResults;
 import com.qtechnetworks.ptplatform.Model.Beans.Exercises.Datum;
 import com.qtechnetworks.ptplatform.Model.Beans.Exercises.GroupResults;
+import com.qtechnetworks.ptplatform.Model.Beans.workout.workoutResults;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.Model.utilits.EndlessRecyclerViewScrollListener;
@@ -34,8 +36,8 @@ public class ExercisesWorkoutFragment extends Fragment implements CallBack {
     RecyclerView categoryRecyclerView;
     public static RecyclerView home_exir_work_recyclerview;
 
-
     TitleAdapter titleAdapter;
+    WorkoutTitleAdapter workoutTitleAdapter;
     TextView title;
 
     String flag = "";
@@ -46,6 +48,7 @@ public class ExercisesWorkoutFragment extends Fragment implements CallBack {
     public static int groupID;
 
     public static GroupResults exercise;
+    public static workoutResults workoutResults;
     public static WorkoutAndExsircisesAdapter workoutAndExsircisesAdapter;
 
     public ExercisesWorkoutFragment(String flag) {
@@ -81,16 +84,10 @@ public class ExercisesWorkoutFragment extends Fragment implements CallBack {
         title= view.findViewById(R.id.title);
         title.setText(flag);
 
-        if (flag.equals("Workout")){
 
-            getWorkout(coachid);
-
-        } else if (flag.equals("Exercises")){
-
+        if (flag.equals("Exercises")){
             getExercises(coachid);
-
         }
-
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -101,22 +98,22 @@ public class ExercisesWorkoutFragment extends Fragment implements CallBack {
         categoryRecyclerView.setLayoutManager(linearLayoutManager3);
 
 
-        home_exir_work_recyclerview.addOnScrollListener(new EndlessRecyclerViewScrollListener( linearLayoutManager) {
-            @Override
-            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-
-                if (flag.equals("Workout")){
-
-                    getCategoryWORK(String.valueOf(groupID),totalItemsCount);
-
-                }else if (flag.equals("Exercises")){
-
-                    getCategoryEX(String.valueOf(groupID),totalItemsCount);
-
-                }
-
-            }
-        });
+//        home_exir_work_recyclerview.addOnScrollListener(new EndlessRecyclerViewScrollListener( linearLayoutManager) {
+//            @Override
+//            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+//
+//                if (flag.equals("Workout")){
+//
+//                    getCategoryWORK(String.valueOf(groupID),totalItemsCount);
+//
+//                }else if (flag.equals("Exercises")){
+//
+//                    getCategoryEX(String.valueOf(groupID),totalItemsCount);
+//
+//                }
+//
+//            }
+//        });
 
 
     }
@@ -162,11 +159,9 @@ public class ExercisesWorkoutFragment extends Fragment implements CallBack {
         params.put("coach_id",coachid);
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);
-        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.section_workout_URL, AppConstants.section_workout_TAG, GroupResults.class, params);
+        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.section_workout_URL, AppConstants.section_workout_TAG, workoutResults.class, params);
 
     }
-
-
 
     @Override
     public void onSubscribe(Disposable d) {
@@ -174,17 +169,23 @@ public class ExercisesWorkoutFragment extends Fragment implements CallBack {
     }
 
     public static void setItems(String groupID, Context context, String flag){
-        for (int i=0; i<exercise.getData().size(); i++){
-            if (groupID.equalsIgnoreCase(exercise.getData().get(i).getId().toString())){
-                workoutAndExsircisesAdapter = new WorkoutAndExsircisesAdapter(context,flag,exercise.getData().get(i).getCategory());
-                home_exir_work_recyclerview.setAdapter(workoutAndExsircisesAdapter);
+        if (flag.equalsIgnoreCase("Workout")){
+
+        } else {
+            for (int i=0; i<exercise.getData().size(); i++){
+                if (groupID.equalsIgnoreCase(exercise.getData().get(i).getId().toString())){
+                    workoutAndExsircisesAdapter = new WorkoutAndExsircisesAdapter(context,flag,exercise.getData().get(i).getCategory());
+                    home_exir_work_recyclerview.setAdapter(workoutAndExsircisesAdapter);
+                }
             }
         }
     }
 
     public void setGroupName(){
-        titleAdapter = new TitleAdapter(getContext(), flag, exercise.getData());
-        categoryRecyclerView.setAdapter(titleAdapter);
+        if (flag.equalsIgnoreCase("Exercises")){
+            titleAdapter = new TitleAdapter(getContext(), flag, exercise.getData());
+            categoryRecyclerView.setAdapter(titleAdapter);
+        }
     }
 
     @Override
@@ -192,7 +193,6 @@ public class ExercisesWorkoutFragment extends Fragment implements CallBack {
 
         switch (tag){
             case AppConstants.section_exercise_TAG:
-            case AppConstants.section_workout_TAG:
 
                 exercise = (GroupResults) result;
                 groupID = exercise.getData().get(0).getId();
@@ -202,21 +202,36 @@ public class ExercisesWorkoutFragment extends Fragment implements CallBack {
 
                 break;
 
+            case AppConstants.section_workout_TAG:
+                workoutResults = (workoutResults) result;
+                groupID = workoutResults.getData().get(0).getId();
+                setGroupName();
+                setItems(String.valueOf(groupID), getContext(), flag);
+
+//
+
+            break;
+
             case AppConstants.category_exercise_TAG:
+
+
+                workoutAndExsircisesAdapter.notifyDataSetChanged();
+
+                break;
+
             case AppConstants.category_Workout_TAG:
+
 
                 CategoryResults categoryResults = (CategoryResults) result;
 
-                for (int j=0; j<exercise.getData().size(); j++){
-                    if (exercise.getData().get(j).getId().equals(groupID)){
+                for (int j = 0; j< workoutResults.getData().size(); j++){
+                    if (workoutResults.getData().get(j).getId().equals(groupID)){
                         for (int i=0; i<categoryResults.getData().size(); i++){
                             exercise.getData().get(j).getCategory().add(categoryResults.getData().get(i));
                         }
-                        j = exercise.getData().size();
+                        j = workoutResults.getData().size();
                     }
                 }
-
-                workoutAndExsircisesAdapter.notifyDataSetChanged();
 
                 break;
         }

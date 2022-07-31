@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
@@ -43,21 +44,8 @@ public class SignUpActivity extends AppCompatActivity implements CallBack {
             @Override
             public void onClick(View v) {
 
-                try {
-                    register();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                register();
 
-                /*if (type.equals("coach")){
-                    startActivity(new Intent(SignUpActivity.this, ThankCoashActivity.class));
-                    finish();
-                } else if (type.equals("trainee")){
-                    Intent i =new Intent(SignUpActivity.this, OtpActivity.class);
-                    i.putExtra("email", email.getText().toString());
-                    startActivity(i);
-                    finish();
-                }*/
             }
         });
 
@@ -98,7 +86,7 @@ public class SignUpActivity extends AppCompatActivity implements CallBack {
         type = getIntent().getStringExtra("type");
     }
 
-    private void register() throws JSONException {
+    private void register() {
 
 
         JsonObject jsonObject=new JsonObject();
@@ -132,11 +120,8 @@ public class SignUpActivity extends AppCompatActivity implements CallBack {
     public void onNext(int tag, boolean isSuccess, Object result) {
 
         Register register=(Register) result;
-
         PreferencesUtils.setUserToken(register.getData().getToken());
-
         PreferencesUtils.setUser(register.getData().getUser(),SignUpActivity.this);
-
 
         startActivity(new Intent(SignUpActivity.this,MainActivity.class));
         finish();

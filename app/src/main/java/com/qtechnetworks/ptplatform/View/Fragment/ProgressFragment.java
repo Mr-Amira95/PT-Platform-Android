@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.qtechnetworks.ptplatform.Controller.adapters.ChestAndBicepsAdapter;
 import com.qtechnetworks.ptplatform.Controller.adapters.NutritionHistoryAdapter;
 import com.qtechnetworks.ptplatform.Controller.adapters.TitleAdapter;
 import com.qtechnetworks.ptplatform.Controller.adapters.WorkoutHistoryAdapter;

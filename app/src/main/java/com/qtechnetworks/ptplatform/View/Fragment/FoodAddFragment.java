@@ -65,8 +65,7 @@ public class FoodAddFragment extends Fragment implements CallBack {
         doneIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                addFood(foodid, "breakfast", weightnumber_edit.getText().toString());
+                addFood(foodid, flag, weightnumber_edit.getText().toString());
             }
         });
 
@@ -94,12 +93,43 @@ public class FoodAddFragment extends Fragment implements CallBack {
         Foodname_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> arg0, View view, int arg2, long arg3) {
+                int carb=food.getData().get(Foodname_spinner.getSelectedItemPosition()).getCarb();
+                int fat=food.getData().get(Foodname_spinner.getSelectedItemPosition()).getFat();
+                int protein=food.getData().get(Foodname_spinner.getSelectedItemPosition()).getProtein();
+                fat_text.setText(fat+"");
+                carb_text.setText(carb+"");
+                protine_text.setText(protein+"");
+                try {
+                    pieChart.clearChart();
+                    pieChart.addPieSlice(
+                            new PieModel(
+                                    "Carbs",
+                                    carb,
+                                    Color.parseColor("#1EB1FC")));
+                    pieChart.addPieSlice(
+                            new PieModel(
+                                    "Fat",
+                                    fat,
+                                    Color.parseColor("#FF0000")));
+                    pieChart.addPieSlice(
+                            new PieModel(
+                                    "Protein",
+                                    protein,
+                                    Color.parseColor("#8DC63F")));
+                    pieChart.addPieSlice(
+                            new PieModel(
+                                    "",
+                                    100-carb-fat-protein,
+                                    Color.parseColor("#FFFFFFFF")));
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                //pieChart.addPieSlice(new PieModel("Carbs", 4, R.color.blue));
+                //pieChart.addPieSlice(new PieModel("Fat", 16, R.color.red));
+                //pieChart.addPieSlice(new PieModel("Protein", 80, R.color.primary_color));
 
-                fat_text.setText(food.getData().get(Foodname_spinner.getSelectedItemPosition()).getFat().toString());
-                carb_text.setText(food.getData().get(Foodname_spinner.getSelectedItemPosition()).getCarb().toString());
-                protine_text.setText(food.getData().get(Foodname_spinner.getSelectedItemPosition()).getProtein().toString());
-
-
+                // To animate the pie chart
+                pieChart.startAnimation();
                 /*fat_text.setText(food.getData().get(position).getFat().toString());
                 carb_text.setText(food.getData().get(position).getCarb().toString());
                 protine_text.setText(food.getData().get(position).getProtein().toString());*/
@@ -131,28 +161,7 @@ public class FoodAddFragment extends Fragment implements CallBack {
 
         // Set the percentage of language used
         // Set the data and color to the pie chart
-        pieChart.addPieSlice(
-                new PieModel(
-                        "Carbs",
-                        4,
-                        R.color.blue));
-        pieChart.addPieSlice(
-                new PieModel(
-                        "Fat",
-                        16,
-                        R.color.red));
-        pieChart.addPieSlice(
-                new PieModel(
-                        "Protein",
-                        80,
-                        R.color.primary_color));
 
-        //pieChart.addPieSlice(new PieModel("Carbs", 4, R.color.blue));
-        //pieChart.addPieSlice(new PieModel("Fat", 16, R.color.red));
-        //pieChart.addPieSlice(new PieModel("Protein", 80, R.color.primary_color));
-
-        // To animate the pie chart
-        pieChart.startAnimation();
     }
 
     private void getFood(String skip){
@@ -169,7 +178,7 @@ public class FoodAddFragment extends Fragment implements CallBack {
     private void addFood(String foodid,String type,String number){
 
         HashMap<String ,Object> params=new HashMap<>();
-
+        foodid=food.getData().get(Foodname_spinner.getSelectedItemPosition()).getId().toString();
         params.put("food_id",foodid);
         params.put("type",type);
         params.put("number",number);
@@ -187,11 +196,11 @@ public class FoodAddFragment extends Fragment implements CallBack {
     @Override
     public void onNext(int tag, boolean isSuccess, Object result) {
 
-        food=(Food) result;
+
 
         switch (tag){
             case AppConstants.food_TAG:
-
+                food=(Food) result;
                 for (int i=0;food.getData().size()>i;i++){
                     arrayListfood.add(food.getData().get(i).getName().toString());
                 }
@@ -214,7 +223,7 @@ public class FoodAddFragment extends Fragment implements CallBack {
 
                 Toast.makeText(getContext(),general.getData().toString(),Toast.LENGTH_LONG).show();
 
-                setFragment(new FoodFragment());
+                getActivity().getSupportFragmentManager().popBackStack();
 
                 break;
 

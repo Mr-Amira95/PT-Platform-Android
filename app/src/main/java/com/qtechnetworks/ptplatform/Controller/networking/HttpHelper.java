@@ -2,6 +2,8 @@ package com.qtechnetworks.ptplatform.Controller.networking;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -42,9 +44,91 @@ public class HttpHelper {
         dialog.setCancelable(false);
         dialog.show();
 
-        RetrofitServices service = MyApplication.getInstance().getHttpMethods();
+        RetrofitServices service = MyApplication.getInstance().getHttpMethods(context);
 
         service.post(url, params)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ResponseBody>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                        callback.onSubscribe(d);
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull ResponseBody responseBody) {
+
+                        dialog.dismiss();
+
+                        try {
+
+                            result(clazz, responseBody.source().readUtf8().toString(), tag, true);
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        dialog.dismiss();
+
+                        try {
+//                            Toast.makeText(context,((HttpException) e).response().errorBody().source().readUtf8().toString().split(":")[4].replace("\\}}","").replace(")",""),Toast.LENGTH_LONG).show();
+                        }catch (Exception g){
+                            g.printStackTrace();
+                        }
+
+                        if (e instanceof SocketTimeoutException)
+                        {
+                            // "Connection Timeout";
+                            try {
+                                Toast.makeText(context,"Connection Timeout",Toast.LENGTH_LONG).show();
+                            }catch (Exception g){
+                                g.printStackTrace();
+                            }
+                        }
+                        else if (e instanceof IOException)
+                        {
+                            // "Timeout";
+                            try {
+                                Toast.makeText(context,"Timeout",Toast.LENGTH_LONG).show();
+                            }catch (Exception g){
+                                g.printStackTrace();
+                            }
+
+                        }
+                        else
+                        {
+
+                        }
+                        callback.onError(e);
+                        e.printStackTrace();
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                        dialog.dismiss();
+
+                        callback.onComplete();
+
+                    }
+                } );
+    }
+    public void PostRaw(Context context,final String url, final int tag, final Class clazz, final Map<String, Object> params) {
+
+        dialog=new ProgressDialog(context);
+        dialog.setMessage("Loading ...");
+        dialog.setCancelable(false);
+        dialog.show();
+
+        RetrofitServices service = MyApplication.getInstance().getHttpMethods(context);
+
+        service.postRaw(url, params)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ResponseBody>() {
@@ -117,7 +201,6 @@ public class HttpHelper {
                     }
                 } );
     }
-
     public void get(Context context,String url, final int tag, final Class clazz, HashMap<String, Object> map) {
 
         dialog=new ProgressDialog(context);
@@ -125,7 +208,7 @@ public class HttpHelper {
         dialog.setCancelable(false);
         dialog.show();
 
-        RetrofitServices service = MyApplication.getInstance().getHttpMethods();
+        RetrofitServices service = MyApplication.getInstance().getHttpMethods(context);
 
         service.get(url, map)
                 .subscribeOn(Schedulers.io())
@@ -197,7 +280,7 @@ public class HttpHelper {
         dialog.show();
 
 
-        RetrofitServices service = MyApplication.getInstance().getHttpMethods();
+        RetrofitServices service = MyApplication.getInstance().getHttpMethods(context);
 
         service.delete(url)
                 .subscribeOn(Schedulers.io())
@@ -278,7 +361,7 @@ public class HttpHelper {
         dialog.show();
 
 
-        RetrofitServices service = MyApplication.getInstance().getHttpMethods();
+        RetrofitServices service = MyApplication.getInstance().getHttpMethods(context);
 
         service.put(url,map)
                 .subscribeOn(Schedulers.io())
@@ -362,7 +445,7 @@ public class HttpHelper {
         dialog.setCancelable(false);
         dialog.show();
 
-        RetrofitServices service = MyApplication.getInstance().getHttpMethods();
+        RetrofitServices service = MyApplication.getInstance().getHttpMethods(context);
 
         service.uploadfile(url, params, file )
                 .subscribeOn(Schedulers.io())
@@ -445,7 +528,7 @@ public class HttpHelper {
         dialog.setCancelable(false);
         dialog.show();
 
-        RetrofitServices service = MyApplication.getInstance().getHttpMethods();
+        RetrofitServices service = MyApplication.getInstance().getHttpMethods(context);
 
         service.postLogin(url, params)
                 .subscribeOn(Schedulers.io())
@@ -464,7 +547,6 @@ public class HttpHelper {
                         dialog.dismiss();
 
                         try {
-
                             result(clazz, responseBody.source().readUtf8().toString(), tag, true);
 
                         } catch (IOException e) {
@@ -476,11 +558,20 @@ public class HttpHelper {
                     public void onError(@NonNull Throwable e) {
                         dialog.dismiss();
 
-                        try {
-                            Toast.makeText(context,((HttpException) e).response().errorBody().source().readUtf8().toString().split(":")[3],Toast.LENGTH_LONG).show();
-                        }catch (Exception g){
-                            g.printStackTrace();
-                        }
+
+                            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+                                        Toast.makeText(context,((HttpException) e).response().errorBody().source().readUtf8().toString().split(":")[4].split("\"")[1],Toast.LENGTH_LONG).show();
+                                    } catch (IOException ex) {
+                                        ex.printStackTrace();
+                                    }
+                                }
+                            });
+
+           //                 Toast.makeText(context,((HttpException) e).response().errorBody().source().readUtf8().toString().split(":")[3],Toast.LENGTH_LONG).show();
+
 
                         if (e instanceof SocketTimeoutException) {
                             // "Connection Timeout";
@@ -526,7 +617,7 @@ public class HttpHelper {
 
     private void result(Class clazz, String str, int tag, boolean isSuccess) {
         if (callback != null) {
-            Log.d("Result API", str);
+            Log.d("Result API "+tag, str);
             callback.onNext(tag, isSuccess, MyApplication.getInstance().getGson().fromJson(str, clazz));
         }
     }

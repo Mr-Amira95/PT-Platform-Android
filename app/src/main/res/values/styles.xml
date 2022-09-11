@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CalenderViewCustom" parent="Theme.AppCompat">
+        <item name="colorAccent">@color/white</item>
+        <item name="colorPrimary">@color/primary_color</item>
+        <item name="android:textColorPrimary">@color/white</item>
+    </style>
+
+    <style name="mySpinnerItemStyle" parent="@android:style/Widget.Holo.DropDownItem.Spinner">
+        <item name="android:textSize">@dimen/_11sdp</item>
+        <item name="android:textColor">@color/white</item>
+
+</style>
+</resources>

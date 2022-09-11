@@ -37,7 +37,7 @@ public class PersonalTrainingUnsubscribedFragment extends Fragment {
         layoutManagerhorizantalleader.setOrientation(LinearLayoutManager.HORIZONTAL);
         packageRecyclerview.setLayoutManager(layoutManagerhorizantalleader);
 
-        packageAdapter = new PackageAdapter(getContext());
-        packageRecyclerview.setAdapter(packageAdapter);
+       // packageAdapter = new PackageAdapter(getContext());
+     //   packageRecyclerview.setAdapter(packageAdapter);
     }
 }

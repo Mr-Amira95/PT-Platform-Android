@@ -25,14 +25,16 @@ android {
     buildFeatures {
         viewBinding = true
     }
-
+//d3395b23-8f23-4730-a9ed-c94737060a7a
     buildTypes {
         debug {
             buildConfigField "String", "API_URL", "\"https://pt.qtechnetworks.co/public/api/v1/\""
+            buildConfigField "String", "ONESIGNAL_APP_ID", "\"d3395b23-8f23-4730-a9ed-c94737060a7a\""
         }
         release {
             minifyEnabled false
             multiDexEnabled true
+            buildConfigField "String", "ONESIGNAL_APP_ID", "\"d3395b23-8f23-4730-a9ed-c94737060a7a\""
             buildConfigField "String", "API_URL", "\"https://pt.qtechnetworks.co/public/api/v1/\""
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -122,11 +124,20 @@ dependencies {
     implementation 'com.github.blackfizz:eazegraph:1.2.5l@aar'
     implementation 'com.nineoldandroids:library:2.4.0'
 
+    //one signal
+    implementation 'com.onesignal:OneSignal:[4.0.0, 4.99.99]'
 
+    implementation 'com.google.android.gms:play-services-auth:20.1.0'
+
+
+    //facebook login
+
+    implementation 'com.facebook.android:facebook-android-sdk:latest.release'
     ///video player
     //implementation 'com.github.HamidrezaAmz:MagicalExoPlayer:1.0.16'
 
     implementation 'com.google.android.exoplayer:exoplayer:2.18.1'
-
+    implementation 'com.google.android.gms:play-services-fitness:21.1.0'
+    implementation 'com.google.android.gms:play-services-auth:20.3.0'
 
 }

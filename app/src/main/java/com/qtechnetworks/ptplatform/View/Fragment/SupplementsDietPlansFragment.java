@@ -82,7 +82,7 @@ public class SupplementsDietPlansFragment extends Fragment implements CallBack {
         HashMap<String ,Object> params=new HashMap<>();
 
         params.put("skip",skip);
-        params.put("coach_id",coachid);
+     //   params.put("coach_id",coachid);
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);
         MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.recipes_URL, AppConstants.recipes_TAG, Recipes.class, params);

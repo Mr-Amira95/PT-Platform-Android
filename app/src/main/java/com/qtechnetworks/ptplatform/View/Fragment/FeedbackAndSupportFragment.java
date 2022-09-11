@@ -59,17 +59,11 @@ public class FeedbackAndSupportFragment extends Fragment implements CallBack {
         send_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if (flag.equalsIgnoreCase("Feedback")){
-
                     setFeedback(name_edittext.getText().toString(),message_edittext.getText().toString());
-
                 }else if (flag.equalsIgnoreCase("Technical Support")){
-
                     setSupport(name_edittext.getText().toString(),message_edittext.getText().toString());
-
                 }
-
             }
         });
 

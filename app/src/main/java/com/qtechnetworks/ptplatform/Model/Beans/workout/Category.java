@@ -15,7 +15,7 @@ public class Category {
     private String title;
     @SerializedName("exercises")
     @Expose
-    private List<Exercise> exercises;
+    private List<Exercise__1> exercises;
 
     public Integer getId() {
         return id;
@@ -33,11 +33,11 @@ public class Category {
         this.title = title;
     }
 
-    public List<Exercise> getExercises() {
+    public List<Exercise__1> getExercises() {
         return exercises;
     }
 
-    public void setExercises(List<Exercise> exercises) {
+    public void setExercises(List<Exercise__1> exercises) {
         this.exercises = exercises;
     }
 

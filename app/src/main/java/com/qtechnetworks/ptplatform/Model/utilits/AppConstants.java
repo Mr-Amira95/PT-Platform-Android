@@ -13,7 +13,7 @@ public class AppConstants {
     public static final int NOTIFICATION_ID_BIG_IMAGE = 101;
     public static final String PUSH_NOTIFICATION = "pushNotification";
     public static String version= String.valueOf(BuildConfig.VERSION_CODE);
-
+    public static final String ONESIGNAL_APP_ID = "ea046acc-4916-4bb3-8ae6-c7fe2bafaf4d";
     public static final String login_URL = "auth/login";
     public static final int login_TAG = 0;
 
@@ -91,6 +91,46 @@ public class AppConstants {
 
     public static final String personalMeals_URL = "users/training/recipe";
     public static final int personalMeals_TAG = 25;
+    public static final String deviceToken_URL = "users/device-token";
+    public static final int deviceToken_TAG = 26;
+     public static final String SHOW_WORKOUT_VIDS = "users/training/workout/";
+    public static final int SHOW_WORKOUT_VIDS_TAG = 27;
+
+    public static final String HEALTHS_URL = "healths";
+    public static final int HEALTHS_TAG = 28;
+
+    public static final String BODYMAESUREMENTS_URL = "body-measurements";
+    public static final int BODYMAESUREMENTS_TAG = 29;
+
+    public static final String COACH_CALENDAR_URL = "coach-calendar";
+    public static final int COACH_CALENDAR_TAG = 30;
+    public static final String COACH_CALENDAR_RESERVATION_URL = "coach-calendar/reservation";
+    public static final int COACH_CALENDAR_RESERVATION_TAG = 31;
+
+    public static final String COACH_QUESTIONS_URL = "coach-questions";
+    public static final int COACH_QUESTIONS_TAG = 32;
+    public static final String COACH_QUESTIONS_ANSWER_URL = "coach-questions";
+    public static final int COACH_QUESTIONS_ANSWER_TAG = 33;
+    public static final String PACKAGES_URL = "packages";
+    public static final int PACKAGES_TAG =34 ;
+    public static final String CHALLENGES_URL = "challenges";
+    public static final int CHALLENGES_TAG = 35;
+    public static final String CHALLENGES_VIDEOS_URL = "challenges/videos";
+    public static final int CHALLENGES_VIDEOS_TAG =36 ;
+    public static final String CHALLENGES_COMPLETE_URL = "challenges/complete";
+    public static final int CHALLENGES_COMPLETE_TAG =37 ;
+    public static final String UPDATE_AVATAR_URL = "users/update/avatar";
+    public static final int UPDATE_AVATAR_TAG =38 ;
+    public static final String GET_RESERVATIONS_VIDEO_CHAT_URL = "coach-calendar/user";
+    public static final int GET_RESERVATIONS_VIDEO_CHAT_TAG =39 ;
+    public static final String GET_PERSONALIZED_URL = "users/training/personal";
+    public static final int GET_PERSONALIZED_TAG =40 ;
+    public static final String CANCEL_RESERVATION_URL = "coach-calendar/delete-reservation";
+    public static final int CANCEL_RESERVATION_TAG =41 ;
+    public static final String UPDATE_EMAIL_URL = "users/update/email";
+    public static final int UPDATE_EMAIL_TAG =42 ;
+    public static final String UPDATE_NAME_URL = "users/update/name";
+    public static final int UPDATE_NAME_TAG =43 ;
 
     public static void Trace(String tag, String msg) {
 

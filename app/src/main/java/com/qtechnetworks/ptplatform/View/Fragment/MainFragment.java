@@ -1,5 +1,7 @@
 package com.qtechnetworks.ptplatform.View.Fragment;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -38,7 +41,7 @@ public class MainFragment extends Fragment implements CallBack {
     private SliderAdapter sliderAdapter;
 
     private LinearLayout exercisesLayout, workoutsLayout, nutritionLayout, progressLayout,
-    personalLayout, challengesLayout, favouriteLayout, calenderLayout, todayWorkout, contactUsLayout,
+    personalLayout, challengesLayout, favouriteLayout, calenderLayout, todayWorkoutLayout, contactUsLayout,
     shopLayout, videoChatLayout, liveChatLayout, historyLayout, kycLayout;
 
     CoachesDialog coachesDialog;
@@ -46,9 +49,15 @@ public class MainFragment extends Fragment implements CallBack {
     private boolean Subscribed = true;
 
     TextView nametext;
-
+    String flag="";
     RoundedImageView cate1_image;
+    public MainFragment(String flag){
+        this.flag=flag;
 
+    }
+    public MainFragment(){
+
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,7 +119,7 @@ public class MainFragment extends Fragment implements CallBack {
         calenderLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //setFragment( new LogFragment("Today’s Workouts"),PreferencesUtils.getCoach(getContext()).getId().toString());
+                setFragment( new CalendarFragment(),PreferencesUtils.getCoach(getContext()).getId().toString());
             }
         });
 
@@ -158,6 +167,48 @@ public class MainFragment extends Fragment implements CallBack {
             @Override
             public void onClick(View view) {
                 setFragment(new HistoryFragment());
+            }
+        });
+        kycLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setFragment( new AddTraineeDetailsFragment());
+            }
+        });
+        todayWorkoutLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setFragment( new LogFragment("Today’s Workouts"),PreferencesUtils.getCoach(getContext()).getId().toString());
+            }
+        });
+        videoChatLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                setFragment( new VideoChatFragment());
+//                Intent intent = new Intent(Intent.ACTION_VIEW,
+//                        Uri.parse("zoomus://join?action=join&confno=99999999999&pwd=ugnuiGOEIfgewigfweifcvewiofcewifcew"));
+//               try{
+//                startActivity(intent);}
+//                catch(Exception e) {
+//                    Toast.makeText(getContext(), "Can't start Video chat", Toast.LENGTH_SHORT).show();
+//                       e.printStackTrace();
+//                   }
+//                if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+//                    try {
+//                        startActivity(intent);
+//                    } catch(Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                } else {
+//                    Toast.makeText(getContext(), "Can't start Video chat", Toast.LENGTH_SHORT).show();
+//                }
+            }
+        });
+        contactUsLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setFragment(new FollowUsFragment());
             }
         });
     }
@@ -212,7 +263,7 @@ public class MainFragment extends Fragment implements CallBack {
         shopLayout = view.findViewById(R.id.shop_layout);
         videoChatLayout = view.findViewById(R.id.video_chat_layout);
         liveChatLayout = view.findViewById(R.id.live_chat_layout);
-        todayWorkout = view.findViewById(R.id.today_layout);
+        todayWorkoutLayout = view.findViewById(R.id.today_layout);
         historyLayout = view.findViewById(R.id.history_layout);
         kycLayout = view.findViewById(R.id.kyc_layout);
 
@@ -222,7 +273,7 @@ public class MainFragment extends Fragment implements CallBack {
 
         nametext= view.findViewById(R.id.name);
 
-        nametext.setText(PreferencesUtils.getCoach(getContext()).getFirstName() + " " + PreferencesUtils.getCoach(getContext()).getLastName());
+        nametext.setText(PreferencesUtils.getCoach(getContext()).getLastName());
 
         try{
             Glide.with(getContext()).load(PreferencesUtils.getCoach(getContext()).getAvatar()).placeholder(R.drawable.logo).into(cate1_image);
@@ -263,6 +314,11 @@ public class MainFragment extends Fragment implements CallBack {
         }catch (Exception e){
             setFragmentWithoutBack(new MainFragment());
             e.printStackTrace();
+        }
+        if(flag.equals("shop")){
+            setFragment(new ShopFragment());
+            flag="";
+
         }
 
     }

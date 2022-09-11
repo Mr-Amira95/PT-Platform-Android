@@ -40,7 +40,7 @@ public class HomeFragment extends Fragment implements CallBack {
     private CircleIndicator sliderCircleIndicator;
     private SliderAdapter sliderAdapter;
 
-    LinearLayout followUs, contactUs, news, coaches;
+    LinearLayout followUs, contactUs, news, coaches,nutritions,progress;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -84,7 +84,18 @@ public class HomeFragment extends Fragment implements CallBack {
                 setFragment(new ChooseCoachFragment());
             }
         });
-
+        progress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setFragment( new ProgressFragment());
+            }
+        });
+        nutritions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setFragment( new NutritionFragment());
+            }
+        });
     }
 
     private void setFragment(Fragment fragment) {
@@ -114,7 +125,8 @@ public class HomeFragment extends Fragment implements CallBack {
         coaches = view.findViewById(R.id.category_two_layout);
         news = view.findViewById(R.id.category_three_layout);
         contactUs = view.findViewById(R.id.category_four_layout);
-
+        nutritions=view.findViewById(R.id.category_five_layout);
+        progress=view.findViewById(R.id.category_six_layout);
     }
 
     private void getbanner(){

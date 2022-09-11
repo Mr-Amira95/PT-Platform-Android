@@ -1,5 +1,7 @@
 package com.qtechnetworks.ptplatform.View.Activity;
 
+import static com.qtechnetworks.ptplatform.Model.utilits.AppConstants.ONESIGNAL_APP_ID;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.JsonObject;
+import com.onesignal.OneSignal;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.RegisterAndLogin.Register;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
@@ -40,7 +43,11 @@ public class SignInActivity extends AppCompatActivity implements CallBack {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+        OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
 
+        // OneSignal Initialization
+        OneSignal.initWithContext(this);
+        OneSignal.setAppId(ONESIGNAL_APP_ID);
         initial();
         clicks();
 
@@ -128,7 +135,7 @@ public class SignInActivity extends AppCompatActivity implements CallBack {
 
         JsonObject jsonObject=new JsonObject();
 
-        jsonObject.addProperty("player_id", "device_player_id");//You can parameterize these values by passing them
+        jsonObject.addProperty("player_id",OneSignal.getDeviceState().getUserId() );//You can parameterize these values by passing them
         jsonObject.addProperty("platform", "android");
         jsonObject.addProperty("timezone", "Asin/Amman");
         jsonObject.addProperty("app_version", "1.0");
@@ -160,7 +167,7 @@ public class SignInActivity extends AppCompatActivity implements CallBack {
 
         PreferencesUtils.setUser(register.getData().getUser(),SignInActivity.this);
 
-
+        PreferencesUtils.setPlayerId(OneSignal.getDeviceState().getUserId());
         startActivity(new Intent(SignInActivity.this,MainActivity.class));
         finish();
 

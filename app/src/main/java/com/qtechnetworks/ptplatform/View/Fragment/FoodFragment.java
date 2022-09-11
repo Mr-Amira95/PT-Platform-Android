@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,10 @@ import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
 import io.reactivex.disposables.Disposable;
@@ -80,35 +85,35 @@ public class FoodFragment extends Fragment implements CallBack {
         addBreakfast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setFragment(R.id.home_frame, new FoodAddFragment("Breakfast"));
+                setFragment(R.id.home_frame, new FoodAddFragment("breakfast"));
             }
         });
 
         addLunch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setFragment(R.id.home_frame, new FoodAddFragment("Lunch"));
+                setFragment(R.id.home_frame, new FoodAddFragment("lunch"));
             }
         });
 
         addDinner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setFragment(R.id.home_frame, new FoodAddFragment("Dinner"));
+                setFragment(R.id.home_frame, new FoodAddFragment("dinner"));
             }
         });
 
         addSnack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setFragment(R.id.home_frame, new FoodAddFragment("Snack"));
+                setFragment(R.id.home_frame, new FoodAddFragment("snack"));
             }
         });
 
         addSupplement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setFragment(R.id.home_frame, new FoodAddFragment("Supplement"));
+                setFragment(R.id.home_frame, new FoodAddFragment("supplement"));
             }
         });
 
@@ -137,15 +142,15 @@ public class FoodFragment extends Fragment implements CallBack {
         addSnack = view.findViewById(R.id.add_snacks);
         addSupplement = view.findViewById(R.id.add_supplements);
 
-        lunchRecyclerview= view.findViewById(R.id.lunch_recyclerview);
-        breakfastRecyclerview=view.findViewById(R.id.breakfast_recyclerview);
-        dinnerRecyclerview=view.findViewById(R.id.dinner_recyclerview);
-        snacksRecyclerview=view.findViewById(R.id.snacks_recyclerview);
+        lunchRecyclerview = view.findViewById(R.id.lunch_recyclerview);
+        breakfastRecyclerview = view.findViewById(R.id.breakfast_recyclerview);
+        dinnerRecyclerview = view.findViewById(R.id.dinner_recyclerview);
+        snacksRecyclerview = view.findViewById(R.id.snacks_recyclerview);
 
-        target_value=view.findViewById(R.id.target_value);
-        food_value=view.findViewById(R.id.food_value);
-        exercise_value=view.findViewById(R.id.exercise_value);
-        total_val=view.findViewById(R.id.total_val);
+        target_value = view.findViewById(R.id.target_value);
+        food_value = view.findViewById(R.id.food_value);
+        exercise_value = view.findViewById(R.id.exercise_value);
+        total_val = view.findViewById(R.id.total_val);
 
         LinearLayoutManager layoutManagerhorizantalleader = new LinearLayoutManager(getContext());
         layoutManagerhorizantalleader.setOrientation(LinearLayoutManager.VERTICAL);
@@ -165,8 +170,6 @@ public class FoodFragment extends Fragment implements CallBack {
 
 
 
-        getFood("2022-5-25");
-
 
     }
 
@@ -181,6 +184,14 @@ public class FoodFragment extends Fragment implements CallBack {
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String currentDate = sdf.format(new Date());
+        Log.d("current Date",currentDate);
+        getFood(currentDate);
+    }
 
     @Override
     public void onSubscribe(Disposable d) {

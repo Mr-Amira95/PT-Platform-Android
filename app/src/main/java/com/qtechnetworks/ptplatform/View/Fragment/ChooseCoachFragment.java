@@ -42,7 +42,6 @@ public class ChooseCoachFragment extends Fragment implements CallBack {
 
     private void initials(View view) {
         coachRecyclerview = view.findViewById(R.id.coach_recyclerview);
-
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),2);
         gridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         coachRecyclerview.setLayoutManager(gridLayoutManager);

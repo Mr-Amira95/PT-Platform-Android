@@ -14,14 +14,11 @@ public class ThankCoashActivity extends AppCompatActivity {
 
     public static int SPLASH_TIME_OUT=4000;
     LinearLayout thankYouLayout;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thank_coash);
-
         initial();
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -29,10 +26,8 @@ public class ThankCoashActivity extends AppCompatActivity {
                 i.putExtra("type","coach");
                 startActivity(i);
                 finish();
-
             }
         },SPLASH_TIME_OUT);
-
         thankYouLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,10 +38,7 @@ public class ThankCoashActivity extends AppCompatActivity {
             }
         });
     }
-
     public void initial(){
         thankYouLayout = findViewById(R.id.thank_you_layout);
     }
-
-
 }

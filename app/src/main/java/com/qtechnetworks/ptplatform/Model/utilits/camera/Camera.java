@@ -2,10 +2,12 @@ package com.qtechnetworks.ptplatform.Model.utilits.camera;
 
 import  static android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,6 +21,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 
@@ -38,21 +41,21 @@ public class Camera {
     public static final int REQUEST_GALLERY_CODE = 200, REQUEST_CAMERA = 400;
     public static final int READ_REQUEST_CODE = 300;
 
-/*
+
     public static void showGallery(final Activity activity) {
         LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        View dialogView = inflater.inflate(R.layout.gallery, null);
+        View dialogView = inflater.inflate(R.layout.dialog_gallery, null);
         builder.setView(dialogView);
-     */
-/*   dialogView.findViewById(R.id.Camera).setOnClickListener(new View.OnClickListener() {
+
+  dialogView.findViewById(R.id.Camera).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 captureImage(activity);
                 desDialog.cancel();
             }
-        });*//*
+        });
 
 
         dialogView.findViewById(R.id.gallery).setOnClickListener(new View.OnClickListener() {
@@ -68,9 +71,39 @@ public class Camera {
         desDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         desDialog.show();
     }
-*/
 
 
+    public static void showGalleryFromFragment(final Activity activity, final Fragment fragment) {
+
+
+
+
+        LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        View dialogView = inflater.inflate(R.layout.dialog_gallery, null);
+        builder.setView(dialogView);
+
+        dialogView.findViewById(R.id.Camera).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                captureImage(activity);
+                desDialog.cancel();
+            }
+        });
+
+        dialogView.findViewById(R.id.gallery).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                activity.startActivityForResult(i, GALLERY_REQUEST);
+                desDialog.cancel();
+            }
+        });
+
+        desDialog = builder.create();
+        desDialog.show();
+
+    }
 
 //    public static String convertUrlToBase64(final String image_url) {
 //        String path = "";

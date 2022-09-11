@@ -27,9 +27,9 @@ import java.util.List;
 public class ChestAndBicepsWorkoutAdapter extends RecyclerView.Adapter<ChestAndBicepsWorkoutAdapter.ViewHolder>  {
 
     private Context context;
-    List<Exercise> category;
+    List<Exercise__1> category;
 
-    public ChestAndBicepsWorkoutAdapter(Context context, List<Exercise> category) {
+    public ChestAndBicepsWorkoutAdapter(Context context, List<Exercise__1> category) {
         this.context = context;
         this.category=category;
     }
@@ -45,20 +45,20 @@ public class ChestAndBicepsWorkoutAdapter extends RecyclerView.Adapter<ChestAndB
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        Exercise current = category.get(position);
+        Exercise__1 current = category.get(position);
 
         try{
-            Glide.with(context).load(current.getExercise().getIcon()).placeholder(R.drawable.logo).into(holder.img);
+            Glide.with(context).load(current.getIcon()).placeholder(R.drawable.logo).into(holder.img);
         }catch (Exception e){
             e.printStackTrace();
         }
 
-        holder.title.setText(current.getExercise().getTitle().toString());
+        holder.title.setText(current.getTitle().toString());
 
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setFragment( new WorkoutSingleFragment(), current.getExercise().getTitle().toString(),current.getExercise().getDescription().toString(),current.getExercise().getIcon().toString(),current.getId().toString());
+                setFragment( new WorkoutSingleFragment(), current.getTitle().toString(),current.getDescription().toString(),current.getIcon().toString(),current.getId().toString());
             }
         });
     }

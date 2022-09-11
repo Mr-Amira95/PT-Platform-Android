@@ -42,6 +42,7 @@
         android:backgroundTint="@color/dark_grey"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:paddingVertical="@dimen/_5sdp"
+        android:inputType="number"
         android:paddingHorizontal="@dimen/_10sdp"
         app:layout_constraintTop_toBottomOf="@id/sub_title"
         android:layout_marginTop="@dimen/_50sdp"/>

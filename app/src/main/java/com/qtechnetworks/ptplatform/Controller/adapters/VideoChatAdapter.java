@@ -1,0 +1,146 @@
+package com.qtechnetworks.ptplatform.Controller.adapters;
+
+import static com.qtechnetworks.ptplatform.View.Fragment.VideoChatFragment.sessions;
+import static com.qtechnetworks.ptplatform.View.Fragment.VideoChatFragment.videoChatAdapter;
+
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
+import com.qtechnetworks.ptplatform.Model.Beans.Challenge.Challenge;
+import com.qtechnetworks.ptplatform.Model.Beans.General;
+import com.qtechnetworks.ptplatform.Model.Beans.VideoChat.Datum;
+import com.qtechnetworks.ptplatform.Model.Beans.VideoChat.VideoChat;
+import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
+import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
+import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
+import com.qtechnetworks.ptplatform.R;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import io.reactivex.disposables.Disposable;
+
+public class VideoChatAdapter extends RecyclerView.Adapter<VideoChatAdapter.ViewHolder>  implements CallBack {
+
+    private Context context;
+    private List<Datum> datum;
+    private String flag;
+
+    private int cposition;
+    public VideoChatAdapter(Context context, List<Datum> datum) {
+        this.datum = datum;
+        this.context=context;
+    }
+
+    @NonNull
+    @Override
+    public VideoChatAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_video_chat_item,parent,false);
+
+        return new VideoChatAdapter.ViewHolder(view);
+    }
+
+    private void cancelSession(int id){
+        HashMap<String ,Object> params=new HashMap<>();
+        params.put("id",id);
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().Post(context, AppConstants.CANCEL_RESERVATION_URL, AppConstants.CANCEL_RESERVATION_TAG, General.class, params);
+
+    }
+    @Override
+    public void onBindViewHolder(@NonNull VideoChatAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
+
+        Datum current= datum.get(position);
+
+        holder.dateTime.setText(current.getDate()+"\n"+current.getTime());
+        holder.joinSessionBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse(current.getCoachTimeReservation().getZoom().getData().getStartUrl()));
+                try{
+                    context.startActivity(intent);}
+                catch(Exception e) {
+                    Toast.makeText(view.getContext(), "Can't start Video chat", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+            }
+        });
+        holder.cancelSessionBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cposition=position;
+                cancelSession(current.getId());
+            }
+        });
+        //textViewList.add(holder.title);
+
+    }
+
+    private void setFragment(int frameLayout, Fragment fragment, AppCompatActivity activity) {
+        FragmentTransaction fragmentTransaction= activity.getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(frameLayout, fragment).commit();
+    }
+
+    @Override
+    public int getItemCount() {
+        return datum.size();
+    }
+
+    @Override
+    public void onSubscribe(Disposable d) {
+
+    }
+
+    @Override
+    public void onNext(int tag, boolean isSuccess, Object result) {
+
+        if(tag==AppConstants.CANCEL_RESERVATION_TAG){
+            if(isSuccess){
+                sessions.getData().remove(cposition);
+                videoChatAdapter.notifyDataSetChanged();
+                Toast.makeText(context, "Reservation Canceled", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    @Override
+    public void onError(Throwable e) {
+
+    }
+
+    @Override
+    public void onComplete() {
+
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+
+        public TextView dateTime;
+        public Button joinSessionBtn,cancelSessionBtn;
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            joinSessionBtn=itemView.findViewById(R.id.join_session_btn);
+            dateTime=itemView.findViewById(R.id.session_date_time);
+            cancelSessionBtn=itemView.findViewById(R.id.cancel_session_btn);
+
+        }
+    }
+
+}

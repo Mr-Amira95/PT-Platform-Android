@@ -53,7 +53,7 @@ public class CoachesAdapter extends RecyclerView.Adapter<CoachesAdapter.ViewHold
 
         Datum current = data.get(position);
 
-        holder.coachName.setText(current.getFirstName() + " " + current.getLastName());
+        holder.coachName.setText(current.getLastName());
 
         holder.coachName.setOnClickListener(new View.OnClickListener() {
             @Override

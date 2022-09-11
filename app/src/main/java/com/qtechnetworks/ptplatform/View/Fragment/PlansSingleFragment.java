@@ -24,12 +24,23 @@ public class PlansSingleFragment extends Fragment {
     IngredientsAdapter ingredientsAdapter;
     RecyclerView ingredientsRecyclerview;
     Datum current;
+    com.qtechnetworks.ptplatform.Model.Beans.MealsPersonal.Datum mealsPersonal;
 
     ImageView image_rec;
     TextView title_text,decrirtion_text,time_text,name_text;
 
     public PlansSingleFragment(Datum current) {
         this.current=current;
+    }
+    public PlansSingleFragment(com.qtechnetworks.ptplatform.Model.Beans.MealsPersonal.Datum mealsPersonal) {
+        current=new Datum();
+        current.setTitle(mealsPersonal.getTitle());
+        current.setTime(mealsPersonal.getTime());
+        current.setName(mealsPersonal.getName());
+        current.setDescription(mealsPersonal.getDescription());
+        current.setImage(mealsPersonal.getImage());
+        current.setIngredients(mealsPersonal.getIngredients());
+        this.mealsPersonal=mealsPersonal;
     }
 
 

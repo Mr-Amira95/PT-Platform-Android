@@ -1,5 +1,6 @@
 package com.qtechnetworks.ptplatform.View.Fragment;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -37,6 +38,8 @@ import com.qtechnetworks.ptplatform.Model.Beans.videoExercises.VideoExercises;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.R;
+import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
+import com.qtechnetworks.ptplatform.View.Activity.MediaViewActivity;
 import com.qtechnetworks.ptplatform.View.Dialogs.AddLogDialog;
 
 import java.io.IOException;
@@ -53,7 +56,7 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
     VideoItemAdapter videoAdapter;
     public PlayerView video_view;
     public static ExoPlayer player;
-
+    ImageView expFullScreen;
     public static TextView desc,add_to_favourite,add_to_workout,add_to_log;
 
 
@@ -131,6 +134,7 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
     private void initial(View view) {
         videoRecyclerview= view.findViewById(R.id.video_recyclerView);
 
+        expFullScreen=view.findViewById(R.id.fullscreen);
         video_view=view.findViewById(R.id.video_view);
         desc=view.findViewById(R.id.desc);
 
@@ -149,6 +153,7 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
         }else if(flag.equalsIgnoreCase("log")){
 
             playinitial(videolink);
+
 
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
                 desc.setText(Html.fromHtml(descrip,Html.FROM_HTML_MODE_LEGACY));
@@ -199,8 +204,16 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
         video_view.setPlayer(player);
         video_view.setUseController(true);
 
-        MediaItem mediaItem = MediaItem.fromUri(videourl);
 
+        player.setRepeatMode(player.REPEAT_MODE_ONE);
+        MediaItem mediaItem = MediaItem.fromUri(videourl);
+        expFullScreen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), MediaViewActivity.class).putExtra("url",videourl));
+
+            }
+        });
 //        player.addMediaItems();
         //player.setRepeatMode(Player.REPEAT_MODE_ALL);
 
@@ -268,7 +281,7 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
         params.put("skip","0");
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);
-        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.workout_videos_URL, AppConstants.workout_videos_TAG, VideoWorkout.class, params);
+        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.SHOW_WORKOUT_VIDS+Exid+"/show", AppConstants.SHOW_WORKOUT_VIDS_TAG, VideoWorkout.class, params);
 
     }
 
@@ -369,38 +382,40 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
 
                 break;
 
-            case AppConstants.workout_videos_TAG:
+            case AppConstants.SHOW_WORKOUT_VIDS_TAG:
 
                 VideoWorkout videoWorkout=(VideoWorkout) result;
-
-                if (videoWorkout.getData().get(0).getIsFavourite()){
-                    add_to_favourite.setText("Remove from favourite");
-                }
-                if (videoWorkout.getData().get(0).getIsTodayLog()){
-                    add_to_log.setText("Remove from log");
-                }
-
-                if (videoWorkout.getData().get(0).getIsWorkout()){
-                    add_to_workout.setText("Remove from Workout");
-                }
-
-                if (videoWorkout.getData().size() > 0){
-                    try {
-                        video_view.setDefaultArtwork(drawableFromUrl(videoWorkout.getData().get(0).getImage()));
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                if(!videoWorkout.getData().isEmpty()) {
+                    if (videoWorkout.getData().get(0).getIsFavourite()) {
+                        add_to_favourite.setText("Remove from favourite");
+                    }
+                    if (videoWorkout.getData().get(0).getIsTodayLog()) {
+                        add_to_log.setText("Remove from log");
                     }
 
-                    desc.setText(Html.fromHtml(videoWorkout.getData().get(0).getDescription()));
+                    if (videoWorkout.getData().get(0).getIsWorkout()) {
+                        add_to_workout.setText("Remove from Workout");
+                    }
 
-                    playinitial(videoWorkout.getData().get(0).getVideo());
+                    if (videoWorkout.getData().size() > 0) {
+                        try {
+                            video_view.setDefaultArtwork(drawableFromUrl(videoWorkout.getData().get(0).getImage()));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
 
-                    VideoItemworkoutAdapter videoAdapter = new VideoItemworkoutAdapter(getContext(),videoWorkout.getData(),ExercisesSingleFragment.this);
-                    videoRecyclerview.setAdapter(videoAdapter);
+                        desc.setText(Html.fromHtml(videoWorkout.getData().get(0).getDescription()));
 
-                    VideoID=videoWorkout.getData().get(0).getId().toString();
+                        playinitial(videoWorkout.getData().get(0).getVideo());
+
+                        VideoItemworkoutAdapter videoAdapter = new VideoItemworkoutAdapter(getContext(), videoWorkout.getData(), ExercisesSingleFragment.this);
+                        videoRecyclerview.setAdapter(videoAdapter);
+
+                        VideoID = videoWorkout.getData().get(0).getId().toString();
+                    }
                 }
                 break;
+
 
         }
 

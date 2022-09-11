@@ -20,6 +20,8 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.qtechnetworks.ptplatform.R;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -198,8 +200,7 @@ public class UtilisMethods {
             modifiedData[i] = captilizeFirstLetter(data.get(i).toString());
         }//end for.
 
-        ArrayAdapter<String> gameKindArray = new ArrayAdapter<>(activity, android.R.layout.simple_spinner_item, modifiedData);
-
+        ArrayAdapter<String> gameKindArray = new ArrayAdapter<>(activity, R.layout.spinner_selected_item, modifiedData);
 
         gameKindArray.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(gameKindArray);

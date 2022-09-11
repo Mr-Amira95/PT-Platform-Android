@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,8 @@ import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 import io.reactivex.disposables.Disposable;
@@ -72,7 +75,10 @@ public class LogFragment extends Fragment implements CallBack {
             getFavorite(coachid);
 
         }else if (flag.equalsIgnoreCase("Log")){
-            getLog(coachid,"2022-05-24");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            String currentDate = sdf.format(new Date());
+            Log.d("current Date",currentDate);
+            getLog(coachid,currentDate);
         }else if (flag.equalsIgnoreCase("Today’s Workouts")){
             getWorkout(coachid);
         }

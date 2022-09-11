@@ -107,8 +107,8 @@ public class WorkoutAndExsircisesAdapter extends RecyclerView.Adapter<WorkoutAnd
         params.put("category_id", categoryID);
         params.put("skip", skip);
 
-        MyApplication.getInstance().getHttpHelper().setCallback(this);
-        MyApplication.getInstance().getHttpHelper().get(context, AppConstants.exercise_URL, AppConstants.exercise_TAG, ExercisesResults.class, params);
+        MyApplication.getInstance().getBackgroundHttpHelper().setCallback(this);
+        MyApplication.getInstance().getBackgroundHttpHelper().get(context, AppConstants.exercise_URL, AppConstants.exercise_TAG, ExercisesResults.class, params);
     }
 
 
@@ -131,18 +131,18 @@ public class WorkoutAndExsircisesAdapter extends RecyclerView.Adapter<WorkoutAnd
     public void onNext(int tag, boolean isSuccess, Object result) {
 
         ExercisesResults exercisesResults = (ExercisesResults) result;
-
-        for (int j=0; j<data.size(); j++){
-            if (data.get(j).getId().equals(selectedCategory)){
-                for (int i=0; i<exercisesResults.getData().size(); i++){
-                    data.get(0).getExercises().add(exercisesResults.getData().get(i));
+        if(!exercisesResults.getData().isEmpty()) {
+            for (int j = 0; j < data.size(); j++) {
+                if (data.get(j).getId().equals(selectedCategory)) {
+                    for (int i = 0; i < exercisesResults.getData().size(); i++) {
+                        data.get(0).getExercises().add(exercisesResults.getData().get(i));
+                    }
+                    j = data.size();
                 }
-                j = data.size();
             }
+
+            adapter.notifyDataSetChanged();
         }
-
-        adapter.notifyDataSetChanged();
-
     }
 
     @Override

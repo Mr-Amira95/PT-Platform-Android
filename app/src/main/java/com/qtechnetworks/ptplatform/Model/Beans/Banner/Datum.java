@@ -14,6 +14,9 @@ public class Datum {
     @SerializedName("text")
     @Expose
     private String text;
+    @SerializedName("url")
+    @Expose
+    private String url;
 
     public Integer getId() {
         return id;
@@ -37,6 +40,13 @@ public class Datum {
 
     public void setText(String text) {
         this.text = text;
+    }
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String text) {
+        this.url = url;
     }
 
 }

@@ -13,6 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Shop"
+        android:visibility="gone"
         android:textColor="@color/primary_color"
         android:textSize="@dimen/_20sdp"
         android:fontFamily="@font/aeonikbold"
@@ -27,6 +28,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginHorizontal="@dimen/_20sdp"
+        android:visibility="gone"
         android:layout_marginTop="@dimen/_25sdp"
         app:layout_constraintTop_toBottomOf="@id/title"
         app:layout_constraintStart_toStartOf="parent">
@@ -53,12 +55,13 @@
     </LinearLayout>
 
     <View
+        android:visibility="gone"
         android:id="@+id/line"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_1sdp"
         android:background="@color/txt_grey"
         android:layout_marginHorizontal="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_10sdp"
         app:layout_constraintTop_toBottomOf="@id/cart_total_layout"/>
 
     <LinearLayout
@@ -67,7 +70,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginHorizontal="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_15sdp" android:visibility="gone"
+
         app:layout_constraintTop_toBottomOf="@id/line">
 
         <TextView
@@ -82,6 +86,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Xxx"
+
             android:textSize="@dimen/_12sdp"
             android:textColor="@color/white"
             android:gravity="end"/>
@@ -93,6 +98,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Payment Method"
+        android:visibility="gone"
         android:textColor="@color/txt_grey"
         app:layout_constraintTop_toBottomOf="@id/subtotal_layout"
         app:layout_constraintStart_toStartOf="parent"
@@ -104,6 +110,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:weightSum="3"
+        android:visibility="gone"
         android:orientation="horizontal"
         android:layout_margin="@dimen/_20sdp"
         app:layout_constraintTop_toBottomOf="@id/payment_method_title">
@@ -174,6 +181,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Card Number"
+        android:visibility="gone"
         app:hintTextColor="@color/txt_grey"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_20sdp"
@@ -196,6 +204,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Cardholder Name"
+        android:visibility="gone"
         app:hintTextColor="@color/txt_grey"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_20sdp"
@@ -220,6 +229,7 @@
         android:orientation="horizontal"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_20sdp"
+        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/cardholder_name"
         android:textColorHint="@color/color_hint">
 
@@ -229,6 +239,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:hint="Month"
+            android:visibility="gone"
             app:hintTextColor="@color/txt_grey"
             android:layout_marginEnd="@dimen/_10sdp"
             android:textColorHint="@color/color_hint">
@@ -250,6 +261,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:hint="Year"
+            android:visibility="gone"
             app:hintTextColor="@color/txt_grey"
             android:layout_marginStart="@dimen/_10sdp"
             android:textColorHint="@color/color_hint">
@@ -272,6 +284,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="CVV"
+        android:visibility="gone"
         app:hintTextColor="@color/txt_grey"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_20sdp"
@@ -289,17 +302,28 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <WebView
+        android:id="@+id/payment_webview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toBottomOf="@id/cvv"
+
+        tools:layout_editor_absoluteX="0dp" />
+
     <Button
         android:id="@+id/confirm_purchase_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_margin="@dimen/_20sdp"
+        android:layout_marginBottom="24dp"
         android:background="@drawable/button_background"
-        android:text="Confirm Purchase"
-        android:textSize="@dimen/_18sdp"
         android:fontFamily="@font/aeonikbold"
+        android:text="Confirm Purchase"
+        android:visibility="gone"
+        android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textAllCaps="false"/>
+        android:textSize="@dimen/_18sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="25dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

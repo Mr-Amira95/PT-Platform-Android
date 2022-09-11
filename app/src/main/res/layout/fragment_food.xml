@@ -24,63 +24,38 @@
             android:fontFamily="@font/aeonikbold"
             android:layout_margin="@dimen/_20sdp"/>
 
+
         <LinearLayout
+            android:id="@+id/choose_date"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:orientation="horizontal"
+            android:background="@drawable/background_radius_10"
+            android:backgroundTint="@color/primary_color"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:layout_marginHorizontal="@dimen/_20sdp">
 
             <TextView
-                android:id="@+id/four_days_before"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="3/10"
-                android:textSize="@dimen/_12sdp"
-                android:textColor="@color/white"
-                android:gravity="center"/>
-
-            <TextView
-                android:id="@+id/three_days_before"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="4/10"
-                android:textSize="@dimen/_12sdp"
-                android:textColor="@color/white"
-                android:gravity="center"/>
-
-            <TextView
-                android:id="@+id/two_days_before"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="5/10"
-                android:textSize="@dimen/_12sdp"
-                android:textColor="@color/white"
-                android:gravity="center"/>
-
-            <TextView
-                android:id="@+id/one_days_before"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="6/10"
-                android:textSize="@dimen/_12sdp"
-                android:textColor="@color/white"
-                android:gravity="center"/>
-
-            <TextView
                 android:id="@+id/today"
-                android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_width="150dp"
+                android:background="@drawable/background_radius_10"
+                android:backgroundTint="@color/primary_color"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+
                 android:text="Today"
                 android:textSize="@dimen/_12sdp"
                 android:textColor="@color/white"
                 android:gravity="center"
-                android:background="@drawable/background_radius_10"
-                android:backgroundTint="@color/primary_color"/>
+          />
+            <ImageView
+                android:visibility="gone"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_edit_icon"
+                android:layout_gravity="center"
+                app:tint="@color/white" />
 
         </LinearLayout>
 
@@ -284,7 +259,8 @@
         android:paddingHorizontal="@dimen/_20sdp"
         android:paddingVertical="@dimen/_5sdp"
         android:background="#505050"
-        android:text="Add Food"
+        android:text="Add Breakfast"
+
         android:textColor="@color/primary_color"
         android:textSize="@dimen/_12sdp"
         android:drawablePadding="@dimen/_10sdp"
@@ -295,6 +271,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+            android:visibility="gone"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_20sdp">
 
@@ -321,6 +298,7 @@
             android:id="@+id/lunch_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:text="Carbs 1g, Fat 2g, Protein 22g"
             android:textColor="@color/primary_color"
             android:textSize="@dimen/_10sdp"

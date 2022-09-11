@@ -67,6 +67,7 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.ViewHolder> 
                         }
                     }
                 }
+
             }
         });
     }

@@ -15,8 +15,10 @@ import android.widget.TextView;
 import com.qtechnetworks.ptplatform.Controller.adapters.CoachAdapter;
 import com.qtechnetworks.ptplatform.Controller.adapters.PersonalMealsHomeAdapter;
 import com.qtechnetworks.ptplatform.Controller.adapters.PersonalWorkoutHomeAdapter;
+import com.qtechnetworks.ptplatform.Controller.adapters.PersonalizedItemAdapter;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.MealsPersonal.MealsPersonal;
+import com.qtechnetworks.ptplatform.Model.Beans.Personalized.Personalized;
 import com.qtechnetworks.ptplatform.Model.Beans.WorkoutPersonal.WorkoutPersonal;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
@@ -35,7 +37,7 @@ public class PersonalTrainingSubscribedFragment extends Fragment implements Call
     boolean haveContent = true;
 
     private RecyclerView assignedWorkoutsRecyclerview, assignedMealsRecyclerview, videosRecyclerview, imagesRecyclerview, notesRecyclerview;
-    private CoachAdapter adapter;
+    private PersonalizedItemAdapter videosAdapter,imagesAdapter,notesAdapter;
 
     int tag;
 
@@ -114,16 +116,22 @@ public class PersonalTrainingSubscribedFragment extends Fragment implements Call
         linearLayoutManager4.setOrientation(LinearLayoutManager.HORIZONTAL);
         notesRecyclerview.setLayoutManager(linearLayoutManager4);
 
-        adapter = new CoachAdapter(getContext());
-
-        videosRecyclerview.setAdapter(adapter);
-        imagesRecyclerview.setAdapter(adapter);
-        notesRecyclerview.setAdapter(adapter);
 
         getworkout();
+        getPersonalized();
 
     }
+    private void getPersonalized(){
 
+        HashMap<String ,Object> params=new HashMap<>();
+
+        params.put("coach_id", PreferencesUtils.getCoach(getContext()).getId());
+        params.put("skip","0");
+
+        MyApplication.getInstance().getBackgroundHttpHelper().setCallback(this);
+        MyApplication.getInstance().getBackgroundHttpHelper().get(getContext(), AppConstants.GET_PERSONALIZED_URL, AppConstants.GET_PERSONALIZED_TAG, Personalized.class, params);
+
+    }
     private void getworkout(){
 
         HashMap<String ,Object> params=new HashMap<>();
@@ -181,7 +189,18 @@ public class PersonalTrainingSubscribedFragment extends Fragment implements Call
                 assignedMealsRecyclerview.setAdapter(personalMealsHomeAdapter);
 
                 break;
+            case AppConstants.GET_PERSONALIZED_TAG:
 
+                Personalized personalized=(Personalized) result;
+
+                 videosAdapter=new PersonalizedItemAdapter(getContext(),personalized.getData(),PersonalizedItemAdapter.VIDEO_PERSONAL_TAG);
+                imagesAdapter=new PersonalizedItemAdapter(getContext(),personalized.getData(),PersonalizedItemAdapter.IMAGE_PERSONAL_TAG);
+                 notesAdapter=new PersonalizedItemAdapter(getContext(),personalized.getData(),PersonalizedItemAdapter.NOTE_PERSONAL_TAG);
+
+                videosRecyclerview.setAdapter(videosAdapter);
+                imagesRecyclerview.setAdapter(imagesAdapter);
+                notesRecyclerview.setAdapter(notesAdapter);
+                break;
 
 
         }

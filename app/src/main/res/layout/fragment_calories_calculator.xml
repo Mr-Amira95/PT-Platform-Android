@@ -1,91 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".View.Fragment.CaloriesCalculatorFragment"
+    android:background="@color/backapp"
     android:orientation="vertical"
-    android:background="@color/backapp">
+    tools:context=".View.Fragment.CaloriesCalculatorFragment">
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_20sdp"
+        android:fontFamily="@font/aeonikbold"
         android:text="Nutrition"
         android:textColor="@color/primary_color"
         android:textSize="@dimen/_20sdp"
-        android:fontFamily="@font/aeonikbold"
-        android:layout_margin="@dimen/_20sdp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/sub_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
         android:text="Calorie Calculator"
         android:textColor="@color/white"
         android:textSize="@dimen/_20sdp"
         android:textStyle="bold"
-        android:layout_marginTop="@dimen/_10sdp"
-        app:layout_constraintTop_toBottomOf="@id/title"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title" />
 
     <EditText
         android:id="@+id/age_edittext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:hint="Age"
-        android:textColorHint="@color/txt_grey"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_50sdp"
         android:background="@drawable/background_radius_10"
         android:backgroundTint="@color/dark_grey"
-        android:layout_marginHorizontal="@dimen/_20sdp"
-        android:paddingVertical="@dimen/_5sdp"
+        android:hint="Age"
+        android:inputType="number"
         android:paddingHorizontal="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_50sdp"
-        app:layout_constraintTop_toBottomOf="@id/sub_title"/>
+        android:paddingVertical="@dimen/_5sdp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/txt_grey"
+        app:layout_constraintTop_toBottomOf="@id/sub_title" />
 
     <TextView
         android:id="@+id/gender_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
         android:text="Gender"
         android:textColor="@color/white"
         android:textSize="@dimen/_12sdp"
-        app:layout_constraintTop_toBottomOf="@id/age_edittext"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_10sdp"/>
+        app:layout_constraintTop_toBottomOf="@id/age_edittext" />
 
     <RadioGroup
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_20sdp"
         android:orientation="horizontal"
-        app:layout_constraintStart_toEndOf="@id/gender_title"
-        app:layout_constraintTop_toTopOf="@id/gender_title"
         app:layout_constraintBottom_toBottomOf="@id/gender_title"
-        android:layout_marginStart="@dimen/_20sdp">
+        app:layout_constraintStart_toEndOf="@id/gender_title"
+        app:layout_constraintTop_toTopOf="@id/gender_title">
 
         <RadioButton
             android:id="@+id/male"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Male"
-            android:textColor="@color/white"
+            android:buttonTint="@color/primary_color"
             android:checked="true"
-            android:buttonTint="@color/primary_color"/>
+            android:text="Male"
+            android:textColor="@color/white" />
 
         <RadioButton
             android:id="@+id/female"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Female"
-            android:textColor="@color/white"
             android:layout_marginStart="@dimen/_20sdp"
-            android:buttonTint="@color/primary_color"/>
+            android:buttonTint="@color/primary_color"
+            android:text="Female"
+            android:textColor="@color/white" />
 
     </RadioGroup>
 
@@ -93,46 +94,69 @@
         android:id="@+id/height_edittext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:hint="Height"
-        android:textColorHint="@color/txt_grey"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
         android:background="@drawable/background_radius_10"
         android:backgroundTint="@color/dark_grey"
-        android:layout_marginHorizontal="@dimen/_20sdp"
-        android:paddingVertical="@dimen/_5sdp"
+        android:hint="Height"
+        android:inputType="number"
         android:paddingHorizontal="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        app:layout_constraintTop_toBottomOf="@id/gender_title"/>
+        android:paddingVertical="@dimen/_5sdp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/txt_grey"
+        app:layout_constraintTop_toBottomOf="@id/gender_title" />
 
     <EditText
         android:id="@+id/weight_edittext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:hint="Weight"
-        android:textColorHint="@color/txt_grey"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
         android:background="@drawable/background_radius_10"
         android:backgroundTint="@color/dark_grey"
-        android:layout_marginHorizontal="@dimen/_20sdp"
-        android:paddingVertical="@dimen/_5sdp"
+        android:hint="Weight"
+        android:inputType="number"
         android:paddingHorizontal="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        app:layout_constraintTop_toBottomOf="@id/height_edittext"/>
+        android:paddingVertical="@dimen/_5sdp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/txt_grey"
+        app:layout_constraintTop_toBottomOf="@id/height_edittext" />
+    <Spinner
+        android:id="@+id/activity_spinner"
+        style="@style/mySpinnerItemStyle"
+        android:backgroundTint="@color/white"
+        android:foregroundTint="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginStart="20dp"
+        android:gravity="center"
+        android:minHeight="48dp"
+        android:paddingVertical="10dp"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_14sdp"
+        app:layout_constraintTop_toBottomOf="@id/weight_edittext" />
+    />
 
     <EditText
         android:id="@+id/activity_edittext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:hint="Activity"
-        android:textColorHint="@color/txt_grey"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
         android:background="@drawable/background_radius_10"
         android:backgroundTint="@color/dark_grey"
-        android:layout_marginHorizontal="@dimen/_20sdp"
-        android:paddingVertical="@dimen/_5sdp"
+        android:hint="Activity"
         android:paddingHorizontal="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_10sdp"
-        app:layout_constraintTop_toBottomOf="@id/weight_edittext"/>
+        android:paddingVertical="@dimen/_5sdp"
+        android:textColor="@color/white"
+        android:textColorHint="@color/txt_grey"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/weight_edittext" />
+
 
     <Button
         android:id="@+id/calculate_btn"
@@ -142,6 +166,21 @@
         android:background="@drawable/button_background"
         android:text="Calculate"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/activity_spinner" />
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_20sdp"
+        android:fontFamily="@font/aeonikbold"
+        android:text=""
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/calculate_btn"
+        android:textColor="@color/primary_color"
+        android:textSize="@dimen/_20sdp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

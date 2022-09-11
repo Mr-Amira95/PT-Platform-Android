@@ -19,117 +19,18 @@
         android:layout_marginTop="@dimen/_50sdp"
         android:layout_marginHorizontal="@dimen/_20sdp"
         app:layout_constraintTop_toTopOf="parent"/>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/age"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Age"
-        app:hintTextColor="@color/txt_grey"
-        android:layout_marginHorizontal="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_20sdp"
+    <ScrollView
         app:layout_constraintTop_toBottomOf="@id/header"
-        android:textColorHint="@color/color_hint">
-
-        <AutoCompleteTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="none"
-            android:textColor="@color/white"
-            android:textCursorDrawable="@color/white"
-            android:backgroundTint="@color/white"
-            android:textColorHint="@color/color_hint" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/weight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:id="@+id/questionsLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Weight"
-        app:hintTextColor="@color/txt_grey"
-        android:layout_marginHorizontal="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        app:layout_constraintTop_toBottomOf="@id/age"
-        android:textColorHint="@color/color_hint">
+        android:layout_margin="10dp"
+        android:orientation="vertical">
 
-        <AutoCompleteTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="none"
-            android:textColor="@color/white"
-            android:textCursorDrawable="@color/white"
-            android:backgroundTint="@color/white"
-            android:textColorHint="@color/color_hint"  />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/diseases"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Do you suffer from any diseases?"
-        app:hintTextColor="@color/txt_grey"
-        android:layout_marginHorizontal="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        app:layout_constraintTop_toBottomOf="@id/weight"
-        android:textColorHint="@color/color_hint">
-
-        <AutoCompleteTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="none"
-            android:textColor="@color/white"
-            android:textCursorDrawable="@color/white"
-            android:backgroundTint="@color/white"
-            android:textColorHint="@color/color_hint" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/medication"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Are you on any medication?"
-        app:hintTextColor="@color/txt_grey"
-        android:layout_marginHorizontal="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        app:layout_constraintTop_toBottomOf="@id/diseases"
-        android:textColorHint="@color/color_hint">
-
-        <AutoCompleteTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="none"
-            android:textColor="@color/white"
-            android:textCursorDrawable="@color/white"
-            android:backgroundTint="@color/white"
-            android:textColorHint="@color/color_hint"  />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/mass"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Body Mass Index"
-        app:hintTextColor="@color/txt_grey"
-        android:layout_marginHorizontal="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        app:layout_constraintTop_toBottomOf="@id/medication"
-        android:textColorHint="@color/color_hint">
-
-        <AutoCompleteTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="none"
-            android:textColor="@color/white"
-            android:textCursorDrawable="@color/white"
-            android:backgroundTint="@color/white"
-            android:textColorHint="@color/color_hint" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
+    </LinearLayout></ScrollView>
     <TextView
         android:id="@+id/done_txt"
         android:layout_width="wrap_content"

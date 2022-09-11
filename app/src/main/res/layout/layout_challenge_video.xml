@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/challenge_video_layout">
+<FrameLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="10dp">
+    <com.makeramen.roundedimageview.RoundedImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/video_image"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_175sdp"
+
+        android:scaleType="centerCrop"
+        app:riv_corner_radius="@dimen/_15sdp"
+        android:src="@drawable/follwous"/>
+    <CheckBox
+
+        android:id="@+id/complete_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        android:layout_margin="5dp"
+        android:background="@drawable/button_rounded_background"
+        />
+</FrameLayout>
+    <TextView
+        android:id="@+id/video_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:gravity="center"
+        android:text="PT Platform"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_12sdp"
+        android:textStyle="bold"/>
+
+</LinearLayout>

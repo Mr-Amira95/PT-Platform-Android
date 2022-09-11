@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.JsonObject;
+import com.onesignal.OneSignal;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.RegisterAndLogin.Register;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
@@ -91,7 +92,7 @@ public class SignUpActivity extends AppCompatActivity implements CallBack {
 
         JsonObject jsonObject=new JsonObject();
 
-        jsonObject.addProperty("player_id", "device_player_id");//You can parameterize these values by passing them
+        jsonObject.addProperty("player_id", OneSignal.getDeviceState().getUserId() );//You can parameterize these values by passing them
         jsonObject.addProperty("platform", "android");
         jsonObject.addProperty("timezone", "Asin/Amman");
         jsonObject.addProperty("app_version", "1.0");
@@ -119,13 +120,19 @@ public class SignUpActivity extends AppCompatActivity implements CallBack {
     @Override
     public void onNext(int tag, boolean isSuccess, Object result) {
 
-        Register register=(Register) result;
-        PreferencesUtils.setUserToken(register.getData().getToken());
-        PreferencesUtils.setUser(register.getData().getUser(),SignUpActivity.this);
+        if(tag==AppConstants.signup_TAG) {
+            if(isSuccess) {
+                Register register = (Register) result;
+                PreferencesUtils.setUserToken(register.getData().getToken());
+                PreferencesUtils.setUser(register.getData().getUser(), SignUpActivity.this);
 
-        startActivity(new Intent(SignUpActivity.this,MainActivity.class));
-        finish();
-
+                startActivity(new Intent(SignUpActivity.this, MainActivity.class));
+                finish();
+            }else{
+                Register register = (Register) result;
+                Toast.makeText(this, "Please check inputs", Toast.LENGTH_SHORT).show();
+            }
+        }
 
     }
 

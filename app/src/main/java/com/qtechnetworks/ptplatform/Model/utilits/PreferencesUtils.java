@@ -124,6 +124,13 @@ public class PreferencesUtils {
         return PreferencesUtils.getString(PrefKeys.userPhone, "");
 
     }
+    public static String getPlayerId() {
+        return PreferencesUtils.getString(PrefKeys.playerId, "");
+
+    }
+    public static void setPlayerId(String playerId) {
+        PreferencesUtils.set(PrefKeys.playerId, playerId);
+    }
 
     public static void setLocale(String lang, Activity activity) {
         Locale myLocale = new Locale(lang);

@@ -1,5 +1,6 @@
 package com.qtechnetworks.ptplatform.View.Fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,11 +9,13 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
+import com.qtechnetworks.ptplatform.Model.Beans.Target.Target;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.R;
@@ -59,6 +62,7 @@ public class SetTargetCaloriesFragment extends Fragment implements CallBack {
     private void initials(View view) {
         save = view.findViewById(R.id.save_btn);
         valueCal_text=view.findViewById(R.id.valueCal_text);
+
     }
 
     private void setTarget(String value){
@@ -68,11 +72,23 @@ public class SetTargetCaloriesFragment extends Fragment implements CallBack {
         params.put("key","target_calorie");
         params.put("value",value);
 
-        //MyApplication.getInstance().getHttpHelper().setCallback(this);
-        //MyApplication.getInstance().getHttpHelper().Post(getContext(), AppConstants.target_URL, AppConstants.target_TAG, Target.class, params);
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().Post(getContext(), AppConstants.target_URL, AppConstants.target_TAG, Target.class, params);
 
     }
-
+    private void closeKeyboard()
+    {
+        View view = getActivity().getCurrentFocus();
+        if (view != null) {
+            InputMethodManager manager
+                    = (InputMethodManager)
+                    getActivity().getSystemService(
+                            Context.INPUT_METHOD_SERVICE);
+            manager
+                    .hideSoftInputFromWindow(
+                            view.getWindowToken(), 0);
+        }
+    }
     private void setFragment(Fragment fragment) {
 
         Bundle args = new Bundle();
@@ -89,10 +105,10 @@ public class SetTargetCaloriesFragment extends Fragment implements CallBack {
 
     @Override
     public void onNext(int tag, boolean isSuccess, Object result) {
-/*
+
         Target target=(Target) result;
         setFragment(new NutritionFragment());
-*/
+
     }
 
     @Override

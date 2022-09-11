@@ -1,6 +1,7 @@
 package com.qtechnetworks.ptplatform.Controller.networking;
 
 
+import com.fasterxml.jackson.annotation.JsonRawValue;
 import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
@@ -38,6 +39,10 @@ public interface RetrofitServices {
     @FormUrlEncoded
     @POST
     Observable<ResponseBody> post(@Url String url, @FieldMap Map<String, Object> params);
+
+    @Headers({"Accept: application/json"})
+    @POST
+    Observable<ResponseBody> postRaw(@Url String url, @Body Map<String, Object> params);
 
     @Headers("Accept: application/json")
     @POST

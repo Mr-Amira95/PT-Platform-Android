@@ -48,7 +48,7 @@ public class SuccessFragment extends Fragment {
         if (flag.equals("Calendar")){
             title.setText("Request Sent!");
             msg.setText("Your request is awaiting your PT’s approval. We’ll notify you soon! ");
-        } else if (flag.equals("Checkout")){
+        } else if (flag.equals("Checkout")) {
             title.setText("Purchase Successful!");
             msg.setText("Enjoy the benefits of your subscription, and start the journey of change now");
         }

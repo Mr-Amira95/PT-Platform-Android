@@ -191,49 +191,54 @@ public class ExercisesWorkoutFragment extends Fragment implements CallBack {
     @Override
     public void onNext(int tag, boolean isSuccess, Object result) {
 
-        switch (tag){
-            case AppConstants.section_exercise_TAG:
+        if(isSuccess) {
+            switch (tag) {
+                case AppConstants.section_exercise_TAG:
 
-                exercise = (GroupResults) result;
-                groupID = exercise.getData().get(0).getId();
+                    exercise = (GroupResults) result;
+                    if(!exercise.getData().isEmpty()) {
+                        groupID = exercise.getData().get(0).getId();
+                    }
 
-                setGroupName();
-                setItems(String.valueOf(groupID), getContext(), flag);
+                    setGroupName();
+                    setItems(String.valueOf(groupID), getContext(), flag);
 
-                break;
+                    break;
 
-            case AppConstants.section_workout_TAG:
-                workoutResults = (workoutResults) result;
-                groupID = workoutResults.getData().get(0).getId();
-                setGroupName();
-                setItems(String.valueOf(groupID), getContext(), flag);
-
+                case AppConstants.section_workout_TAG:
+                    workoutResults = (workoutResults) result;
+                    if(!workoutResults.getData().isEmpty()) {
+                        groupID = workoutResults.getData().get(0).getId();
+                        setGroupName();
+                        setItems(String.valueOf(groupID), getContext(), flag);
+                    }
 //
 
-            break;
+                    break;
 
-            case AppConstants.category_exercise_TAG:
-
-
-                workoutAndExsircisesAdapter.notifyDataSetChanged();
-
-                break;
-
-            case AppConstants.category_Workout_TAG:
+                case AppConstants.category_exercise_TAG:
 
 
-                CategoryResults categoryResults = (CategoryResults) result;
+                        workoutAndExsircisesAdapter.notifyDataSetChanged();
 
-                for (int j = 0; j< workoutResults.getData().size(); j++){
-                    if (workoutResults.getData().get(j).getId().equals(groupID)){
-                        for (int i=0; i<categoryResults.getData().size(); i++){
-                            exercise.getData().get(j).getCategory().add(categoryResults.getData().get(i));
+                    break;
+
+                case AppConstants.category_Workout_TAG:
+
+
+                    CategoryResults categoryResults = (CategoryResults) result;
+                    if(!categoryResults.getData().isEmpty()) {
+                        for (int j = 0; j < workoutResults.getData().size(); j++) {
+                            if (workoutResults.getData().get(j).getId().equals(groupID)) {
+                                for (int i = 0; i < categoryResults.getData().size(); i++) {
+                                    exercise.getData().get(j).getCategory().add(categoryResults.getData().get(i));
+                                }
+                                j = workoutResults.getData().size();
+                            }
                         }
-                        j = workoutResults.getData().size();
                     }
-                }
-
-                break;
+                    break;
+            }
         }
 
 

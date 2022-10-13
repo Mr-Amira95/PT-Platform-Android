@@ -25,6 +25,9 @@ public class SubscriptionPackage  {
         @SerializedName("permissions")
         @Expose
         private Permissions permissions;
+        @SerializedName("style")
+        @Expose
+        private String style;
 
         public Integer getId() {
             return id;
@@ -40,6 +43,14 @@ public class SubscriptionPackage  {
 
         public void setName(String name) {
             this.name = name;
+        }
+
+        public String getStyle() {
+            return style;
+        }
+
+        public void setStyle(String style) {
+            this.style = style;
         }
 
         public String getDescription() {

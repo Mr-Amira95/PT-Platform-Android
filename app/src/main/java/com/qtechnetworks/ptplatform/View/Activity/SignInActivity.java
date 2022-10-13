@@ -6,14 +6,22 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
 import com.google.gson.JsonObject;
 import com.onesignal.OneSignal;
+import com.qtechnetworks.ptplatform.BuildConfig;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.RegisterAndLogin.Register;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
@@ -32,47 +40,46 @@ import okhttp3.RequestBody;
 
 public class SignInActivity extends AppCompatActivity implements CallBack {
 
-    TextView signup_textview, forgotPassword;
-
+    TextView signup_textview, forgotPassword, orTxt;
     EditText email_login_edittext,password_login_edittext;
-
     Button googlelogin_button,facebooklogin_button,login_button;
-    String type;
+
+    GoogleSignInOptions gso;
+    GoogleSignInClient mGoogleSignInClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+
         OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
 
         // OneSignal Initialization
         OneSignal.initWithContext(this);
         OneSignal.setAppId(ONESIGNAL_APP_ID);
+
         initial();
         clicks();
 
-        if (type.equalsIgnoreCase("coach")){
-            facebooklogin_button.setVisibility(View.GONE);
-            googlelogin_button.setVisibility(View.GONE);
-        }
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail().requestIdToken("778836019800-ae9t16kd468u9niin041l9j64a3cdqmo.apps.googleusercontent.com").build();
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
 
     }
 
     private void clicks() {
+
         signup_textview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(SignInActivity.this, SignUpActivity.class);
-                i.putExtra("type", type);
-                i.putExtra("flag", "SignUp");
-                startActivity(i);
-
-
-//                    Intent i = new Intent(SignInActivity.this, EmailActivity.class);
-//                    i.putExtra("type", type);
-//                    i.putExtra("flag", "SignUp");
-//                    startActivity(i);
+                if (PreferencesUtils.getUserType().equalsIgnoreCase("coach")){
+                    startActivity(new Intent(SignInActivity.this, EmailActivity.class).putExtra("flag", "signUp"));
+                } else if (PreferencesUtils.getUserType().equalsIgnoreCase("trainee")){
+                    startActivity(new Intent(SignInActivity.this, SignUpActivity.class));
+                }
             }
         });
 
@@ -81,11 +88,14 @@ public class SignInActivity extends AppCompatActivity implements CallBack {
             @Override
             public void onClick(View v) {
 
-                try {
+                if (email_login_edittext.getText().toString().isEmpty() && password_login_edittext.getText().toString().isEmpty())
+                    Toast.makeText(SignInActivity.this, "Please fill all field", Toast.LENGTH_SHORT).show();
+                else if (email_login_edittext.getText().toString().isEmpty())
+                    Toast.makeText(SignInActivity.this, "Please fill email field", Toast.LENGTH_SHORT).show();
+                else if (password_login_edittext.getText().toString().isEmpty())
+                    Toast.makeText(SignInActivity.this, "Please fill password field", Toast.LENGTH_SHORT).show();
+                else
                     checkLogin();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
 
             }
         });
@@ -93,34 +103,57 @@ public class SignInActivity extends AppCompatActivity implements CallBack {
         forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(SignInActivity.this, EmailActivity.class);
-                i.putExtra("type", type);
-                i.putExtra("flag", "ForgotPassword");
-                startActivity(i);
+                startActivity(new Intent(SignInActivity.this,EmailActivity.class).putExtra("flag", "forgotPassword"));
             }
         });
 
         googlelogin_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(SignInActivity.this, "Later", Toast.LENGTH_LONG).show();
+
+                GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(SignInActivity.this);
+                if (account != null){
+                    socialLogin("google", account.getId(), account.getIdToken(), account.getDisplayName(), account.getEmail());
+                } else {
+                    googleSignIn();
+                }
             }
         });
 
         facebooklogin_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(SignInActivity.this, "Later", Toast.LENGTH_LONG).show();
+                //socialLogin("facebook");
             }
         });
 
     }
 
-    private void initial(){
+    private void socialLogin(String provider, String providerId, String providerToken, String name, String email) {
 
-        Bundle bundle = getIntent().getExtras();
-        type = bundle.getString("type");
+        JsonObject jsonObject=new JsonObject();
 
+        jsonObject.addProperty("player_id",OneSignal.getDeviceState().getUserId()); //You can parameterize these values by passing them
+        jsonObject.addProperty("platform", "android");
+        jsonObject.addProperty("timezone", "Asian/Amman");
+        jsonObject.addProperty("app_version", BuildConfig.VERSION_CODE);
+
+        JsonObject params = new JsonObject();
+        params.addProperty("email", email);
+        params.addProperty("name", name);
+        params.addProperty("provider", provider);
+        params.addProperty("provider_id", providerId);
+        params.addProperty("provider_token", providerToken);
+        params.add("device",jsonObject);
+
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().postLogin(this, AppConstants.SOCIAL_LOGIN_URL, AppConstants.SOCIAL_LOGIN_TAG, Register.class, params);
+
+    }
+
+    private void initial() {
+
+        orTxt=findViewById(R.id.or_txt);
         signup_textview=findViewById(R.id.signup_textview);
         googlelogin_button=findViewById(R.id.googlelogin_button);
         facebooklogin_button=findViewById(R.id.facebooklogin_button);
@@ -128,28 +161,41 @@ public class SignInActivity extends AppCompatActivity implements CallBack {
         email_login_edittext=findViewById(R.id.email_login_edittext);
         password_login_edittext=findViewById(R.id.password_login_edittext);
         forgotPassword = findViewById(R.id.forgot_password);
+
+        if (PreferencesUtils.getUserType().equalsIgnoreCase("coach")) {
+            orTxt.setVisibility(View.GONE);
+            googlelogin_button.setVisibility(View.GONE);
+            facebooklogin_button.setVisibility(View.GONE);
+        } else if (PreferencesUtils.getUserType().equalsIgnoreCase("trainee")) {
+            orTxt.setVisibility(View.VISIBLE);
+            googlelogin_button.setVisibility(View.VISIBLE);
+            facebooklogin_button.setVisibility(View.VISIBLE);
+        }
     }
 
 
-    private void checkLogin() throws JSONException {
+    private void checkLogin() {
 
         JsonObject jsonObject=new JsonObject();
 
-        jsonObject.addProperty("player_id",OneSignal.getDeviceState().getUserId() );//You can parameterize these values by passing them
+        jsonObject.addProperty("player_id",OneSignal.getDeviceState().getUserId()); //You can parameterize these values by passing them
         jsonObject.addProperty("platform", "android");
-        jsonObject.addProperty("timezone", "Asin/Amman");
-        jsonObject.addProperty("app_version", "1.0");
-
+        jsonObject.addProperty("timezone", "Asian/Amman");
+        jsonObject.addProperty("app_version", BuildConfig.VERSION_CODE);
 
         JsonObject params = new JsonObject();
         params.addProperty("email", email_login_edittext.getText().toString());
         params.addProperty("password", password_login_edittext.getText().toString());
         params.add("device",jsonObject);
 
-
         MyApplication.getInstance().getHttpHelper().setCallback(this);
         MyApplication.getInstance().getHttpHelper().postLogin(this, AppConstants.login_URL, AppConstants.login_TAG, Register.class, params);
 
+    }
+
+    private void googleSignIn() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, 100);
     }
 
 
@@ -161,13 +207,12 @@ public class SignInActivity extends AppCompatActivity implements CallBack {
     @Override
     public void onNext(int tag, boolean isSuccess, Object result) {
 
-        Register register=(Register) result;
+        Register register = (Register) result;
 
         PreferencesUtils.setUserToken(register.getData().getToken());
-
         PreferencesUtils.setUser(register.getData().getUser(),SignInActivity.this);
-
         PreferencesUtils.setPlayerId(OneSignal.getDeviceState().getUserId());
+
         startActivity(new Intent(SignInActivity.this,MainActivity.class));
         finish();
 
@@ -182,4 +227,38 @@ public class SignInActivity extends AppCompatActivity implements CallBack {
     public void onComplete() {
 
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
+        if (requestCode == 100) {
+            // The Task returned from this call is always completed, no need to attach
+            // a listener.
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleSignInResult(task);
+        }
+    }
+
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+
+        try {
+            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+
+            // Signed in successfully, show authenticated UI.
+            String providerId = account.getId();
+            String providerToken = account.getIdToken();
+            String name = account.getDisplayName();
+            String email = account.getEmail();
+
+            socialLogin("google", providerId, providerToken, name, email);
+        } catch (ApiException e) {
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            Log.w("google login", "signInResult:failed code=" + e.getStatusCode());
+            Toast.makeText(SignInActivity.this, "sign in failed", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }

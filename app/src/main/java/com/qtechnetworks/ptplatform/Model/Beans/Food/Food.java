@@ -8,7 +8,7 @@ public class Food {
 
     @SerializedName("data")
     @Expose
-    private List<Datum> data = null;
+    private List<Datum> data;
     @SerializedName("success")
     @Expose
     private Boolean success;

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -27,12 +28,12 @@ import java.util.HashMap;
 
 import io.reactivex.disposables.Disposable;
 
-public class SupplementsDietPlansFragment extends Fragment implements CallBack {
+public class SupplementsDietPlansFragment extends Fragment implements CallBack{
 
     EditText searchBar;
     TextView title;
     RecyclerView recyclerView;
-    SupplementsAndDietPlansAdapter adapter;
+    Button searchBtn;
     String flag;
 
     public SupplementsDietPlansFragment(String flag) {
@@ -52,18 +53,20 @@ public class SupplementsDietPlansFragment extends Fragment implements CallBack {
 
     private void initials(View view) {
         title = view.findViewById(R.id.title);
+        searchBtn = view.findViewById(R.id.search_button);
         title.setText(flag);
 
         searchBar = view.findViewById(R.id.search_bar);
+
         if(flag.equals("Supplements")){
 
             searchBar.setHint("SEARCH FOR SUPLEMENTS");
             getSupplement();
 
-        }else if (flag.equals("Recipes and Diet Plans")) {
+        } else if (flag.equals("Recipes and Diet Plans")) {
             searchBar.setHint("SEARCH FOR RECIPES");
 
-            getRecipes("0", PreferencesUtils.getCoach(getContext()).getId().toString());
+            getRecipes();
 
         }
 
@@ -74,15 +77,25 @@ public class SupplementsDietPlansFragment extends Fragment implements CallBack {
         gridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(gridLayoutManager);
 
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                    if (flag.equals("Supplements")){
+                        searchSupplement (searchBar.getText().toString());
+                    } else if (flag.equals("Recipes and Diet Plans")) {
+                        searchRecipes(searchBar.getText().toString());
+                    }
+            }
+        });
 
     }
 
-    private void getRecipes(String skip,String coachid){
+    private void getRecipes(){
 
         HashMap<String ,Object> params=new HashMap<>();
 
-        params.put("skip",skip);
-     //   params.put("coach_id",coachid);
+        params.put("skip","0");
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);
         MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.recipes_URL, AppConstants.recipes_TAG, Recipes.class, params);
@@ -93,12 +106,33 @@ public class SupplementsDietPlansFragment extends Fragment implements CallBack {
 
         HashMap<String ,Object> params=new HashMap<>();
 
-
         MyApplication.getInstance().getHttpHelper().setCallback(this);
         MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.Supplement_URL, AppConstants.Supplement_TAG, Supplement.class, params);
 
     }
 
+    private void searchRecipes(String word){
+
+        HashMap<String ,Object> params=new HashMap<>();
+
+        params.put("skip","0");
+        params.put("name",word);
+
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.recipes_URL, 98, Recipes.class, params);
+
+    }
+
+    private void searchSupplement(String word){
+
+        HashMap<String ,Object> params=new HashMap<>();
+
+        params.put("title",word);
+
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.Supplement_URL, 99, Supplement.class, params);
+
+    }
 
     @Override
     public void onSubscribe(Disposable d) {
@@ -114,7 +148,7 @@ public class SupplementsDietPlansFragment extends Fragment implements CallBack {
 
                 Supplement supplement=(Supplement) result;
 
-                adapter = new SupplementsAndDietPlansAdapter(getContext(), flag,supplement.getData());
+                SupplementsAndDietPlansAdapter adapter = new SupplementsAndDietPlansAdapter(getContext(), flag,supplement.getData());
                 recyclerView.setAdapter(adapter);
 
                 break;
@@ -127,6 +161,26 @@ public class SupplementsDietPlansFragment extends Fragment implements CallBack {
                 recyclerView.setAdapter(recipesAdapter);
 
                 break;
+
+            case 98:
+
+                Recipes recipes1=(Recipes) result;
+
+                RecipesAdapter recipesAdapter1=new RecipesAdapter(getContext(),flag, recipes1.getData());
+                recyclerView.setAdapter(recipesAdapter1);
+
+                break;
+
+            case 99:
+
+                Supplement supplement1=(Supplement) result;
+
+                SupplementsAndDietPlansAdapter adapter1 = new SupplementsAndDietPlansAdapter(getContext(), flag,supplement1.getData());
+                recyclerView.setAdapter(adapter1);
+
+                break;
+
+
 
         }
 

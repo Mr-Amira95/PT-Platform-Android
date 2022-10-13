@@ -2,19 +2,30 @@ package com.qtechnetworks.ptplatform.View.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.google.gson.JsonObject;
+import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
+import com.qtechnetworks.ptplatform.Model.Beans.CheckEmail.CheckEmailResults;
+import com.qtechnetworks.ptplatform.Model.Beans.General;
+import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
+import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.R;
 
-public class ResetPasswordActivity extends AppCompatActivity {
+import io.reactivex.disposables.Disposable;
+import pub.devrel.easypermissions.EasyPermissions;
+
+public class ResetPasswordActivity extends AppCompatActivity implements CallBack {
 
     EditText password, confirmPassword;
     Button save;
-    String type, email, flag;
+    String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,19 +38,20 @@ public class ResetPasswordActivity extends AppCompatActivity {
     }
 
     private void getArguments() {
-        flag = getIntent().getStringExtra("flag");
-        type = getIntent().getStringExtra("type");
-        email = getIntent().getStringExtra("email");
+        token = getIntent().getStringExtra("token");
     }
 
     private void clicks() {
+
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(ResetPasswordActivity.this, SignInActivity.class);
-                i.putExtra("type", type);
-                startActivity(i);
-                finish();
+
+                if (password.getText().toString().equals(confirmPassword.getText().toString()))
+                    resetPassword();
+                else
+                    Toast.makeText(ResetPasswordActivity.this, "password doesn't match", Toast.LENGTH_SHORT).show();
+
             }
         });
     }
@@ -48,5 +60,43 @@ public class ResetPasswordActivity extends AppCompatActivity {
         password = findViewById(R.id.password_edittext);
         confirmPassword = findViewById(R.id.confirm_password_edittext);
         save = findViewById(R.id.confirm_button);
+    }
+
+    private void resetPassword() {
+
+        JsonObject params = new JsonObject();
+        params.addProperty("token", token);
+        params.addProperty("password", password.getText().toString());
+        params.addProperty("password_confirmation", confirmPassword.getText().toString());
+
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().postLogin(this, AppConstants.Reset_Password_URL, AppConstants.Reset_Password_TAG, General.class, params);
+    }
+
+    @Override
+    public void onSubscribe(Disposable d) {
+
+    }
+
+    @Override
+    public void onNext(int tag, boolean isSuccess, Object result) {
+
+        if (isSuccess){
+            General general = (General) result;
+            Intent i = new Intent(ResetPasswordActivity.this, SignInActivity.class);
+            startActivity(i);
+            finish();
+        }
+
+    }
+
+    @Override
+    public void onError(Throwable e) {
+
+    }
+
+    @Override
+    public void onComplete() {
+
     }
 }

@@ -89,14 +89,16 @@
         android:textSize="@dimen/_14sdp"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_10sdp"
-        android:drawableEnd="@drawable/ic_right_icon"/>
+        android:drawableEnd="@drawable/ic_right_icon"
+        android:visibility="gone"/>
 
     <View
         android:id="@+id/line5"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_1sdp"
         android:background="@color/txt_grey"
-        android:layout_marginTop="@dimen/_10sdp"/>
+        android:layout_marginTop="@dimen/_10sdp"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/language"

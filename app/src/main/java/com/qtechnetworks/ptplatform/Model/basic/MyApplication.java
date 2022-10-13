@@ -25,8 +25,6 @@ import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 import com.qtechnetworks.ptplatform.View.Activity.NotAuthorizedActivity;
 import com.qtechnetworks.ptplatform.View.Fragment.MainFragment;
-import com.qtechnetworks.ptplatform.View.Fragment.NotAuthorizedFragment;
-
 import java.io.IOException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -97,7 +95,6 @@ public class MyApplication extends Application {
                 int code=resp.code();
                 Log.d("res Code","-------------"+code);
                 if(code==403){
-                   // setFragment(R.id.home_frame, new NotAuthorizedFragment(),context);
                     startActivity();
                 }
                return resp;
@@ -112,7 +109,6 @@ public class MyApplication extends Application {
         return okHttpClient;
     }
     private void startActivity() {
-
       startActivity( new Intent(getApplicationContext(), NotAuthorizedActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_TASK_ON_HOME));
         MainActivity.me.finish();
     }

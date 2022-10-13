@@ -38,53 +38,64 @@ import io.reactivex.disposables.Disposable;
 
 public class AddTraineeDetailsFragment extends Fragment implements CallBack {
 
-    TextView doneBtn;
+    TextView doneBtn, header;
     LinearLayout mRlayout;
-    String coachId;
     LinearLayout.LayoutParams mRparams;
-    List<EditText> questionsEt= new ArrayList<EditText>();
+    List<EditText> questionsEt= new ArrayList<>();
+
+    Integer userID;
+
+    public AddTraineeDetailsFragment(Integer userID) {
+        this.userID = userID;
+    }
+
+    public AddTraineeDetailsFragment() {
+
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_add_trainee_details, container, false);
-        if (PreferencesUtils.getCoach(getContext()) != null) {
-            coachId=PreferencesUtils.getCoach(getContext()).getId().toString();
-            getQuestions();
-        }
+
         initials(view);
+        clicks();
+
+        // Inflate the layout for this fragment
+        return view;
+    }
+
+    private void clicks() {
 
         doneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-             //   setFragment(R.id.home_frame, new SuccessFragment("Checkout"));
                 if(questionsEt.size()>0){
                     answerQuestions();
-                }else {
+                } else {
                     setFragment(R.id.home_frame, new MainFragment());
                     Toast.makeText(getContext(), "No Questions to Answer!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-        // Inflate the layout for this fragment
-        return view;
     }
 
     private void answerQuestions(){
+
         HashMap<String ,Object> params=new HashMap<>();
         List<HashMap<String, Object>> answers =new ArrayList<>();
+
         for (int i=0;i<questionsEt.size();i++) {
             if(!questionsEt.get(i).getText().toString().equals("")) {
                 HashMap<String, Object> answer = new HashMap<>();
                 answer.put("question_id", questionsEt.get(i).getId());
                 answer.put("answer", questionsEt.get(i).getText().toString());
                 answers.add(answer);
-
             }
-
         }
-        JSONArray answersjs = new JSONArray(answers);
-        params.put("coach_id", coachId);
+
+        params.put("coach_id", PreferencesUtils.getCoach(getContext()).getId().toString());
         params.put("answers", answers);
         MyApplication.getInstance().getHttpHelper().setCallback(this);
         MyApplication.getInstance().getHttpHelper().PostRaw(getContext(), AppConstants.COACH_QUESTIONS_ANSWER_URL, AppConstants.COACH_QUESTIONS_ANSWER_TAG, General.class, params);
@@ -93,12 +104,10 @@ public class AddTraineeDetailsFragment extends Fragment implements CallBack {
     }
     private void getQuestions(){
         HashMap<String ,Object> params=new HashMap<>();
-        params.put("coach_id",coachId);
+        params.put("coach_id",PreferencesUtils.getCoach(getContext()).getId().toString());
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);
         MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.COACH_QUESTIONS_URL, AppConstants.COACH_QUESTIONS_TAG, Question.class, params);
-
-
     }
 
     private void setFragment(int frameLayout, Fragment fragment) {
@@ -109,11 +118,26 @@ public class AddTraineeDetailsFragment extends Fragment implements CallBack {
     }
 
     private void initials(View view) {
+        header = view.findViewById(R.id.header);
         doneBtn = view.findViewById(R.id.done_txt);
-         mRlayout = view.findViewById(R.id.questionsLayout);
-          mRparams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        mRlayout = view.findViewById(R.id.questionsLayout);
+        mRparams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
+        if (PreferencesUtils.getUserType().equalsIgnoreCase("coach")){
+            header.setVisibility(View.GONE);
+            doneBtn.setVisibility(View.GONE);
+            getAnswersCoach();
+        } else if (PreferencesUtils.getUserType().equalsIgnoreCase("trainee")){
+            getQuestions();
+        }
 
+    }
+
+    private void getAnswersCoach() {
+        HashMap<String ,Object> params=new HashMap<>();
+
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.COACH_QUESTIONS_URL + "/" + userID+"/by-user", AppConstants.COACH_QUESTIONS_TAG, Question.class, params);
     }
 
     @Override
@@ -131,6 +155,7 @@ public class AddTraineeDetailsFragment extends Fragment implements CallBack {
                     if (questionsEt != null) {
                         questionsEt.clear();
                     }
+
                     for (Datum queston : coachQuestiohns.getData()) {
                         TextView myTextView = new TextView(getContext());
                         myTextView.setLayoutParams(mRparams);
@@ -141,18 +166,27 @@ public class AddTraineeDetailsFragment extends Fragment implements CallBack {
 
                         EditText myEditText = new EditText(getContext());
                         myEditText.setLayoutParams(mRparams);
-                      //  myEditText.setHint(queston.getQuestion());
                         myEditText.setTextColor(Color.WHITE);
                         myEditText.setHintTextColor(Color.WHITE);
                         myEditText.setHeight(150);
-                        myEditText.setMaxLines(1);
                         myEditText.setPadding(20,20,20,20);
+                        myEditText.setMaxLines(1);
+                        myEditText.setLines(1);
+                        myEditText.setSingleLine(true);
                         myEditText.setBackgroundResource(R.drawable.background_radius_10);
                         //   myEditText.setGravity(Gravity.CENTER);
                         myEditText.setId(queston.getId());
                         questionsEt.add(myEditText);
                         mRlayout.addView(myTextView);
                         mRlayout.addView(myEditText);
+
+                        if (queston.getAnswer() != null)
+                            myEditText.setText(queston.getAnswer());
+
+                        if (PreferencesUtils.getUserType().equalsIgnoreCase("Coach")){
+                            myEditText.setEnabled(false);
+                        }
+
                     }
                 }else{
                     Toast.makeText(getContext(), "No questions to answer!", Toast.LENGTH_SHORT).show();

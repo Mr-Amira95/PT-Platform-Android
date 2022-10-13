@@ -17,7 +17,8 @@
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:textSize="@dimen/_12sdp"
-        android:padding="@dimen/_15sdp"/>
+        android:padding="@dimen/_15sdp"
+        />
 
     <Spinner
         android:id="@+id/weight_unit"
@@ -39,7 +40,8 @@
         android:textSize="@dimen/_12sdp"
         android:paddingVertical="@dimen/_5sdp"
         android:paddingHorizontal="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_15sdp"/>
+        android:layout_marginTop="@dimen/_15sdp"
+        android:inputType="number"/>
 
     <EditText
         android:id="@+id/repititions"
@@ -51,7 +53,8 @@
         android:textSize="@dimen/_12sdp"
         android:paddingVertical="@dimen/_5sdp"
         android:paddingHorizontal="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_15sdp"/>
+        android:layout_marginTop="@dimen/_15sdp"
+        android:inputType="number"/>
 
     <EditText
         android:id="@+id/note"

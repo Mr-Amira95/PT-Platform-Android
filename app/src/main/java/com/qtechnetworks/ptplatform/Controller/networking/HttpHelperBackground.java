@@ -159,7 +159,7 @@ public class HttpHelperBackground {
                         }
 
                         try {
-//                            Toast.makeText(context,((HttpException) e).response().errorBody().source().readUtf8().toString().split(":")[3],Toast.LENGTH_LONG).show();
+                            Toast.makeText(context,((HttpException) e).response().errorBody().source().readUtf8().toString().split(":")[3],Toast.LENGTH_LONG).show();
                         }catch (Exception g){
                             g.printStackTrace();
                         }
@@ -348,14 +348,14 @@ public class HttpHelperBackground {
 
     }
 
-    public void PostFile(Context context, final String url, final int tag, final Class clazz, final Map<String, RequestBody> params, MultipartBody.Part[] file) {
+    public void PostFile(Context context, final String url, final int tag, final Class clazz, MultipartBody.Part file) {
 
 
 
 
         RetrofitServices service = MyApplication.getInstance().getHttpMethods(context);
 
-        service.uploadfile(url, params, file )
+        service.uploadfile(url, file )
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ResponseBody>() {

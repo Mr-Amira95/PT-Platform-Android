@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,15 +12,23 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.qtechnetworks.ptplatform.Model.Beans.FoodHome.Snack;
 import com.qtechnetworks.ptplatform.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class NutritionHistoryAdapter extends RecyclerView.Adapter<NutritionHistoryAdapter.ViewHolder>  {
 
     private Context context;
+    private List<Snack> data;
+    private String flag;
 
-    public NutritionHistoryAdapter(Context context) {
+    public NutritionHistoryAdapter(Context context, List<Snack> data, String flag) {
         this.context=context;
+        this.data=data;
+        this.flag=flag;
     }
 
 
@@ -34,27 +43,29 @@ public class NutritionHistoryAdapter extends RecyclerView.Adapter<NutritionHisto
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-    }
-
-    private void setFragment(int frameLayout, Fragment fragment, AppCompatActivity activity) {
-        FragmentTransaction fragmentTransaction= activity.getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(frameLayout, fragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+        Snack current = data.get(position);
+        holder.title.setText(current.getName());
+        holder.desc.setText("Carbs: " + current.getCarb() + ", Fat: " + current.getFat() + ", Protein: " + current.getProtein() );
+        holder.calories.setText("Calories: " + current.getCalorie());
     }
 
     @Override
     public int getItemCount() {
 
-        return 3;
+        return data.size();
 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        TextView title, desc, calories;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            title = itemView.findViewById(R.id.nutrition_title);
+            desc = itemView.findViewById(R.id.nutrition_desc);
+            calories = itemView.findViewById(R.id.nutrition_calories);
         }
     }
 

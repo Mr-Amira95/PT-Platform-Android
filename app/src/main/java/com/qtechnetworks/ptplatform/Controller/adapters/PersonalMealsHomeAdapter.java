@@ -51,8 +51,8 @@ public class PersonalMealsHomeAdapter extends RecyclerView.Adapter<PersonalMeals
                 setFragment(new PlansSingleFragment(current));
             }
         });
-        holder.trainerName.setText(current.getTitle().toString());
 
+        holder.trainerName.setText(current.getTitle().toString());
 
         try{
 

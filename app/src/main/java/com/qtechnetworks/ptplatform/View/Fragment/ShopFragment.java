@@ -51,8 +51,8 @@ public class ShopFragment extends Fragment implements CallBack {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         ptPackagesRecyclerview.setLayoutManager(linearLayoutManager);
-
     }
+
     private void getSubscriptions(String coachid){
 
         HashMap<String ,Object> params=new HashMap<>();

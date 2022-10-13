@@ -28,12 +28,11 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHold
     private Context context;
     private PermissionAdapter permissionsAdapter;
     private List<SubscriptionPackage> packages;
+
     public PackageAdapter(Context context,List<SubscriptionPackage> packages) {
         this.packages=packages;
         this.context=context;
-
     }
-
 
     @NonNull
     @Override
@@ -51,12 +50,14 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHold
         layoutManagerhorizantalleader.setOrientation(LinearLayoutManager.VERTICAL);
         holder.featureRecyclerview.setLayoutManager(layoutManagerhorizantalleader);
         List<String> permissions=new ArrayList<>();
-        if(packages.get(position).getPermissions()!=null){
-        permissions.add("Video calls: "+packages.get(position).getPermissions().getCallVideo().toString());
-        permissions.add("Workout Schedule: "+packages.get(position).getPermissions().getWorkoutSchedule().toString());
-        permissions.add("Food Plan: "+packages.get(position).getPermissions().getFoodPlan().toString());
 
-        permissionsAdapter = new PermissionAdapter(this.context,  permissions);
+        if(packages.get(position).getPermissions()!=null){
+            permissions.add("Video calls: "+packages.get(position).getPermissions().getCallVideo().toString());
+            permissions.add("Workout Schedule: "+packages.get(position).getPermissions().getWorkoutSchedule().toString());
+            permissions.add("Food Plan: "+packages.get(position).getPermissions().getFoodPlan().toString());
+
+
+            permissionsAdapter = new PermissionAdapter(this.context,  permissions);
             holder.featureRecyclerview.setAdapter(permissionsAdapter);
         }
 
@@ -64,13 +65,14 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHold
         holder.packageDesc.setText(packages.get(position).getDescription());
         holder.packageDate.setText(packages.get(position).getDate()+" months");
         holder.packagePrice.setText(packages.get(position).getPrice());
-        if(packages.get(position).getName().equals("BRONZE")){
+
+        if(packages.get(position).getStyle().equalsIgnoreCase("style_bronze")){
             holder.backgroundLayout.setBackgroundResource(R.drawable.background_package_bronze);
         }
-        if(packages.get(position).getName().equals("GOLD")){
+        if(packages.get(position).getStyle().equalsIgnoreCase("style_gold")){
             holder.backgroundLayout.setBackgroundResource(R.drawable.background_package_gold);
         }
-        if(packages.get(position).getName().equals("SILVER")){
+        if(packages.get(position).getStyle().equalsIgnoreCase("style_silver")){
             holder.backgroundLayout.setBackgroundResource(R.drawable.background_package_silver);
         }
         holder.buyNowBtn.setOnClickListener(new View.OnClickListener() {

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -37,22 +38,13 @@
         android:background="@color/txt_grey"
         android:layout_marginTop="@dimen/_30sdp"/>
 
-
-    <Spinner
+    <TextView
         android:id="@+id/Foodname_spinner"
-        style="@style/mySpinnerItemStyle"
-        android:backgroundTint="@color/white"
-        android:foregroundTint="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:layout_margin="20dp"
         android:layout_marginHorizontal="@dimen/_20sdp"
-        android:layout_marginStart="20dp"
-        android:gravity="center"
-        android:minHeight="48dp"
         android:paddingVertical="10dp"
-        android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="@dimen/_14sdp"
         app:layout_constraintBottom_toTopOf="@id/line_two"
@@ -79,18 +71,49 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginHorizontal="@dimen/_20sdp"/>
 
+    <TextView
+        android:id="@+id/decrease"
+        android:layout_width="@dimen/_25sdp"
+        android:layout_height="@dimen/_25sdp"
+        app:layout_constraintTop_toTopOf="@id/number_txt"
+        app:layout_constraintBottom_toBottomOf="@id/number_txt"
+        app:layout_constraintStart_toEndOf="@id/number_txt"
+        android:layout_marginStart="@dimen/_25sdp"
+        android:background="@color/primary_color"
+        android:text="-"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_14sdp"
+        android:gravity="center" />
+
+    <TextView
+        android:id="@+id/increase"
+        android:layout_width="@dimen/_25sdp"
+        android:layout_height="@dimen/_25sdp"
+        app:layout_constraintTop_toTopOf="@id/number_txt"
+        app:layout_constraintBottom_toBottomOf="@id/number_txt"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:background="@color/primary_color"
+        android:text="+"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_14sdp"
+        android:gravity="center" />
+
     <EditText
+        android:id="@+id/weightnumber_edit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="1"
+        android:inputType="number"
         android:textColor="@color/white"
         android:textSize="@dimen/_14sdp"
         app:layout_constraintTop_toBottomOf="@id/line_two"
         app:layout_constraintBottom_toTopOf="@id/line_three"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/number_txt"
-        android:layout_marginHorizontal="@dimen/_20sdp"
-        android:gravity="end"/>
+        app:layout_constraintEnd_toStartOf="@id/increase"
+        app:layout_constraintStart_toEndOf="@id/decrease"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:gravity="center"
+        android:focusable="false"/>
 
     <View
         android:id="@+id/line_three"
@@ -110,13 +133,14 @@
         app:layout_constraintTop_toBottomOf="@id/line_three"
         app:layout_constraintBottom_toTopOf="@id/line_four"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginHorizontal="@dimen/_20sdp"/>
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:visibility="gone"/>
 
     <EditText
-        android:id="@+id/weightnumber_edit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="1"
+        android:inputType="number"
         android:textColor="@color/white"
         android:textSize="@dimen/_14sdp"
         app:layout_constraintTop_toBottomOf="@id/line_three"
@@ -124,7 +148,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/serving_size_txt"
         android:layout_marginHorizontal="@dimen/_20sdp"
-        android:gravity="end"/>
+        android:gravity="end"
+        android:visibility="gone"/>
 
     <View
         android:id="@+id/line_four"
@@ -132,14 +157,16 @@
         android:layout_height="@dimen/_1sdp"
         app:layout_constraintTop_toBottomOf="@+id/line_three"
         android:background="@color/txt_grey"
-        android:layout_marginTop="@dimen/_50sdp"/>
+        android:layout_marginTop="@dimen/_50sdp"
+        android:visibility="gone"/>
 
 
     <LinearLayout
+        android:id="@+id/layout_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/line_four"
+        app:layout_constraintTop_toBottomOf="@id/line_three"
         android:layout_marginTop="@dimen/_25sdp"
         android:layout_marginHorizontal="@dimen/_20sdp">
 
@@ -147,19 +174,27 @@
             android:id="@+id/pie_chart_layout"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center">
 
-            <org.eazegraph.lib.charts.PieChart
-                android:id="@+id/pie_chart"
+            <TextView
+                android:id="@+id/calories_text"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_70sdp"
-                android:background="@color/tran"
-                app:egInnerValueColor="@color/tran"
-                app:egLegendColor="@color/tran"
-                app:egInnerPaddingColor="@color/backapp"
-                app:egInnerValueSize="2dp"
-                android:padding="6dp"/>
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/white"
+                android:textSize="@dimen/_19sdp"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Calories"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_13sdp"
+                android:gravity="center"/>
+
 
         </LinearLayout>
 
@@ -168,15 +203,9 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="%"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_13sdp"
-                android:gravity="center"/>
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_gravity="center">
 
             <TextView
                 android:id="@+id/carb_text"
@@ -202,15 +231,8 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="%"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_13sdp"
-                android:gravity="center"/>
+            android:orientation="vertical"
+            android:layout_gravity="center">
 
             <TextView
                 android:id="@+id/fat_text"
@@ -236,15 +258,8 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="%"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_13sdp"
-                android:gravity="center"/>
+            android:orientation="vertical"
+            android:layout_gravity="center">
 
             <TextView
                 android:id="@+id/protine_text"
@@ -266,4 +281,5 @@
         </LinearLayout>
 
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

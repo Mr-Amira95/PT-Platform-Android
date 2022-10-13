@@ -48,7 +48,8 @@
         android:fontFamily="@font/aeonikregular"
         android:layout_margin="@dimen/_20sdp"
         app:layout_constraintTop_toBottomOf="@id/title"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/workout_title"
@@ -60,7 +61,8 @@
         android:fontFamily="@font/aeonikregular"
         android:layout_margin="@dimen/_20sdp"
         app:layout_constraintTop_toBottomOf="@id/sub_title"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="gone"/>
 
     <ImageView
         android:id="@+id/workout_img"
@@ -68,7 +70,8 @@
         android:layout_height="@dimen/_150sdp"
         app:layout_constraintTop_toBottomOf="@id/header"
         android:src="@drawable/demoslider"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop"
+        android:visibility="gone"/>
 
     <Button
         android:id="@+id/begin_btn"
@@ -82,7 +85,8 @@
         android:textAllCaps="false"
         android:textSize="@dimen/_12sdp"
         android:textColor="@color/white"
-        android:layout_marginBottom="@dimen/_10sdp"/>
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/other_challenges_title"
@@ -94,13 +98,13 @@
         android:textSize="@dimen/_20sdp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/workout_img"
-        android:layout_marginTop="@dimen/_25sdp"/>
+        android:layout_marginTop="@dimen/_25sdp"
+        android:visibility="gone"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/other_challenges_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_10sdp"
         app:layout_constraintTop_toBottomOf="@id/other_challenges_title"/>
 

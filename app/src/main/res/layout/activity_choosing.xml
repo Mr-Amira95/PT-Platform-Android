@@ -75,8 +75,7 @@
                 android:text="I am a Coach"
                 android:textColor="@color/primary_color"
                 android:textSize="@dimen/_20sdp" />
-
-    </RelativeLayout>
+        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="0dp"

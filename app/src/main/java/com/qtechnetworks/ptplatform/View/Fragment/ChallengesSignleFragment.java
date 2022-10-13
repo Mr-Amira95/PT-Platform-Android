@@ -36,38 +36,55 @@ public class ChallengesSignleFragment extends Fragment implements CallBack {
     Button finishBtn;
     TextView subtitle;
     private int challengeId;
+
     public ChallengesSignleFragment(int challengeId){
-        this.challengeId=challengeId;
+        this.challengeId = challengeId;
     }
 
     int completed=0;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_challenges_signle, container, false);
 
         initials(view);
+        clicks();
         getChallengeVideos();
+
+        // Inflate the layout for this fragment
+        return view;
+    }
+
+    private void clicks() {
+
         finishBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 completeChallenges();
             }
         });
-        // Inflate the layout for this fragment
-        return view;
+
     }
 
     private void initials(View view) {
         finishBtn = view.findViewById(R.id.finish_btn);
         challengesRecyclerview = view.findViewById(R.id.challenges_recyclerview);
         subtitle=view.findViewById(R.id.sub_title);
+
+        if (PreferencesUtils.getUserType().equalsIgnoreCase("coach")){
+            subtitle.setVisibility(View.GONE);
+            finishBtn.setVisibility(View.GONE);
+        } else if (PreferencesUtils.getUserType().equalsIgnoreCase("trainee")){
+            subtitle.setVisibility(View.VISIBLE);
+            finishBtn.setVisibility(View.VISIBLE);
+        }
+
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
         gridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         challengesRecyclerview.setLayoutManager(gridLayoutManager);
-
-
     }
+
     private void completeChallenges(){
 
         if(adapter.completedVideosIds.size()>0) {
@@ -80,16 +97,15 @@ public class ChallengesSignleFragment extends Fragment implements CallBack {
             Toast.makeText(getContext(), "Select Challenge To Finish", Toast.LENGTH_SHORT).show();
         }
 
-
     }
-    private void getChallengeVideos(){
+    private void getChallengeVideos () {
 
         HashMap<String ,Object> params=new HashMap<>();
         params.put("challenge_id", challengeId);
         params.put("skip",0);
+
         MyApplication.getInstance().getHttpHelper().setCallback(this);
         MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.CHALLENGES_VIDEOS_URL, AppConstants.CHALLENGES_VIDEOS_TAG, VideoChallenge.class, params);
-
     }
 
     @Override

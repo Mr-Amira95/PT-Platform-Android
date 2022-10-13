@@ -41,36 +41,24 @@ public class SplashActivity extends AppCompatActivity implements CallBack {
         OneSignal.initWithContext(this);
         OneSignal.setAppId(ONESIGNAL_APP_ID);
 
-        initial();
-
-    }
-
-
-    public void initial(){
-
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
 
                 if (PreferencesUtils.getUserToken().equalsIgnoreCase("-1")){
-                    startActivity(new Intent(SplashActivity.this,ChoosingActivity.class));
+                    startActivity(new Intent(SplashActivity.this, ChoosingActivity.class));
                     finish();
                 }else {
-                   devicetoken();
+                    devicetoken();
                     startActivity(new Intent(SplashActivity.this,MainActivity.class));
                     finish();
                 }
-
-
-
             }
         },SPLASH_TIME_OUT);
 
     }
 
     private void devicetoken() {
-;
 
         HashMap<String,Object> tokenMap = new HashMap<>();
 

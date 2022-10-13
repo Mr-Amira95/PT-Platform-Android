@@ -88,7 +88,7 @@ public class VideoChatFragment extends Fragment implements CallBack {
                     videoChatRv.setAdapter(videoChatAdapter);
                     if(sessions.getData().isEmpty()){
                         emptyTxt.setVisibility(View.VISIBLE);
-                    }else{
+                    } else {
                         emptyTxt.setVisibility(View.GONE);
                     }
                 }else{

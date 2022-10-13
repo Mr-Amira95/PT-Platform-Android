@@ -37,7 +37,7 @@ public class HttpHelper {
 
     ProgressDialog dialog;
 
-    public void Post(Context context,final String url, final int tag, final Class clazz, final Map<String, Object> params) {
+    public void Post(Context context, final String url, final int tag, final Class clazz, final Map<String, Object> params) {
 
         dialog=new ProgressDialog(context);
         dialog.setMessage("Loading ...");
@@ -52,9 +52,7 @@ public class HttpHelper {
                 .subscribe(new Observer<ResponseBody>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-
                         callback.onSubscribe(d);
-
                     }
 
                     @Override
@@ -76,7 +74,7 @@ public class HttpHelper {
                         dialog.dismiss();
 
                         try {
-//                            Toast.makeText(context,((HttpException) e).response().errorBody().source().readUtf8().toString().split(":")[4].replace("\\}}","").replace(")",""),Toast.LENGTH_LONG).show();
+                            Toast.makeText(context,((HttpException) e).response().errorBody().source().readUtf8().toString().split(":")[4].replace("\\}}","").replace(")",""),Toast.LENGTH_LONG).show();
                         }catch (Exception g){
                             g.printStackTrace();
                         }
@@ -119,6 +117,7 @@ public class HttpHelper {
                     }
                 } );
     }
+
     public void PostRaw(Context context,final String url, final int tag, final Class clazz, final Map<String, Object> params) {
 
         dialog=new ProgressDialog(context);
@@ -238,7 +237,7 @@ public class HttpHelper {
                         dialog.dismiss();
 
                         try {
-                            Toast.makeText(context,((HttpException) e).response().errorBody().source().readUtf8().toString().split(":")[3],Toast.LENGTH_LONG).show();
+                            Toast.makeText(context,((HttpException) e).response().errorBody().source().readUtf8().toString().split(":")[4],Toast.LENGTH_LONG).show();
                         }catch (Exception g){
                             g.printStackTrace();
                         }
@@ -438,7 +437,7 @@ public class HttpHelper {
 
     }
 
-    public void PostFile(Context context, final String url, final int tag, final Class clazz, final Map<String, RequestBody> params, MultipartBody.Part[] file) {
+    public void PostFile(Context context, final String url, final int tag, final Class clazz, MultipartBody.Part file) {
 
         dialog=new ProgressDialog(context);
         dialog.setMessage("Loading ...");
@@ -447,7 +446,7 @@ public class HttpHelper {
 
         RetrofitServices service = MyApplication.getInstance().getHttpMethods(context);
 
-        service.uploadfile(url, params, file )
+        service.uploadfile(url, file)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ResponseBody>() {
@@ -557,7 +556,6 @@ public class HttpHelper {
                     @Override
                     public void onError(@NonNull Throwable e) {
                         dialog.dismiss();
-
 
                             new Handler(Looper.getMainLooper()).post(new Runnable() {
                                 @Override

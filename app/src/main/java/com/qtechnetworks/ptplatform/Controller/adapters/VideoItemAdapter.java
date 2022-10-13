@@ -27,7 +27,7 @@ import java.util.List;
 public class VideoItemAdapter extends RecyclerView.Adapter<VideoItemAdapter.ViewHolder>  {
 
     private Context context;
-    private List<Datum> data;
+    private List <Datum> data;
     private ExercisesSingleFragment exercisesSingleFragment;
     TextView add_to_favourite; TextView add_to_workout; TextView add_to_log;
 
@@ -80,6 +80,7 @@ public class VideoItemAdapter extends RecyclerView.Adapter<VideoItemAdapter.View
         holder.video_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ExercisesSingleFragment.counter = -1;
                 exercisesSingleFragment.player.pause();
 
                 exercisesSingleFragment.VideoID=current.getId().toString();

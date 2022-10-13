@@ -16,6 +16,7 @@ public class NotAuthorizedActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_not_authorized);
+
         initial();
         clicks();
 
@@ -31,11 +32,13 @@ public class NotAuthorizedActivity extends AppCompatActivity {
     }
 
     private void initial() {
-
         subscribeBtn = findViewById(R.id.subscribe_btn);
-
-
-
-
     }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(NotAuthorizedActivity.this,MainActivity.class));
+        finish();
+    }
+
 }

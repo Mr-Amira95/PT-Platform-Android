@@ -7,14 +7,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".View.Fragment.ProfileFragment"
     android:background="@color/backapp">
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
 
     <TextView
         android:id="@+id/title"
@@ -64,15 +56,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/profile_img"
         android:layout_marginTop="@dimen/_20sdp"/>
+
         <ImageView
-        android:id="@+id/edit_name_image_view"
-        android:layout_width="@dimen/_15sdp"
-        android:layout_height="@dimen/_15sdp"
-        app:layout_constraintStart_toEndOf="@id/username"
-        android:src="@drawable/ic_edit_icon"
-        app:layout_constraintTop_toTopOf="@id/username"
-        app:layout_constraintBottom_toBottomOf="@id/username"
-        android:layout_marginStart="@dimen/_15sdp"/>
+            android:id="@+id/edit_name_image_view"
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            app:layout_constraintStart_toEndOf="@id/username"
+            android:src="@drawable/ic_edit_icon"
+            app:layout_constraintTop_toTopOf="@id/username"
+            app:layout_constraintBottom_toBottomOf="@id/username"
+            android:layout_marginStart="@dimen/_15sdp"/>
 
     <TextView
         android:id="@+id/joining_date"
@@ -216,6 +209,5 @@
         android:background="@color/txt_grey"
         app:layout_constraintTop_toBottomOf="@id/logout"
         android:layout_marginTop="@dimen/_10sdp"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,7 +18,9 @@ public class ThankCoashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thank_coash);
+
         initial();
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -28,6 +30,7 @@ public class ThankCoashActivity extends AppCompatActivity {
                 finish();
             }
         },SPLASH_TIME_OUT);
+
         thankYouLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

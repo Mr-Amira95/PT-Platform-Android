@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -20,7 +21,6 @@
             android:scaleType="centerCrop"
             app:layout_constraintTop_toTopOf="parent"
             app:repeat_toggle_modes="none"
-
             app:use_artwork="true" />
 
         <ImageView
@@ -99,7 +99,6 @@
         android:id="@+id/desc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum."
         android:textColor="@color/white"
         android:textSize="@dimen/_10sdp"
         android:layout_marginHorizontal="@dimen/_15sdp"/>
@@ -107,7 +106,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Upper Chest"
         android:textSize="@dimen/_20sdp"
         android:textStyle="bold"
         android:textColor="@color/white"

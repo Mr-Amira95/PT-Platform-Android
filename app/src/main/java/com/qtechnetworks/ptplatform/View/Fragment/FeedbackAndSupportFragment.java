@@ -1,8 +1,10 @@
 package com.qtechnetworks.ptplatform.View.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,25 +14,33 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.JsonObject;
+import com.onesignal.OneSignal;
+import com.qtechnetworks.ptplatform.BuildConfig;
+import com.qtechnetworks.ptplatform.Controller.NewNetworking.RetrofitClient;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.Banner.Banner;
 import com.qtechnetworks.ptplatform.Model.Beans.General;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
+import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
+import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 import io.reactivex.disposables.Disposable;
+import retrofit2.Call;
+import retrofit2.Callback;
 
-public class FeedbackAndSupportFragment extends Fragment implements CallBack {
+public class FeedbackAndSupportFragment extends Fragment {
 
     TextView title;
     String flag="";
 
     Button send_button;
-
-    EditText name_edittext,message_edittext;
+    EditText name_edittext, message_edittext;
 
     public FeedbackAndSupportFragment(String flag) {
         this.flag = flag;
@@ -42,9 +52,34 @@ public class FeedbackAndSupportFragment extends Fragment implements CallBack {
         View view = inflater.inflate(R.layout.fragment_feedback_and_support, container, false);
 
         initial(view);
+        clicks();
 
-        // Inflate the layout for this fragment
         return view;
+    }
+
+    private void clicks() {
+
+        send_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (name_edittext.getText().toString().isEmpty() && message_edittext.getText().toString().isEmpty()) {
+                    Toast.makeText(getContext(), "Please fill all field", Toast.LENGTH_SHORT).show();
+                } else if (name_edittext.getText().toString().isEmpty()){
+                    Toast.makeText(getContext(), "Please fill title field", Toast.LENGTH_SHORT).show();
+                } else if (message_edittext.getText().toString().isEmpty()){
+                    Toast.makeText(getContext(), "Please fill message field", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (flag.equalsIgnoreCase("Feedback")) {
+                        feedback(name_edittext.getText().toString(), message_edittext.getText().toString());
+                    } else if (flag.equalsIgnoreCase("Technical Support")){
+                        support(name_edittext.getText().toString(), message_edittext.getText().toString());
+                    }
+                }
+
+            }
+        });
+
     }
 
     private void initial(View view) {
@@ -54,68 +89,78 @@ public class FeedbackAndSupportFragment extends Fragment implements CallBack {
 
         name_edittext=view.findViewById(R.id.name_edittext);
         message_edittext=view.findViewById(R.id.message_edittext);
+    }
 
+    private void support(String subject,String message) {
 
-        send_button.setOnClickListener(new View.OnClickListener() {
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("subject", subject);
+        params.put("message", message);
+
+        Call<General> call = RetrofitClient.getInstance().getMyApi().supportForm(AppConstants.support_URL, params);
+        call.enqueue(new Callback<General>() {
             @Override
-            public void onClick(View v) {
-                if (flag.equalsIgnoreCase("Feedback")){
-                    setFeedback(name_edittext.getText().toString(),message_edittext.getText().toString());
-                }else if (flag.equalsIgnoreCase("Technical Support")){
-                    setSupport(name_edittext.getText().toString(),message_edittext.getText().toString());
+            public void onResponse(Call<General> call, retrofit2.Response<General> response) {
+
+                if (response.isSuccessful()){
+                    General general = response.body();
+
+                    if (general.getSuccess()){
+                        Toast.makeText(getContext(), String.valueOf(general.getData()), Toast.LENGTH_LONG).show();
+
+                        Intent i = new Intent(getContext(), MainActivity.class);
+                        startActivity(i);
+                        getActivity().finish();
+                    } else {
+                        Toast.makeText(getContext(), String.valueOf(general.getData()), Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(getContext(), "The message must be at least 20 characters", Toast.LENGTH_LONG).show();
                 }
             }
+
+            @Override
+            public void onFailure(Call<General> call, Throwable t) {
+                Toast.makeText(getContext(), "An error has occured", Toast.LENGTH_LONG).show();
+            }
+
         });
-
-
     }
 
-    private void setSupport(String subject,String message){
+    private void feedback(String subject,String message) {
 
-        HashMap<String ,Object> params=new HashMap<>();
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("subject", subject);
+        params.put("message", message);
 
-        params.put("subject",subject);
-        params.put("message",message);
+        Call<General> call = RetrofitClient.getInstance().getMyApi().supportForm(AppConstants.feedback_URL, params);
+        call.enqueue(new Callback<General>() {
+            @Override
+            public void onResponse(Call<General> call, retrofit2.Response<General> response) {
 
-        MyApplication.getInstance().getHttpHelper().setCallback(this);
-        MyApplication.getInstance().getHttpHelper().Post(getContext(), AppConstants.support_URL, AppConstants.support_TAG, Banner.class, params);
+                if (response.isSuccessful()){
+                    General general = response.body();
 
+                    if (general.getSuccess()){
+                        Toast.makeText(getContext(), String.valueOf(general.getData()), Toast.LENGTH_LONG).show();
+
+                        Intent i = new Intent(getContext(), MainActivity.class);
+                        startActivity(i);
+                        getActivity().finish();
+                    } else {
+                        Toast.makeText(getContext(), String.valueOf(general.getData()), Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(getContext(), "The message must be at least 20 characters", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<General> call, Throwable t) {
+                Toast.makeText(getContext(), "An error has occured", Toast.LENGTH_LONG).show();
+            }
+
+        });
     }
 
-    private void setFeedback(String subject,String message){
-
-        HashMap<String ,Object> params=new HashMap<>();
-
-        params.put("subject",subject);
-        params.put("message",message);
-
-        MyApplication.getInstance().getHttpHelper().setCallback(this);
-        MyApplication.getInstance().getHttpHelper().Post(getContext(), AppConstants.feedback_URL, AppConstants.feedback_TAG, General.class, params);
-
-    }
-
-
-    @Override
-    public void onSubscribe(Disposable d) {
-
-    }
-
-    @Override
-    public void onNext(int tag, boolean isSuccess, Object result) {
-
-        General general=(General) result;
-
-        Toast.makeText(getContext(),general.getData().toString(),Toast.LENGTH_LONG).show();
-
-    }
-
-    @Override
-    public void onError(Throwable e) {
-
-    }
-
-    @Override
-    public void onComplete() {
-
-    }
 }

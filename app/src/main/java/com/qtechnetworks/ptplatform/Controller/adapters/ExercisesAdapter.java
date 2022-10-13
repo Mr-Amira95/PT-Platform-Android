@@ -13,8 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.Exercises.Category;
-import com.qtechnetworks.ptplatform.Model.Beans.Exercises.CategoryResults;
-import com.qtechnetworks.ptplatform.Model.Beans.Exercises.Datum;
 import com.qtechnetworks.ptplatform.Model.Beans.Exercises.ExercisesResults;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
@@ -27,23 +25,18 @@ import java.util.List;
 
 import io.reactivex.disposables.Disposable;
 
-public class WorkoutAndExsircisesAdapter extends RecyclerView.Adapter<WorkoutAndExsircisesAdapter.ViewHolder> implements CallBack {
+public class ExercisesAdapter extends RecyclerView.Adapter<ExercisesAdapter.ViewHolder> implements CallBack {
 
     private Context context;
-    private String flag;
-    List<Category> data;
-    int selectedCategory;
+    private List<Category> data;
+    private int selectedCategory;
 
     ChestAndBicepsAdapter adapter;
 
-    public WorkoutAndExsircisesAdapter(Context context, String flag,List<Category> data) {
-
+    public ExercisesAdapter(Context context, List<Category> data) {
         this.context = context;
-        this.flag = flag;
         this.data = data;
     }
-
-
 
     @NonNull
     @Override
@@ -57,12 +50,13 @@ public class WorkoutAndExsircisesAdapter extends RecyclerView.Adapter<WorkoutAnd
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         Category current= data.get(position);
+        selectedCategory = current.getId();
 
         LinearLayoutManager linearLayoutManager3 = new LinearLayoutManager(context);
         linearLayoutManager3.setOrientation(LinearLayoutManager.HORIZONTAL);
         holder.exercise_recyclerview.setLayoutManager(linearLayoutManager3);
 
-        adapter = new ChestAndBicepsAdapter (context,flag,current.getExercises());
+        adapter = new ChestAndBicepsAdapter (context, current.getExercises());
         holder.exercise_recyclerview.setAdapter(adapter);
 
         holder.title_text.setText(current.getTitle().toString());
@@ -71,28 +65,9 @@ public class WorkoutAndExsircisesAdapter extends RecyclerView.Adapter<WorkoutAnd
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
 
-                selectedCategory = current.getId();
-                if (flag.equals("Workout")){
-
-                    getCategoryWorkouts(String.valueOf(current.getId()),totalItemsCount);
-
-                }else if (flag.equals("Exercises")){
-
-                    getCategoryExercises(String.valueOf(current.getId()),totalItemsCount);
-
-                }
-
+                getCategoryExercises(String.valueOf(current.getId()),totalItemsCount);
             }
         });
-
-    }
-
-    private void setFragment(Fragment fragment) {
-
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-
-        ((MainActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.home_frame, fragment, "OptionsFragment").addToBackStack(null).commit();
 
     }
 
@@ -111,17 +86,6 @@ public class WorkoutAndExsircisesAdapter extends RecyclerView.Adapter<WorkoutAnd
         MyApplication.getInstance().getBackgroundHttpHelper().get(context, AppConstants.exercise_URL, AppConstants.exercise_TAG, ExercisesResults.class, params);
     }
 
-
-    private void getCategoryWorkouts(String categoryID, int skip){
-
-        HashMap<String ,Object> params=new HashMap<>();
-        params.put("category_id",categoryID);
-        params.put("skip",skip);
-
-        MyApplication.getInstance().getHttpHelper().setCallback(this);
-        MyApplication.getInstance().getHttpHelper().get(context, AppConstants.workout_URL, AppConstants.workout_TAG, ExercisesResults.class, params);
-    }
-
     @Override
     public void onSubscribe(Disposable d) {
 
@@ -133,7 +97,7 @@ public class WorkoutAndExsircisesAdapter extends RecyclerView.Adapter<WorkoutAnd
         ExercisesResults exercisesResults = (ExercisesResults) result;
         if(!exercisesResults.getData().isEmpty()) {
             for (int j = 0; j < data.size(); j++) {
-                if (data.get(j).getId().equals(selectedCategory)) {
+                if (data.get(j).getId() == selectedCategory) {
                     for (int i = 0; i < exercisesResults.getData().size(); i++) {
                         data.get(0).getExercises().add(exercisesResults.getData().get(i));
                     }

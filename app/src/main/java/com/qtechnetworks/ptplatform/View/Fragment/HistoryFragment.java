@@ -45,7 +45,7 @@ public class HistoryFragment extends Fragment {
         workoutHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setFragment(new HistoryWorkoutFragment());
+                setFragment(new HistoryWorkoutFragment("Workout"));
             }
         });
 

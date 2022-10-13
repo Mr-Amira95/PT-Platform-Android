@@ -60,21 +60,19 @@ public class CoachesAdapter extends RecyclerView.Adapter<CoachesAdapter.ViewHold
             public void onClick(View v) {
 
                 PreferencesUtils.putString(PrefKeys.coachid,current.getId().toString());
+                PreferencesUtils.setCoach(current, mContext);
 
-                Bundle bundle = new Bundle();
                 coachesDialog.dismiss();
 
-                setFragment(new MainFragment(), bundle);
+                setFragment(new MainFragment());
             }
         });
 
     }
 
-    private void setFragment(Fragment fragment , Bundle bundle) {
+    private void setFragment(Fragment fragment) {
 
-        fragment.setArguments(bundle);
-
-        ((MainActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.home_frame, fragment, "OptionsFragment").addToBackStack(null).commit();
+        ((MainActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.home_frame, fragment, "OptionsFragment").commit();
     }
 
     @Override

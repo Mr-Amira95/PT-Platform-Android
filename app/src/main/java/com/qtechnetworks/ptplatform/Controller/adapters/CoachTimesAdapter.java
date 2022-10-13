@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.qtechnetworks.ptplatform.Model.Beans.calender.Datum;
 import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Fragment.CalendarFragment;
-import com.qtechnetworks.ptplatform.View.Fragment.ExercisesWorkoutFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,32 +47,32 @@ public class CoachTimesAdapter extends RecyclerView.Adapter<CoachTimesAdapter.Vi
         Datum current= datum.get(position);
 
         holder.title.setText(current.getTime());
+
         if(current.getIsAvailable()){
             holder.title.setTextColor(Color.WHITE);
-        }else{
+        } else {
             holder.title.setBackgroundResource(R.drawable.background_empty);
             holder.title.setTextColor(Color.RED);
         }
-        textViewList.add(holder.title);
 
-       // textViewList.get(0).setBackgroundResource(R.drawable.background_radius_20_title);
+        textViewList.add(holder.title);
 
         holder.title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    for (int i=0; i<textViewList.size(); i++){
-                        if (i == holder.getAdapterPosition() && current.getIsAvailable()){
-                            textViewList.get(i).setBackgroundResource(R.drawable.background_radius_20_title);
-                            CalendarFragment.SELECTED_TIME = current.getId();
-                            CalendarFragment.SELECTED_TIME_STRING=  current.getTime();
 
-                        } else {
-                            textViewList.get(i).setBackgroundResource(R.drawable.background_empty);
+                for (int i=0; i<textViewList.size(); i++) {
+                    textViewList.get(i).setBackgroundResource(R.drawable.background_empty);
+                }
 
-                        }
-                    }
-
-
+                if (current.getIsAvailable()){
+                    CalendarFragment.SELECTED_TIME = current.getId();
+                    CalendarFragment.SELECTED_TIME_STRING=  current.getTime();
+                    holder.title.setBackgroundResource(R.drawable.background_radius_20_title);
+                } else {
+                    CalendarFragment.SELECTED_TIME = null;
+                    CalendarFragment.SELECTED_TIME_STRING=  "";
+                }
             }
         });
     }

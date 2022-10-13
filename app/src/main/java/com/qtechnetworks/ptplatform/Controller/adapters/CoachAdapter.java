@@ -13,7 +13,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.qtechnetworks.ptplatform.Model.Beans.Coach.Coach;
+import com.qtechnetworks.ptplatform.Model.Beans.Coach.Datum;
+import com.qtechnetworks.ptplatform.Model.utilits.PrefKeys;
+import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Fragment.ContactFragment;
 import com.qtechnetworks.ptplatform.View.Fragment.MainFragment;
@@ -24,9 +29,11 @@ import java.util.List;
 public class CoachAdapter extends RecyclerView.Adapter<CoachAdapter.ViewHolder>  {
 
     private Context context;
+    private Coach coach;
 
-    public CoachAdapter(Context context) {
+    public CoachAdapter(Context context, Coach coach) {
         this.context=context;
+        this.coach=coach;
     }
 
 
@@ -40,9 +47,19 @@ public class CoachAdapter extends RecyclerView.Adapter<CoachAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
+        Datum current = coach.getData().get(position);
+
+        holder.trainerName.setText(current.getLastName());
+        Glide.with(context).load(current.getAvatar()).placeholder(R.drawable.logo).into(holder.trainerImage);
+
         holder.coachLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                PreferencesUtils.putString(PrefKeys.coachid,current.getId().toString());
+                PreferencesUtils.setCoach(current, context);
+
                 setFragment(R.id.home_frame ,new MainFragment(), (AppCompatActivity) v.getContext());
             }
         });
@@ -59,7 +76,7 @@ public class CoachAdapter extends RecyclerView.Adapter<CoachAdapter.ViewHolder> 
     @Override
     public int getItemCount() {
 
-        return 10;
+        return coach.getData().size();
 
     }
 

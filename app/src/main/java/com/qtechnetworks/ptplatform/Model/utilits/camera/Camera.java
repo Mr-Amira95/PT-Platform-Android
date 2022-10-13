@@ -57,7 +57,6 @@ public class Camera {
             }
         });
 
-
         dialogView.findViewById(R.id.gallery).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,27 +74,16 @@ public class Camera {
 
     public static void showGalleryFromFragment(final Activity activity, final Fragment fragment) {
 
-
-
-
         LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        View dialogView = inflater.inflate(R.layout.dialog_gallery, null);
+        View dialogView = inflater.inflate(R.layout.gallery, null);
         builder.setView(dialogView);
-
-        dialogView.findViewById(R.id.Camera).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                captureImage(activity);
-                desDialog.cancel();
-            }
-        });
 
         dialogView.findViewById(R.id.gallery).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                activity.startActivityForResult(i, GALLERY_REQUEST);
+                Intent i = new Intent(Intent.ACTION_PICK, EXTERNAL_CONTENT_URI);
+                fragment.startActivityForResult(i, GALLERY_REQUEST);
                 desDialog.cancel();
             }
         });

@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,11 +20,14 @@ import com.qtechnetworks.ptplatform.Model.Beans.Progress.Percentage;
 import com.qtechnetworks.ptplatform.Model.Beans.Progress.Progress;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
+import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 import com.qtechnetworks.ptplatform.View.Dialogs.AddMeasurementsDialog;
 import com.qtechnetworks.ptplatform.View.Dialogs.AddProgressDialog;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 import io.reactivex.disposables.Disposable;
@@ -36,16 +40,21 @@ public class ProgressFragment extends Fragment  implements CallBack {
             beforeLeftThigh,afterLeftThigh,beforeLeftCalf,afterLeftCalf,beforeRightCalf,
             afterRightCalf,beforeBelly,afterBelly,beforeUpperBelly,afterUpperBelly,beforelowerBelly,afterlowerBelly,fatPercentage,musclePercentae,weightPercentage,waterPercentage;
     private ImageView fatIncrease,fatDecrease,muscleIncrease,muscleDecrease,weightIncrease,weightDecrease,waterIncrease,waterDecrease;
-  //  private TextView sunWorkout, monWorkout, tueWorkout, wedWorkout, thuWorkout, friWorkout, satWorkout;
-   // private TextView sunNutrition, monNutrition, tueNutrition, wedNutrition, thuNutrition, friNutrition, satNutrition;
-  //  private RecyclerView workoutRecyclerView, nutritionRecyclerview;
- //   private WorkoutHistoryAdapter workoutHistoryAdapter;
- //   private NutritionHistoryAdapter nutritionHistoryAdapter;
+
     private Button updateProgressBtn,updateMeasurementsBtn;
 
     private AddProgressDialog progressDialog;
     private AddMeasurementsDialog maesurementsDialog;
- //   private List<TextView> workoutDays, nutritionDays;
+
+    Integer userID;
+
+    public ProgressFragment(Integer userID) {
+        this.userID = userID;
+    }
+
+    public ProgressFragment() {
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,6 +62,13 @@ public class ProgressFragment extends Fragment  implements CallBack {
         View view = inflater.inflate(R.layout.fragment_progress, container, false);
 
         initials(view);
+        clicks();
+
+        // Inflate the layout for this fragment
+        return view;
+    }
+
+    private void clicks() {
 
         weightTitle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,12 +139,12 @@ public class ProgressFragment extends Fragment  implements CallBack {
                 progressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override
                     public void onDismiss(DialogInterface dialogInterface) {
-                        getPrrogress();
-
+//                        getPrrogress();
                     }
                 });
             }
         });
+
         updateMeasurementsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -139,196 +155,11 @@ public class ProgressFragment extends Fragment  implements CallBack {
                     @Override
                     public void onDismiss(DialogInterface dialogInterface) {
 
-                        getMeasurements();
+//                        getMeasurements();
                     }
                 });
             }
         });
-//        workoutDays.get(0).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                for (int i=0; i<workoutDays.size(); i++){
-//                    if (i == 0){
-//                        workoutDays.get(i).setBackgroundResource(R.drawable.button_background);
-//                    } else {
-//                        workoutDays.get(i).setBackgroundResource(R.drawable.background_empty);
-//                    }
-//                }
-//            }
-//        });
-//
-//        workoutDays.get(1).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                for (int i=0; i<workoutDays.size(); i++){
-//                    if (i == 1){
-//                        workoutDays.get(i).setBackgroundResource(R.drawable.button_background);
-//                    } else {
-//                        workoutDays.get(i).setBackgroundResource(R.drawable.background_empty);
-//                    }
-//                }
-//            }
-//        });
-//
-//        workoutDays.get(2).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                for (int i=0; i<workoutDays.size(); i++){
-//                    if (i == 2){
-//                        workoutDays.get(i).setBackgroundResource(R.drawable.button_background);
-//                    } else {
-//                        workoutDays.get(i).setBackgroundResource(R.drawable.background_empty);
-//                    }
-//                }
-//            }
-//        });
-//
-//        workoutDays.get(3).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                for (int i=0; i<workoutDays.size(); i++){
-//                    if (i == 3){
-//                        workoutDays.get(i).setBackgroundResource(R.drawable.button_background);
-//                    } else {
-//                        workoutDays.get(i).setBackgroundResource(R.drawable.background_empty);
-//                    }
-//                }
-//            }
-//        });
-//
-//        workoutDays.get(4).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                for (int i=0; i<workoutDays.size(); i++){
-//                    if (i == 4){
-//                        workoutDays.get(i).setBackgroundResource(R.drawable.button_background);
-//                    } else {
-//                        workoutDays.get(i).setBackgroundResource(R.drawable.background_empty);
-//                    }
-//                }
-//            }
-//        });
-//
-//        workoutDays.get(5).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                for (int i=0; i<workoutDays.size(); i++){
-//                    if (i == 5){
-//                        workoutDays.get(i).setBackgroundResource(R.drawable.button_background);
-//                    } else {
-//                        workoutDays.get(i).setBackgroundResource(R.drawable.background_empty);
-//                    }
-//                }
-//            }
-//        });
-//
-//        workoutDays.get(6).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                for (int i=0; i<workoutDays.size(); i++){
-//                    if (i == 6){
-//                        workoutDays.get(i).setBackgroundResource(R.drawable.button_background);
-//                    } else {
-//                        workoutDays.get(i).setBackgroundResource(R.drawable.background_empty);
-//                    }
-//                }
-//            }
-//        });
-//
-//        nutritionDays.get(0).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                for (int i=0; i<nutritionDays.size(); i++){
-//                    if (i == 0){
-//                        nutritionDays.get(i).setBackgroundResource(R.drawable.button_background);
-//                    } else {
-//                        nutritionDays.get(i).setBackgroundResource(R.drawable.background_empty);
-//                    }
-//                }
-//            }
-//        });
-//
-//        nutritionDays.get(1).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                for (int i=0; i<nutritionDays.size(); i++){
-//                    if (i == 1){
-//                        nutritionDays.get(i).setBackgroundResource(R.drawable.button_background);
-//                    } else {
-//                        nutritionDays.get(i).setBackgroundResource(R.drawable.background_empty);
-//                    }
-//                }
-//            }
-//        });
-//
-//        nutritionDays.get(2).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                for (int i=0; i<nutritionDays.size(); i++){
-//                    if (i == 2){
-//                        nutritionDays.get(i).setBackgroundResource(R.drawable.button_background);
-//                    } else {
-//                        nutritionDays.get(i).setBackgroundResource(R.drawable.background_empty);
-//                    }
-//                }
-//            }
-//        });
-//
-//        nutritionDays.get(3).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                for (int i=0; i<nutritionDays.size(); i++){
-//                    if (i == 3){
-//                        nutritionDays.get(i).setBackgroundResource(R.drawable.button_background);
-//                    } else {
-//                        nutritionDays.get(i).setBackgroundResource(R.drawable.background_empty);
-//                    }
-//                }
-//            }
-//        });
-//
-//        nutritionDays.get(4).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                for (int i=0; i<nutritionDays.size(); i++){
-//                    if (i == 4){
-//                        nutritionDays.get(i).setBackgroundResource(R.drawable.button_background);
-//                    } else {
-//                        nutritionDays.get(i).setBackgroundResource(R.drawable.background_empty);
-//                    }
-//                }
-//            }
-//        });
-//
-//        nutritionDays.get(5).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                for (int i=0; i<nutritionDays.size(); i++){
-//                    if (i == 5){
-//                        nutritionDays.get(i).setBackgroundResource(R.drawable.button_background);
-//                    } else {
-//                        nutritionDays.get(i).setBackgroundResource(R.drawable.background_empty);
-//                    }
-//                }
-//            }
-//        });
-//
-//        nutritionDays.get(6).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                for (int i=0; i<nutritionDays.size(); i++){
-//                    if (i == 6){
-//                        nutritionDays.get(i).setBackgroundResource(R.drawable.button_background);
-//                    } else {
-//                        nutritionDays.get(i).setBackgroundResource(R.drawable.background_empty);
-//                    }
-//                }
-//            }
-//        });
-
-
-        // Inflate the layout for this fragment
-        return view;
     }
 
     private void initials(View view) {
@@ -345,22 +176,6 @@ public class ProgressFragment extends Fragment  implements CallBack {
         stepsTitle = view.findViewById(R.id.steps_title);
         stepsValue = view.findViewById(R.id.steps_value);
 
-//        workoutRecyclerView = view.findViewById(R.id.workout_history_recyclerview);
-//        nutritionRecyclerview = view.findViewById(R.id.nutrition_history_recyclerview);
-//
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-//        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-//        workoutRecyclerView.setLayoutManager(linearLayoutManager);
-//
-//        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getContext());
-//        linearLayoutManager1.setOrientation(LinearLayoutManager.VERTICAL);
-//        nutritionRecyclerview.setLayoutManager(linearLayoutManager1);
-//
-//        workoutHistoryAdapter = new WorkoutHistoryAdapter(getContext());
-//        workoutRecyclerView.setAdapter(workoutHistoryAdapter);
-//
-//        nutritionHistoryAdapter = new NutritionHistoryAdapter(getContext());
-//        nutritionRecyclerview.setAdapter(nutritionHistoryAdapter);
         updateProgressBtn=view.findViewById(R.id.update_progress_btn);
         updateMeasurementsBtn=view.findViewById(R.id.update_measurements_btn);
         beforeDate=view.findViewById(R.id.date);
@@ -403,39 +218,17 @@ public class ProgressFragment extends Fragment  implements CallBack {
         weightIncrease=view.findViewById(R.id.weight_increase_iv);
         waterIncrease=view.findViewById(R.id.water_increase_iv);
         waterDecrease=view.findViewById(R.id.water_decrease_iv);
-//        workoutDays = new ArrayList<>();
-//        sunWorkout = view.findViewById(R.id.sunday);
-//        workoutDays.add(sunWorkout);
-//        monWorkout = view.findViewById(R.id.monday);
-//        workoutDays.add(monWorkout);
-//        tueWorkout = view.findViewById(R.id.tuesday);
-//        workoutDays.add(tueWorkout);
-//        wedWorkout = view.findViewById(R.id.wednesday);
-//        workoutDays.add(wedWorkout);
-//        thuWorkout = view.findViewById(R.id.thursday);
-//        workoutDays.add(thuWorkout);
-//        friWorkout = view.findViewById(R.id.friday);
-//        workoutDays.add(friWorkout);
-//        satWorkout = view.findViewById(R.id.saterday);
-//        workoutDays.add(satWorkout);
-//
-//        nutritionDays = new ArrayList<>();
-//        sunNutrition = view.findViewById(R.id.sunday_nutrition);
-//        nutritionDays.add(sunNutrition);
-//        monNutrition = view.findViewById(R.id.monday_nutrition);
-//        nutritionDays.add(monNutrition);
-//        tueNutrition = view.findViewById(R.id.tuesday_nutrition);
-//        nutritionDays.add(tueNutrition);
-//        wedNutrition = view.findViewById(R.id.wednesday_nutrition);
-//        nutritionDays.add(wedNutrition);
-//        thuNutrition = view.findViewById(R.id.thursday_nutrition);
-//        nutritionDays.add(thuNutrition);
-//        friNutrition = view.findViewById(R.id.friday_nutrition);
-//        nutritionDays.add(friNutrition);
-//        satNutrition = view.findViewById(R.id.saterday_nutrition);
-//        nutritionDays.add(satNutrition);
-        getPrrogress();
-        getMeasurements();
+
+        if (PreferencesUtils.getUserType().equalsIgnoreCase("Coach")){
+            updateProgressBtn.setVisibility(View.GONE);
+            updateMeasurementsBtn.setVisibility(View.GONE);
+        } else if (PreferencesUtils.getUserType().equalsIgnoreCase("Trainee")){
+            getPrrogress();
+            getMeasurements();
+            updateProgressBtn.setVisibility(View.VISIBLE);
+            updateMeasurementsBtn.setVisibility(View.VISIBLE);
+        }
+
     }
 
     private void getMeasurements(){
@@ -467,6 +260,7 @@ public class ProgressFragment extends Fragment  implements CallBack {
                 case AppConstants.HEALTHS_TAG:
 
                     Progress myProgress=(Progress) result;
+
                     for (Datum myp :myProgress.getData()) {
                         if(myp.getFat()!=null){
                             fatValue.setText(myp.getFat().toString()+"%");
@@ -480,6 +274,7 @@ public class ProgressFragment extends Fragment  implements CallBack {
                                 fatIncrease.setVisibility(View.VISIBLE);
                             }
                         }
+
                         if(myp.getMuscle()!=null){
                             muscleValue.setText(myp.getMuscle().toString()+"%");
                             Percentage percentage=myp.getPercentage();
@@ -492,6 +287,7 @@ public class ProgressFragment extends Fragment  implements CallBack {
                                 muscleIncrease.setVisibility(View.VISIBLE);
                             }
                         }
+
                         if(myp.getWeight()!=null){
                             weightValue.setText(myp.getWeight().toString()+"kg");
                             Percentage percentage=myp.getPercentage();
@@ -504,6 +300,7 @@ public class ProgressFragment extends Fragment  implements CallBack {
                                 weightIncrease.setVisibility(View.VISIBLE);
                             }
                         }
+
                         if(myp.getWater()!=null){
                             waterValue.setText(myp.getWater().toString()+"%");
                             Percentage percentage=myp.getPercentage();
@@ -516,12 +313,14 @@ public class ProgressFragment extends Fragment  implements CallBack {
                                 waterIncrease.setVisibility(View.VISIBLE);
                             }
                         }
+
                         if(myp.getActive_calories()!=null){
                             activeCaloriesValue.setText(myp.getActive_calories().toString()+" Calories");
                             Percentage percentage=myp.getPercentage();
                             musclePercentae.setText(percentage.getValue().toString()+"%");
 
                         }
+
                         if(myp.getSteps()!=null){
                             stepsValue.setText(myp.getSteps().toString()+" Steps");
                             Percentage percentage=myp.getPercentage();
@@ -530,68 +329,87 @@ public class ProgressFragment extends Fragment  implements CallBack {
                     }
 
                     break;
+
                 case AppConstants.BODYMAESUREMENTS_TAG:
                     BodyMeasurement bodyMeasurement=(BodyMeasurement) result;
                     if(bodyMeasurement.getData().size()==2) {
                         com.qtechnetworks.ptplatform.Model.Beans.BodyMeasurement.Datum beforeMeasurement=bodyMeasurement.getData().get(1);
                         com.qtechnetworks.ptplatform.Model.Beans.BodyMeasurement.Datum afterMeasurement=bodyMeasurement.getData().get(0);
                         if (beforeMeasurement!= null) {
+
                             //TODO Edit Names Like Nick
-                            beforeNick.setText( "NICK: "+beforeMeasurement.getNeck().toString());
-                            beforeChest.setText("CHEST: "+beforeChest.getText().toString()+beforeMeasurement.getChest().toString());
-                            beforeLeftArm.setText("LEFT ARM: "+beforeLeftArm.getText().toString()+beforeMeasurement.getLeftArm().toString());
-                            beforeRightArm.setText("RIGHT ARM: "+beforeMeasurement.getRightArm().toString());
-                            beforeWaist.setText("WAIST: "+beforeWaist.getText().toString()+beforeMeasurement.getWaist().toString());
-                            beforeHips.setText("HIPS : "+beforeHips.getText().toString()+beforeMeasurement.getHips().toString());
-                            beforeLeftThigh.setText(" : "+beforeLeftThigh.getText().toString()+beforeMeasurement.getLeftThigh().toString());
-                            beforeLeftCalf.setText("HIPS : "+beforeLeftCalf.getText().toString()+beforeMeasurement.getLiftCalf().toString());
-                            beforeRightCalf.setText("HIPS : "+beforeRightCalf.getText().toString()+beforeMeasurement.getRightCalf().toString());
-                            beforeDate.setText("HIPS : "+beforeDate.getText().toString()+beforeMeasurement.getDate());
-                            beforeBelly.setText("HIPS : "+beforeBelly.getText().toString()+beforeMeasurement.getBelly());
-                            beforeUpperBelly.setText("HIPS : "+beforeUpperBelly.getText().toString()+beforeMeasurement.getUpper_belly());
-                            beforelowerBelly.setText("HIPS : "+beforelowerBelly.getText().toString()+beforeMeasurement.getLower_belly());
+                            beforeNick.append(beforeMeasurement.getNeck().toString());
+                            beforeChest.append(beforeMeasurement.getChest().toString());
+                            beforeLeftArm.append(beforeMeasurement.getLeftArm().toString());
+                            beforeRightArm.append(beforeMeasurement.getRightArm().toString());
+                            beforeWaist.append(beforeMeasurement.getWaist().toString());
+                            beforeHips.append(beforeMeasurement.getHips().toString());
+                            beforeLeftThigh.append(beforeMeasurement.getLeftThigh().toString());
+                            beforeLeftCalf.append(beforeMeasurement.getLiftCalf().toString());
+                            beforeRightCalf.append(beforeMeasurement.getRightCalf().toString());
+                            beforeDate.append(changeDateFormat(beforeMeasurement.getDate()));
+                            beforeBelly.append(String.valueOf(beforeMeasurement.getBelly()));
+                            beforeUpperBelly.append(String.valueOf(beforeMeasurement.getUpper_belly()));
+                            beforelowerBelly.append(String.valueOf(beforeMeasurement.getLower_belly()));
 
                         }
                         if (afterMeasurement!= null) {
-                            afterNick.setText(afterNick.getText().toString()+afterMeasurement.getNeck().toString());
-                            afterChest.setText(afterChest.getText().toString()+afterMeasurement.getChest().toString());
-                            afterLeftArm.setText(afterLeftArm.getText().toString()+afterMeasurement.getLeftArm().toString());
-                            afterRightArm.setText(afterRightArm.getText().toString()+afterMeasurement.getRightArm().toString());
-                            afterWaist.setText(afterWaist.getText().toString()+afterMeasurement.getWaist().toString());
-                            afterHips.setText(afterHips.getText().toString()+afterMeasurement.getHips().toString());
-                            afterLeftThigh.setText(afterLeftThigh.getText().toString()+afterMeasurement.getLeftThigh().toString());
-                            afterLeftCalf.setText(afterLeftCalf.getText().toString()+afterMeasurement.getLiftCalf().toString());
-                            afterRightCalf.setText(afterRightCalf.getText().toString()+afterMeasurement.getRightCalf().toString());
-                            afterDate.setText(afterDate.getText().toString()+afterMeasurement.getDate());
-                            afterBelly.setText(afterBelly.getText().toString()+afterMeasurement.getBelly());
-                            afterUpperBelly.setText(afterUpperBelly.getText().toString()+afterMeasurement.getUpper_belly());
-                            afterlowerBelly.setText(afterlowerBelly.getText().toString()+afterMeasurement.getLower_belly());
+                            afterNick.append(afterMeasurement.getNeck().toString());
+                            afterChest.append(afterMeasurement.getChest().toString());
+                            afterLeftArm.append(afterMeasurement.getLeftArm().toString());
+                            afterRightArm.append(afterMeasurement.getRightArm().toString());
+                            afterWaist.append(afterMeasurement.getWaist().toString());
+                            afterHips.append(afterMeasurement.getHips().toString());
+                            afterLeftThigh.append(afterMeasurement.getLeftThigh().toString());
+                            afterLeftCalf.append(afterMeasurement.getLiftCalf().toString());
+                            afterRightCalf.append(afterMeasurement.getRightCalf().toString());
+                            afterDate.append(changeDateFormat(afterMeasurement.getDate()));
+                            afterBelly.append(String.valueOf(afterMeasurement.getBelly()));
+                            afterUpperBelly.append(String.valueOf(afterMeasurement.getUpper_belly()));
+                            afterlowerBelly.append(String.valueOf(afterMeasurement.getLower_belly()));
                         }
                     }
+
                     if(bodyMeasurement.getData().size()==1) {
-                        com.qtechnetworks.ptplatform.Model.Beans.BodyMeasurement.Datum beforeMeasurement=bodyMeasurement.getData().get(01);
+                        com.qtechnetworks.ptplatform.Model.Beans.BodyMeasurement.Datum beforeMeasurement=bodyMeasurement.getData().get(0);
                         if (beforeMeasurement!= null) {
-                            beforeNick.setText(beforeNick.getText().toString()+beforeMeasurement.getNeck().toString());
-                            beforeChest.setText(beforeChest.getText().toString()+beforeMeasurement.getChest().toString());
-                            beforeLeftArm.setText(beforeLeftArm.getText().toString()+beforeMeasurement.getLeftArm().toString());
-                            beforeRightArm.setText(beforeRightArm.getText().toString()+beforeMeasurement.getRightArm().toString());
-                            beforeWaist.setText(beforeWaist.getText().toString()+beforeMeasurement.getWaist().toString());
-                            beforeHips.setText(beforeHips.getText().toString()+beforeMeasurement.getHips().toString());
-                            beforeLeftThigh.setText(beforeLeftThigh.getText().toString()+beforeMeasurement.getLeftThigh().toString());
-                            beforeLeftCalf.setText(beforeLeftCalf.getText().toString()+beforeMeasurement.getLiftCalf().toString());
-                            beforeRightCalf.setText(beforeRightCalf.getText().toString()+beforeMeasurement.getRightCalf().toString());
-                             beforeDate.setText(beforeDate.getText().toString()+beforeMeasurement.getDate());
-                            beforeBelly.setText(beforeBelly.getText().toString()+beforeMeasurement.getBelly());
-                            beforeUpperBelly.setText(beforeUpperBelly.getText().toString()+beforeMeasurement.getUpper_belly());
-                            beforelowerBelly.setText(beforelowerBelly.getText().toString()+beforeMeasurement.getLower_belly());
+                            beforeNick.append(beforeMeasurement.getNeck().toString());
+                            beforeChest.append(beforeMeasurement.getChest().toString());
+                            beforeLeftArm.append(beforeMeasurement.getLeftArm().toString());
+                            beforeRightArm.append(beforeMeasurement.getRightArm().toString());
+                            beforeWaist.append(beforeMeasurement.getWaist().toString());
+                            beforeHips.append(beforeMeasurement.getHips().toString());
+                            beforeLeftThigh.append(beforeMeasurement.getLeftThigh().toString());
+                            beforeLeftCalf.append(beforeMeasurement.getLiftCalf().toString());
+                            beforeRightCalf.append(beforeMeasurement.getRightCalf().toString());
+                            beforeDate.append(changeDateFormat(beforeMeasurement.getDate()));
+                            beforeBelly.append(String.valueOf(beforeMeasurement.getBelly()));
+                            beforeUpperBelly.append(String.valueOf(beforeMeasurement.getUpper_belly()));
+                            beforelowerBelly.append(String.valueOf(beforeMeasurement.getLower_belly()));
                         }
                     }
-
-
-
 
                     break;
             }
+        }
+    }
+
+    private String changeDateFormat(String unFormated) {
+        String inputPattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
+        String outputPattern = "YYYY-MMM-dd";
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
+            SimpleDateFormat outputFormat= new SimpleDateFormat(outputPattern);
+
+            try {
+                Date date = inputFormat.parse(unFormated);
+                return outputFormat.format(date);
+            } catch (Exception e){
+                return unFormated;
+            }
+        } else {
+            return unFormated;
         }
     }
 

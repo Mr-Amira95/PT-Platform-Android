@@ -29,12 +29,10 @@ import java.util.List;
 public class LogAdapter extends RecyclerView.Adapter<LogAdapter.ViewHolder>  {
 
     private Context context;
-    private String flag;
     List<Datum> data;
 
-    public LogAdapter(Context context, String flag, List<Datum> data) {
+    public LogAdapter(Context context, List<Datum> data) {
         this.context=context;
-        this.flag = flag;
         this.data=data;
     }
 

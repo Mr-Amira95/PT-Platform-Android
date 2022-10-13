@@ -49,50 +49,50 @@ import java.util.HashMap;
 import java.util.TimeZone;
 
 import io.reactivex.disposables.Disposable;
+import pub.devrel.easypermissions.EasyPermissions;
 
 public class CalendarFragment extends Fragment implements CallBack {
 
     RecyclerView timesRecyclerview;
     CalendarView calendarView;
-    CoachTimesAdapter timesAdapter;
     public static Integer SELECTED_TIME;
     Button confirmBtn;
-    String coachId;
+    public static String selectedDate="";
     TextView coachNameTv;
-    String coachName="";
-     String selectedDate="";
-    public static String SELECTED_TIME_STRING="";
-    CalenderTime times;
-
+    public static String SELECTED_TIME_STRING = "";
+    boolean thereTimes= false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_calendar, container, false);
-        askForPermission(Manifest.permission.WRITE_CALENDAR,1);
+        EasyPermissions.requestPermissions(getActivity(), "Please accept permission", 233, Manifest.permission.WRITE_CALENDAR);
 
         initials(view);
-        if (getArguments() != null) {
-            coachId=getArguments().getString("coachid");
-            coachName= PreferencesUtils.getCoach(getContext()).getFirstName();
-            coachNameTv.setText(coachName+" availability:");
-        }
+        clicks();
+
+        // Inflate the layout for this fragment
+        return view;
+    }
+
+    private void clicks() {
+
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.WRITE_CALENDAR) == PackageManager.PERMISSION_GRANTED) {
-                    // You can use the API that requires the permission.
-                    requestReservation(SELECTED_TIME+"");
-                } else {
-                    // You can directly ask for the permission.
-                    askForPermission(Manifest.permission.WRITE_CALENDAR,1);
 
-                }
-
-
+                EasyPermissions.requestPermissions(getActivity(), "Please accept permission", 233, Manifest.permission.WRITE_CALENDAR);
+                 if (SELECTED_TIME != null && thereTimes){
+                        requestReservation(String.valueOf(SELECTED_TIME));
+                } else if (!thereTimes){
+                     Toast.makeText(getContext(), "There are no available appointments on " + selectedDate, Toast.LENGTH_SHORT).show();
+                 } else {
+                     Toast.makeText(getContext(), "Please select time", Toast.LENGTH_SHORT).show();
+                 }
             }
         });
+
         calendarView.setMinDate(Calendar.getInstance().getTimeInMillis());
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -102,11 +102,10 @@ public class CalendarFragment extends Fragment implements CallBack {
             }
         });
 
-
-        // Inflate the layout for this fragment
-        return view;
     }
+
     private void askForPermission(String permission, int requestCode) {
+
         if (ContextCompat.checkSelfPermission(getContext(), permission)
                 != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), permission)) {
@@ -117,27 +116,26 @@ public class CalendarFragment extends Fragment implements CallBack {
             }
         }
     }
+
     private void requestReservation(String time_id){
 
-        Log.d("AddEvent","out");
         HashMap<String ,Object> params=new HashMap<>();
         params.put("time_id",time_id);
-      //  addEvent("Appointment with caoch "+PreferencesUtils.getCoach(getContext()).getFirstName(),"on Zoom",selectedDate+" "+SELECTED_TIME_STRING,"Zoom URL");
 
-          MyApplication.getInstance().getHttpHelper().setCallback(this);
-       MyApplication.getInstance().getHttpHelper().Post(getContext(), AppConstants.COACH_CALENDAR_RESERVATION_URL, AppConstants.COACH_CALENDAR_RESERVATION_TAG , CoachTime.class, params);
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().Post(getContext(), AppConstants.COACH_CALENDAR_RESERVATION_URL, AppConstants.COACH_CALENDAR_RESERVATION_TAG , CoachTime.class, params);
 
     }
     private void getAvailableTimes(String date){
 
-
             HashMap<String ,Object> params=new HashMap<>();
-            params.put("coach_id",coachId);
-            params.put("date",date);
+            params.put("coach_id", PreferencesUtils.getCoach(getContext()).getId());
+            params.put("date", date);
             MyApplication.getInstance().getHttpHelper().setCallback(this);
             MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.COACH_CALENDAR_URL, AppConstants.COACH_CALENDAR_TAG, CalenderTime.class, params);
 
     }
+
     private void initials(View view) {
 
         confirmBtn = view.findViewById(R.id.confirm_btn);
@@ -149,6 +147,9 @@ public class CalendarFragment extends Fragment implements CallBack {
         timesRecyclerview.setLayoutManager(linearLayoutManager3);
         coachNameTv=view.findViewById(R.id.coach_name_tv);
 
+        coachNameTv.setText(PreferencesUtils.getCoach(getContext()).getFirstName() + " availability:");
+        selectedDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        getAvailableTimes(selectedDate);
     }
 
     private void setFragment(int frameLayout, Fragment fragment) {
@@ -168,19 +169,30 @@ public class CalendarFragment extends Fragment implements CallBack {
 
             switch (tag) {
                 case AppConstants.COACH_CALENDAR_TAG:
+
                     if(isSuccess) {
-                         times = (CalenderTime) result;
-                        timesAdapter = new CoachTimesAdapter(getContext(), times.getData());
-                        timesRecyclerview.setAdapter(timesAdapter);
+                        CalenderTime times = (CalenderTime) result;
+
+                        if (times.getData().size() > 0){
+                            thereTimes = true;
+                            CoachTimesAdapter timesAdapter = new CoachTimesAdapter(getContext(), times.getData());
+                            timesRecyclerview.setAdapter(timesAdapter);
+                            CalendarFragment.SELECTED_TIME = null;
+                            CalendarFragment.SELECTED_TIME_STRING=  "";
+                        } else {
+                            thereTimes = false;
+                            CoachTimesAdapter timesAdapter = new CoachTimesAdapter(getContext(), times.getData());
+                            timesRecyclerview.setAdapter(timesAdapter);
+                            Toast.makeText(getContext(), "There are no available appointments on " + selectedDate, Toast.LENGTH_SHORT).show();
+                            CalendarFragment.SELECTED_TIME = null;
+                            CalendarFragment.SELECTED_TIME_STRING=  "";
+                        }
                     }
                         break;
+
                 case AppConstants.COACH_CALENDAR_RESERVATION_TAG:
                     if(isSuccess) {
-                        addEvent("Appointment with caoch "+PreferencesUtils.getCoach(getContext()).getFirstName(),"on Zoom",selectedDate+" "+SELECTED_TIME_STRING,"Zoom URL");
-
                         setFragment(R.id.home_frame, new SuccessFragment("Calendar"));
-
-
                     }else{
                         Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
                     break;
@@ -188,76 +200,6 @@ public class CalendarFragment extends Fragment implements CallBack {
             }
         }
     }
-    public long  getEndDatetime(Date date) {
-        Calendar c = Calendar.getInstance();
-        c.setTime(date);
-
-        // Perform addition/subtraction
-        //  c.add(Calendar.YEAR, 2);
-        //   c.add(Calendar.MONTH, 1);
-        //   c.add(Calendar.DATE, -10);
-        //   c.add(Calendar.HOUR, -4);
-        c.add(Calendar.MINUTE, +30);
-        //   c.add(Calendar.SECOND, 50);
-
-        // Convert calendar back to Date
-        Date currentDatePlusOne = c.getTime();
-        //System.out.println("Current time => "+c.getTime());
-      //  SimpleDateFormat df = new SimpleDateFormat("hh:mm:ss");
-       // String formattedDate = df.format(currentDatePlusOne.getTime());
-        return currentDatePlusOne.getTime();
-    }
-    public void addEvent(String title, String location, String begin, String  description) {
-        Log.d("AddEvent",title+location+begin+description);
-        ContentResolver cr = getActivity().getContentResolver();
-        ContentValues values = new ContentValues();
-            String dateString = begin;
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-
-            try {
-                Date  date = sdf.parse(dateString);
-                long  startDate = date.getTime();
-               long endDate=getEndDatetime(date);
-                values.put(CalendarContract.Events.DTSTART, startDate);
-                values.put(CalendarContract.Events.TITLE, title);
-                values.put(CalendarContract.Events.DESCRIPTION, description);
-                values.put(CalendarContract.Events.EVENT_LOCATION, location);
-
-                TimeZone timeZone = TimeZone.getDefault();
-                values.put(CalendarContract.Events.EVENT_TIMEZONE, timeZone.getID());
-
-// Default calendar
-                values.put(CalendarContract.Events.CALENDAR_ID, 1);
-
-//        values.put(CalendarContract.Events.RRULE, "FREQ=DAILY;UNTIL="
-//                + dtUntill);
-// Set Period for 1 Hour
-                values.put(CalendarContract.Events.DURATION, "+P30M");
-
-                values.put(CalendarContract.Events.HAS_ALARM, 1);
-
-// Insert event to calendar
-                Uri uri = cr.insert(CalendarContract.Events.CONTENT_URI, values);
-                Intent intent = new Intent(Intent.ACTION_INSERT)
-                        .setData(CalendarContract.Events.CONTENT_URI)
-                        .putExtra(CalendarContract.Events.TITLE, title)
-                        .putExtra(CalendarContract.Events.EVENT_LOCATION, location)
-                        .putExtra(CalendarContract.Events.DURATION, "+P30M")
-                        .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startDate)
-                        .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endDate)
-                        .putExtra(CalendarContract.EXTRA_CUSTOM_APP_URI, endDate);
-             //   startActivity(intent);
-                if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
-                    startActivity(intent);
-                }
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-
-
-
-    }
-
 
     @Override
     public void onError(Throwable e) {
@@ -269,20 +211,4 @@ public class CalendarFragment extends Fragment implements CallBack {
 
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        switch (requestCode) {
-            case 1:
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    //permission with request code 1 granted
-                    Toast.makeText(getContext(), "Permission Granted" , Toast.LENGTH_LONG).show();
-                } else {
-                    //permission with request code 1 was not granted
-                    Toast.makeText(getContext(), "Permission was not Granted" , Toast.LENGTH_LONG).show();
-                }
-                break;
-            default:
-                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
-    }
 }

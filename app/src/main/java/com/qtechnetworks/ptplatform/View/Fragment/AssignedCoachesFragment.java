@@ -10,14 +10,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.qtechnetworks.ptplatform.Controller.adapters.CoachAdapter;
+import com.qtechnetworks.ptplatform.Controller.adapters.CoachUserAdapter;
+import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
+import com.qtechnetworks.ptplatform.Model.Beans.Coach.Coach;
+import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
+import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.R;
 
-public class AssignedCoachesFragment extends Fragment {
+import java.util.HashMap;
+
+import io.reactivex.disposables.Disposable;
+
+public class AssignedCoachesFragment extends Fragment implements CallBack {
 
     private RecyclerView coachRecyclerview;
-    private CoachAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -25,21 +34,57 @@ public class AssignedCoachesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_assigned_coaches, container, false);
 
         initials(view);
+        getAssignedCoach();
 
         // Inflate the layout for this fragment
         return view;
     }
 
+    private void getAssignedCoach(){
+
+        HashMap<String ,Object> params=new HashMap<>();
+
+        params.put("skip","0");
+        params.put("filter","assigned_coaches");
+
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.users_coaches_URL, AppConstants.users_coaches_TAG, Coach.class, params);
+
+    }
+
     private void initials(View view) {
         coachRecyclerview = view.findViewById(R.id.assigendcoaches_recyclerview);
-
-
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
         gridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         coachRecyclerview.setLayoutManager(gridLayoutManager);
+    }
 
-        adapter = new CoachAdapter(getContext());
-        coachRecyclerview.setAdapter(adapter);
+    @Override
+    public void onSubscribe(Disposable d) {
+
+    }
+
+    @Override
+    public void onNext(int tag, boolean isSuccess, Object result) {
+        Coach coach=(Coach) result;
+
+        if (coach.getData().size()>0) {
+            CoachAdapter adapter = new CoachAdapter(getContext(), coach);
+            coachRecyclerview.setAdapter(adapter);
+        } else {
+            Toast.makeText(getContext(), "No assigned coaches to show", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    @Override
+    public void onError(Throwable e) {
+
+    }
+
+    @Override
+    public void onComplete() {
+
     }
 }

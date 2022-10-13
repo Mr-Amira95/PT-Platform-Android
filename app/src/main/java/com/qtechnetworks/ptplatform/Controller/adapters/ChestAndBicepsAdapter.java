@@ -32,11 +32,9 @@ public class ChestAndBicepsAdapter extends RecyclerView.Adapter<ChestAndBicepsAd
 
     private Context context;
     List<Exercise> category;
-    private String flag;
 
-    public ChestAndBicepsAdapter(Context context, String flag, List<Exercise> category) {
+    public ChestAndBicepsAdapter(Context context, List<Exercise> category) {
         this.context = context;
-        this.flag = flag;
         this.category=category;
     }
 
@@ -51,30 +49,19 @@ public class ChestAndBicepsAdapter extends RecyclerView.Adapter<ChestAndBicepsAd
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        Exercise current=category.get(position);
+        Exercise current = category.get(position);
 
         try{
-
             Glide.with(context).load(current.getIcon()).placeholder(R.drawable.logo).into(holder.img);
-
         }catch (Exception e){
             e.printStackTrace();
         }
 
         holder.title.setText(current.getTitle().toString());
-
-
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (flag.equals("Exercises"))
-                    setFragment( new ExercisesSingleFragment(),"Exercises",current.getId().toString());
-                else if (flag.equals("Workout"))
-                    setFragment( new WorkoutSingleFragment(),current.getTitle().toString(),current.getDescription().toString(),current.getId().toString());
-                else if (flag.equals("Supplements"))
-                    setFragment( new SupplementSingleFragment());
-               // else if (flag.equals("Recipes and Diet Plans"))
-                   // setFragment( new PlansSingleFragment());
+                setFragment( new ExercisesSingleFragment(),"Exercises",current.getId().toString());
             }
         });
     }

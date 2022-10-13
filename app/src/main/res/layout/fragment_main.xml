@@ -7,14 +7,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".View.Fragment.MainFragment"
     android:background="@drawable/background_four">
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/slider_viewPager"
         android:layout_width="match_parent"
@@ -66,7 +59,6 @@
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Yuri-Fit"
             android:textColor="@color/white"
             android:textSize="@dimen/_18sdp"
             android:layout_marginTop="@dimen/_8sdp"
@@ -75,9 +67,9 @@
 
     </LinearLayout>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@id/info_card"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -308,7 +300,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/contact_us_layout"
+                    android:id="@+id/history_layout"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
@@ -317,24 +309,25 @@
                     android:layout_gravity="center">
 
                     <ImageView
-                        android:id="@+id/ContactUS_title"
+                        android:id="@+id/history_title"
                         android:layout_width="@dimen/_75sdp"
                         android:layout_height="@dimen/_75sdp"
-                        android:src="@drawable/ic_contact_us"
+                        android:src="@drawable/ic_history"
                         android:padding="@dimen/_20sdp"
                         android:background="@drawable/background_main_category"/>
 
                     <TextView
-                        android:id="@+id/ContactUS_icon"
+                        android:id="@+id/history_icon"
                         android:layout_width="@dimen/_75sdp"
                         android:layout_height="wrap_content"
                         android:maxLines="1"
-                        android:text="Contact Us"
+                        android:text="History"
                         android:textSize="@dimen/_8sdp"
                         android:textColor="@color/white"
                         android:gravity="center"/>
 
                 </LinearLayout>
+
             </LinearLayout>
 
             <LinearLayout
@@ -529,50 +522,7 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginHorizontal="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_8sdp">
-
-                <LinearLayout
-                    android:id="@+id/history_layout"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:layout_gravity="center">
-
-                    <ImageView
-                        android:id="@+id/history_title"
-                        android:layout_width="@dimen/_75sdp"
-                        android:layout_height="@dimen/_75sdp"
-                        android:src="@drawable/ic_history"
-                        android:padding="@dimen/_20sdp"
-                        android:background="@drawable/background_main_category"/>
-
-                    <TextView
-                        android:id="@+id/history_icon"
-                        android:layout_width="@dimen/_75sdp"
-                        android:layout_height="wrap_content"
-                        android:maxLines="1"
-                        android:text="History"
-                        android:textSize="@dimen/_8sdp"
-                        android:textColor="@color/white"
-                        android:gravity="center"/>
-
-                </LinearLayout>
-
-
-
-
-
-            </LinearLayout>
-
         </LinearLayout>
-    </androidx.appcompat.widget.LinearLayoutCompat>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+    </androidx.core.widget.NestedScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

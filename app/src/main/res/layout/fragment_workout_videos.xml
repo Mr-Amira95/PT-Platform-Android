@@ -97,15 +97,6 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/desc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum."
-        android:textColor="@color/white"
-        android:textSize="@dimen/_10sdp"
-        android:layout_marginHorizontal="@dimen/_15sdp"/>
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Upper Chest"

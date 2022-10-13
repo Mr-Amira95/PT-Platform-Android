@@ -50,7 +50,7 @@
         android:background="@drawable/background_radius_10"
         android:backgroundTint="@color/white"
         android:textColor="@color/backapp"
-        android:hint="Name"/>
+        android:hint="Title" />
 
     <EditText
         android:id="@+id/phone_edittext"
@@ -64,7 +64,8 @@
         android:backgroundTint="@color/white"
         android:textColor="@color/backapp"
         android:hint="Phone Number"
-        android:maxLines="1"/>
+        android:maxLines="1"
+        android:visibility="gone"/>
 
     <EditText
         android:id="@+id/email_edittext"
@@ -78,7 +79,8 @@
         android:backgroundTint="@color/white"
         android:textColor="@color/backapp"
         android:hint="Email Address"
-        android:maxLines="1"/>
+        android:maxLines="1"
+        android:visibility="gone"/>
 
     <EditText
         android:id="@+id/message_edittext"

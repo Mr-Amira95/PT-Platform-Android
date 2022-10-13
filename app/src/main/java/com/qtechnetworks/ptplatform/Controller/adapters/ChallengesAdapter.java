@@ -35,12 +35,10 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
     private Context context;
     List<ChallengeData> data;
 
-
     public ChallengesAdapter(Context context, List<ChallengeData> data) {
         this.context=context;
         this.data=data;
     }
-
 
     @NonNull
     @Override
@@ -54,24 +52,26 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
     public void onBindViewHolder(@NonNull ChallengesAdapter.ViewHolder holder, int position) {
         ChallengeData current= data.get(position);
 
+        holder.challengeName.setText(current.getTitle());
+
         try{
-            holder.challengeName.setText(current.getTitle());
             Glide.with(context).load(current.getIcon()).placeholder(R.drawable.logo).into(holder.ChallengeImg);
         }catch (Exception e){
             e.printStackTrace();
         }
+
         holder.challengeLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setFragment(R.id.home_frame,new ChallengesSignleFragment(current.getId()),(AppCompatActivity) view.getContext());
+                setFragment(new ChallengesSignleFragment(current.getId()));
             }
         });
 
     }
 
-    private void setFragment(int frameLayout, Fragment fragment, AppCompatActivity activity) {
-        FragmentTransaction fragmentTransaction= activity.getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(frameLayout, fragment);
+    private void setFragment(Fragment fragment) {
+        FragmentTransaction fragmentTransaction= ((MainActivity) context).getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.home_frame, fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
@@ -86,6 +86,7 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
         TextView challengeName;
         ImageView ChallengeImg;
         LinearLayout challengeLinearLayout;
+
         CheckBox completeCheckbox;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

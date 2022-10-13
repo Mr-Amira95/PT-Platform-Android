@@ -27,9 +27,7 @@ import java.util.HashMap;
 
 import io.reactivex.disposables.Disposable;
 
-
     public class AddMeasurementsDialog extends Dialog implements CallBack {
-
 
         Context mContext;
 
@@ -122,7 +120,14 @@ import io.reactivex.disposables.Disposable;
             updateBtn=findViewById(R.id.update_btn);
         }
 
+        private void setFragment(Fragment fragment) {
 
+            Bundle args = new Bundle();
+            fragment.setArguments(args);
+
+            ((MainActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.home_frame, fragment, "OptionsFragment").commit();
+
+        }
         @Override
         public void onSubscribe(Disposable d) {
 
@@ -130,16 +135,11 @@ import io.reactivex.disposables.Disposable;
 
         @Override
         public void onNext(int tag, boolean isSuccess, Object result) {
-            if(isSuccess &&tag== AppConstants.BODYMAESUREMENTS_TAG){}
-            Toast.makeText(mContext, "Measurements Added", Toast.LENGTH_SHORT).show();
+            if(isSuccess) {
+                Toast.makeText(mContext, "Measurements Added", Toast.LENGTH_SHORT).show();
+                setFragment(new ProgressFragment());
+            }
             this.dismiss();
-          //  setFragment( new ProgressFragment());
-
-        }
-        private void setFragment(Fragment fragment ) {
-
-            ((MainActivity) mContext).getSupportFragmentManager().popBackStack();
-            ((MainActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.home_frame, fragment, "OptionsFragment").addToBackStack(null).commit();
 
         }
         @Override

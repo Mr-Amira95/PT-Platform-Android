@@ -11,6 +11,21 @@ public class User {
     @SerializedName("first_name")
     @Expose
     private String firstName;
+    @SerializedName("full_name")
+    @Expose
+    private String fullName;
+    @SerializedName("nick_name")
+    @Expose
+    private String nickName;
+    @SerializedName("phone_number")
+    @Expose
+    private String phoneNumber;
+    @SerializedName("link_social_media")
+    @Expose
+    private String linkSocialMedia;
+    @SerializedName("potential_clients")
+    @Expose
+    private String potentialClients;
     @SerializedName("last_name")
     @Expose
     private String lastName;
@@ -20,6 +35,9 @@ public class User {
     @SerializedName("status")
     @Expose
     private String status;
+    @SerializedName("role")
+    @Expose
+    private String role;
     @SerializedName("avatar")
     @Expose
     private Object avatar;
@@ -38,6 +56,46 @@ public class User {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getLinkSocialMedia() {
+        return linkSocialMedia;
+    }
+
+    public void setLinkSocialMedia(String linkSocialMedia) {
+        this.linkSocialMedia = linkSocialMedia;
+    }
+
+    public String getPotentialClients() {
+        return potentialClients;
+    }
+
+    public void setPotentialClients(String potentialClients) {
+        this.potentialClients = potentialClients;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getLastName() {

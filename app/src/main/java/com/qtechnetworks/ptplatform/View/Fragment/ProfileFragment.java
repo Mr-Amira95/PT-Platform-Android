@@ -1,6 +1,8 @@
 package com.qtechnetworks.ptplatform.View.Fragment;
 
+import static android.app.Activity.RESULT_OK;
 import static com.qtechnetworks.ptplatform.Model.utilits.camera.Camera.captureImage;
+import static com.qtechnetworks.ptplatform.Model.utilits.camera.Camera.getPath;
 
 import android.Manifest;
 import android.app.Activity;
@@ -9,6 +11,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -27,122 +30,75 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
+import com.qtechnetworks.ptplatform.Model.Beans.General;
+import com.qtechnetworks.ptplatform.Model.Beans.RegisterAndLogin.UpdateUserResults;
+import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
+import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.Model.utilits.camera.Camera;
 import com.qtechnetworks.ptplatform.R;
-import com.qtechnetworks.ptplatform.View.Activity.ChoosingActivity;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
+import com.qtechnetworks.ptplatform.View.Activity.SplashActivity;
 import com.qtechnetworks.ptplatform.View.Dialogs.AddProgressDialog;
 import com.qtechnetworks.ptplatform.View.Dialogs.EditProfileDialog;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.HashMap;
 
-public class ProfileFragment extends Fragment {
+import io.reactivex.disposables.Disposable;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import pub.devrel.easypermissions.EasyPermissions;
+import retrofit2.Call;
+import retrofit2.Callback;
 
-    TextView username,joining_date;
+public class ProfileFragment extends Fragment implements CallBack {
 
+    TextView username, joining_date, assigned_coaches,progress,subscriptions,kyc,settings,logout;
     RoundedImageView profile_img;
-    public static final int CAMERA_REQUEST = 1888;
-    public static final int GALLERY_REQUEST = 100;
-    private static final String TAG = "TAG";
-    public static final int REQUEST_GALLERY_CODE = 200, REQUEST_CAMERA = 400, WRITE_EXTERNAL_STORAGE_CODE=201;
-
-    public static final int READ_REQUEST_CODE = 300;
-    TextView assigned_coaches,progress,subscriptions,kyc,settings,logout;
-    public static AlertDialog desDialog = null;
     ImageView editPin,editNamePin;
-    View view;
     private EditProfileDialog editProfileDialog;
+
+    String filePath = "";
+    File file;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view=inflater.inflate(R.layout.fragment_profile, container, false);
+        View view=inflater.inflate(R.layout.fragment_profile, container, false);
+
+        EasyPermissions.requestPermissions(getActivity(), "Please accept permission", 233, Manifest.permission.READ_EXTERNAL_STORAGE);
+        EasyPermissions.requestPermissions(getActivity(), "Please accept permission", 233, Manifest.permission.WRITE_EXTERNAL_STORAGE);
 
         initial(view);
+        clicks();
 
         return view;
     }
 
-    private void initial(View v){
-        username=v.findViewById(R.id.username);
-        joining_date=v.findViewById(R.id.joining_date);
-        profile_img=v.findViewById(R.id.profile_img);
-        editPin=v.findViewById(R.id.edit_profile_image_view);
-        editNamePin=v.findViewById(R.id.edit_name_image_view);
-        assigned_coaches=v.findViewById(R.id.assigned_coaches);
-        progress=v.findViewById(R.id.progress);
-        subscriptions=v.findViewById(R.id.subscriptions);
-        kyc=v.findViewById(R.id.kyc);
-        settings=v.findViewById(R.id.settings);
-        logout=v.findViewById(R.id.logout);
+    private void clicks() {
 
-        try{
-
-            Glide.with(getContext()).load(
-                    PreferencesUtils.getUser(getContext()).getAvatar()).
-                    placeholder(R.drawable.logo).into(profile_img);
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
         editNamePin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 editProfileDialog = new EditProfileDialog(getContext());
                 editProfileDialog.setCancelable(true);
                 editProfileDialog.show();
-                editProfileDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                    @Override
-                    public void onDismiss(DialogInterface dialogInterface) {
-                        //TODO Up'date profile data.
-                        joining_date.setText(PreferencesUtils.getUser(getContext()).getEmail());
-
-                        username.setText(
-                                PreferencesUtils.getUser(getContext()).getFirstName()
-                                        +" "+PreferencesUtils.getUser(getContext()).getLastName());
-                    }
-                });
             }
         });
+
         editPin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "hh", Toast.LENGTH_SHORT).show();
-                if(ActivityCompat.checkSelfPermission(getContext(),
-                        Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED )
-                {
-                    getActivity().requestPermissions(
-                            new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                            READ_REQUEST_CODE);
-
-
-                }else{
-                    if(ActivityCompat.checkSelfPermission(getContext(),
-                            Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                        getActivity().requestPermissions(
-                                new String[]{Manifest.permission.CAMERA},
-                                REQUEST_CAMERA);
-                    }else {
-                        if (ActivityCompat.checkSelfPermission(getContext(),
-                                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                            getActivity().requestPermissions(
-                                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                                    WRITE_EXTERNAL_STORAGE_CODE);
-                        } else {
-
-                                showGalleryFromFragment(getActivity());
-                            }
-
-
-
-
-                    }
-                }
-
+                Camera.showGalleryFromFragment(getActivity(), ProfileFragment.this);
             }
         });
+
         assigned_coaches.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -174,7 +130,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                setFragment(new SettingsFragment());
+//                setFragment(new SettingsFragment());
 
             }
         });
@@ -183,85 +139,146 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                PreferencesUtils.clearDefaults(getContext());
-                startActivity(new Intent(getContext(), ChoosingActivity.class));
-                getActivity().finish();
+                logoutAPI();
 
             }
         });
+    }
 
+    private void logoutAPI() {
+
+        HashMap<String ,Object> params=new HashMap<>();
+
+        params.put("device_player_id", PreferencesUtils.getPlayerId());
+
+        MyApplication.getInstance().getBackgroundHttpHelper().setCallback(this);
+        MyApplication.getInstance().getBackgroundHttpHelper().Post(getContext(), AppConstants.LOGOUT_URL, AppConstants.LOGOUT_TAG, General.class, params);
+
+    }
+
+    private void editImg () {
+
+        file = new File(filePath);
+
+        RequestBody surveyBody = RequestBody.create(MediaType.parse("image/*"), file);
+        MultipartBody.Part body = MultipartBody.Part.createFormData("avatar", file.getPath(), surveyBody);
+
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().PostFile(getContext(), AppConstants.UPDATE_AVATAR_URL, AppConstants.UPDATE_AVATAR_TAG, UpdateUserResults.class, body);
+
+    }
+
+    private void initial(View v){
+
+        username=v.findViewById(R.id.username);
+        joining_date=v.findViewById(R.id.joining_date);
+        profile_img=v.findViewById(R.id.profile_img);
+        editPin=v.findViewById(R.id.edit_profile_image_view);
+        editNamePin=v.findViewById(R.id.edit_name_image_view);
+        assigned_coaches=v.findViewById(R.id.assigned_coaches);
+        progress=v.findViewById(R.id.progress);
+        subscriptions=v.findViewById(R.id.subscriptions);
+        kyc=v.findViewById(R.id.kyc);
+        settings=v.findViewById(R.id.settings);
+        logout=v.findViewById(R.id.logout);
+
+        Glide.with(getContext()).load(PreferencesUtils.getUser(getContext()).getAvatar()).placeholder(R.drawable.logo).into(profile_img);
         joining_date.setText(PreferencesUtils.getUser(getContext()).getEmail());
-
-        username.setText(
-                PreferencesUtils.getUser(getContext()).getFirstName()
-                        +" "+PreferencesUtils.getUser(getContext()).getLastName());
-
-    }
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        System.out.println("OnActivityResult");
-//        Log.d("OnActivityResult","added");
-//
-//            if (requestCode == GALLERY_REQUEST) {
-//                // System.out.println("select file from gallery ");
-//                Uri selectedImageUri = data.getData();
-//                String tempPath = Camera.getPath(getActivity(),
-//                        selectedImageUri);
-//
-//                Bitmap bm = null;
-//                try {
-//                    bm = Camera
-//                            .decodeUri(getActivity(),selectedImageUri);
-//                } catch (FileNotFoundException e) {
-//                    e.printStackTrace();
-//                }
-//                profile_img.setImageBitmap(bm);
-//            } else if (requestCode == CAMERA_REQUEST ) {
-//                Bitmap photo = (Bitmap) data.getExtras()
-//                        .get("data");
-//                profile_img.setImageBitmap(photo);
-//            }
-//    }
-    public void showGalleryFromFragment(final Activity activity) {
-
-
-
-
-        LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-        View dialogView = inflater.inflate(R.layout.dialog_gallery, null);
-        builder.setView(dialogView);
-
-        dialogView.findViewById(R.id.Camera).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                captureImage(activity);
-                desDialog.cancel();
-            }
-        });
-
-        dialogView.findViewById(R.id.gallery).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                activity.startActivityForResult(i, GALLERY_REQUEST);
-                desDialog.cancel();
-            }
-        });
-
-        desDialog = builder.create();
-        desDialog.show();
+        if (PreferencesUtils.getUser(getContext()).getLastName() != null)
+            username.setText(PreferencesUtils.getUser(getContext()).getFirstName() + " " + PreferencesUtils.getUser(getContext()).getLastName());
+        else
+            username.setText(PreferencesUtils.getUser(getContext()).getFirstName());
 
     }
+
     private void setFragment(Fragment fragment ) {
 
         Bundle args = new Bundle();
-
         fragment.setArguments(args);
-
         ((MainActivity) getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.home_frame, fragment, "OptionsFragment").addToBackStack(null).commit();
 
     }
+
+    private void setFragmentWithoutBack(Fragment fragment ) {
+
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
+        ((MainActivity) getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.home_frame, fragment, "OptionsFragment").commit();
+
+    }
+
+    @Override
+    public void onSubscribe(Disposable d) {
+
+    }
+
+    @Override
+    public void onNext(int tag, boolean isSuccess, Object result) {
+
+        if (isSuccess){
+
+            switch (tag){
+                case AppConstants.LOGOUT_TAG:
+                    General general = (General) result;
+
+                    Toast.makeText(getContext(), general.getData(), Toast.LENGTH_SHORT).show();
+                    PreferencesUtils.clearDefaults(getContext());
+                    startActivity(new Intent(getContext(), SplashActivity.class));
+                    getActivity().finish();
+                    break;
+
+                case AppConstants.UPDATE_AVATAR_TAG:
+                    UpdateUserResults updateUserResults = (UpdateUserResults) result;
+
+                    Toast.makeText(getContext(), "Updated", Toast.LENGTH_SHORT).show();
+                    PreferencesUtils.setUser(updateUserResults.getData(),getContext());
+                    setFragmentWithoutBack(new ProfileFragment());
+
+                    break;
+            }
+
+        }
+    }
+
+    @Override
+    public void onError(Throwable e) {
+
+    }
+
+    @Override
+    public void onComplete() {
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d("OnActivityResult", "" + requestCode + ",Result " + resultCode);
+        if (resultCode != RESULT_OK) {
+            return;
+        }
+
+        filePath = getPath(getActivity(), data.getData());
+        file = new File(filePath);
+
+        if(file.exists()){
+
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+            Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+
+            try {
+                Glide.with(getContext()).load(bitmap).into(profile_img);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+            editImg();
+
+        }
+
+
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
 
 }

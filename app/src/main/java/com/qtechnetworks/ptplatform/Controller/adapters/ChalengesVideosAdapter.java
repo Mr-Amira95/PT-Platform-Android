@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.qtechnetworks.ptplatform.Model.Beans.Challenge.ChallengeData;
 import com.qtechnetworks.ptplatform.Model.Beans.Challenge.VideoChallengeData;
+import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 import com.qtechnetworks.ptplatform.View.Fragment.ExercisesSingleFragment;
@@ -34,6 +36,7 @@ public class ChalengesVideosAdapter extends RecyclerView.Adapter<ChalengesVideos
     List<VideoChallengeData> data;
 
     public List<Integer> completedVideosIds=new ArrayList<>();
+
     public ChalengesVideosAdapter(Context context, List<VideoChallengeData> data) {
         this.context=context;
         this.data=data;
@@ -50,23 +53,36 @@ public class ChalengesVideosAdapter extends RecyclerView.Adapter<ChalengesVideos
 
     @Override
     public void onBindViewHolder(@NonNull ChalengesVideosAdapter.ViewHolder holder, int position) {
+
         VideoChallengeData current= data.get(position);
+
         holder.challengeVideoName.setText(current.getVideo().getTitle());
+
         try{
             Glide.with(context).load(current.getVideo().getImage()).placeholder(R.drawable.logo).into(holder.challengeVideoImg);
         }catch (Exception e){
             e.printStackTrace();
         }
+
         holder.challengeVideoLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 setFragment(new ExercisesSingleFragment(),current.getVideo().getId().toString(),current.getVideo().getVideo(),current.getVideo().getTitle(),current.getVideo().getDescription());
             }
         });
+
         if(current.getIsComplete()){
             holder.completeCheckbox.setClickable(false);
             holder.completeCheckbox.setChecked(true);
         }
+
+        holder.completeCheckbox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                holder.completeCheckbox.setChecked(holder.completeCheckbox.isChecked());
+            }
+        });
+
         holder.completeCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -79,12 +95,14 @@ public class ChalengesVideosAdapter extends RecyclerView.Adapter<ChalengesVideos
                         completedVideosIds.remove(current.getId());
                     }
                 }
-                for (int d :
-                        completedVideosIds) {
-                    Log.d("completedVideosIds+",d+"");
-                }
             }
         });
+
+        if (PreferencesUtils.getUserType().equalsIgnoreCase("coach")){
+            holder.completeCheckbox.setVisibility(View.GONE);
+        } else if (PreferencesUtils.getUserType().equalsIgnoreCase("trainee")){
+            holder.completeCheckbox.setVisibility(View.VISIBLE);
+        }
 
     }
 
@@ -116,8 +134,9 @@ public class ChalengesVideosAdapter extends RecyclerView.Adapter<ChalengesVideos
 
         TextView challengeVideoName;
         ImageView challengeVideoImg;
-        LinearLayout challengeVideoLinearLayout;
+        ConstraintLayout challengeVideoLinearLayout;
         CheckBox completeCheckbox;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 

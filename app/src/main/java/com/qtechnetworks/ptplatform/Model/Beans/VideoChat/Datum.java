@@ -32,7 +32,7 @@ public class Datum {
     @SerializedName("updated_at")
     @Expose
     private String updatedAt;
-    @SerializedName("coach_time_reservation")
+    @SerializedName("coach_time_reservation_accept")
     @Expose
     private CoachTimeReservation coachTimeReservation;
 

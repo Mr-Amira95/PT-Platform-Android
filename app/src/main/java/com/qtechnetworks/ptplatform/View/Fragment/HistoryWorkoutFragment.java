@@ -1,30 +1,47 @@
 package com.qtechnetworks.ptplatform.View.Fragment;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.qtechnetworks.ptplatform.Controller.adapters.NewsAdapter;
-import com.qtechnetworks.ptplatform.Controller.adapters.WorkoutHistoryAdapter;
+import com.qtechnetworks.ptplatform.Controller.adapters.LogAdapter;
+import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
+import com.qtechnetworks.ptplatform.Model.Beans.FavoriteandWorkout.FavoriteandWorkout;
+import com.qtechnetworks.ptplatform.Model.Beans.FoodHome.Foodhome;
+import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
+import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
+import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 
-public class HistoryWorkoutFragment extends Fragment {
+import io.reactivex.disposables.Disposable;
+
+public class HistoryWorkoutFragment extends Fragment implements CallBack {
 
     RecyclerView workoutRecyclerview;
-    TextView sun, mon, tue, wed, thu, fri, sat;
-    ArrayList <TextView> daysList = new ArrayList<>();
+    TextView selectedDate, title;
+    DatePickerDialog StartTime;
 
-    public HistoryWorkoutFragment() {
-        // Required empty public constructor
+    String flag;
+
+    public HistoryWorkoutFragment(String flag) {
+        this.flag = flag;
     }
 
     @Override
@@ -43,98 +60,111 @@ public class HistoryWorkoutFragment extends Fragment {
         initial(view);
         clicks();
 
+        if (flag.equalsIgnoreCase("Workout"))
+            getWorkoutHistory(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+        else if (flag.equalsIgnoreCase("Exercises"))
+            getExercisesHistory(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+
         // Inflate the layout for this fragment
         return view;
     }
 
     private void clicks() {
-        sun.setOnClickListener(new View.OnClickListener() {
+
+        selectedDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setBackground(0);
+                StartTime.show();
             }
         });
 
-        mon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setBackground(1);
-            }
-        });
-
-        tue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setBackground(2);
-            }
-        });
-
-        wed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setBackground(3);
-            }
-        });
-
-        thu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setBackground(4);
-            }
-        });
-
-        fri.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setBackground(5);
-            }
-        });
-
-        sat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setBackground(6);
-            }
-        });
-
-    }
-
-    private void setBackground(int index) {
-        for (int i=0; i<daysList.size(); i++){
-            if ( i == index){
-                daysList.get(i).setBackgroundResource(R.drawable.button_background);
-            } else {
-                daysList.get(i).setBackgroundResource(R.color.tran);
-            }
-        }
     }
 
     private void initial(View view) {
+        title= view.findViewById(R.id.title);
         workoutRecyclerview= view.findViewById(R.id.workout_recyclerview);
+        selectedDate= view.findViewById(R.id.selected_date);
 
-        sun = view.findViewById(R.id.sun);
-        mon = view.findViewById(R.id.mon);
-        tue = view.findViewById(R.id.tue);
-        wed = view.findViewById(R.id.wed);
-        thu = view.findViewById(R.id.thu);
-        fri = view.findViewById(R.id.fri);
-        sat = view.findViewById(R.id.sat);
+        if (flag.equalsIgnoreCase("Workout"))
+            title.setText("Workouts History");
+        else if (flag.equalsIgnoreCase("Exercises"))
+            title.setText("Exercises History");
 
-        daysList.add(sun);
-        daysList.add(mon);
-        daysList.add(tue);
-        daysList.add(wed);
-        daysList.add(thu);
-        daysList.add(fri);
-        daysList.add(sat);
-
-        LinearLayoutManager layoutManagerhorizantalleader = new LinearLayoutManager(getContext());
+        GridLayoutManager layoutManagerhorizantalleader = new GridLayoutManager(getContext(), 2);
         layoutManagerhorizantalleader.setOrientation(LinearLayoutManager.VERTICAL);
         workoutRecyclerview.setLayoutManager(layoutManagerhorizantalleader);
 
-        WorkoutHistoryAdapter workoutHistoryAdapter = new WorkoutHistoryAdapter(getContext());
-        workoutRecyclerview.setAdapter(workoutHistoryAdapter);
+        final Calendar newCalendar = Calendar.getInstance();
+        StartTime = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                selectedDate.setText(year + "-" +(monthOfYear+1) + "-" + dayOfMonth);
+
+                if (flag.equalsIgnoreCase("Workout"))
+                    getWorkoutHistory(year + "-" +(monthOfYear+1) + "-" + dayOfMonth);
+                else if (flag.equalsIgnoreCase("Exercises"))
+                    getExercisesHistory(year + "-" +(monthOfYear+1) + "-" + dayOfMonth);
+            }
+        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+    }
+
+    private void getWorkoutHistory(String date) {
+
+        HashMap<String ,Object> params=new HashMap<>();
+
+        params.put("date",date);
+        params.put("skip","0");
+        params.put("coach_id", PreferencesUtils.getCoach(getContext()).getId());
+
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.Add_Workout_URL, AppConstants.Add_Workout_TAG, FavoriteandWorkout.class, params);
 
     }
 
+    private void getExercisesHistory(String date) {
+
+        HashMap<String ,Object> params=new HashMap<>();
+
+        params.put("date",date);
+        params.put("skip","0");
+        params.put("coach_id", PreferencesUtils.getCoach(getContext()).getId());
+
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.Add_Log_URL, AppConstants.Add_Log_TAG, FavoriteandWorkout.class, params);
+    }
+
+    @Override
+    public void onSubscribe(Disposable d) {
+
+    }
+
+    @Override
+    public void onNext(int tag, boolean isSuccess, Object result) {
+
+        if (isSuccess) {
+
+            FavoriteandWorkout favoriteandWorkout = (FavoriteandWorkout) result;
+
+            if (favoriteandWorkout.getData().size() > 0){
+                LogAdapter logAdapter = new LogAdapter(getContext(), favoriteandWorkout.getData());
+                workoutRecyclerview.setAdapter(logAdapter);
+            } else {
+                LogAdapter logAdapter = new LogAdapter(getContext(), favoriteandWorkout.getData());
+                workoutRecyclerview.setAdapter(logAdapter);
+                Toast.makeText(getContext(), "There are no videos to show", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+
+        }
+
+    }
+
+    @Override
+    public void onError(Throwable e) {
+
+    }
+
+    @Override
+    public void onComplete() {
+
+    }
 }

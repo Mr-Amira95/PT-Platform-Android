@@ -13,6 +13,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,7 +26,9 @@ import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.Model.utilits.UtilisMethods;
 import com.qtechnetworks.ptplatform.R;
+import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 import com.qtechnetworks.ptplatform.View.Fragment.ExercisesSingleFragment;
+import com.qtechnetworks.ptplatform.View.Fragment.ProgressFragment;
 
 import java.util.HashMap;
 
@@ -94,6 +97,14 @@ private boolean validation(EditText et){
         updateBtn=findViewById(R.id.update_btn);
     }
 
+    private void setFragment(Fragment fragment) {
+
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
+
+        ((MainActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.home_frame, fragment, "OptionsFragment").commit();
+
+    }
 
     @Override
     public void onSubscribe(Disposable d) {
@@ -102,8 +113,10 @@ private boolean validation(EditText et){
 
     @Override
     public void onNext(int tag, boolean isSuccess, Object result) {
-        if(isSuccess &&tag==AppConstants.HEALTHS_TAG){}
-        Toast.makeText(mContext, "Progress Added", Toast.LENGTH_SHORT).show();
+        if(isSuccess) {
+            Toast.makeText(mContext, "Progress Added", Toast.LENGTH_SHORT).show();
+            setFragment(new ProgressFragment());
+        }
     this.dismiss();
 
     }

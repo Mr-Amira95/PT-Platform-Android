@@ -33,6 +33,9 @@ public class CoachTimeReservation {
     @SerializedName("updated_at")
     @Expose
     private String updatedAt;
+    @SerializedName("user")
+    @Expose
+    private User user;
 
     public Integer getId() {
         return id;
@@ -96,6 +99,14 @@ public class CoachTimeReservation {
 
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
 }

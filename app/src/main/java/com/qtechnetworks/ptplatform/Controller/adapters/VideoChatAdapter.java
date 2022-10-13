@@ -29,6 +29,7 @@ import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
+import com.qtechnetworks.ptplatform.View.Dialogs.ConfirmationDialog;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,13 +37,13 @@ import java.util.List;
 
 import io.reactivex.disposables.Disposable;
 
-public class VideoChatAdapter extends RecyclerView.Adapter<VideoChatAdapter.ViewHolder>  implements CallBack {
+public class VideoChatAdapter extends RecyclerView.Adapter<VideoChatAdapter.ViewHolder> {
 
     private Context context;
     private List<Datum> datum;
-    private String flag;
 
-    private int cposition;
+    ConfirmationDialog confirmationDialog;
+
     public VideoChatAdapter(Context context, List<Datum> datum) {
         this.datum = datum;
         this.context=context;
@@ -56,19 +57,14 @@ public class VideoChatAdapter extends RecyclerView.Adapter<VideoChatAdapter.View
         return new VideoChatAdapter.ViewHolder(view);
     }
 
-    private void cancelSession(int id){
-        HashMap<String ,Object> params=new HashMap<>();
-        params.put("id",id);
-        MyApplication.getInstance().getHttpHelper().setCallback(this);
-        MyApplication.getInstance().getHttpHelper().Post(context, AppConstants.CANCEL_RESERVATION_URL, AppConstants.CANCEL_RESERVATION_TAG, General.class, params);
-
-    }
     @Override
     public void onBindViewHolder(@NonNull VideoChatAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
         Datum current= datum.get(position);
 
-        holder.dateTime.setText(current.getDate()+"\n"+current.getTime());
+        holder.dateTime.setText(current.getDate()+" / "+current.getTime());
+        holder.sessionName.setText(PreferencesUtils.getCoach(context).getFirstName());
+
         holder.joinSessionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,11 +78,13 @@ public class VideoChatAdapter extends RecyclerView.Adapter<VideoChatAdapter.View
                 }
             }
         });
+
         holder.cancelSessionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cposition=position;
-                cancelSession(current.getId());
+                confirmationDialog = new ConfirmationDialog(context, String.valueOf(current.getId()));
+                confirmationDialog.setCancelable(true);
+                confirmationDialog.show();
             }
         });
         //textViewList.add(holder.title);
@@ -103,39 +101,15 @@ public class VideoChatAdapter extends RecyclerView.Adapter<VideoChatAdapter.View
         return datum.size();
     }
 
-    @Override
-    public void onSubscribe(Disposable d) {
-
-    }
-
-    @Override
-    public void onNext(int tag, boolean isSuccess, Object result) {
-
-        if(tag==AppConstants.CANCEL_RESERVATION_TAG){
-            if(isSuccess){
-                sessions.getData().remove(cposition);
-                videoChatAdapter.notifyDataSetChanged();
-                Toast.makeText(context, "Reservation Canceled", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-    @Override
-    public void onError(Throwable e) {
-
-    }
-
-    @Override
-    public void onComplete() {
-
-    }
-
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView dateTime;
+        public TextView dateTime, sessionName;
         public Button joinSessionBtn,cancelSessionBtn;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            sessionName=itemView.findViewById(R.id.session_name);
             joinSessionBtn=itemView.findViewById(R.id.join_session_btn);
             dateTime=itemView.findViewById(R.id.session_date_time);
             cancelSessionBtn=itemView.findViewById(R.id.cancel_session_btn);

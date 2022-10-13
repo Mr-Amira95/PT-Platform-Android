@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -13,10 +14,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.qtechnetworks.ptplatform.Controller.adapters.CoachAdapter;
 import com.qtechnetworks.ptplatform.Controller.adapters.CoachUserAdapter;
 import com.qtechnetworks.ptplatform.Controller.adapters.CoachesAdapter;
+import com.qtechnetworks.ptplatform.Controller.adapters.TreineeAdapter;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.Coach.Coach;
+import com.qtechnetworks.ptplatform.Model.Beans.PersonalCoach.PersonalCoach;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
+import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
 
 import java.util.HashMap;
@@ -28,6 +32,7 @@ public class CoachesDialog extends Dialog implements CallBack {
 
     Context mContext;
     RecyclerView coachesRecyclerview;
+    TextView title;
 
     public CoachesDialog(@NonNull Context context) {
         super(context);
@@ -49,6 +54,7 @@ public class CoachesDialog extends Dialog implements CallBack {
 
     private void initials() {
         coachesRecyclerview = findViewById(R.id.coaches_recyclerview);
+        title = findViewById(R.id.title);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -74,9 +80,8 @@ public class CoachesDialog extends Dialog implements CallBack {
     @Override
     public void onNext(int tag, boolean isSuccess, Object result) {
 
-        Coach coach=(Coach) result;
-
-        CoachesAdapter coachAdapter = new CoachesAdapter(mContext,coach.getData(),CoachesDialog.this);
+        Coach coach = (Coach) result;
+        CoachesAdapter coachAdapter = new CoachesAdapter(mContext, coach.getData(), CoachesDialog.this);
         coachesRecyclerview.setAdapter(coachAdapter);
 
     }

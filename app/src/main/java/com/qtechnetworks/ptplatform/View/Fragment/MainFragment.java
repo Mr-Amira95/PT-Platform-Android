@@ -1,11 +1,8 @@
 package com.qtechnetworks.ptplatform.View.Fragment;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import android.view.LayoutInflater;
@@ -13,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedImageView;
@@ -27,9 +23,9 @@ import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 import com.qtechnetworks.ptplatform.View.Dialogs.CoachesDialog;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import io.reactivex.disposables.Disposable;
 import me.relex.circleindicator.CircleIndicator;
@@ -39,29 +35,32 @@ public class MainFragment extends Fragment implements CallBack {
     private ViewPager sliderViewPager;
     private CircleIndicator sliderCircleIndicator;
     private SliderAdapter sliderAdapter;
+    private Banner banner;
+    private Timer timer;
+    private int page = 0;
 
-    private LinearLayout exercisesLayout, workoutsLayout, nutritionLayout, progressLayout,
-    personalLayout, challengesLayout, favouriteLayout, calenderLayout, todayWorkoutLayout, contactUsLayout,
-    shopLayout, videoChatLayout, liveChatLayout, historyLayout, kycLayout;
+    private LinearLayout
+            exercisesLayout, workoutsLayout, nutritionLayout, progressLayout,
+            personalLayout, challengesLayout, favouriteLayout, calenderLayout, todayWorkoutLayout,
+            shopLayout, videoChatLayout, liveChatLayout, historyLayout, kycLayout;
 
     CoachesDialog coachesDialog;
 
-    private boolean Subscribed = true;
-
     TextView nametext;
-    String flag="";
+    String flag = "";
     RoundedImageView cate1_image;
-    public MainFragment(String flag){
-        this.flag=flag;
 
+    public MainFragment(String flag) {
+        this.flag = flag;
     }
+
     public MainFragment(){
 
     }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+        if ( getArguments() != null) {
 
         }
     }
@@ -73,7 +72,6 @@ public class MainFragment extends Fragment implements CallBack {
 
         initial(view);
         clicks();
-        fillSliderViewPager();
 
         // Inflate the layout for this fragment
         return view;
@@ -84,7 +82,7 @@ public class MainFragment extends Fragment implements CallBack {
         exercisesLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setFragment(new ExercisesWorkoutFragment("Exercises"), PreferencesUtils.getCoach(getContext()).getId().toString());
+                setFragment(new ExercisesFragment(), PreferencesUtils.getCoach(getContext()).getId().toString());
             }
         });
 
@@ -126,11 +124,7 @@ public class MainFragment extends Fragment implements CallBack {
         personalLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Subscribed){
-                    setFragment( new PersonalTrainingSubscribedFragment());
-                } else {
-                    setFragment( new PersonalTrainingUnsubscribedFragment());
-                }
+                setFragment( new PersonalTrainingTraineeFragment());
             }
         });
 
@@ -169,48 +163,29 @@ public class MainFragment extends Fragment implements CallBack {
                 setFragment(new HistoryFragment());
             }
         });
+
         kycLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 setFragment( new AddTraineeDetailsFragment());
             }
         });
+
         todayWorkoutLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 setFragment( new LogFragment("Today’s Workouts"),PreferencesUtils.getCoach(getContext()).getId().toString());
             }
         });
+
         videoChatLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 setFragment( new VideoChatFragment());
-//                Intent intent = new Intent(Intent.ACTION_VIEW,
-//                        Uri.parse("zoomus://join?action=join&confno=99999999999&pwd=ugnuiGOEIfgewigfweifcvewiofcewifcew"));
-//               try{
-//                startActivity(intent);}
-//                catch(Exception e) {
-//                    Toast.makeText(getContext(), "Can't start Video chat", Toast.LENGTH_SHORT).show();
-//                       e.printStackTrace();
-//                   }
-//                if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
-//                    try {
-//                        startActivity(intent);
-//                    } catch(Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                } else {
-//                    Toast.makeText(getContext(), "Can't start Video chat", Toast.LENGTH_SHORT).show();
-//                }
             }
         });
-        contactUsLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setFragment(new FollowUsFragment());
-            }
-        });
+
     }
 
     private void setFragment(Fragment fragment ) {
@@ -235,18 +210,6 @@ public class MainFragment extends Fragment implements CallBack {
 
     }
 
-    private void fillSliderViewPager() {
-        List<Integer> sliderList = new ArrayList<Integer>() {{
-            add(R.drawable.follwous);
-            add(R.drawable.coaches);
-            add(R.drawable.contactus);
-        }};
-
-        /*sliderAdapter = new SliderAdapter(sliderList , getActivity());
-        sliderViewPager.setAdapter(sliderAdapter);
-        sliderCircleIndicator.setViewPager(sliderViewPager);*/
-    }
-
     private void initial(View view) {
         sliderViewPager=view.findViewById(R.id.slider_viewPager);
         sliderCircleIndicator=view.findViewById(R.id.slider_indicator_unselected);
@@ -259,7 +222,6 @@ public class MainFragment extends Fragment implements CallBack {
         challengesLayout = view.findViewById(R.id.challenges_layout);
         favouriteLayout = view.findViewById(R.id.favourite_layout);
         calenderLayout = view.findViewById(R.id.calendar_layout);
-        contactUsLayout = view.findViewById(R.id.contact_us_layout);
         shopLayout = view.findViewById(R.id.shop_layout);
         videoChatLayout = view.findViewById(R.id.video_chat_layout);
         liveChatLayout = view.findViewById(R.id.live_chat_layout);
@@ -306,11 +268,14 @@ public class MainFragment extends Fragment implements CallBack {
 
 
         try {
-            Banner banner=(Banner) result;
+            banner=(Banner) result;
 
-            sliderAdapter = new SliderAdapter(banner.getData(), getActivity());
+            sliderAdapter = new SliderAdapter(banner.getData(), getActivity(), "MainTrainee");
             sliderViewPager.setAdapter(sliderAdapter);
             sliderCircleIndicator.setViewPager(sliderViewPager);
+            pageSwitcher();
+
+
         }catch (Exception e){
             setFragmentWithoutBack(new MainFragment());
             e.printStackTrace();
@@ -332,4 +297,37 @@ public class MainFragment extends Fragment implements CallBack {
     public void onComplete() {
 
     }
+
+    public void pageSwitcher() {
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new RemindTask(), 0, 5000); // delay
+    }
+
+
+    class RemindTask extends TimerTask {
+
+        @Override
+        public void run() {
+
+            if (getActivity() != null){
+
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        if (page > banner.getData().size()-1) {
+                            page = 0;
+                            sliderViewPager.setCurrentItem(page);
+                        } else {
+                            sliderViewPager.setCurrentItem(page++);
+                        }
+
+                    }
+                });
+
+            }
+
+        }
+    }
+
 }

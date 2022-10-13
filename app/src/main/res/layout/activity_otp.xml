@@ -38,7 +38,7 @@
             android:textSize="@dimen/_16sdp"/>
 
         <EditText
-            android:id="@+id/firstname_edittext"
+            android:id="@+id/otp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -51,7 +51,7 @@
             android:textColorHint="@color/white" />
 
         <TextView
-            android:id="@+id/signup_textview"
+            android:id="@+id/resend_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Didn’t receive one? Send again"

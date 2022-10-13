@@ -19,6 +19,7 @@ import com.qtechnetworks.ptplatform.Model.Beans.WorkoutVideo.VideoWorkout;
 import com.qtechnetworks.ptplatform.Model.Beans.videoExercises.VideoExercises;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
+import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 
@@ -62,7 +63,10 @@ public class WorkoutSingleFragment extends Fragment  {
         explore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setFragment( new ExercisesSingleFragment(),"Workout",id);
+                if (PreferencesUtils.getUserType().equalsIgnoreCase("trainee"))
+                    setFragment( new ExercisesSingleFragment(),"Workout",id);
+                else
+                    setFragmentWithoutBack( new ExercisesSingleFragment(),"Workout",id);
             }
         });
 
@@ -89,7 +93,15 @@ public class WorkoutSingleFragment extends Fragment  {
 
     }
 
+    private void setFragmentWithoutBack(Fragment fragment,String flag,String id) {
 
+        Bundle args=new Bundle();
+        args.putString("flag",flag);
+        args.putString("ID",id);
+        fragment.setArguments(args);
 
+        ((MainActivity) getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.home_frame, fragment, "OptionsFragment").commit();
+
+    }
 
 }

@@ -11,14 +11,18 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.General;
+import com.qtechnetworks.ptplatform.Model.Beans.RegisterAndLogin.UpdateUserResults;
 import com.qtechnetworks.ptplatform.Model.Beans.RegisterAndLogin.User;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
+import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
+import com.qtechnetworks.ptplatform.View.Fragment.ProfileFragment;
 
 import java.util.HashMap;
 
@@ -28,7 +32,6 @@ public class EditProfileDialog  extends Dialog implements CallBack {
 
 
     Context mContext;
-
     EditText firstNameEt,lastNameEt,emailEt;
     Button updateBtn;
 
@@ -46,36 +49,47 @@ public class EditProfileDialog  extends Dialog implements CallBack {
         getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
         initials();
+        clicks();
+
+    }
+
+    private void clicks() {
+
         updateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                updateEmail();
-                updateName();
+
+                if(validation(firstNameEt) && validation(lastNameEt) && validation(emailEt)) {
+                    updateName();
+                } else {
+                    Toast.makeText(mContext, "Please Check info", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
     }
+
     private void updateEmail(){
+
         HashMap<String ,Object> params=new HashMap<>();
-        if(validation(firstNameEt)&&validation(lastNameEt)
-                &&validation(emailEt)) {
-         //   params.put("username", usernameEt.getText().toString());
-            params.put("email", emailEt.getText().toString());
-            MyApplication.getInstance().getHttpHelper().setCallback(this);
-            MyApplication.getInstance().getHttpHelper().Post(getContext(), AppConstants.UPDATE_EMAIL_URL, AppConstants.UPDATE_EMAIL_TAG, User.class, params);
-        }
+
+        params.put("email", emailEt.getText().toString());
+
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().Post(getContext(), AppConstants.UPDATE_EMAIL_URL, AppConstants.UPDATE_EMAIL_TAG, UpdateUserResults.class, params);
     }
+
+
     private void updateName(){
         HashMap<String ,Object> params=new HashMap<>();
-        if(validation(firstNameEt)&&validation(lastNameEt)
-                &&validation(emailEt)) {
-             params.put("first_name", firstNameEt.getText().toString());
-             params.put("last_name", lastNameEt.getText().toString());
-           // params.put("email", emailEt.getText().toString());
-            MyApplication.getInstance().getBackgroundHttpHelper().setCallback(this);
-            MyApplication.getInstance().getBackgroundHttpHelper().Post(getContext(), AppConstants.UPDATE_NAME_URL, AppConstants.UPDATE_NAME_TAG, User.class, params);
-        }
+
+        params.put("first_name", firstNameEt.getText().toString());
+        params.put("last_name", lastNameEt.getText().toString());
+
+        MyApplication.getInstance().getBackgroundHttpHelper().setCallback(this);
+        MyApplication.getInstance().getBackgroundHttpHelper().Post(getContext(), AppConstants.UPDATE_NAME_URL, AppConstants.UPDATE_NAME_TAG, UpdateUserResults.class, params);
     }
+
     private boolean validation(EditText et){
         if( TextUtils.isEmpty(et.getText())){
             et.setError( "this field is required!" );
@@ -84,16 +98,24 @@ public class EditProfileDialog  extends Dialog implements CallBack {
         return true;
     }
     private void initials() {
+
         emailEt=findViewById(R.id.email_et);
         firstNameEt=findViewById(R.id.first_name_et);
         lastNameEt=findViewById(R.id.last_name_et);
+        updateBtn=findViewById(R.id.update_btn);
 
         emailEt.setText(PreferencesUtils.getUser(getContext()).getEmail());
         firstNameEt.setText(PreferencesUtils.getUser(getContext()).getFirstName());
         lastNameEt.setText(PreferencesUtils.getUser(getContext()).getLastName());
-        updateBtn=findViewById(R.id.update_btn);
     }
 
+    private void setFragment(Fragment fragment ) {
+
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
+        ((MainActivity) mContext).getSupportFragmentManager().beginTransaction().replace(R.id.home_frame, fragment, "OptionsFragment").commit();
+
+    }
 
     @Override
     public void onSubscribe(Disposable d) {
@@ -102,27 +124,25 @@ public class EditProfileDialog  extends Dialog implements CallBack {
 
     @Override
     public void onNext(int tag, boolean isSuccess, Object result) {
-        if(tag== AppConstants.UPDATE_EMAIL_TAG) {
-            if (isSuccess) {
-               // User cUser=(User) result;
-                User cUser= PreferencesUtils.getUser(getContext());
-                cUser.setEmail(emailEt.getText().toString());
-             PreferencesUtils.setUser(cUser,getContext());
-                Toast.makeText(mContext, "Email Updated", Toast.LENGTH_SHORT).show();
+
+        if (isSuccess){
+            UpdateUserResults updateUserResults = (UpdateUserResults) result;
+
+            switch (tag){
+
+                case AppConstants.UPDATE_NAME_TAG:
+                    updateEmail();
+                    break;
+
+                case AppConstants.UPDATE_EMAIL_TAG:
+                    Toast.makeText(mContext, "Updated", Toast.LENGTH_SHORT).show();
+                    PreferencesUtils.setUser(updateUserResults.getData(),getContext());
+                    setFragment(new ProfileFragment());
+                    dismiss();
+                    break;
             }
         }
-         if(tag== AppConstants.UPDATE_NAME_TAG){
-             if (isSuccess) {
-                User cUser= PreferencesUtils.getUser(getContext());
-               //  User cUser=(User) result;
 
-                 cUser.setFirstName(firstNameEt.getText().toString());
-                 cUser.setFirstName(lastNameEt.getText().toString());
-                 PreferencesUtils.setUser(cUser,getContext());
-                 Toast.makeText(mContext, "Name Updated", Toast.LENGTH_SHORT).show();
-             }
-    }
-        this.dismiss();
 
     }
 

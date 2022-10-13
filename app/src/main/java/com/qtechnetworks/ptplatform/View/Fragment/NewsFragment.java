@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 import com.qtechnetworks.ptplatform.Controller.adapters.NewsAdapter;
@@ -83,14 +84,15 @@ public class NewsFragment extends Fragment implements CallBack {
     @Override
     public void onNext(int tag, boolean isSuccess, Object result) {
 
-        try {
-            News news=(News) result;
+        News news=(News) result;
 
+        if (news.getData().size() > 0) {
             newsAdapter = new NewsAdapter(getContext(),news.getData());
             newsRecyclerview.setAdapter(newsAdapter);
-        } catch (Exception e){
-            setFragmentWithoutBack(new NewsFragment());
+        } else {
+            Toast.makeText(getContext(), "There are no news to show", Toast.LENGTH_SHORT).show();
         }
+
     }
 
     @Override

@@ -15,6 +15,11 @@ import com.qtechnetworks.ptplatform.R;
 public class ChatFragment extends Fragment {
 
     private Button coachChat, supportChat;
+    private Integer id;
+
+    public ChatFragment(Integer id) {
+        this.id = id;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -26,14 +31,14 @@ public class ChatFragment extends Fragment {
         coachChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setFragment(R.id.home_frame, new ChatSingleFragment("Coach"));
+//                setFragment(R.id.home_frame, new ChatSingleFragment("Coach"));
             }
         });
 
         supportChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setFragment(R.id.home_frame, new ChatSingleFragment("Technical"));
+//                setFragment(R.id.home_frame, new ChatSingleFragment("Technical"));
             }
         });
 

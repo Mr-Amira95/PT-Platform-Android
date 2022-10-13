@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.qtechnetworks.ptplatform.Model.Beans.Exercises.Datum;
 import com.qtechnetworks.ptplatform.R;
-import com.qtechnetworks.ptplatform.View.Fragment.ExercisesWorkoutFragment;
+import com.qtechnetworks.ptplatform.View.Fragment.ExercisesFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,10 +25,8 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.ViewHolder> 
     private Context context;
     private List<Datum> datum;
     private List<TextView> textViewList = new ArrayList<>();
-    private String flag;
 
-    public TitleAdapter(Context context, String flag, List<Datum> datum) {
-        this.flag = flag;
+    public TitleAdapter(Context context, List<Datum> datum) {
         this.datum = datum;
         this.context=context;
     }
@@ -56,25 +54,18 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.ViewHolder> 
             @Override
             public void onClick(View v) {
 
-                if (flag.equals("Workout") || flag.equals("Exercises")){
-                    for (int i=0; i<textViewList.size(); i++){
-                        if (i == holder.getAdapterPosition()){
-                            textViewList.get(i).setBackgroundResource(R.drawable.background_radius_20_title);
-                            ExercisesWorkoutFragment.setItems(current.getId().toString(), context, flag);
-                            ExercisesWorkoutFragment.groupID = current.getId();
-                        } else {
-                            textViewList.get(i).setBackgroundResource(R.drawable.background_empty);
-                        }
+                for (int i=0; i<textViewList.size(); i++){
+                    if (i == holder.getAdapterPosition()){
+                        textViewList.get(i).setBackgroundResource(R.drawable.background_radius_20_title);
+                        ExercisesFragment.setItems(current.getId().toString(), context);
+                        ExercisesFragment.groupID = current.getId();
+                    } else {
+                        textViewList.get(i).setBackgroundResource(R.drawable.background_empty);
                     }
                 }
 
             }
         });
-    }
-
-    private void setFragment(int frameLayout, Fragment fragment, AppCompatActivity activity) {
-        FragmentTransaction fragmentTransaction= activity.getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(frameLayout, fragment).commit();
     }
 
     @Override

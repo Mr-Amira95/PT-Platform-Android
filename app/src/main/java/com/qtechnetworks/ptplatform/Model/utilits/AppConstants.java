@@ -16,9 +16,29 @@ public class AppConstants {
     public static final String ONESIGNAL_APP_ID = "ea046acc-4916-4bb3-8ae6-c7fe2bafaf4d";
     public static final String login_URL = "auth/login";
     public static final int login_TAG = 0;
+    public static final String SOCIAL_LOGIN_URL = "auth/social-login";
+    public static final int SOCIAL_LOGIN_TAG = 48;
 
     public static final String signup_URL = "auth/register-user";
     public static final int signup_TAG = 1;
+
+    public static final String signup_coach_URL = "auth/register-coach";
+    public static final int signup_coach_TAG = 50;
+
+    public static final String Check_Email_Coach_URL = "auth/verify-email";
+    public static final int Check_Email_Coach_TAG = 49;
+
+    public static final String Check_Code_URL = "auth/verify-email/check-code";
+    public static final int Check_Code_TAG = 44;
+
+    public static final String Resend_Code_URL = "auth/verify-email/reset-code";
+    public static final int Resend_Code_TAG = 45;
+
+    public static final String Check_Email_URL = "auth/verify-email/forgot-password";
+    public static final int Check_Email_TAG = 45;
+
+    public static final String Reset_Password_URL = "auth/verify-email/update-password";
+    public static final int Reset_Password_TAG = 46;
 
     public static final String news_URL = "news-feed";
     public static final int news_TAG = 2;
@@ -131,6 +151,17 @@ public class AppConstants {
     public static final int UPDATE_EMAIL_TAG =42 ;
     public static final String UPDATE_NAME_URL = "users/update/name";
     public static final int UPDATE_NAME_TAG =43 ;
+    public static final String LOGOUT_URL = "users/logout";
+    public static final int LOGOUT_TAG =47 ;
+
+    public static final String Personal_Training_Coach_URL = "coaches/personal-training";
+    public static final int Personal_Training_Coach_TAG =51 ;
+
+    public static final String Coach_Calendar_URL = "coach-calendar/calendar";
+    public static final int Coach_Calendar_TAG =52 ;
+
+    public static final String Coach_Video_Chat_URL = "coach-calendar/coach";
+    public static final int Coach_Video_Chat_TAG =53 ;
 
     public static void Trace(String tag, String msg) {
 

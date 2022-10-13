@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".View.Fragment.BannerFragment">
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/slider_viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/black"/>
+
+    <me.relex.circleindicator.CircleIndicator
+        android:id="@+id/slider_indicator_unselected"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        app:ci_drawable="@drawable/unselected_slider"
+        app:ci_drawable_unselected="@drawable/unselected_slider"
+        app:layout_constraintBottom_toBottomOf="@id/slider_viewPager"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="@dimen/_20sdp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

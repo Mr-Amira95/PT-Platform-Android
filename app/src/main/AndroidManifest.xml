@@ -24,8 +24,8 @@
     <queries>
         <intent>
             <action android:name="android.intent.action.VIEW" />
-
-            <data android:scheme="https" />
+            <data
+                android:scheme="https" />
         </intent>
     </queries>
 
@@ -42,23 +42,24 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true" >
+
         <activity
             android:name=".View.Activity.MediaViewActivity"
-            android:exported="false" />
+            android:exported="false"/>
+
         <activity
             android:name=".View.Activity.NotAuthorizedActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".View.Fragment.HistoryActivity"
-            android:exported="false" />
-        <activity
             android:name=".View.Activity.ResetPasswordActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".View.Activity.EmailActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".View.Activity.ThankCoashActivity"
             android:exported="false"
@@ -81,8 +82,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".View.Activity.MainActivity"
-            android:exported="true"
+            android:exported="false"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".View.Activity.SplashActivity"
             android:exported="true"
@@ -93,6 +95,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
 
         <meta-data
             android:name="com.onesignal.NotificationServiceExtension"
@@ -106,6 +109,7 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </receiver>
+
     </application>
 
 </manifest>

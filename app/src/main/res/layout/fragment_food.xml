@@ -24,7 +24,6 @@
             android:fontFamily="@font/aeonikbold"
             android:layout_margin="@dimen/_20sdp"/>
 
-
         <LinearLayout
             android:id="@+id/choose_date"
             android:layout_width="match_parent"
@@ -34,7 +33,8 @@
             android:backgroundTint="@color/primary_color"
             android:layout_gravity="center"
             android:gravity="center"
-            android:layout_marginHorizontal="@dimen/_20sdp">
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_20sdp">
 
             <TextView
                 android:id="@+id/today"
@@ -43,21 +43,227 @@
                 android:backgroundTint="@color/primary_color"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-
                 android:text="Today"
                 android:textSize="@dimen/_12sdp"
                 android:textColor="@color/white"
-                android:gravity="center"
-          />
-            <ImageView
-                android:visibility="gone"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/ic_edit_icon"
-                android:layout_gravity="center"
-                app:tint="@color/white" />
+                android:gravity="center" />
 
         </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/target_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Target"
+                android:textColor="@color/white"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"/>
+
+            <TextView
+                android:id="@+id/view_history_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="View History"
+                android:textColor="@color/txt_grey"
+                app:layout_constraintTop_toBottomOf="@id/title"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:visibility="gone"/>
+
+            <FrameLayout
+                android:id="@+id/progress_frame_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/target_txt"
+                android:layout_marginTop="@dimen/_10sdp"
+                tools:ignore="MissingConstraints">
+
+                <ProgressBar
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_30sdp"
+                    android:id="@+id/targetprogressBar"
+                    android:indeterminate="false"
+                    android:layout_gravity="center"
+                    android:progressDrawable="@drawable/custom_green_progressbar"
+                    android:layout_marginHorizontal="@dimen/_20sdp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center"
+                    android:id="@+id/progress_txt"
+                    android:text="0/0"/>
+
+            </FrameLayout>
+
+            <ImageView
+                android:id="@+id/edit_icon"
+                android:layout_width="@dimen/_10sdp"
+                android:layout_height="@dimen/_10sdp"
+                android:layout_marginHorizontal="20dp"
+                app:layout_constraintEnd_toEndOf="@id/progress_frame_layout"
+                app:layout_constraintTop_toBottomOf="@id/progress_frame_layout"
+                android:src="@drawable/ic_edit_icon"
+                android:layout_marginTop="@dimen/_5sdp"/>
+
+            <ImageView
+                android:id="@+id/cal_background"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:src="@drawable/ic_background_calories"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/progress_frame_layout"
+                android:layout_marginTop="@dimen/_30sdp"
+                android:scaleType="centerCrop"/>
+
+            <TextView
+                android:id="@+id/cal_text"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:text="0 Cal"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintTop_toTopOf="@id/cal_background"
+                app:layout_constraintBottom_toBottomOf="@id/cal_background"
+                app:layout_constraintStart_toStartOf="@id/cal_background"
+                app:layout_constraintEnd_toEndOf="@id/cal_background"
+                android:gravity="center"/>
+
+            <org.eazegraph.lib.charts.PieChart
+                android:id="@+id/fat_chart"
+                android:layout_width="@dimen/_75sdp"
+                android:layout_height="@dimen/_75sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cal_background"
+                android:layout_marginTop="@dimen/_20sdp"
+                app:egInnerValueSize="@dimen/_12sdp"
+                app:egUseInnerValue="true"
+                app:egInnerValueString="0"
+                app:egInnerValueColor="@color/white"
+                app:egInnerPaddingColor="@color/backapp"
+                app:egInnerPadding="90"/>
+
+            <TextView
+                android:id="@+id/fat_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintTop_toTopOf="@id/fat_chart"
+                app:layout_constraintBottom_toTopOf="@id/fat_value"
+                app:layout_constraintStart_toStartOf="@id/fat_chart"
+                app:layout_constraintEnd_toEndOf="@id/fat_chart"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/fat_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fat"
+                android:textColor="@color/red"
+                android:textSize="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@id/fat_title"
+                app:layout_constraintBottom_toBottomOf="@id/fat_chart"
+                app:layout_constraintStart_toStartOf="@id/fat_chart"
+                app:layout_constraintEnd_toEndOf="@id/fat_chart"
+                android:gravity="center"/>
+
+            <org.eazegraph.lib.charts.PieChart
+                android:id="@+id/carbs_chart"
+                android:layout_width="@dimen/_75sdp"
+                android:layout_height="@dimen/_75sdp"
+                app:egLegendTextSize="18sp"
+                app:layout_constraintEnd_toStartOf="@id/fat_chart"
+                app:layout_constraintTop_toBottomOf="@id/cal_background"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                app:egInnerValueSize="@dimen/_12sdp"
+                app:egUseInnerValue="true"
+                app:egInnerValueString="0"
+                app:egInnerValueColor="@color/white"
+                app:egInnerPaddingColor="@color/backapp"
+                app:egInnerPadding="90"/>
+
+            <TextView
+                android:id="@+id/carbs_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintTop_toTopOf="@id/carbs_chart"
+                app:layout_constraintBottom_toTopOf="@id/carbs_value"
+                app:layout_constraintStart_toStartOf="@id/carbs_chart"
+                app:layout_constraintEnd_toEndOf="@id/carbs_chart"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/carbs_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Carbs"
+                android:textColor="@color/blue"
+                android:textSize="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@id/carbs_title"
+                app:layout_constraintBottom_toBottomOf="@id/carbs_chart"
+                app:layout_constraintStart_toStartOf="@id/carbs_chart"
+                app:layout_constraintEnd_toEndOf="@id/carbs_chart"
+                android:gravity="center"/>
+
+            <org.eazegraph.lib.charts.PieChart
+                android:id="@+id/protein_chart"
+                android:layout_width="@dimen/_75sdp"
+                android:layout_height="@dimen/_75sdp"
+                app:layout_constraintStart_toEndOf="@id/fat_chart"
+                app:layout_constraintTop_toBottomOf="@id/cal_background"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                app:egInnerValueSize="@dimen/_12sdp"
+                app:egUseInnerValue="true"
+                app:egInnerValueString="0"
+                app:egInnerValueColor="@color/white"
+                app:egInnerPaddingColor="@color/backapp"
+                app:egInnerPadding="90" />
+
+            <TextView
+                android:id="@+id/protein_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12sdp"
+                app:layout_constraintTop_toTopOf="@id/protein_chart"
+                app:layout_constraintBottom_toTopOf="@id/protein_value"
+                app:layout_constraintStart_toStartOf="@id/protein_chart"
+                app:layout_constraintEnd_toEndOf="@id/protein_chart"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/protein_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Protein"
+                android:textColor="@color/primary_color"
+                android:textSize="@dimen/_10sdp"
+                app:layout_constraintTop_toBottomOf="@id/protein_title"
+                app:layout_constraintBottom_toBottomOf="@id/protein_chart"
+                app:layout_constraintStart_toStartOf="@id/protein_chart"
+                app:layout_constraintEnd_toEndOf="@id/protein_chart"
+                android:gravity="center"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
         android:layout_width="match_parent"
@@ -67,15 +273,14 @@
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_20sdp">
 
-        <TextView
-            android:id="@+id/target_value"
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="wrap_content"
-            android:text="2840"
-            android:textSize="@dimen/_18sdp"
-            android:textColor="@color/white"
-            android:gravity="center"/>
+            <TextView
+                android:id="@+id/target_value"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_18sdp" />
 
         <TextView
             android:layout_width="0dp"
@@ -91,7 +296,6 @@
             android:layout_width="0dp"
             android:layout_weight="2"
             android:layout_height="wrap_content"
-            android:text="310"
             android:textSize="@dimen/_18sdp"
             android:textColor="@color/white"
             android:gravity="center"/>
@@ -110,7 +314,6 @@
             android:layout_width="0dp"
             android:layout_weight="2"
             android:layout_height="wrap_content"
-            android:text="0"
             android:textSize="@dimen/_18sdp"
             android:textColor="@color/white"
             android:gravity="center"/>
@@ -148,7 +351,7 @@
             android:layout_weight="2"
             android:layout_height="wrap_content"
             android:text="Target"
-            android:textSize="@dimen/_12sdp"
+            android:textSize="@dimen/_10sdp"
             android:textColor="@color/white"
             android:gravity="center"/>
 
@@ -167,7 +370,7 @@
             android:layout_weight="2"
             android:layout_height="wrap_content"
             android:text="Food"
-            android:textSize="@dimen/_12sdp"
+            android:textSize="@dimen/_10sdp"
             android:textColor="@color/white"
             android:gravity="center"/>
 
@@ -186,7 +389,7 @@
             android:layout_weight="2"
             android:layout_height="wrap_content"
             android:text="Exercise"
-            android:textSize="@dimen/_12sdp"
+            android:textSize="@dimen/_10sdp"
             android:textColor="@color/white"
             android:gravity="center"/>
 
@@ -204,7 +407,7 @@
             android:layout_weight="2"
             android:layout_height="wrap_content"
             android:text="Remaining"
-            android:textSize="@dimen/_12sdp"
+            android:textSize="@dimen/_10sdp"
             android:textColor="@color/primary_color"
             android:gravity="center"/>
 
@@ -260,7 +463,6 @@
         android:paddingVertical="@dimen/_5sdp"
         android:background="#505050"
         android:text="Add Breakfast"
-
         android:textColor="@color/primary_color"
         android:textSize="@dimen/_12sdp"
         android:drawablePadding="@dimen/_10sdp"
@@ -271,7 +473,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-            android:visibility="gone"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_20sdp">
 
@@ -290,7 +491,8 @@
             android:text="310"
             android:textColor="@color/white"
             android:textSize="@dimen/_16sdp"
-            android:gravity="end"/>
+            android:gravity="end"
+            android:visibility="gone"/>
 
     </LinearLayout>
 
@@ -489,6 +691,7 @@
             android:textSize="@dimen/_12sdp"
             android:drawablePadding="@dimen/_10sdp"
             android:layout_marginTop="@dimen/_10sdp"
-            app:drawableStartCompat="@drawable/ic_baseline_add_24" />
+            app:drawableStartCompat="@drawable/ic_baseline_add_24"/>
+
     </LinearLayout>
 </ScrollView>

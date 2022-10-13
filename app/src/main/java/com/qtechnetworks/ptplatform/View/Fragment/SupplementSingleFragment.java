@@ -1,5 +1,6 @@
 package com.qtechnetworks.ptplatform.View.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -16,11 +17,9 @@ import com.qtechnetworks.ptplatform.R;
 
 public class SupplementSingleFragment extends Fragment {
 
-    String image,title,descrip;
-
-    ImageView supplement_img;
-
-    TextView description_text,title_text_pa;
+    String image, title, descrip;
+    ImageView supplement_img, share_icon;
+    TextView description_text, title_text_pa;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,7 +28,6 @@ public class SupplementSingleFragment extends Fragment {
             image=getArguments().getString("image");
             title=getArguments().getString("title");
             descrip=getArguments().getString("descrip");
-
         }
     }
 
@@ -50,24 +48,29 @@ public class SupplementSingleFragment extends Fragment {
         supplement_img=v.findViewById(R.id.supplement_img);
         description_text=v.findViewById(R.id.description_text);
         title_text_pa=v.findViewById(R.id.title_text_pa);
+        share_icon=v.findViewById(R.id.share_icon);
 
         title_text_pa.setText(title);
-
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            description_text.setText(Html.fromHtml(descrip,Html.FROM_HTML_MODE_LEGACY));
-        } else {
-            description_text.setText(Html.fromHtml(descrip));
-        }
-
+        description_text.setText(Html.fromHtml(descrip));
 
         try{
-
             Glide.with(getContext()).load(image).placeholder(R.drawable.logo).into(supplement_img);
-
         }catch (Exception e){
             e.printStackTrace();
         }
 
+        share_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_SUBJECT, title);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "Text" + Html.fromHtml(descrip));
+                sendIntent.setType("text/plain");
+                startActivity(sendIntent);
+
+            }
+        });
 
     }
 

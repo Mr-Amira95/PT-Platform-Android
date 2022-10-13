@@ -98,7 +98,7 @@
         android:layout_marginTop="@dimen/_10sdp"
         android:background="@drawable/background_radius_10"
         android:backgroundTint="@color/dark_grey"
-        android:hint="Height"
+        android:hint="Height (cm)"
         android:inputType="number"
         android:paddingHorizontal="@dimen/_10sdp"
         android:paddingVertical="@dimen/_5sdp"
@@ -114,32 +114,39 @@
         android:layout_marginTop="@dimen/_10sdp"
         android:background="@drawable/background_radius_10"
         android:backgroundTint="@color/dark_grey"
-        android:hint="Weight"
+        android:hint="Weight (kg)"
         android:inputType="number"
         android:paddingHorizontal="@dimen/_10sdp"
         android:paddingVertical="@dimen/_5sdp"
         android:textColor="@color/white"
         android:textColorHint="@color/txt_grey"
         app:layout_constraintTop_toBottomOf="@id/height_edittext" />
-    <Spinner
+
+    <com.skydoves.powerspinner.PowerSpinnerView
         android:id="@+id/activity_spinner"
-        style="@style/mySpinnerItemStyle"
-        android:backgroundTint="@color/white"
-        android:foregroundTint="@color/white"
+        android:background="@drawable/background_radius_10"
+        android:backgroundTint="@color/dark_grey"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:layout_margin="20dp"
-        android:layout_marginHorizontal="@dimen/_20sdp"
-        android:layout_marginStart="20dp"
-        android:gravity="center"
-        android:minHeight="48dp"
-        android:paddingVertical="10dp"
-        android:textAlignment="center"
+        android:hint="Activity"
+        android:padding="10dp"
         android:textColor="@color/white"
-        android:textSize="@dimen/_14sdp"
-        app:layout_constraintTop_toBottomOf="@id/weight_edittext" />
-    />
+        android:textColorHint="@color/white"
+        android:textSize="15sp"
+        app:spinner_preference_name="English"
+        app:spinner_arrow_gravity="end"
+        app:spinner_arrow_padding="8dp"
+        app:spinner_arrow_tint="@color/black"
+        app:spinner_divider_color="@color/white"
+        app:spinner_divider_show="true"
+        app:spinner_divider_size="0.4dp"
+        app:spinner_item_height="46dp"
+        app:spinner_item_array="@array/activity"
+        app:spinner_popup_background="@drawable/background_radius_10"
+        app:spinner_popup_animation="dropdown"
+        app:layout_constraintTop_toBottomOf="@id/weight_edittext"/>
+
 
     <EditText
         android:id="@+id/activity_edittext"

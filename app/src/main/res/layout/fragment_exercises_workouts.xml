@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".View.Fragment.ExercisesWorkoutFragment"
+    tools:context=".View.Fragment.ExercisesFragment"
     android:background="@color/backapp">
 
     <ImageView
@@ -26,7 +26,7 @@
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Title"
+        android:text="Exercises"
         android:textColor="@color/primary_color"
         android:textSize="@dimen/_20sdp"
         android:fontFamily="@font/aeonikbold"
@@ -36,14 +36,15 @@
         app:layout_constraintStart_toStartOf="parent"/>
 
     <ImageView
-        android:layout_width="@dimen/_20sdp"
-        android:layout_height="@dimen/_20sdp"
-        android:src="@drawable/ic_filter_icon"
+        android:layout_width="19dp"
+        android:layout_height="16dp"
+        android:layout_marginEnd="@dimen/_20sdp"
         android:backgroundTint="@color/white"
-        app:layout_constraintTop_toTopOf="@id/title"
+        android:src="@drawable/ic_filter_icon"
         app:layout_constraintBottom_toBottomOf="@id/title"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="@dimen/_20sdp"/>
+        app:layout_constraintTop_toTopOf="@id/title"
+        android:visibility="gone"/>
 
     <EditText
         android:id="@+id/search_bar"
@@ -53,7 +54,7 @@
         android:background="@drawable/background_radius_20"
         android:backgroundTint="@color/white"
         android:drawableEnd="@drawable/ic_search"
-        android:hint="SEARCH WORKOUT"
+        android:hint="SEARCH EXERCISE"
         android:paddingStart="@dimen/_20sdp"
         android:paddingEnd="@dimen/_10sdp"
         android:textColor="@color/backapp"
@@ -63,6 +64,17 @@
         app:layout_constraintTop_toBottomOf="@id/title"
         android:layout_margin="@dimen/_20sdp"/>
 
+    <Button
+        android:id="@+id/search_button"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@drawable/button_background"
+        android:text="Search"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@id/search_bar"
+        app:layout_constraintTop_toTopOf="@id/search_bar"
+        app:layout_constraintBottom_toBottomOf="@id/search_bar"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/category_recyclerView"
         android:layout_width="match_parent"
@@ -71,27 +83,13 @@
         app:layout_constraintBottom_toBottomOf="@id/header_img"
         android:layout_marginHorizontal="@dimen/_20sdp"/>
 
-    <ScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/home_exir_work_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="vertical"
+        android:layout_marginHorizontal="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_10sdp"
         app:layout_constraintTop_toBottomOf="@id/header_img"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/home_exir_work_recyclerview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/_5sdp"
-                android:layout_marginTop="@dimen/_10sdp"/>
-
-        </LinearLayout>
-
-    </ScrollView>
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

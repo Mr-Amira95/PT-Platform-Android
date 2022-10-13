@@ -29,6 +29,7 @@ public class MediaViewActivity extends AppCompatActivity {
         mediaWebview.loadUrl(url);
 
     }
+
     private void initals(){
           mediaWebview=findViewById(R.id.media_webview);
     }

@@ -12,10 +12,10 @@ import com.qtechnetworks.ptplatform.R;
 
 public class ChatSingleFragment extends Fragment {
 
-    private String flag;
+    private Integer userID;
     
-    public ChatSingleFragment(String flag) {
-        this.flag = flag;
+    public ChatSingleFragment(Integer userID) {
+        this.userID = userID;
     }
 
     @Override

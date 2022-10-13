@@ -62,8 +62,6 @@
         android:paddingHorizontal="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_15sdp"/>
 
-
-
     <Button
         android:id="@+id/update_btn"
         android:layout_width="wrap_content"

@@ -61,7 +61,7 @@ public interface RetrofitServices {
     @Headers({"Accept: application/json"})
     @POST
     @Multipart
-    Observable<ResponseBody> uploadfile(@Url String url, @PartMap Map<String, RequestBody> params, @Part MultipartBody.Part[] part);
+    Observable<ResponseBody> uploadfile(@Url String url, @Part MultipartBody.Part part);
 
 }
 

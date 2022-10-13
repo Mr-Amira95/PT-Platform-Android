@@ -9,14 +9,14 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
 
 public class ChoosingActivity extends AppCompatActivity {
-//design checked
+
     Button next_button;
 
     ImageView imageView_coach,imageView_trainee;
-    Boolean trainee=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,13 +24,18 @@ public class ChoosingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_choosing);
 
         initial();
+        clicks();
+
+    }
+
+    private void clicks() {
 
         imageView_coach.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 imageView_coach.setImageResource(R.drawable.checked);
                 imageView_trainee.setImageResource(R.drawable.notcheck);
-                trainee=false;
+                PreferencesUtils.setUserType("coach");
             }
         });
 
@@ -39,7 +44,7 @@ public class ChoosingActivity extends AppCompatActivity {
             public void onClick(View v) {
                 imageView_trainee.setImageResource(R.drawable.checked);
                 imageView_coach.setImageResource(R.drawable.notcheck);
-                trainee=true;
+                PreferencesUtils.setUserType("trainee");
             }
         });
 
@@ -48,19 +53,18 @@ public class ChoosingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if (!trainee){
-                    Toast.makeText(ChoosingActivity.this, "Later", Toast.LENGTH_LONG).show();
-                    //startActivity(new Intent(ChoosingActivity.this, SignInActivity.class).putExtra("type","coach"));
-                }else if (trainee){
-                    startActivity(new Intent(ChoosingActivity.this, SignInActivity.class).putExtra("type","trainee"));
+                if (PreferencesUtils.getUserType().equalsIgnoreCase("coach")){
+                    startActivity(new Intent(ChoosingActivity.this, SignInActivity.class));
+                } else if (PreferencesUtils.getUserType().equalsIgnoreCase("trainee")){
+                    startActivity(new Intent(ChoosingActivity.this, SignInActivity.class));
                 }
+
             }
         });
 
     }
 
     private void initial(){
-
         imageView_coach=findViewById(R.id.imageView_coach);
         imageView_trainee=findViewById(R.id.imageView_trainee);
         next_button=findViewById(R.id.next_button);

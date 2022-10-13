@@ -42,7 +42,7 @@
                 android:layout_marginStart="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:fontFamily="@font/aeonikbold"
-                android:text="Coach"
+                android:text="Trainee"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_27sdp" />
 
@@ -99,6 +99,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/email_parent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
@@ -181,13 +182,15 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/mobile_parent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_gravity="start"
                 android:layout_marginHorizontal="@dimen/_20sdp"
                 android:textColorHint="@color/white"
-                app:hintTextAppearance="@style/Widget.Design.TextInputLayout">
+                app:hintTextAppearance="@style/Widget.Design.TextInputLayout"
+                android:visibility="gone">
 
                 <EditText
                     android:id="@+id/mobilenumber_coach_signup_edittext"
@@ -207,13 +210,15 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/social_media_parent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_gravity="start"
                 android:layout_marginHorizontal="@dimen/_20sdp"
                 android:textColorHint="@color/white"
-                app:hintTextAppearance="@style/Widget.Design.TextInputLayout">
+                app:hintTextAppearance="@style/Widget.Design.TextInputLayout"
+                android:visibility="gone">
 
                 <EditText
                     android:id="@+id/socialmedia_coach_signup_edittext"
@@ -228,20 +233,20 @@
                     android:textCursorDrawable="@color/white"
                     android:textColor="@color/white"
                     android:backgroundTint="@color/white"
-                    android:textColorHint="@color/white" />
+                    android:textColorHint="@color/white"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
-
-
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/potential_parent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_gravity="start"
                 android:layout_marginHorizontal="@dimen/_20sdp"
                 android:textColorHint="@color/white"
-                app:hintTextAppearance="@style/Widget.Design.TextInputLayout">
+                app:hintTextAppearance="@style/Widget.Design.TextInputLayout"
+                android:visibility="gone">
 
                 <EditText
                     android:id="@+id/potential_coach_signup_edittext"
@@ -269,7 +274,7 @@
                 android:textColor="@color/white"
                 android:fontFamily="@font/aeonikregular"
                 android:layout_margin="@dimen/_20sdp"
-                android:text="Submit"
+                android:text="Next"
                 android:textSize="@dimen/_14sdp"
                 android:textAllCaps="false"/>
 

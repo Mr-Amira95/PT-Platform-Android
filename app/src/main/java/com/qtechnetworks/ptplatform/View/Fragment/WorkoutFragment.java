@@ -10,23 +10,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.qtechnetworks.ptplatform.Controller.adapters.TitleAdapter;
 import com.qtechnetworks.ptplatform.Controller.adapters.WorkoutAdapter;
-import com.qtechnetworks.ptplatform.Controller.adapters.WorkoutAndExsircisesAdapter;
 import com.qtechnetworks.ptplatform.Controller.adapters.WorkoutTitleAdapter;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.workout.Category;
-import com.qtechnetworks.ptplatform.Model.Beans.workout.CategoryResults;
 import com.qtechnetworks.ptplatform.Model.Beans.workout.workoutResults;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
-import com.qtechnetworks.ptplatform.Model.utilits.EndlessRecyclerViewScrollListener;
 import com.qtechnetworks.ptplatform.R;
+import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -38,9 +36,11 @@ public class WorkoutFragment extends Fragment implements CallBack {
     public static RecyclerView home_exir_work_recyclerview;
 
     WorkoutTitleAdapter workoutTitleAdapter;
-    TextView title;
 
     String coachid;
+
+    Button searchBtn;
+    EditText searchBar;
 
     public static int groupID = -1;
 
@@ -67,13 +67,37 @@ public class WorkoutFragment extends Fragment implements CallBack {
         View view = inflater.inflate(R.layout.fragment_workout, container, false);
 
         initial(view);
+        clicks();
         getWorkout(coachid);
 
         // Inflate the layout for this fragment
         return view;
     }
 
+    private void clicks() {
+
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (!searchBar.getText().toString().isEmpty()) {
+                    setFragment(new SearchFragment("Workouts", searchBar.getText().toString()));
+                } else {
+                    Toast.makeText(getContext(), "Please write what are you looking for...", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+        });
+    }
+
+    private void setFragment(Fragment fragment) {
+        ((MainActivity) getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.home_frame, fragment, "OptionsFragment").addToBackStack(null).commit();
+    }
+
     private void initial(View view) {
+        searchBar = view.findViewById(R.id.search_bar);
+        searchBtn = view.findViewById(R.id.search_button);
+
         home_exir_work_recyclerview= view.findViewById(R.id.home_exir_work_recyclerview);
         categoryRecyclerView= view.findViewById(R.id.category_recyclerView);
 

@@ -14,6 +14,8 @@ import android.widget.TextView;
 import com.google.android.exoplayer2.MediaItem;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.ui.PlayerView;
+import com.qtechnetworks.ptplatform.Controller.adapters.ExerciseHRecordAdapter;
+import com.qtechnetworks.ptplatform.Controller.adapters.ExerciseHistoryAdapter;
 import com.qtechnetworks.ptplatform.Controller.adapters.VideoItemAdapter;
 import com.qtechnetworks.ptplatform.Controller.adapters.WorkoutHistoryAdapter;
 import com.qtechnetworks.ptplatform.R;
@@ -23,51 +25,11 @@ import java.util.ArrayList;
 
 public class HistoryExerciseFragment extends Fragment {
 
-    TextView sun, mon, tue, wed, thu, fri, sat;
-    ArrayList<TextView> daysList = new ArrayList<>();
-
-    RecyclerView videoRecyclerview;
-    VideoItemAdapter videoAdapter;
-    public PlayerView video_view;
-    public TextView desc;
-
-    public static SimpleExoPlayer player;
-
-    public String VideoID;
-    boolean secondPlay = false;
+    RecyclerView exercisesRecyclerview;
 
     public HistoryExerciseFragment() {
         // Required empty public constructor
     }
-
-    @Override
-    public void onStop() {
-        try {
-            player.pause();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        super.onStop();
-    }
-
-    @Override
-    public void onPause() {
-        try{
-
-        }catch (Exception e){
-            player.pause();
-        }
-        super.onPause();
-    }
-
-    @Override
-    public void onStart() {
-        if (secondPlay){
-            player.play();
-        }
-        super.onStart();
-    }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -83,127 +45,21 @@ public class HistoryExerciseFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_exercise_history, container, false);
 
         initial(view);
-        clicks();
 
         // Inflate the layout for this fragment
         return view;
     }
 
-    public void playinitial (String videourl) {
-
-        player = new SimpleExoPlayer.Builder(getContext()).build();
-
-        video_view.setPlayer(player);
-        video_view.setUseController(false);
-
-        MediaItem mediaItem = MediaItem.fromUri(videourl);
-
-        //player.setRepeatMode(Player.REPEAT_MODE_ALL);
-
-        video_view.setControllerHideOnTouch(true);
-        video_view.showController();
-
-        // Set the media item to be played.
-        player.setMediaItem(mediaItem);
-
-        // Prepare the player.
-        player.prepare();
-
-        // Start the playback.
-        player.play();
-        secondPlay = true;
-
-    }
-
-    private void clicks() {
-        sun.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setBackground(0);
-            }
-        });
-
-        mon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setBackground(1);
-            }
-        });
-
-        tue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setBackground(2);
-            }
-        });
-
-        wed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setBackground(3);
-            }
-        });
-
-        thu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setBackground(4);
-            }
-        });
-
-        fri.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setBackground(5);
-            }
-        });
-
-        sat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setBackground(6);
-            }
-        });
-
-    }
-
-    private void setBackground(int index) {
-        for (int i=0; i<daysList.size(); i++){
-            if ( i == index){
-                daysList.get(i).setBackgroundResource(R.drawable.button_background);
-            } else {
-                daysList.get(i).setBackgroundResource(R.color.tran);
-            }
-        }
-    }
-
     private void initial(View view) {
 
-        videoRecyclerview= view.findViewById(R.id.video_recyclerView);
-
-        video_view=view.findViewById(R.id.video_viewex);
-
-        desc=view.findViewById(R.id.desc);
+        exercisesRecyclerview = view.findViewById(R.id.exercises_recyclerview);
 
         LinearLayoutManager layoutManagerhorizantalleader = new LinearLayoutManager(getContext());
         layoutManagerhorizantalleader.setOrientation(LinearLayoutManager.VERTICAL);
-        videoRecyclerview.setLayoutManager(layoutManagerhorizantalleader);
+        exercisesRecyclerview.setLayoutManager(layoutManagerhorizantalleader);
 
-        sun = view.findViewById(R.id.sun);
-        mon = view.findViewById(R.id.mon);
-        tue = view.findViewById(R.id.tue);
-        wed = view.findViewById(R.id.wed);
-        thu = view.findViewById(R.id.thu);
-        fri = view.findViewById(R.id.fri);
-        sat = view.findViewById(R.id.sat);
-
-        daysList.add(sun);
-        daysList.add(mon);
-        daysList.add(tue);
-        daysList.add(wed);
-        daysList.add(thu);
-        daysList.add(fri);
-        daysList.add(sat);
+        ExerciseHistoryAdapter exerciseHistoryAdapter = new ExerciseHistoryAdapter(getContext());
+        exercisesRecyclerview.setAdapter(exerciseHistoryAdapter);
     }
 
 }

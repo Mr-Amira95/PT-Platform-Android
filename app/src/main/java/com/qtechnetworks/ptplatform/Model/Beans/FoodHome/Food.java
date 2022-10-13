@@ -8,27 +8,33 @@ public class Food {
 
     @SerializedName("breakfast")
     @Expose
-    private List<Breakfast> breakfast = null;
+    private List<Snack> breakfast = null;
     @SerializedName("dinner")
     @Expose
-    private List<Dinner> dinner = null;
+    private List<Snack> dinner = null;
     @SerializedName("snack")
     @Expose
     private List<Snack> snack = null;
+    @SerializedName("supplements")
+    @Expose
+    private List<Snack> supplements = null;
+    @SerializedName("lunch")
+    @Expose
+    private List<Snack> lunch = null;
 
-    public List<Breakfast> getBreakfast() {
+    public List<Snack> getBreakfast() {
         return breakfast;
     }
 
-    public void setBreakfast(List<Breakfast> breakfast) {
+    public void setBreakfast(List<Snack> breakfast) {
         this.breakfast = breakfast;
     }
 
-    public List<Dinner> getDinner() {
+    public List<Snack> getDinner() {
         return dinner;
     }
 
-    public void setDinner(List<Dinner> dinner) {
+    public void setDinner(List<Snack> dinner) {
         this.dinner = dinner;
     }
 
@@ -38,6 +44,22 @@ public class Food {
 
     public void setSnack(List<Snack> snack) {
         this.snack = snack;
+    }
+
+    public List<Snack> getSupplements() {
+        return supplements;
+    }
+
+    public void setSupplements(List<Snack> supplements) {
+        this.supplements = supplements;
+    }
+
+    public List<Snack> getLunch() {
+        return lunch;
+    }
+
+    public void setLunch(List<Snack> lunch) {
+        this.lunch = lunch;
     }
 
 }

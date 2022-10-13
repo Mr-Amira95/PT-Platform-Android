@@ -10,6 +10,9 @@ public class Datum {
     @SerializedName("question")
     @Expose
     private String question;
+    @SerializedName("answer")
+    @Expose
+    private String answer;
 
     public Integer getId() {
         return id;
@@ -25,6 +28,14 @@ public class Datum {
 
     public void setQuestion(String question) {
         this.question = question;
+    }
+
+    public String getAnswer() {
+        return answer;
+    }
+
+    public void setAnswer(String answer) {
+        this.answer = answer;
     }
 
 }

@@ -3,6 +3,7 @@ package com.qtechnetworks.ptplatform.View.Fragment;
 import android.os.Bundle;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.qtechnetworks.ptplatform.Controller.adapters.CoachAdapter;
 import com.qtechnetworks.ptplatform.Controller.adapters.PersonalMealsHomeAdapter;
@@ -29,12 +31,11 @@ import java.util.HashMap;
 
 import io.reactivex.disposables.Disposable;
 
-public class PersonalTrainingSubscribedFragment extends Fragment implements CallBack {
+public class PersonalTrainingTraineeFragment extends Fragment implements CallBack {
 
     private ConstraintLayout noContentLayout;
     private LinearLayout contentLayout, homeCategoryLayout, PersonalizedCategoryLayout;
-    private TextView homeCategoryTxt, personalizedCategoryTxt;
-    boolean haveContent = true;
+    private TextView homeCategoryTxt, personalizedCategoryTxt, assignedWorkouts, assignedMeals, videoTitle, imagesTitle, notesTitle;
 
     private RecyclerView assignedWorkoutsRecyclerview, assignedMealsRecyclerview, videosRecyclerview, imagesRecyclerview, notesRecyclerview;
     private PersonalizedItemAdapter videosAdapter,imagesAdapter,notesAdapter;
@@ -48,17 +49,13 @@ public class PersonalTrainingSubscribedFragment extends Fragment implements Call
 
         initials(view);
 
-        if (haveContent){
-            noContentLayout.setVisibility(View.INVISIBLE);
-            contentLayout.setVisibility(View.VISIBLE);
-        } else {
-            noContentLayout.setVisibility(View.VISIBLE);
-            contentLayout.setVisibility(View.INVISIBLE);
-        }
+        noContentLayout.setVisibility(View.INVISIBLE);
+        contentLayout.setVisibility(View.VISIBLE);
 
         personalizedCategoryTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                getPersonalized();
                 homeCategoryLayout.setVisibility(View.GONE);
                 PersonalizedCategoryLayout.setVisibility(View.VISIBLE);
                 personalizedCategoryTxt.setBackgroundResource(R.drawable.background_radius_20_title);
@@ -81,8 +78,15 @@ public class PersonalTrainingSubscribedFragment extends Fragment implements Call
     }
 
     private void initials(View view) {
+        videoTitle = view.findViewById(R.id.video_title);
+        imagesTitle = view.findViewById(R.id.image_title);
+        notesTitle = view.findViewById(R.id.notes_title);
+
         contentLayout = view.findViewById(R.id.content_layout);
         noContentLayout = view.findViewById(R.id.no_content_layout);
+
+        assignedWorkouts = view.findViewById(R.id.assigned_workouts_title);
+        assignedMeals = view.findViewById(R.id.assigned_meals_title);
 
         homeCategoryLayout = view.findViewById(R.id.home_layout);
         PersonalizedCategoryLayout = view.findViewById(R.id.personalized_layout);
@@ -96,32 +100,30 @@ public class PersonalTrainingSubscribedFragment extends Fragment implements Call
         imagesRecyclerview = view.findViewById(R.id.image_recyclerView);
         notesRecyclerview = view.findViewById(R.id.notes_recyclerView);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        GridLayoutManager linearLayoutManager = new GridLayoutManager(getContext(), 3);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         assignedWorkoutsRecyclerview.setLayoutManager(linearLayoutManager);
 
-        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getContext());
-        linearLayoutManager1.setOrientation(LinearLayoutManager.HORIZONTAL);
+        GridLayoutManager linearLayoutManager1 = new GridLayoutManager(getContext(), 3);
+        linearLayoutManager1.setOrientation(LinearLayoutManager.VERTICAL);
         assignedMealsRecyclerview.setLayoutManager(linearLayoutManager1);
 
-        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getContext());
-        linearLayoutManager2.setOrientation(LinearLayoutManager.HORIZONTAL);
+        GridLayoutManager linearLayoutManager2 = new GridLayoutManager(getContext(), 3);
+        linearLayoutManager2.setOrientation(LinearLayoutManager.VERTICAL);
         videosRecyclerview.setLayoutManager(linearLayoutManager2);
 
-        LinearLayoutManager linearLayoutManager3 = new LinearLayoutManager(getContext());
-        linearLayoutManager3.setOrientation(LinearLayoutManager.HORIZONTAL);
+        GridLayoutManager linearLayoutManager3 = new GridLayoutManager(getContext(), 3);
+        linearLayoutManager3.setOrientation(LinearLayoutManager.VERTICAL);
         imagesRecyclerview.setLayoutManager(linearLayoutManager3);
 
-        LinearLayoutManager linearLayoutManager4 = new LinearLayoutManager(getContext());
-        linearLayoutManager4.setOrientation(LinearLayoutManager.HORIZONTAL);
+        GridLayoutManager linearLayoutManager4 = new GridLayoutManager(getContext(), 3);
+        linearLayoutManager4.setOrientation(LinearLayoutManager.VERTICAL);
         notesRecyclerview.setLayoutManager(linearLayoutManager4);
 
-
         getworkout();
-        getPersonalized();
-
     }
-    private void getPersonalized(){
+
+    private void getPersonalized() {
 
         HashMap<String ,Object> params=new HashMap<>();
 
@@ -130,10 +132,9 @@ public class PersonalTrainingSubscribedFragment extends Fragment implements Call
 
         MyApplication.getInstance().getBackgroundHttpHelper().setCallback(this);
         MyApplication.getInstance().getBackgroundHttpHelper().get(getContext(), AppConstants.GET_PERSONALIZED_URL, AppConstants.GET_PERSONALIZED_TAG, Personalized.class, params);
-
     }
-    private void getworkout(){
 
+    private void getworkout() {
         HashMap<String ,Object> params=new HashMap<>();
 
         params.put("coach_id", PreferencesUtils.getCoach(getContext()).getId());
@@ -141,12 +142,10 @@ public class PersonalTrainingSubscribedFragment extends Fragment implements Call
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);
         MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.personalWorkout_URL, AppConstants.personalWorkout_TAG, WorkoutPersonal.class, params);
-
     }
 
 
     private void getMeals(){
-
         HashMap<String ,Object> params=new HashMap<>();
 
         params.put("coach_id", PreferencesUtils.getCoach(getContext()).getId());
@@ -154,7 +153,6 @@ public class PersonalTrainingSubscribedFragment extends Fragment implements Call
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);
         MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.personalMeals_URL, AppConstants.personalMeals_TAG, MealsPersonal.class, params);
-
     }
 
 
@@ -173,33 +171,57 @@ public class PersonalTrainingSubscribedFragment extends Fragment implements Call
 
                 WorkoutPersonal workoutPersonal =(WorkoutPersonal) result;
 
-                PersonalWorkoutHomeAdapter personalHomeAdapter=new PersonalWorkoutHomeAdapter(getContext(),workoutPersonal.getData());
-
-                assignedWorkoutsRecyclerview.setAdapter(personalHomeAdapter);
-
+                if (workoutPersonal.getData().size() > 0){
+                    PersonalWorkoutHomeAdapter personalHomeAdapter=new PersonalWorkoutHomeAdapter(getContext(),workoutPersonal.getData());
+                    assignedWorkoutsRecyclerview.setAdapter(personalHomeAdapter);
+                } else {
+                    assignedWorkouts.setVisibility(View.GONE);
+                    assignedWorkoutsRecyclerview.setVisibility(View.GONE);
+                }
 
                 break;
 
             case AppConstants.personalMeals_TAG:
-
                 MealsPersonal mealsPersonal=(MealsPersonal) result;
 
-                PersonalMealsHomeAdapter personalMealsHomeAdapter=new PersonalMealsHomeAdapter(getContext(),mealsPersonal.getData());
-
-                assignedMealsRecyclerview.setAdapter(personalMealsHomeAdapter);
+                if (mealsPersonal.getData().size() > 0){
+                    PersonalMealsHomeAdapter personalMealsHomeAdapter=new PersonalMealsHomeAdapter(getContext(),mealsPersonal.getData());
+                    assignedMealsRecyclerview.setAdapter(personalMealsHomeAdapter);
+                } else {
+                    assignedMeals.setVisibility(View.GONE);
+                    assignedMealsRecyclerview.setVisibility(View.GONE);
+                }
 
                 break;
+
             case AppConstants.GET_PERSONALIZED_TAG:
 
                 Personalized personalized=(Personalized) result;
 
-                 videosAdapter=new PersonalizedItemAdapter(getContext(),personalized.getData(),PersonalizedItemAdapter.VIDEO_PERSONAL_TAG);
-                imagesAdapter=new PersonalizedItemAdapter(getContext(),personalized.getData(),PersonalizedItemAdapter.IMAGE_PERSONAL_TAG);
-                 notesAdapter=new PersonalizedItemAdapter(getContext(),personalized.getData(),PersonalizedItemAdapter.NOTE_PERSONAL_TAG);
+                if (personalized.getData().getVideo().size() > 0) {
+                    videosAdapter=new PersonalizedItemAdapter(getContext(),personalized.getData(),PersonalizedItemAdapter.VIDEO_PERSONAL_TAG);
+                    videosRecyclerview.setAdapter(videosAdapter);
+                } else {
+                    videoTitle.setVisibility(View.GONE);
+                    videosRecyclerview.setVisibility(View.GONE);
+                }
 
-                videosRecyclerview.setAdapter(videosAdapter);
-                imagesRecyclerview.setAdapter(imagesAdapter);
-                notesRecyclerview.setAdapter(notesAdapter);
+                if (personalized.getData().getImage().size() >0) {
+                    imagesAdapter=new PersonalizedItemAdapter(getContext(),personalized.getData(),PersonalizedItemAdapter.IMAGE_PERSONAL_TAG);
+                    imagesRecyclerview.setAdapter(imagesAdapter);
+                } else {
+                    imagesTitle.setVisibility(View.GONE);
+                    imagesRecyclerview.setVisibility(View.GONE);
+                }
+
+                if (personalized.getData().getPdf().size() > 0){
+                    notesAdapter=new PersonalizedItemAdapter(getContext(),personalized.getData(),PersonalizedItemAdapter.NOTE_PERSONAL_TAG);
+                    notesRecyclerview.setAdapter(notesAdapter);
+                } else {
+                    notesTitle.setVisibility(View.GONE);
+                    notesRecyclerview.setVisibility(View.GONE);
+                }
+
                 break;
 
 

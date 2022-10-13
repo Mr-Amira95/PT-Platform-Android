@@ -1,8 +1,11 @@
 package com.qtechnetworks.ptplatform.View.Fragment;
 
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.multidex.BuildConfig;
 
@@ -18,7 +21,9 @@ import com.qtechnetworks.ptplatform.R;
 
 public class NewsSingleFragment extends Fragment {
 
-    String image,title,decription;
+    String image;
+    String title;
+    String decription;
 
     ImageView news_img, share;
     TextView title_text,news_details;
@@ -47,13 +52,23 @@ public class NewsSingleFragment extends Fragment {
     }
 
     private void clicks() {
+
         share.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View view) {
+
+//                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+//                sharingIntent.setType("*/*");
+//                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, title);
+//                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, decription);
+//                sharingIntent.putExtra(Intent.EXTRA_STREAM, image);
+//                startActivity(sharingIntent);
+
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_SUBJECT, "PT Platform");
-                sendIntent.putExtra(Intent.EXTRA_TEXT, "Text" + BuildConfig.APPLICATION_ID);
+                sendIntent.putExtra(Intent.EXTRA_SUBJECT, title);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, "Text" + Html.fromHtml(decription));
                 sendIntent.setType("text/plain");
                 startActivity(sendIntent);
 
@@ -69,22 +84,13 @@ public class NewsSingleFragment extends Fragment {
         share = v.findViewById(R.id.share_icon);
 
         try{
-
             Glide.with(getContext()).load(image).placeholder(R.drawable.logo).into(news_img);
-
         }catch (Exception e){
             e.printStackTrace();
         }
 
         title_text.setText(title);
-
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            news_details.setText(Html.fromHtml(decription,Html.FROM_HTML_MODE_LEGACY));
-        } else {
-            news_details.setText(Html.fromHtml(decription));
-        }
-
-
+        news_details.setText(Html.fromHtml(decription));
 
     }
 

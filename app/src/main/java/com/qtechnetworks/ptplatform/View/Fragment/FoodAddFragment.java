@@ -26,6 +26,7 @@ import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.Model.utilits.UtilisMethods;
 import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
+import com.qtechnetworks.ptplatform.View.Dialogs.FoodDialog;
 
 import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.models.PieModel;
@@ -37,19 +38,16 @@ import io.reactivex.disposables.Disposable;
 
 public class FoodAddFragment extends Fragment implements CallBack {
 
-    PieChart pieChart;
     String flag;
     ImageView doneIcon;
-    Spinner Foodname_spinner;
-    ArrayList<String> arrayListfood;
 
-    TextView fat_text, carb_text, protine_text;
+    public static TextView fat_text, carb_text, protine_text, calories_text, Foodname_spinner;
+    TextView increase, decrease;
+    public static EditText weightnumber_edit;
 
-    EditText weightnumber_edit;
+    FoodDialog foodDialog;
 
-    String foodid;
-
-    Food food;
+    public static int selectedFoodIndex = -1;
 
     public FoodAddFragment(String flag) {
         this.flag = flag;
@@ -61,23 +59,66 @@ public class FoodAddFragment extends Fragment implements CallBack {
         View view = inflater.inflate(R.layout.fragment_food_add, container, false);
 
         initials(view);
-
-        doneIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addFood(foodid, flag, weightnumber_edit.getText().toString());
-            }
-        });
-
-        setData();
+        clicks();
 
         // Inflate the layout for this fragment
         return view;
     }
 
+    private void clicks() {
+
+        doneIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addFood();
+            }
+        });
+
+        decrease.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int i = Integer.parseInt(weightnumber_edit.getText().toString())-1;
+                if (i>0){
+                    weightnumber_edit.setText(String.valueOf(i));
+
+                    int carb= FoodDialog.food.getData().get(selectedFoodIndex).getCarb() * i;
+                    int fat=FoodDialog.food.getData().get(selectedFoodIndex).getFat() * i;
+                    int protein=FoodDialog.food.getData().get(selectedFoodIndex).getProtein() * i;
+                    int calories=FoodDialog.food.getData().get(selectedFoodIndex).getCalorie() * i;
+                    fat_text.setText(String.valueOf(fat));
+                    carb_text.setText(String.valueOf(carb));
+                    protine_text.setText(String.valueOf(protein));
+                    calories_text.setText(String.valueOf(calories));
+
+                }
+            }
+        });
+
+        increase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int i = Integer.parseInt(weightnumber_edit.getText().toString())+ 1;
+                weightnumber_edit.setText(String.valueOf(i));
+
+                int carb=FoodDialog.food.getData().get(selectedFoodIndex).getCarb() * i;
+                int fat=FoodDialog.food.getData().get(selectedFoodIndex).getFat() * i;
+                int protein=FoodDialog.food.getData().get(selectedFoodIndex).getProtein() * i;
+                int calories=FoodDialog.food.getData().get(selectedFoodIndex).getCalorie() * i;
+                fat_text.setText(String.valueOf(fat));
+                carb_text.setText(String.valueOf(carb));
+                protine_text.setText(String.valueOf(protein));
+                calories_text.setText(String.valueOf(calories));
+
+            }
+        });
+
+    }
+
     private void initials(View view) {
-        pieChart = view.findViewById(R.id.pie_chart);
+        calories_text = view.findViewById(R.id.calories_text);
         doneIcon = view.findViewById(R.id.done_icon);
+        increase = view.findViewById(R.id.increase);
+        decrease = view.findViewById(R.id.decrease);
 
         fat_text = view.findViewById(R.id.fat_text);
         carb_text = view.findViewById(R.id.carb_text);
@@ -86,54 +127,31 @@ public class FoodAddFragment extends Fragment implements CallBack {
         Foodname_spinner = view.findViewById(R.id.Foodname_spinner);
         weightnumber_edit = view.findViewById(R.id.weightnumber_edit);
 
-        arrayListfood = new ArrayList<>();
+        foodDialog = new FoodDialog(getContext());
+        foodDialog.setCancelable(false);
+        foodDialog.show();
 
-        getFood("0");
+        Foodname_spinner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                foodDialog = new FoodDialog(getContext());
+                foodDialog.show();
+            }
+        });
 
+
+/*
         Foodname_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> arg0, View view, int arg2, long arg3) {
-                int carb=food.getData().get(Foodname_spinner.getSelectedItemPosition()).getCarb();
-                int fat=food.getData().get(Foodname_spinner.getSelectedItemPosition()).getFat();
-                int protein=food.getData().get(Foodname_spinner.getSelectedItemPosition()).getProtein();
+                int carb=food.getData().get(Foodname_spinner.getSelectedItemPosition()).getCarb() * Integer.parseInt(weightnumber_edit.getText().toString());
+                int fat=food.getData().get(Foodname_spinner.getSelectedItemPosition()).getFat() * Integer.parseInt(weightnumber_edit.getText().toString());
+                int protein=food.getData().get(Foodname_spinner.getSelectedItemPosition()).getProtein() * Integer.parseInt(weightnumber_edit.getText().toString());
+                int calories=food.getData().get(Foodname_spinner.getSelectedItemPosition()).getCalorie() * Integer.parseInt(weightnumber_edit.getText().toString());
                 fat_text.setText(fat+"");
                 carb_text.setText(carb+"");
                 protine_text.setText(protein+"");
-                try {
-                    pieChart.clearChart();
-                    pieChart.addPieSlice(
-                            new PieModel(
-                                    "Carbs",
-                                    carb,
-                                    Color.parseColor("#1EB1FC")));
-                    pieChart.addPieSlice(
-                            new PieModel(
-                                    "Fat",
-                                    fat,
-                                    Color.parseColor("#FF0000")));
-                    pieChart.addPieSlice(
-                            new PieModel(
-                                    "Protein",
-                                    protein,
-                                    Color.parseColor("#8DC63F")));
-                    pieChart.addPieSlice(
-                            new PieModel(
-                                    "",
-                                    100-carb-fat-protein,
-                                    Color.parseColor("#FFFFFFFF")));
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-                //pieChart.addPieSlice(new PieModel("Carbs", 4, R.color.blue));
-                //pieChart.addPieSlice(new PieModel("Fat", 16, R.color.red));
-                //pieChart.addPieSlice(new PieModel("Protein", 80, R.color.primary_color));
-
-                // To animate the pie chart
-                pieChart.startAnimation();
-                /*fat_text.setText(food.getData().get(position).getFat().toString());
-                carb_text.setText(food.getData().get(position).getCarb().toString());
-                protine_text.setText(food.getData().get(position).getProtein().toString());*/
-
+                calories_text.setText(calories+"");
             }
 
             @Override
@@ -142,12 +160,8 @@ public class FoodAddFragment extends Fragment implements CallBack {
 
             }
         });
-
+*/
     }
-
-
-
-
 
     private void setFragment(Fragment fragment) {
 
@@ -157,31 +171,13 @@ public class FoodAddFragment extends Fragment implements CallBack {
         ((MainActivity) getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.home_frame, fragment).addToBackStack(null).commit();
     }
 
-    private void setData() {
 
-        // Set the percentage of language used
-        // Set the data and color to the pie chart
+    private void addFood() {
 
-    }
-
-    private void getFood(String skip){
-
-        HashMap<String ,Object> params=new HashMap<>();
-
-        params.put("skip",skip);
-
-        MyApplication.getInstance().getHttpHelper().setCallback(this);
-        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.food_URL, AppConstants.food_TAG, Food.class, params);
-
-    }
-
-    private void addFood(String foodid,String type,String number){
-
-        HashMap<String ,Object> params=new HashMap<>();
-        foodid=food.getData().get(Foodname_spinner.getSelectedItemPosition()).getId().toString();
-        params.put("food_id",foodid);
-        params.put("type",type);
-        params.put("number",number);
+        HashMap<String ,Object> params = new HashMap<>();
+        params.put("food_id", FoodDialog.food.getData().get(selectedFoodIndex).getId());
+        params.put("type",flag);
+        params.put("number",weightnumber_edit.getText().toString());
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);
         MyApplication.getInstance().getHttpHelper().Post(getContext(), AppConstants.addfood_URL, AppConstants.addfood_TAG, General.class, params);
@@ -196,25 +192,8 @@ public class FoodAddFragment extends Fragment implements CallBack {
     @Override
     public void onNext(int tag, boolean isSuccess, Object result) {
 
-
-
         switch (tag){
             case AppConstants.food_TAG:
-                food=(Food) result;
-                for (int i=0;food.getData().size()>i;i++){
-                    arrayListfood.add(food.getData().get(i).getName().toString());
-                }
-
-                UtilisMethods.fillSpinnerData(getContext(),arrayListfood,Foodname_spinner);
-
-//                foodid=food.getData().get(Foodname_spinner.getSelectedItemPosition()).getId().toString();
-//
-//
-//                fat_text.setText(food.getData().get(Foodname_spinner.getSelectedItemPosition()).getFat().toString());
-//                carb_text.setText(food.getData().get(Foodname_spinner.getSelectedItemPosition()).getCarb().toString());
-//                protine_text.setText(food.getData().get(Foodname_spinner.getSelectedItemPosition()).getProtein().toString());
-
-
                 break;
 
             case AppConstants.addfood_TAG:
@@ -222,7 +201,6 @@ public class FoodAddFragment extends Fragment implements CallBack {
                 General general=(General) result;
 
                 Toast.makeText(getContext(),general.getData().toString(),Toast.LENGTH_LONG).show();
-
                 getActivity().getSupportFragmentManager().popBackStack();
 
                 break;

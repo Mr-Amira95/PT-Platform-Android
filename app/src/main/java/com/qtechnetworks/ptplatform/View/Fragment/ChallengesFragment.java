@@ -30,45 +30,45 @@ import io.reactivex.disposables.Disposable;
 public class ChallengesFragment extends Fragment implements CallBack {
 
     private RecyclerView otherRecyclerview, historyRecyclerview;
-    private ChallengesAdapter adapter;
-    private Button beginBtn;
-    private int challengeOfTheDayId=-1;
+    private Integer userID;
+
+    public ChallengesFragment(Integer userID) {
+        this.userID = userID;
+    }
+
+    public ChallengesFragment() {
+
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_challenges, container, false);
 
         initials(view);
-        getChallenges();
-        beginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(challengeOfTheDayId != -1) {
-                    setFragment(R.id.home_frame, new ChallengesSignleFragment(challengeOfTheDayId));
-                }else{
-                    Toast.makeText(getContext(), "No Challenges Available", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+
+        if (PreferencesUtils.getUserType().equalsIgnoreCase("Trainee"))
+            getChallengesUser();
+        else if (PreferencesUtils.getUserType().equalsIgnoreCase("Coach"))
+            getChallengesUser();
+
         // Inflate the layout for this fragment
         return view;
     }
 
     private void initials(View view) {
-        beginBtn = view.findViewById(R.id.begin_btn);
 
         otherRecyclerview = view.findViewById(R.id.other_challenges_recyclerview);
         historyRecyclerview = view.findViewById(R.id.history_recyclerview);
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         otherRecyclerview.setLayoutManager(linearLayoutManager);
 
         LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getContext());
         linearLayoutManager1.setOrientation(LinearLayoutManager.HORIZONTAL);
         historyRecyclerview.setLayoutManager(linearLayoutManager1);
 
-       // historyRecyclerview.setAdapter(adapter);
     }
 
     private void setFragment(int frameLayout, Fragment fragment) {
@@ -77,15 +77,25 @@ public class ChallengesFragment extends Fragment implements CallBack {
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
-    private void getChallenges(){
 
-
+    private void getChallengesUser(){
         HashMap<String ,Object> params=new HashMap<>();
-        params.put("coach_id", PreferencesUtils.getCoach(getActivity()).getId());
-        params.put("skip",0);
+
+        params.put("coach_id", PreferencesUtils.getCoach(getContext()).getId());
+        params.put("skip","0");
+
         MyApplication.getInstance().getHttpHelper().setCallback(this);
         MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.CHALLENGES_URL, AppConstants.CHALLENGES_TAG, Challenge.class, params);
+    }
 
+    private void getChallengesCoach(){
+        HashMap<String ,Object> params=new HashMap<>();
+
+        params.put("coach_id", PreferencesUtils.getCoach(getContext()).getId());
+        params.put("skip","0");
+
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.CHALLENGES_URL, AppConstants.CHALLENGES_TAG, Challenge.class, params);
     }
 
     @Override
@@ -98,15 +108,14 @@ public class ChallengesFragment extends Fragment implements CallBack {
         switch (tag){
             case AppConstants.CHALLENGES_TAG:
                 if(isSuccess) {
-                    try {
-                        Challenge challenges = (Challenge) result;
-                        if (challenges.getData().isEmpty())
-                            break;
-                        challengeOfTheDayId = challenges.getData().get(0).getId();
-                        adapter = new ChallengesAdapter(getContext(), challenges.getData());
+
+                    Challenge challenges = (Challenge) result;
+
+                    if (challenges.getData().size()>0) {
+                        ChallengesAdapter adapter = new ChallengesAdapter(getContext(), challenges.getData());
                         otherRecyclerview.setAdapter(adapter);
-                    }catch (Exception e){
-                        e.printStackTrace();
+                    } else {
+                        Toast.makeText(getContext(), "There are no challenges to show", Toast.LENGTH_SHORT).show();
                     }
                 }
                 break;

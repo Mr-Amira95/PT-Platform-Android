@@ -65,9 +65,7 @@ public class CoachUserAdapter extends RecyclerView.Adapter<CoachUserAdapter.View
             e.printStackTrace();
         }
 
-        holder.trainerName.setText(current.getFirstName()+" "+current.getLastName());
-
-
+        holder.trainerName.setText(current.getLastName());
     }
 
     private void setFragment(Fragment fragment ,String coachid, String name, String image) {

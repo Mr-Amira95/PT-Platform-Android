@@ -20,98 +20,37 @@
         android:layout_marginHorizontal="@dimen/_20sdp"/>
 
     <LinearLayout
+        android:id="@+id/choose_date"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:orientation="horizontal"
-        android:weightSum="7"
+        android:background="@drawable/background_radius_10"
+        android:backgroundTint="@color/primary_color"
+        android:layout_gravity="center"
+        android:gravity="center"
         android:layout_marginHorizontal="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_25sdp">
+        android:layout_marginTop="@dimen/_20sdp">
 
         <TextView
-            android:id="@+id/sun"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:id="@+id/selected_date"
+            android:layout_width="150dp"
+            android:background="@drawable/background_radius_10"
+            android:backgroundTint="@color/primary_color"
             android:layout_height="wrap_content"
-            android:text="Sun"
+            android:layout_gravity="center"
+            android:text="Today"
             android:textSize="@dimen/_12sdp"
             android:textColor="@color/white"
-            android:gravity="center"
-            android:paddingVertical="@dimen/_5sdp"
-            android:background="@drawable/button_background"/>
-
-        <TextView
-            android:id="@+id/mon"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="Mon"
-            android:textSize="@dimen/_12sdp"
-            android:textColor="@color/white"
-            android:gravity="center"
-            android:paddingVertical="@dimen/_5sdp"/>
-
-        <TextView
-            android:id="@+id/tue"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="Tue"
-            android:textSize="@dimen/_12sdp"
-            android:textColor="@color/white"
-            android:gravity="center"
-            android:paddingVertical="@dimen/_5sdp"/>
-
-        <TextView
-            android:id="@+id/wed"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="Wed"
-            android:textSize="@dimen/_12sdp"
-            android:textColor="@color/white"
-            android:gravity="center"
-            android:paddingVertical="@dimen/_5sdp"/>
-
-        <TextView
-            android:id="@+id/thu"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="Thu"
-            android:textSize="@dimen/_12sdp"
-            android:textColor="@color/white"
-            android:gravity="center"
-            android:paddingVertical="@dimen/_5sdp"/>
-
-        <TextView
-            android:id="@+id/fri"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="Fri"
-            android:textSize="@dimen/_12sdp"
-            android:textColor="@color/white"
-            android:gravity="center"
-            android:paddingVertical="@dimen/_5sdp"/>
-
-        <TextView
-            android:id="@+id/sat"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:text="Sat"
-            android:textSize="@dimen/_12sdp"
-            android:textColor="@color/white"
-            android:gravity="center"
-            android:paddingVertical="@dimen/_5sdp"/>
+            android:gravity="center" />
 
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/workout_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:layout_marginHorizontal="@dimen/_20sdp"/>
+        android:layout_height="match_parent"
+        android:layout_marginVertical="@dimen/_20sdp"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:layout_marginEnd="@dimen/_5sdp"/>
 
 </LinearLayout>

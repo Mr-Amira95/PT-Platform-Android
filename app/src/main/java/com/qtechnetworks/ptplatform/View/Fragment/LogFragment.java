@@ -139,7 +139,7 @@ public class LogFragment extends Fragment implements CallBack {
 
                 FavoriteandWorkout favoriteandWorkout=(FavoriteandWorkout) result;
 
-                logAdapter = new LogAdapter(getContext(), flag,favoriteandWorkout.getData());
+                logAdapter = new LogAdapter(getContext(), favoriteandWorkout.getData());
                 logRecyclerview.setAdapter(logAdapter);
 
                 break;

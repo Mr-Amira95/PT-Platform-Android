@@ -22,7 +22,13 @@ public class ContactFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_contact, container, false);
 
         initials(view);
+        clicks();
 
+        // Inflate the layout for this fragment
+        return view;
+    }
+
+    private void clicks() {
         feedbackBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,10 +43,6 @@ public class ContactFragment extends Fragment {
                 setFragment(R.id.home_frame, new FeedbackAndSupportFragment("Technical Support"));
             }
         });
-
-
-        // Inflate the layout for this fragment
-        return view;
     }
 
     private void setFragment(int frameLayout, Fragment fragment) {
@@ -49,7 +51,6 @@ public class ContactFragment extends Fragment {
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
-
 
     private void initials(View view) {
         feedbackBtn = view.findViewById(R.id.feedback_button);

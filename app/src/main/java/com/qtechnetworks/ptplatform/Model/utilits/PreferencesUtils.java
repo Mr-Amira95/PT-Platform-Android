@@ -71,7 +71,13 @@ public class PreferencesUtils {
 
     }
 
+    public static String getUserType() {
+        return PreferencesUtils.getString(PrefKeys.type, "-1");
+    }
 
+    public static void setUserType(String type) {
+        PreferencesUtils.putString(PrefKeys.type, type);
+    }
 
     public static String getUserToken() {
         return PreferencesUtils.getString(PrefKeys.userToken, "-1");
@@ -209,6 +215,31 @@ public class PreferencesUtils {
         }
     }
 
+    public static com.qtechnetworks.ptplatform.Model.Beans.PersonalCoach.Datum getTrainee(Context c) {
+
+        try {
+            GsonBuilder gsb = new GsonBuilder();
+            Gson gn = gsb.create();
+            return gn.fromJson(getDefaults("trainee", c), com.qtechnetworks.ptplatform.Model.Beans.PersonalCoach.Datum.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Trace("getting trainee ", "");
+            return null;
+        }
+    }
+
+    public static void setTrainee(com.qtechnetworks.ptplatform.Model.Beans.PersonalCoach.Datum value, Context c) {
+        String json = "";
+        try {
+            GsonBuilder gsb = new GsonBuilder();
+            Gson gn = gsb.create();
+            json = gn.toJson(value);
+            setDefaults("trainee", json, c);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Trace("setting Coach", json);
+        }
+    }
 
     public static String getDefaults(String key, Context context) {
 

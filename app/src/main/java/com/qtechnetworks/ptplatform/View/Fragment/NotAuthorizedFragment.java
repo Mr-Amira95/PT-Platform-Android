@@ -19,21 +19,12 @@ import com.qtechnetworks.ptplatform.R;
 
 public class NotAuthorizedFragment extends Fragment {
 
-
     Button subscribeBtn;
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_not_authorized, container, false);
-
-        // Inflate the layout for this fragment
 
         initial(view);
         clicks();
@@ -42,6 +33,7 @@ public class NotAuthorizedFragment extends Fragment {
     }
 
     private void clicks() {
+
         subscribeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,9 +47,6 @@ public class NotAuthorizedFragment extends Fragment {
 
         subscribeBtn = v.findViewById(R.id.subscribe_btn);
 
-
-
-
     }
 
 
@@ -67,6 +56,7 @@ public class NotAuthorizedFragment extends Fragment {
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
+
 }
 
 

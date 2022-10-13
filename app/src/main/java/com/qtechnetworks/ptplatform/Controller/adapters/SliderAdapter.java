@@ -2,18 +2,24 @@ package com.qtechnetworks.ptplatform.Controller.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.bumptech.glide.Glide;
 import com.qtechnetworks.ptplatform.Model.Beans.Banner.Datum;
 import com.qtechnetworks.ptplatform.R;
+import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
+import com.qtechnetworks.ptplatform.View.Fragment.BannerFragment;
 
 import java.util.List;
 
@@ -21,17 +27,15 @@ import java.util.List;
 public class SliderAdapter extends PagerAdapter {
 
     private Context context;
+    private String flag;
     private LayoutInflater inflater;
     private List<Datum> listPic;
 
-    public SliderAdapter(List<Datum> listPic, Activity context) {
+    public SliderAdapter(List<Datum> listPic, Activity context, String flag) {
+        this.flag=flag;
         this.context=context;
         this.listPic=listPic;
         this.inflater = context.getLayoutInflater();
-    }
-
-    public SliderAdapter(List<Integer> listPic, FragmentActivity activity) {
-
     }
 
     @Override
@@ -61,23 +65,26 @@ public class SliderAdapter extends PagerAdapter {
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                switch (position){
-                    case 0:
-                        //context.startActivity(new Intent(context.getApplicationContext(), FollowusActivity.class));
-                        break;
-                    case 1:
-                        //context.startActivity(new Intent(context.getApplicationContext(), ChoosingCoachActivity.class));
-                        break;
-                    case 2:
-                        //context.startActivity(new Intent(context.getApplicationContext(), ContactUsActivity.class));
-                        break;
+                if (listPic.get(position).getUrl() != null){
+                    try {
+                        Uri uri = Uri.parse(listPic.get(position).getUrl()); // missing 'http://' will cause crashed
+                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                        context.startActivity(intent);
+                    } catch (Exception ignored){}
+                } else {
+                    setFragment(new BannerFragment(flag));
                 }
-
             }
         });
 
         container.addView(SliderLayout, 0);
         return SliderLayout;
+    }
+
+    private void setFragment(Fragment fragment) {
+
+        ((MainActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.home_frame, fragment, "OptionsFragment").addToBackStack(null).commit();
+
     }
 
     @Override

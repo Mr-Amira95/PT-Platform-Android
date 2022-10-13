@@ -14,6 +14,18 @@ public class Data {
     @SerializedName("exercise_target")
     @Expose
     private Integer exerciseTarget;
+    @SerializedName("carb")
+    @Expose
+    private Integer carb;
+    @SerializedName("fat")
+    @Expose
+    private Integer fat;
+    @SerializedName("protein")
+    @Expose
+    private Integer protein;
+    @SerializedName("user")
+    @Expose
+    private User user;
     @SerializedName("food")
     @Expose
     private Food food;
@@ -40,6 +52,38 @@ public class Data {
 
     public void setExerciseTarget(Integer exerciseTarget) {
         this.exerciseTarget = exerciseTarget;
+    }
+
+    public Integer getCarb() {
+        return carb;
+    }
+
+    public void setCarb(Integer carb) {
+        this.carb = carb;
+    }
+
+    public Integer getFat() {
+        return fat;
+    }
+
+    public void setFat(Integer fat) {
+        this.fat = fat;
+    }
+
+    public Integer getProtein() {
+        return protein;
+    }
+
+    public void setProtein(Integer protein) {
+        this.protein = protein;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setCarbTarget(User user) {
+        this.user = user;
     }
 
     public Food getFood() {

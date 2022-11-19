@@ -1,6 +1,5 @@
 package com.qtechnetworks.ptplatform.View.Fragment;
 
-import static com.qtechnetworks.ptplatform.BuildConfig.API_URL;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -214,7 +213,7 @@ public class CheckoutFragment extends Fragment implements CallBack {
 
     @Override
     public void onError(Throwable e) {
-        Toast.makeText(getContext(), "Already subscribed", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), R.string.already_subscribed, Toast.LENGTH_SHORT).show();
         getActivity().getSupportFragmentManager().popBackStackImmediate();
 
     }

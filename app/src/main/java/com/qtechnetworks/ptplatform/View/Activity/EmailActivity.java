@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.gson.JsonObject;
-import com.qtechnetworks.ptplatform.BuildConfig;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.CheckEmail.CheckEmailResults;
 import com.qtechnetworks.ptplatform.Model.Beans.RegisterAndLogin.Register;
@@ -49,7 +48,7 @@ public class EmailActivity extends AppCompatActivity implements CallBack {
                     else if (PreferencesUtils.getUserType().equalsIgnoreCase("coach"))
                         checkCoachEmail(email.getText().toString());
                     else
-                    Toast.makeText(EmailActivity.this, "Please fill the email field", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EmailActivity.this, getString(R.string.fill_the_email_field), Toast.LENGTH_SHORT).show();
 
             }
         });

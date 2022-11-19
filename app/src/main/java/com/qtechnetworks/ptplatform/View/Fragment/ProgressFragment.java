@@ -338,7 +338,7 @@ public class ProgressFragment extends Fragment  implements CallBack {
                         }
 
                         if(myp.getActive_calories()!=null){
-                            activeCaloriesValue.setText(myp.getActive_calories().toString()+" Calories");
+                            activeCaloriesValue.setText(myp.getActive_calories().toString()+" " + getString(R.string.calories_1));
                             Percentage percentage=myp.getPercentage();
                             musclePercentae.setText(percentage.getValue().toString()+"%");
 

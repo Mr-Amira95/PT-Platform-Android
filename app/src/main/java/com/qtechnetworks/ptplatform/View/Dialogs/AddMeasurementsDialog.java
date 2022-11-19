@@ -136,7 +136,7 @@ import io.reactivex.disposables.Disposable;
         @Override
         public void onNext(int tag, boolean isSuccess, Object result) {
             if(isSuccess) {
-                Toast.makeText(mContext, "Measurements Added", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, R.string.measurments_added, Toast.LENGTH_SHORT).show();
                 setFragment(new ProgressFragment());
             }
             this.dismiss();

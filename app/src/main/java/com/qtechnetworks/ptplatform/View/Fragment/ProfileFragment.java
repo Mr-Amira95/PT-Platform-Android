@@ -233,7 +233,7 @@ public class ProfileFragment extends Fragment implements CallBack {
                 case AppConstants.UPDATE_AVATAR_TAG:
                     UpdateUserResults updateUserResults = (UpdateUserResults) result;
 
-                    Toast.makeText(getContext(), "Updated", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), R.string.updated, Toast.LENGTH_SHORT).show();
                     PreferencesUtils.setUser(updateUserResults.getData(),getContext());
                     setFragmentWithoutBack(new ProfileFragment());
 

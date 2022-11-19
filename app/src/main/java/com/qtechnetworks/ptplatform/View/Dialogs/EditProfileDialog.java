@@ -132,7 +132,7 @@ public class EditProfileDialog  extends Dialog implements CallBack {
 
                 case AppConstants.UPDATE_NAME_TAG:
 //                    updateEmail();
-                    Toast.makeText(mContext, "Updated", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, R.string.updated, Toast.LENGTH_SHORT).show();
                     PreferencesUtils.setUser(updateUserResults.getData(),getContext());
                     setFragment(new ProfileFragment());
                     dismiss();
@@ -140,7 +140,7 @@ public class EditProfileDialog  extends Dialog implements CallBack {
                     break;
 
                 case AppConstants.UPDATE_EMAIL_TAG:
-                    Toast.makeText(mContext, "Updated", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(mContext, R.string.updated, Toast.LENGTH_SHORT).show();
                     PreferencesUtils.setUser(updateUserResults.getData(),getContext());
                     setFragment(new ProfileFragment());
                     dismiss();

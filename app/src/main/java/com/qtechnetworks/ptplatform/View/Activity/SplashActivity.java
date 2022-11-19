@@ -1,6 +1,5 @@
 package com.qtechnetworks.ptplatform.View.Activity;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -9,7 +8,6 @@ import android.os.Handler;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 import com.onesignal.OneSignal;
-import com.qtechnetworks.ptplatform.BuildConfig;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.device.DeviceToken;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;

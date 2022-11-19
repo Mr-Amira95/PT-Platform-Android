@@ -78,7 +78,7 @@ public class ExercisesFragment extends Fragment implements CallBack {
                 if (!searchBar.getText().toString().isEmpty()) {
                     setFragment(new SearchFragment("Exercises", searchBar.getText().toString()));
                 } else {
-                    Toast.makeText(getContext(), "Please write what are you looking for...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), R.string.please_write_what_you_are_looking_for, Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -161,7 +161,7 @@ public class ExercisesFragment extends Fragment implements CallBack {
                         setGroupName();
                         setItems(String.valueOf(groupID), getContext());
                     } else {
-                        Toast.makeText(getContext(), "There are no Exercises to Show", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), R.string.there_are_no_exercises_to_show, Toast.LENGTH_SHORT).show();
                     }
                     break;
 

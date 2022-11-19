@@ -111,7 +111,7 @@ public class HistoryExerciseFragment extends Fragment implements CallBack {
             exercisesRecyclerview.setAdapter(exerciseHistoryAdapter);
 
             if (workoutHistoryResults.getData().size() == 0) {
-                Toast.makeText(getContext(), "There is no Exercises to show", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), R.string.there_are_no_exercises_to_show, Toast.LENGTH_SHORT).show();
             }
         }
     }

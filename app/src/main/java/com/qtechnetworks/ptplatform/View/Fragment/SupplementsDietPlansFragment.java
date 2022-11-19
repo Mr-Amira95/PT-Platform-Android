@@ -54,18 +54,18 @@ public class SupplementsDietPlansFragment extends Fragment implements CallBack{
     private void initials(View view) {
         title = view.findViewById(R.id.title);
         searchBtn = view.findViewById(R.id.search_button);
-        title.setText(flag);
 
         searchBar = view.findViewById(R.id.search_bar);
 
         if(flag.equals("Supplements")){
 
-            searchBar.setHint("SEARCH FOR SUPLEMENTS");
+            searchBar.setHint(getString(R.string.search_for_suplements));
             getSupplement();
+            title.setText(R.string.supplements);
 
         } else if (flag.equals("Recipes and Diet Plans")) {
-            searchBar.setHint("SEARCH FOR RECIPES");
-
+            searchBar.setHint(R.string.search_for_recipes);
+            title.setText(R.string.recipes_and_diet_plans);
             getRecipes();
 
         }

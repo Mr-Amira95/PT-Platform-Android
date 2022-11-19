@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.multidex.BuildConfig;
 
 import com.bumptech.glide.Glide;
 import com.qtechnetworks.ptplatform.R;

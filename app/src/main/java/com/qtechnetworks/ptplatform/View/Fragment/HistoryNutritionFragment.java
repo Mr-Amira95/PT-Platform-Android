@@ -175,10 +175,10 @@ public class HistoryNutritionFragment extends Fragment implements CallBack {
 
             if (foodhome.getData().getFoodTarget() > 0){
                 progressBar.setProgress(foodhome.getData().getFoodTarget(), true);
-                progressTxt.setText(foodhome.getData().getFoodTarget() + " Calories");
+                progressTxt.setText(foodhome.getData().getFoodTarget() + getString(R.string.calories_1));
             } else {
                 progressBar.setProgress(0, true);
-                progressTxt.setText("0 Calories");
+                progressTxt.setText("0 " + getString(R.string.calories_1));
             }
 
             if (foodhome.getData().getCarb() > 0) {

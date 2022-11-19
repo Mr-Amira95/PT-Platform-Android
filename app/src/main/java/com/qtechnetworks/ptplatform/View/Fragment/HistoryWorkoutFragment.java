@@ -146,7 +146,7 @@ public class HistoryWorkoutFragment extends Fragment implements CallBack {
             } else {
                 LogAdapter logAdapter = new LogAdapter(getContext(), favoriteandWorkout.getData());
                 workoutRecyclerview.setAdapter(logAdapter);
-                Toast.makeText(getContext(), "There are no videos to show", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), R.string.there_are_no_videos_to_show, Toast.LENGTH_SHORT).show();
             }
         } else {
 

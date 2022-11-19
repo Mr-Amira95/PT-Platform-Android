@@ -85,12 +85,12 @@ public class SuccessFragment extends Fragment {
         addToCalenderBtn = view.findViewById(R.id.add_to_calender_btn);
 
         if (flag.equals("Calendar")){
-            title.setText("Request Sent!");
-            msg.setText("Your request is awaiting your PT’s approval. We’ll notify you soon! ");
+            title.setText(getString(R.string.request_sent));
+            msg.setText(getString(R.string.your_request_is_awaiting_your_pt_s_approval_we_ll_notify_you_soon));
             addToCalenderBtn.setVisibility(View.VISIBLE);
         } else if (flag.equals("Checkout")) {
-            title.setText("Purchase Successful!");
-            msg.setText("Enjoy the benefits of your subscription, and start the journey of change now");
+            title.setText(R.string.purchase_successfull);
+            msg.setText(R.string.enjoy_the_benefits);
             addToCalenderBtn.setVisibility(View.GONE);
         }
     }

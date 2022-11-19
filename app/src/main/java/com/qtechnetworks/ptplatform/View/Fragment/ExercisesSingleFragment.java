@@ -381,7 +381,7 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
                     VideoID = videoExercises.getData().get(0).getId().toString();
 
                 } else {
-                    Toast.makeText(getContext(), "No Videos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), R.string.no_videos, Toast.LENGTH_SHORT).show();
                 }
 
                 break;

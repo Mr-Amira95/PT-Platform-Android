@@ -141,7 +141,7 @@ public class AddLogDialog extends Dialog implements CallBack {
                 repititions.setText("");
                 note.setText("");
 
-                Toast.makeText(context, "Please add the next set details" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, R.string.please_add_next_set , Toast.LENGTH_SHORT).show();
 
             } else {
                 dismiss();

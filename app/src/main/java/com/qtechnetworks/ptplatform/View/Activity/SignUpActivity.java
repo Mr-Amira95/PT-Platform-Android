@@ -13,7 +13,6 @@ import android.widget.Toast;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.JsonObject;
 import com.onesignal.OneSignal;
-import com.qtechnetworks.ptplatform.BuildConfig;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.General;
 import com.qtechnetworks.ptplatform.Model.Beans.RegisterAndLogin.Register;
@@ -60,17 +59,17 @@ public class SignUpActivity extends AppCompatActivity implements CallBack{
                     if (!firstName.getText().toString().isEmpty() && !lastName.getText().toString().isEmpty() && !password.getText().toString().isEmpty() && !confirmPassword.getText().toString().isEmpty() && !potential.getText().toString().isEmpty() && !socialLink.getText().toString().isEmpty() && !mobile.getText().toString().isEmpty() && password.getText().toString().equals(confirmPassword.getText().toString())){
                         registerCoach();
                     } else if (!password.getText().toString().equals(confirmPassword.getText().toString())){
-                        Toast.makeText(SignUpActivity.this, "The password doesn't match", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignUpActivity.this, R.string.password_doesnt_match, Toast.LENGTH_SHORT).show();
                     } else{
-                        Toast.makeText(SignUpActivity.this, "the information you entered is invalid, Please check", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignUpActivity.this, R.string.the_information_you_entered, Toast.LENGTH_SHORT).show();
                     }
                 } else if (PreferencesUtils.getUserType().equalsIgnoreCase("Trainee")){
                     if (!firstName.getText().toString().isEmpty() && !lastName.getText().toString().isEmpty() && !emailEditText.getText().toString().isEmpty() && !password.getText().toString().isEmpty() && !confirmPassword.getText().toString().isEmpty() && password.getText().toString().equals(confirmPassword.getText().toString())){
                         register();
                     } else if (!password.getText().toString().equals(confirmPassword.getText().toString())){
-                        Toast.makeText(SignUpActivity.this, "The password doesn't match", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignUpActivity.this, R.string.password_doesnt_match, Toast.LENGTH_SHORT).show();
                     } else{
-                        Toast.makeText(SignUpActivity.this, "the information you entered is invalid, Please check", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignUpActivity.this, R.string.the_information_you_entered, Toast.LENGTH_SHORT).show();
                     }
                 }
             }

@@ -159,7 +159,7 @@ public class ChooseCoachFragment extends Fragment implements CallBack {
                 coachRecyclerview.setAdapter(coachAdapter);
 
                 if (coach.getData().size() == 0)
-                    Toast.makeText(getContext(), "There are no coaches to show", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), R.string.there_are_no_coaches_to_show, Toast.LENGTH_SHORT).show();
 
                 break;
 

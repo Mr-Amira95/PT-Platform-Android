@@ -83,7 +83,7 @@ public class WorkoutFragment extends Fragment implements CallBack {
                 if (!searchBar.getText().toString().isEmpty()) {
                     setFragment(new SearchFragment("Workouts", searchBar.getText().toString()));
                 } else {
-                    Toast.makeText(getContext(), "Please write what are you looking for...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), R.string.please_write_what_you_are_looking_for, Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -159,7 +159,7 @@ public class WorkoutFragment extends Fragment implements CallBack {
                     setItems(getContext(), workoutResults.getData().get(0).getCategory());
                     setGroupName();
                 } else {
-                    Toast.makeText(getContext(), "No Workouts", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), R.string.no_workouts, Toast.LENGTH_SHORT).show();
                 }
                 break;
         }

@@ -85,7 +85,7 @@ public class LanguagesDialog extends Dialog {
                      Intent i = new Intent(context ,SplashActivity.class);
                      context.startActivity(i);
                  } else {
-                     Toast.makeText(context, "You didn't Change Language", Toast.LENGTH_SHORT).show();
+                     Toast.makeText(context, R.string.you_didnt_change_the_language, Toast.LENGTH_SHORT).show();
                  }
 
             }

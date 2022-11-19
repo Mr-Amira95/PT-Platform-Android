@@ -105,7 +105,7 @@ public class ChallengesFragment extends Fragment implements CallBack {
                         ChallengesAdapter adapter = new ChallengesAdapter(getContext(), challenges.getData());
                         otherRecyclerview.setAdapter(adapter);
                     } else {
-                        Toast.makeText(getContext(), "There are no challenges to show", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), R.string.there_are_no_challenges_to_show, Toast.LENGTH_SHORT).show();
                     }
                 }
                 break;

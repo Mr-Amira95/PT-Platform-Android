@@ -105,7 +105,7 @@ public class ChallengesSignleFragment extends Fragment implements CallBack {
             MyApplication.getInstance().getHttpHelper().setCallback(this);
             MyApplication.getInstance().getHttpHelper().PostRaw(getContext(), AppConstants.CHALLENGES_COMPLETE_URL, AppConstants.CHALLENGES_COMPLETE_TAG, General.class, params);
         }else{
-            Toast.makeText(getContext(), "Select Challenge To Finish", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.select_challenge_to_finish, Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -148,12 +148,12 @@ public class ChallengesSignleFragment extends Fragment implements CallBack {
                             completed=completed+1;
                         }
                     }
-                    subtitle.setText(completed+"/"+videoChallenge.getData().size()+" Challenges Completed");
+                    subtitle.setText(completed+"/"+videoChallenge.getData().size()+getString(R.string.challenges_completed));
                 }
                 break;
             case AppConstants.CHALLENGES_COMPLETE_TAG:
                 if(isSuccess){
-                    Toast.makeText(getContext(), "Updated Successfully!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), R.string.updated_successfully, Toast.LENGTH_SHORT).show();
                     getActivity().getSupportFragmentManager().popBackStackImmediate();
                 }
                 break;

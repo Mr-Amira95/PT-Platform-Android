@@ -126,7 +126,7 @@ public class SinglePackageFragment extends Fragment implements CallBack {
 
         packageType.setText(packages.getName());
         packageDesc.setText(packages.getDescription());
-        packageData.setText(packages.getDate() + " months");
+        packageData.setText(packages.getDate() + getString(R.string.months));
         packagePrice.setText(packages.getPrice());
         discountTitle.setVisibility(View.GONE);
         discountValue.setVisibility(View.GONE);
@@ -134,9 +134,9 @@ public class SinglePackageFragment extends Fragment implements CallBack {
         List<String> permissions=new ArrayList<>();
 
         if(packages.getPermissions()!=null){
-            permissions.add("Video calls: " + packages.getPermissions().getCallVideo().toString());
-            permissions.add("Workout Schedule: " + packages.getPermissions().getWorkoutSchedule().toString());
-            permissions.add("Food Plan: " + packages.getPermissions().getFoodPlan().toString());
+            permissions.add(getString(R.string.video_calls) + packages.getPermissions().getCallVideo().toString());
+            permissions.add(getString(R.string.workout_schedule) + packages.getPermissions().getWorkoutSchedule().toString());
+            permissions.add(getString(R.string.food_plan) + packages.getPermissions().getFoodPlan().toString());
 
             permissionsAdapter = new PermissionAdapter(getContext(),  permissions);
             featuresRecyclerview.setAdapter(permissionsAdapter);

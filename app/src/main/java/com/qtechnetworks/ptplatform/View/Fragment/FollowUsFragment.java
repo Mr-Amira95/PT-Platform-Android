@@ -52,7 +52,7 @@ public class FollowUsFragment extends Fragment {
         twitterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "doesn't provided", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), R.string.isnt_provided, Toast.LENGTH_SHORT).show();
             }
         });
 

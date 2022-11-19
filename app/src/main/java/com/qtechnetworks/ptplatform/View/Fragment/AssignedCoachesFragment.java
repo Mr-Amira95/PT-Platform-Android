@@ -73,7 +73,7 @@ public class AssignedCoachesFragment extends Fragment implements CallBack {
             CoachAdapter adapter = new CoachAdapter(getContext(), coach);
             coachRecyclerview.setAdapter(adapter);
         } else {
-            Toast.makeText(getContext(), "No assigned coaches to show", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.no_assigned_coaches_to_show, Toast.LENGTH_SHORT).show();
         }
 
     }

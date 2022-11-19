@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 import com.onesignal.OneSignal;
-import com.qtechnetworks.ptplatform.BuildConfig;
 import com.qtechnetworks.ptplatform.Controller.NewNetworking.RetrofitClient;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.Banner.Banner;
@@ -64,11 +63,11 @@ public class FeedbackAndSupportFragment extends Fragment {
             public void onClick(View v) {
 
                 if (name_edittext.getText().toString().isEmpty() && message_edittext.getText().toString().isEmpty()) {
-                    Toast.makeText(getContext(), "Please fill all field", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), R.string.please_fill_all_fields, Toast.LENGTH_SHORT).show();
                 } else if (name_edittext.getText().toString().isEmpty()){
-                    Toast.makeText(getContext(), "Please fill title field", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), R.string.please_fill_title_field, Toast.LENGTH_SHORT).show();
                 } else if (message_edittext.getText().toString().isEmpty()){
-                    Toast.makeText(getContext(), "Please fill message field", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), R.string.please_fill_message_field, Toast.LENGTH_SHORT).show();
                 } else {
                     if (flag.equalsIgnoreCase("Feedback")) {
                         feedback(name_edittext.getText().toString(), message_edittext.getText().toString());
@@ -84,7 +83,11 @@ public class FeedbackAndSupportFragment extends Fragment {
 
     private void initial(View view) {
         title = view.findViewById(R.id.title_textview);
-        title.setText(flag);
+        if (flag.equalsIgnoreCase("")){
+            title.setText(R.string.feedback);
+        } else {
+            title.setText(R.string.technical_support);
+        }
         send_button=view.findViewById(R.id.send_button);
 
         name_edittext=view.findViewById(R.id.name_edittext);
@@ -115,13 +118,13 @@ public class FeedbackAndSupportFragment extends Fragment {
                         Toast.makeText(getContext(), String.valueOf(general.getData()), Toast.LENGTH_LONG).show();
                     }
                 } else {
-                    Toast.makeText(getContext(), "The message must be at least 20 characters", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), R.string.the_message_must_be_at_least_20_characters, Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<General> call, Throwable t) {
-                Toast.makeText(getContext(), "An error has occured", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), R.string.an_error_has_occurred, Toast.LENGTH_LONG).show();
             }
 
         });
@@ -151,13 +154,13 @@ public class FeedbackAndSupportFragment extends Fragment {
                         Toast.makeText(getContext(), String.valueOf(general.getData()), Toast.LENGTH_LONG).show();
                     }
                 } else {
-                    Toast.makeText(getContext(), "The message must be at least 20 characters", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), R.string.the_message_must_be_at_least_20_characters, Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<General> call, Throwable t) {
-                Toast.makeText(getContext(), "An error has occured", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), R.string.an_error_has_occurred, Toast.LENGTH_LONG).show();
             }
 
         });

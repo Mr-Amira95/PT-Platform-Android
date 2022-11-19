@@ -47,7 +47,7 @@ public class SetTargetCaloriesFragment extends Fragment implements CallBack {
                 if (!valueCal_text.getText().toString().isEmpty() && !fatValue.getText().toString().isEmpty() && !carbsValue.getText().toString().isEmpty() && !proteinValue.getText().toString().isEmpty()){
                     setTarget();
                 }else {
-                    Toast.makeText(getContext(),"Please fill input values",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), R.string.please_fill_all_input_values,Toast.LENGTH_LONG).show();
                 }
             }
         });

@@ -101,7 +101,7 @@ public class ConfirmationDialog extends Dialog implements CallBack {
     public void onNext(int tag, boolean isSuccess, Object result) {
 
         if(isSuccess){
-            Toast.makeText(context, "Reservation Canceled", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.reservation_failed, Toast.LENGTH_SHORT).show();
             dismiss();
             setFragment(new VideoChatFragment());
         }

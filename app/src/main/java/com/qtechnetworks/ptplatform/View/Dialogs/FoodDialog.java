@@ -116,7 +116,7 @@ public class FoodDialog extends Dialog implements CallBack {
                 calories_text.setText(calories+"");
                 Foodname_spinner.setText(food.getData().get(0).getName());
             } else {
-                Toast.makeText(context, "There is no food to show", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, R.string.there_is_no_food_to_show, Toast.LENGTH_SHORT).show();
             }
 
             FoodsAdapter foodsAdapter = new FoodsAdapter (context, food.getData(), FoodDialog.this);

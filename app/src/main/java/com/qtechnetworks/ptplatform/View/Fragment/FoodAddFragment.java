@@ -73,7 +73,7 @@ public class FoodAddFragment extends Fragment implements CallBack {
                 if (selectedFoodIndex != -1) {
                     addFood();
                 } else {
-                    Toast.makeText(getContext(), "Please select food", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.please_select_food), Toast.LENGTH_SHORT).show();
                     foodDialog = new FoodDialog(getContext());
                     foodDialog.show();
                 }
@@ -97,7 +97,7 @@ public class FoodAddFragment extends Fragment implements CallBack {
                     calories_text.setText(String.valueOf(calories));
 
                 } else if (selectedFoodIndex == -1) {
-                    Toast.makeText(getContext(), "Please select food", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), R.string.please_select_food, Toast.LENGTH_SHORT).show();
                     foodDialog = new FoodDialog(getContext());
                     foodDialog.show();
                 }
@@ -121,7 +121,7 @@ public class FoodAddFragment extends Fragment implements CallBack {
                     protine_text.setText(String.valueOf(protein));
                     calories_text.setText(String.valueOf(calories));
                 } else {
-                    Toast.makeText(getContext(), "Please select food", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), getString(R.string.please_select_food), Toast.LENGTH_SHORT).show();
                     foodDialog = new FoodDialog(getContext());
                     foodDialog.show();
                 }

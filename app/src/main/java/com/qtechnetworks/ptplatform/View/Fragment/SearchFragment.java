@@ -138,7 +138,7 @@ public class SearchFragment extends Fragment implements CallBack {
             if(searchResults.getData().size()>0) {
                 displaySearch(searchResults.getData());
             } else {
-                Toast.makeText(getContext(), "There are no Exercises to Show", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), R.string.there_are_no_exercises_to_show, Toast.LENGTH_SHORT).show();
             }
         }
     }

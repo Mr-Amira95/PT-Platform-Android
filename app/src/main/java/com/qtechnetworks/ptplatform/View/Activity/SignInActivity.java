@@ -19,7 +19,6 @@ import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.google.gson.JsonObject;
 import com.onesignal.OneSignal;
-import com.qtechnetworks.ptplatform.BuildConfig;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.RegisterAndLogin.Register;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
@@ -87,11 +86,11 @@ public class SignInActivity extends AppCompatActivity implements CallBack {
             public void onClick(View v) {
 
                 if (email_login_edittext.getText().toString().isEmpty() && password_login_edittext.getText().toString().isEmpty())
-                    Toast.makeText(SignInActivity.this, "Please fill all field", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignInActivity.this, R.string.please_fill_all_fields, Toast.LENGTH_SHORT).show();
                 else if (email_login_edittext.getText().toString().isEmpty())
-                    Toast.makeText(SignInActivity.this, "Please fill email field", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignInActivity.this, R.string.fill_the_email_field, Toast.LENGTH_SHORT).show();
                 else if (password_login_edittext.getText().toString().isEmpty())
-                    Toast.makeText(SignInActivity.this, "Please fill password field", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignInActivity.this, R.string.please_fill_password_field, Toast.LENGTH_SHORT).show();
                 else
                     checkLogin();
 
@@ -259,7 +258,7 @@ public class SignInActivity extends AppCompatActivity implements CallBack {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
             Log.w("google login", "signInResult:failed code=" + e.getStatusCode());
-            Toast.makeText(SignInActivity.this, "sign in failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SignInActivity.this, R.string.sign_in_failed, Toast.LENGTH_SHORT).show();
         }
     }
 

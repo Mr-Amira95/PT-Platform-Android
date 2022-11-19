@@ -7,7 +7,6 @@ import android.os.Bundle;
 
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
-import androidx.multidex.BuildConfig;
 
 import android.text.Html;
 import android.view.LayoutInflater;

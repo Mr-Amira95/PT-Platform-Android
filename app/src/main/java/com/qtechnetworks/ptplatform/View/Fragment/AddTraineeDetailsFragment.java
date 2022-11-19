@@ -74,7 +74,7 @@ public class AddTraineeDetailsFragment extends Fragment implements CallBack {
                     answerQuestions();
                 } else {
                     setFragment(R.id.home_frame, new MainFragment());
-                    Toast.makeText(getContext(), "No Questions to Answer!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), R.string.no_questions_to_answer, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -189,15 +189,15 @@ public class AddTraineeDetailsFragment extends Fragment implements CallBack {
 
                     }
                 }else{
-                    Toast.makeText(getContext(), "No questions to answer!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), R.string.no_questions_to_answer, Toast.LENGTH_SHORT).show();
                 }
             break;
             case AppConstants.COACH_QUESTIONS_ANSWER_TAG :
                 if(isSuccess){
-                    Toast.makeText(getContext(), "Answered Successfully!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), R.string.answered_successfully, Toast.LENGTH_SHORT).show();
                     setFragment(R.id.home_frame, new MainFragment());
                 }else {
-                    Toast.makeText(getContext(), "failed!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), R.string.failed, Toast.LENGTH_SHORT).show();
                 }
     }
 

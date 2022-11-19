@@ -434,7 +434,7 @@ public class FoodFragment extends Fragment implements CallBack {
                 carbChart.setInnerValueString(target.getData().getTargetCarb().toString());
                 fatChart.setInnerValueString(target.getData().getTargetFat().toString());
                 proteinChart.setInnerValueString(target.getData().getTargetProtein().toString());
-                cal_text.setText(target.getData().getTargetCalorie() + "Cal");
+                cal_text.setText(target.getData().getTargetCalorie() + getString(R.string.cal));
 
                 break;
 

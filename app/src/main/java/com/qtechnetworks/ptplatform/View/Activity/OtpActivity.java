@@ -15,7 +15,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.gson.JsonObject;
-import com.qtechnetworks.ptplatform.BuildConfig;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.CheckCode.CheckCode;
 import com.qtechnetworks.ptplatform.Model.Beans.CheckCode.ResendCodeResults;
@@ -59,7 +58,7 @@ public class OtpActivity extends AppCompatActivity implements CallBack {
                         checkCode(otp.getText().toString());
                     }
                 } else {
-                    Toast.makeText(OtpActivity.this, "Please check the verification Code", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(OtpActivity.this, R.string.please_check_the_verification_code, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -158,7 +157,7 @@ public class OtpActivity extends AppCompatActivity implements CallBack {
             }
 
         } else {
-            Toast.makeText(this, "Please check inputs", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.please_check_inputs, Toast.LENGTH_SHORT).show();
         }
 
     }

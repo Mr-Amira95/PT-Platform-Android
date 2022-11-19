@@ -73,7 +73,7 @@ public class CheckoutWebviewFragment extends Fragment {
                 }
 
                 if (url.contains("payment/error")) {
-                    Toast.makeText(getContext(), "Payment Failed!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), R.string.payment_failed, Toast.LENGTH_SHORT).show();
                     getFragmentManager().popBackStack();
                 }
 
@@ -89,7 +89,7 @@ public class CheckoutWebviewFragment extends Fragment {
                 }
 
                 if (url.contains("payment/error")) {
-                    Toast.makeText(getContext(), "Payment Failed!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), R.string.payment_failed, Toast.LENGTH_SHORT).show();
                     getFragmentManager().popBackStack();
                 }
 

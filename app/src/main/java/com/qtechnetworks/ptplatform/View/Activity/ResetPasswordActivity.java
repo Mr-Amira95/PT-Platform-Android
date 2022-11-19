@@ -50,7 +50,7 @@ public class ResetPasswordActivity extends AppCompatActivity implements CallBack
                 if (password.getText().toString().equals(confirmPassword.getText().toString()))
                     resetPassword();
                 else
-                    Toast.makeText(ResetPasswordActivity.this, "password doesn't match", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ResetPasswordActivity.this, R.string.password_doesnt_match, Toast.LENGTH_SHORT).show();
 
             }
         });

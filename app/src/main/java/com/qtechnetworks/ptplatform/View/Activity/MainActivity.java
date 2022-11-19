@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -37,10 +38,27 @@ public class MainActivity extends AppCompatActivity {
 
         me = this;
 
-        if (flag.equalsIgnoreCase("new_coach") || flag.equalsIgnoreCase("end_subscription") || flag.equalsIgnoreCase("end_package") || flag.equalsIgnoreCase("personal_trainer") || flag.equalsIgnoreCase("approved_session") || flag.equalsIgnoreCase("session_reminder") || flag.equalsIgnoreCase("chat") || flag.equalsIgnoreCase("cancel")){
-            setFragmentwithoutBack(new MainFragment(flag, id));
-        } else if (flag.equalsIgnoreCase("news") || flag.equalsIgnoreCase("general")){
-            setFragmentwithoutBack(new HomeFragment(flag, id));
+        if (flag != null) {
+
+            if (flag.equalsIgnoreCase("new_coach") || flag.equalsIgnoreCase("end_subscription") || flag.equalsIgnoreCase("end_package") || flag.equalsIgnoreCase("personal_trainer") || flag.equalsIgnoreCase("approved_session") || flag.equalsIgnoreCase("session_reminder") || flag.equalsIgnoreCase("chat")){
+                setFragmentwithoutBack(new MainFragment(flag, id));
+            } else if (flag.equalsIgnoreCase("news") || flag.equalsIgnoreCase("general") || flag.equalsIgnoreCase("cancel")){
+                setFragmentwithoutBack(new HomeFragment(flag, id));
+            } else {
+                if (PreferencesUtils.getUserType().equalsIgnoreCase("coach")) {
+                    setFragmentwithoutBack(new MainCoachFragment());
+                } else if (PreferencesUtils.getUserType().equalsIgnoreCase("trainee")){
+                    if (PreferencesUtils.getCoach(MainActivity.this) != null) {
+                        if (getIntent().getExtras() != null && getIntent().getExtras().getString("page").equals("shop"))
+                            setFragmentwithoutBack(new MainFragment("shop"));
+                        else
+                            setFragmentwithoutBack(new MainFragment());
+                    } else {
+                        setFragmentwithoutBack(new HomeFragment());
+                    }
+                }
+            }
+
         } else {
 
             if (PreferencesUtils.getUserType().equalsIgnoreCase("coach")) {

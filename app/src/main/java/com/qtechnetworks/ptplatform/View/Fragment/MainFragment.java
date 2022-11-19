@@ -17,6 +17,8 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import com.qtechnetworks.ptplatform.Controller.adapters.SliderAdapter;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.Banner.Banner;
+import com.qtechnetworks.ptplatform.Model.Beans.Coach.Coach;
+import com.qtechnetworks.ptplatform.Model.Beans.Coach.SingleCoach;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
@@ -49,8 +51,9 @@ public class MainFragment extends Fragment implements CallBack {
     CoachesDialog coachesDialog;
 
     TextView nametext;
-    String flag = "";
     RoundedImageView cate1_image;
+
+    String flag =" ", id;
 
     public MainFragment(String flag) {
         this.flag = flag;
@@ -61,7 +64,8 @@ public class MainFragment extends Fragment implements CallBack {
     }
 
     public MainFragment(String flag, String id) {
-
+        this.flag = flag;
+        this.id = id;
     }
 
     @Override
@@ -255,6 +259,7 @@ public class MainFragment extends Fragment implements CallBack {
         nametext.setText(PreferencesUtils.getCoach(getContext()).getLastName());
 
         try{
+            nametext.setText(PreferencesUtils.getCoach(getContext()).getLastName());
             Glide.with(getContext()).load(PreferencesUtils.getCoach(getContext()).getAvatar()).placeholder(R.drawable.logo).into(cate1_image);
         }catch (Exception e){
             e.printStackTrace();
@@ -283,26 +288,66 @@ public class MainFragment extends Fragment implements CallBack {
     @Override
     public void onNext(int tag, boolean isSuccess, Object result) {
 
+        switch (tag){
+            case AppConstants.users_coaches_TAG:
+                SingleCoach singleCoach = (SingleCoach) result;
+                PreferencesUtils.setCoach(singleCoach.getData(), getContext());
 
-        try {
-            banner=(Banner) result;
+                if (flag.equalsIgnoreCase("end_subscription") || flag.equalsIgnoreCase("end_package")){
+                    setFragment(new ShopFragment());
+                } else if (flag.equalsIgnoreCase("personal_trainer")){
+                    setFragment(new PersonalTrainingTraineeFragment());
+                } else if (flag.equalsIgnoreCase("approved_session") || flag.equalsIgnoreCase("session_reminder") ){
+                    setFragment(new CalendarFragment());
+                } else if (flag.equalsIgnoreCase("chat")){
+                    setFragment(new ChatSingleFragment());
+                } else {
+                    nametext.setText(PreferencesUtils.getCoach(getContext()).getLastName());
 
-            sliderAdapter = new SliderAdapter(banner.getData(), getActivity(), "MainTrainee");
-            sliderViewPager.setAdapter(sliderAdapter);
-            sliderCircleIndicator.setViewPager(sliderViewPager);
-            pageSwitcher();
+                    try{
+                        Glide.with(getContext()).load(PreferencesUtils.getCoach(getContext()).getAvatar()).placeholder(R.drawable.logo).into(cate1_image);
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+
+                break;
+
+            case AppConstants.banner_TAG:
+                try {
+                    banner=(Banner) result;
+
+                    sliderAdapter = new SliderAdapter(banner.getData(), getActivity(), "MainTrainee");
+                    sliderViewPager.setAdapter(sliderAdapter);
+                    sliderCircleIndicator.setViewPager(sliderViewPager);
+                    pageSwitcher();
 
 
-        }catch (Exception e){
-            setFragmentWithoutBack(new MainFragment());
-            e.printStackTrace();
+                }catch (Exception e){
+                    setFragmentWithoutBack(new MainFragment());
+                    e.printStackTrace();
+                }
+
+                if (flag!= null){
+                    if(flag.equals("shop")){
+                        setFragment(new ShopFragment());
+                        flag="";
+                    }  else if (flag.equalsIgnoreCase("new_coach")){
+                        getCoach();
+                    }
+                }
+
+                break;
         }
-        if(flag.equals("shop")){
-            setFragment(new ShopFragment());
-            flag="";
 
-        }
 
+    }
+
+    private void getCoach() {
+        HashMap<String ,Object> params=new HashMap<>();
+
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.users_coaches_URL+"/"+id+"/show", AppConstants.users_coaches_TAG, SingleCoach.class, params);
     }
 
     @Override

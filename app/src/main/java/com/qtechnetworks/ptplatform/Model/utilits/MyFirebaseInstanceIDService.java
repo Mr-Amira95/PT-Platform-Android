@@ -2,6 +2,7 @@ package com.qtechnetworks.ptplatform.Model.utilits;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -14,7 +15,9 @@ import com.onesignal.OSNotification;
 import com.onesignal.OSNotificationReceivedEvent;
 import com.onesignal.OneSignal.OSRemoteNotificationReceivedHandler;
 import com.onesignal.OneSignalApiResponseHandler;
+import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.math.BigInteger;
@@ -28,14 +31,12 @@ public class MyFirebaseInstanceIDService extends  FirebaseMessagingService imple
 
     //*********** Called whenever the Token is Generated or Refreshed ********//
 
-
-
     @Override
     public void remoteNotificationReceived(Context context, OSNotificationReceivedEvent notificationReceivedEvent) {
         OSNotification notification = notificationReceivedEvent.getNotification();
 
         notification.getGroupedNotifications();
-       // Log.d("remoteReceived","------------");
+        Log.d("remoteReceived","------------");
         // Example of modifying the notification's accent color
         OSMutableNotification mutableNotification = notification.mutableCopy();
         mutableNotification.setExtender(builder -> {
@@ -56,17 +57,25 @@ public class MyFirebaseInstanceIDService extends  FirebaseMessagingService imple
             builder.setTimeoutAfter(30000);
             return builder;
         });
+
         JSONObject data = notification.getAdditionalData();
         Log.i("OneSignalExample", "Received Notification Data: " + data);
-//        try {
-//            if(data!=null)
-//            getorder(data.getString("id"));
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-       // playBeepSound();
-        // If complete isn't call within a time period of 25 seconds, OneSignal internal logic will show the original notification
-        // To omit displaying a notification, pass `null` to complete()
+        try {
+            if(data!=null){
+
+                Intent i = new Intent(context, MainActivity.class);
+                i.putExtra("flag", data.getString("flag"));
+                i.putExtra("id", data.getString("id"));
+                startActivity(i);
+                ((MainActivity)context).finish();
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+//        getorder(data.getString("id"));
+//         If complete isn't call within a time period of 25 seconds, OneSignal internal logic will show the original notification
+//         To omit displaying a notification, pass `null` to complete()
         notificationReceivedEvent.complete(mutableNotification);
 
     }

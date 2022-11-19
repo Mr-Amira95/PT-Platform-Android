@@ -16,9 +16,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
+import com.qtechnetworks.ptplatform.Model.Beans.News.News;
+import com.qtechnetworks.ptplatform.Model.Beans.News.SingleNews;
+import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
+import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.R;
 
-public class NewsSingleFragment extends Fragment {
+import java.util.HashMap;
+
+import io.reactivex.disposables.Disposable;
+
+public class NewsSingleFragment extends Fragment implements CallBack {
 
     String image;
     String title;
@@ -26,6 +35,14 @@ public class NewsSingleFragment extends Fragment {
 
     ImageView news_img, share;
     TextView title_text,news_details;
+
+    String id;
+
+    public NewsSingleFragment(String id) {
+        this.id = id;
+    }
+
+    public NewsSingleFragment() { }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -82,16 +99,63 @@ public class NewsSingleFragment extends Fragment {
         news_details=v.findViewById(R.id.news_details);
         share = v.findViewById(R.id.share_icon);
 
+        if (id != null){
+
+            getNews();
+
+        } else {
+
+            try{
+                Glide.with(getContext()).load(image).placeholder(R.drawable.logo).into(news_img);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+            title_text.setText(title);
+            news_details.setText(Html.fromHtml(decription));
+
+        }
+
+    }
+
+    private void getNews() {
+        HashMap<String ,Object> params=new HashMap<>();
+
+        params.put("skip","0");
+
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.news_URL+"/"+id+"/show", AppConstants.news_TAG, SingleNews.class, params);
+
+    }
+
+    @Override
+    public void onSubscribe(Disposable d) {
+
+    }
+
+    @Override
+    public void onNext(int tag, boolean isSuccess, Object result) {
+
+        SingleNews singleNews = (SingleNews) result;
+
         try{
-            Glide.with(getContext()).load(image).placeholder(R.drawable.logo).into(news_img);
+            Glide.with(getContext()).load(singleNews.getData().getImage()).placeholder(R.drawable.logo).into(news_img);
         }catch (Exception e){
             e.printStackTrace();
         }
 
-        title_text.setText(title);
-        news_details.setText(Html.fromHtml(decription));
+        title_text.setText(singleNews.getData().getTitle());
+        news_details.setText(Html.fromHtml(singleNews.getData().getDescription()));
 
     }
 
+    @Override
+    public void onError (Throwable e) {
 
+    }
+
+    @Override
+    public void onComplete() {
+
+    }
 }

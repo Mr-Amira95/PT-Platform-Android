@@ -64,23 +64,23 @@ public class LogFragment extends Fragment implements CallBack {
     private void initial(View view) {
         logRecyclerview= view.findViewById(R.id.log_recyclerview);
         title = view.findViewById(R.id.title);
-        title.setText(flag);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),2);
         gridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         logRecyclerview.setLayoutManager(gridLayoutManager);
 
         if (flag.equalsIgnoreCase("Favourite")){
-
             getFavorite(coachid);
-
-        }else if (flag.equalsIgnoreCase("Log")){
+            title.setText(R.string.favorites);
+        } else if (flag.equalsIgnoreCase("Log")){
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             String currentDate = sdf.format(new Date());
             Log.d("current Date",currentDate);
             getLog(coachid,currentDate);
+            title.setText(R.string.log);
         }else if (flag.equalsIgnoreCase("Today’s Workouts")){
             getWorkout(coachid);
+            title.setText(R.string.today_s_workout);
         }
 
 

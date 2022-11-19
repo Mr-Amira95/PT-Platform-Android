@@ -50,10 +50,13 @@ public class HomeFragment extends Fragment implements CallBack {
     private Timer timer;
     private int page = 0;
 
+    String flag =" ", id;
+
     LinearLayout followUs, contactUs, news, coaches, nutritions, progress;
 
     public HomeFragment(String flag, String id) {
-
+        this.flag = flag;
+        this.id = id;
     }
 
     public HomeFragment() {
@@ -145,6 +148,14 @@ public class HomeFragment extends Fragment implements CallBack {
         contactUs = view.findViewById(R.id.category_four_layout);
         nutritions=view.findViewById(R.id.category_five_layout);
         progress=view.findViewById(R.id.category_six_layout);
+
+        if (flag != null){
+            if (flag.equalsIgnoreCase("news")){
+                setFragment(new NewsSingleFragment(id));
+            } else if (flag.equalsIgnoreCase("cancel")){
+                setFragment(new FeedbackAndSupportFragment("Technical Support"));
+            }
+        }
 
     }
 

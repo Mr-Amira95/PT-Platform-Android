@@ -20,7 +20,7 @@
         android:id="@+id/title_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Title"
+        android:text="@string/title"
         android:textColor="@color/primary_color"
         android:textSize="@dimen/_20sdp"
         android:fontFamily="@font/aeonikbold"
@@ -31,7 +31,7 @@
         android:id="@+id/desc_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Need help or have a question? Get in touch with us!"
+        android:text="@string/need_help_or_have_a_question_get_in_touch_with_us"
         android:textColor="@color/white"
         android:textSize="@dimen/_16sdp"
         android:fontFamily="@font/aeonikbold"
@@ -50,7 +50,7 @@
         android:background="@drawable/background_radius_10"
         android:backgroundTint="@color/white"
         android:textColor="@color/backapp"
-        android:hint="Title" />
+        android:hint="@string/title" />
 
     <EditText
         android:id="@+id/phone_edittext"
@@ -63,7 +63,7 @@
         android:background="@drawable/background_radius_10"
         android:backgroundTint="@color/white"
         android:textColor="@color/backapp"
-        android:hint="Phone Number"
+        android:hint="@string/phone_number"
         android:maxLines="1"
         android:visibility="gone"/>
 
@@ -78,7 +78,7 @@
         android:background="@drawable/background_radius_10"
         android:backgroundTint="@color/white"
         android:textColor="@color/backapp"
-        android:hint="Email Address"
+        android:hint="@string/email_address"
         android:maxLines="1"
         android:visibility="gone"/>
 
@@ -94,7 +94,7 @@
         android:padding="@dimen/_10sdp"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_16sdp"
-        android:hint="Message" />
+        android:hint="@string/message" />
 
     <Button
         android:id="@+id/send_button"
@@ -106,7 +106,7 @@
         android:fontFamily="@font/aeonikregular"
         android:layout_marginVertical="@dimen/_25sdp"
         android:layout_marginHorizontal="@dimen/_20sdp"
-        android:text="Send"
+        android:text="@string/send"
         android:textSize="@dimen/_14sdp"
         android:textAllCaps="false"/>
     </LinearLayout>

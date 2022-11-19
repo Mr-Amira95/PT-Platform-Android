@@ -61,9 +61,9 @@ public class FoodsAdapter extends RecyclerView.Adapter<FoodsAdapter.ViewHolder> 
             @Override
             public void onClick(View v) {
 
-                int carb=current.getCarb() * Integer.parseInt(weightnumber_edit.getText().toString());
-                int fat=current.getFat() * Integer.parseInt(weightnumber_edit.getText().toString());
-                int protein=current.getProtein() * Integer.parseInt(weightnumber_edit.getText().toString());
+                double carb=current.getCarb() * Integer.parseInt(weightnumber_edit.getText().toString());
+                double fat=current.getFat() * Integer.parseInt(weightnumber_edit.getText().toString());
+                double protein=current.getProtein() * Integer.parseInt(weightnumber_edit.getText().toString());
                 int calories=current.getCalorie() * Integer.parseInt(weightnumber_edit.getText().toString());
                 fat_text.setText(fat+"");
                 carb_text.setText(carb+"");

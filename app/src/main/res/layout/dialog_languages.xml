@@ -1,0 +1,82 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/background_radius_20_title"
+    android:padding="@dimen/_15sdp"
+    android:layout_marginHorizontal="@dimen/_25sdp"
+    android:layout_gravity="center">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/select_language"
+        android:textSize="@dimen/_14sdp"/>
+
+    <RadioGroup
+        android:id="@+id/languages"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp">
+
+        <RadioButton
+            android:id="@+id/english_language"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/english"
+            android:textColor="@color/white"
+            android:buttonTint="@color/white"
+            android:paddingStart="@dimen/_10sdp"/>
+
+        <RadioButton
+            android:id="@+id/arabic_language"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/arabic"
+            android:textColor="@color/white"
+            android:buttonTint="@color/white"
+            android:paddingStart="@dimen/_10sdp"
+            android:gravity="left|center_vertical"/>
+
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/_20sdp">
+
+        <Button
+            android:id="@+id/no_btn"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/dark_grey"
+            android:background="@drawable/btn_rounded_white"
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/_5sdp"/>
+
+        <Button
+            android:id="@+id/yes_btn"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/confirm"
+            android:textColor="@color/primary_color"
+            android:backgroundTint="@color/white"
+            android:background="@drawable/btn_rounded_white"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/_5sdp"/>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

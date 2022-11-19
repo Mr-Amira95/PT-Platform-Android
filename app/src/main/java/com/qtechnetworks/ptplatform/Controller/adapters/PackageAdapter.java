@@ -1,6 +1,7 @@
 package com.qtechnetworks.ptplatform.Controller.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,15 +16,25 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
+import com.qtechnetworks.ptplatform.Model.Beans.FreePackage.FreePackageResults;
+import com.qtechnetworks.ptplatform.Model.Beans.General;
 import com.qtechnetworks.ptplatform.Model.Beans.Subscription.SubscriptionPackage;
+import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
+import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
+import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
+import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 import com.qtechnetworks.ptplatform.View.Fragment.SinglePackageFragment;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import io.reactivex.disposables.Disposable;
 
-public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHolder>  {
+
+public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHolder> implements CallBack {
 
     private Context context;
     private PermissionAdapter permissionsAdapter;
@@ -39,7 +50,6 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHold
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_package,parent,false);
 
-
         return new ViewHolder(view);
     }
 
@@ -51,11 +61,10 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHold
         holder.featureRecyclerview.setLayoutManager(layoutManagerhorizantalleader);
         List<String> permissions=new ArrayList<>();
 
-        if(packages.get(position).getPermissions()!=null){
+        if(packages.get(position).getPermissions()!=null) {
             permissions.add("Video calls: "+packages.get(position).getPermissions().getCallVideo().toString());
             permissions.add("Workout Schedule: "+packages.get(position).getPermissions().getWorkoutSchedule().toString());
             permissions.add("Food Plan: "+packages.get(position).getPermissions().getFoodPlan().toString());
-
 
             permissionsAdapter = new PermissionAdapter(this.context,  permissions);
             holder.featureRecyclerview.setAdapter(permissionsAdapter);
@@ -75,12 +84,26 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHold
         if(packages.get(position).getStyle().equalsIgnoreCase("style_silver")){
             holder.backgroundLayout.setBackgroundResource(R.drawable.background_package_silver);
         }
+
         holder.buyNowBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setFragment(R.id.home_frame ,new SinglePackageFragment(packages.get(holder.getAbsoluteAdapterPosition())), (AppCompatActivity) v.getContext());
+                if (!packages.get(position).getIsFree())
+                    setFragment(R.id.home_frame ,new SinglePackageFragment(packages.get(holder.getAbsoluteAdapterPosition())), (AppCompatActivity) v.getContext());
+                else
+                    buyPackage(packages.get(position).getId());
             }
         });
+    }
+
+    private void buyPackage(int packageId) {
+        HashMap<String ,Object> params=new HashMap<>();
+        params.put("package_id", packageId);
+        params.put("payment_method", "free");
+        params.put("coach_id", PreferencesUtils.getCoach(context).getId());
+
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().Post(context, AppConstants.PACKAGES_URL, AppConstants.PACKAGES_TAG, FreePackageResults.class, params);
     }
 
     private void setFragment(int frameLayout, Fragment fragment, AppCompatActivity activity) {
@@ -93,6 +116,31 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHold
     @Override
     public int getItemCount() {
         return packages.size();
+    }
+
+    @Override
+    public void onSubscribe(Disposable d) {
+
+    }
+
+    @Override
+    public void onNext(int tag, boolean isSuccess, Object result) {
+
+        if (isSuccess){
+            Intent i = new Intent(context, MainActivity.class);
+            context.startActivity(i);
+            ((MainActivity)context).finish();
+        }
+    }
+
+    @Override
+    public void onError(Throwable e) {
+
+    }
+
+    @Override
+    public void onComplete() {
+
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

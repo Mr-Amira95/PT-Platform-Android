@@ -22,7 +22,7 @@
             android:layout_height="match_parent"
             android:background="@drawable/background_radius_20"
             android:backgroundTint="@color/white"
-            android:hint="SEARCH FOR FOOD"
+            android:hint="@string/search_for_food"
             android:textSize="@dimen/_10sdp"
             android:paddingStart="@dimen/_20sdp"
             android:paddingEnd="@dimen/_10sdp"
@@ -37,7 +37,7 @@
             android:layout_height="match_parent"
             android:background="@drawable/button_rounded_background"
             app:layout_constraintEnd_toEndOf="parent"
-            android:text="Search"
+            android:text="@string/search"
             android:textColor="@color/primary_color"
             />
 

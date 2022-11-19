@@ -58,7 +58,6 @@ public class MyApplication extends Application {
     private Gson gson;
     private SharedPreferences preferences;
 
-
     public synchronized RetrofitServices getHttpMethods(Context context) {
         if (httpMethods == null) {
             gson = new GsonBuilder()
@@ -86,9 +85,10 @@ public class MyApplication extends Application {
 
                 Request originalRequest = chain.request();
 
-                Request.Builder builder = originalRequest.newBuilder().header("Authorization",
-                        "Bearer "+ PreferencesUtils.getUserToken()).header("Accept-Language",PreferencesUtils.getUserlanguage());
-
+                Request.Builder builder = originalRequest
+                        .newBuilder()
+                        .header("Authorization", "Bearer "+ PreferencesUtils.getUserToken())
+                        .header("Accept-Language",PreferencesUtils.getLanguage());
 
                 Request newRequest = builder.build();
              Response resp=  chain.proceed(newRequest);
@@ -112,9 +112,22 @@ public class MyApplication extends Application {
       startActivity( new Intent(getApplicationContext(), NotAuthorizedActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_TASK_ON_HOME));
         MainActivity.me.finish();
     }
+
     @Override
     public void onCreate() {
         super.onCreate();
+
+//        // Enable verbose OneSignal logging to debug issues if needed.
+//        OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
+//
+//        // OneSignal Initialization
+//        OneSignal.initWithContext(this);
+//        OneSignal.setAppId(BuildConfig.ONESIGNAL_APP_ID);
+//
+//        // promptForPushNotifications will show the native Android notification permission prompt.
+//        // We recommend removing the following code and instead using an In-App Message to prompt for notification permission (See step 7)
+//        OneSignal.promptForPushNotifications();
+
 //        Realm.init(this);
 //        RealmConfiguration realmConfig = new RealmConfiguration.Builder()
 //                .name("tasky.realm")

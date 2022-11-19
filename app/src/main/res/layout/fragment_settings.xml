@@ -12,7 +12,7 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Settings"
+        android:text="@string/settings"
         android:textColor="@color/primary_color"
         android:textSize="@dimen/_20sdp"
         android:fontFamily="@font/aeonikbold"
@@ -30,7 +30,7 @@
         android:id="@+id/push_notificataions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Push Notifications"
+        android:text="@string/push_notifications"
         android:textColor="@color/white"
         android:textSize="@dimen/_14sdp"
         android:layout_marginHorizontal="@dimen/_20sdp"
@@ -48,19 +48,21 @@
         android:id="@+id/weight_unit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Weight Unit"
+        android:text="@string/weight_unit"
         android:textColor="@color/white"
         android:textSize="@dimen/_14sdp"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_10sdp"
-        tools:ignore="UseSwitchCompatOrMaterialXml"/>
+        tools:ignore="UseSwitchCompatOrMaterialXml"
+        android:visibility="gone"/>
 
     <View
         android:id="@+id/line3"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_1sdp"
         android:background="@color/txt_grey"
-        android:layout_marginTop="@dimen/_10sdp"/>
+        android:layout_marginTop="@dimen/_10sdp"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/terms_conditions"
@@ -84,7 +86,7 @@
         android:id="@+id/contact_us"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Contact Us"
+        android:text="@string/contact_us"
         android:textColor="@color/white"
         android:textSize="@dimen/_14sdp"
         android:layout_marginHorizontal="@dimen/_20sdp"
@@ -104,7 +106,7 @@
         android:id="@+id/language"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Language"
+        android:text="@string/language"
         android:textColor="@color/white"
         android:textSize="@dimen/_14sdp"
         android:layout_marginHorizontal="@dimen/_20sdp"

@@ -1,7 +1,5 @@
 package com.qtechnetworks.ptplatform.View.Activity;
 
-import static com.qtechnetworks.ptplatform.Model.utilits.AppConstants.ONESIGNAL_APP_ID;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -52,11 +50,11 @@ public class SignInActivity extends AppCompatActivity implements CallBack {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-        OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
-
-        // OneSignal Initialization
-        OneSignal.initWithContext(this);
-        OneSignal.setAppId(ONESIGNAL_APP_ID);
+//        OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
+//
+//        // OneSignal Initialization
+//        OneSignal.initWithContext(this);
+//        OneSignal.setAppId(ONESIGNAL_APP_ID);
 
         initial();
         clicks();
@@ -212,8 +210,12 @@ public class SignInActivity extends AppCompatActivity implements CallBack {
         PreferencesUtils.setUserToken(register.getData().getToken());
         PreferencesUtils.setUser(register.getData().getUser(),SignInActivity.this);
         PreferencesUtils.setPlayerId(OneSignal.getDeviceState().getUserId());
+        if (register.getData().getUser().getRole().equalsIgnoreCase("user"))
+            PreferencesUtils.setUserType("trainee");
+        else
+            PreferencesUtils.setUserType("coach");
 
-        startActivity(new Intent(SignInActivity.this,MainActivity.class));
+        startActivity(new Intent(SignInActivity.this, MainActivity.class));
         finish();
 
     }

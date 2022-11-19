@@ -102,13 +102,15 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        counter = 0;
+
         if (getArguments() != null) {
             flag=getArguments().getString("flag");
             ID=getArguments().getString("ID");
 
             if (flag.equalsIgnoreCase("log")){
 
-                VideoID=getArguments().getString("VideoID");
+                VideoID = getArguments().getString("VideoID");
 
                 videolink=getArguments().getString("video");
 
@@ -351,12 +353,12 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
                 VideoExercises videoExercises=(VideoExercises) result;
 
                 if (videoExercises.getData().size()>0){
-                    if (videoExercises.getData().get(0).getIsFavourite()){
-                        add_to_favourite.setText("Remove from favourite");
-                    }
-                    if (videoExercises.getData().get(0).getIsWorkout()){
-                        add_to_workout.setText("Remove from Workout");
-                    }
+//                    if (videoExercises.getData().get(0).getIsFavourite()){
+//                        add_to_favourite.setText("Remove from favourite");
+//                    }
+//                    if (videoExercises.getData().get(0).getIsWorkout()){
+//                        add_to_workout.setText("Remove from Workout");
+//                    }
 
                     try {
                         video_view.setDefaultArtwork(drawableFromUrl(videoExercises.getData().get(0).getImage()));
@@ -376,7 +378,7 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
                     videoAdapter = new VideoItemAdapter(getContext(),videoExercises.getData(),ExercisesSingleFragment.this,add_to_favourite,add_to_workout,add_to_log);
                     videoRecyclerview.setAdapter(videoAdapter);
 
-                    VideoID=videoExercises.getData().get(0).getId().toString();
+                    VideoID = videoExercises.getData().get(0).getId().toString();
 
                 } else {
                     Toast.makeText(getContext(), "No Videos", Toast.LENGTH_SHORT).show();
@@ -386,14 +388,14 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
 
             case AppConstants.SHOW_WORKOUT_VIDS_TAG:
 
-                VideoWorkout videoWorkout=(VideoWorkout) result;
+                VideoWorkout videoWorkout = (VideoWorkout) result;
                 if(!videoWorkout.getData().isEmpty()) {
-                    if (videoWorkout.getData().get(0).getIsFavourite()) {
-                        add_to_favourite.setText("Remove from favourite");
-                    }
-                    if (videoWorkout.getData().get(0).getIsWorkout()) {
-                        add_to_workout.setText("Remove from Workout");
-                    }
+//                    if (videoWorkout.getData().get(0).getIsFavourite()) {
+//                        add_to_favourite.setText("Remove from favourite");
+//                    }
+//                    if (videoWorkout.getData().get(0).getIsWorkout()) {
+//                        add_to_workout.setText("Remove from Workout");
+//                    }
 
                     if (videoWorkout.getData().size() > 0) {
                         try {

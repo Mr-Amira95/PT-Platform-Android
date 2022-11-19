@@ -73,11 +73,13 @@ public class ChooseCoachFragment extends Fragment implements CallBack {
 
         if (PreferencesUtils.getUserType().equalsIgnoreCase("Coach")) {
             getUsers();
-            searchBar.setHint("Search Trainee");
-            title.append("\nTrainee");
+            searchBar.setHint(R.string.search_treinee);
+            String titleTxt = getResources().getString(R.string.trainee);
+            title.append("\n" + titleTxt);
         } else if (PreferencesUtils.getUserType().equalsIgnoreCase("Trainee")){
-            searchBar.setHint("Search Coach");
-            title.append("\nCoach");
+            String titleTxt = getResources().getString(R.string.coach);
+            searchBar.setHint(R.string.search_coach);
+            title.append("\n" + titleTxt);
             getCoach();
         }
 

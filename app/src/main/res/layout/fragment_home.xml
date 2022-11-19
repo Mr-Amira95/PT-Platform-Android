@@ -64,7 +64,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:gravity="center"
-                    android:text="Follow Us"
+                    android:text="@string/follow_us"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_14sdp"
                     android:textStyle="bold"/>
@@ -97,7 +97,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:gravity="center"
-                    android:text="Coaches"
+                    android:text="@string/coaches"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_14sdp"
                     android:textStyle="bold"/>
@@ -112,7 +112,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/category_one_layout"
                 app:layout_constraintTop_toBottomOf="@id/category_two_layout"
-
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginBottom="@dimen/_10sdp">
 
@@ -130,7 +129,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:gravity="center"
-                    android:text="Contact Us"
+                    android:text="@string/contact_us"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_14sdp"
                     android:textStyle="bold"/>
@@ -146,8 +145,7 @@
                 app:layout_constraintEnd_toStartOf="@id/category_four_layout"
                 app:layout_constraintTop_toBottomOf="@id/category_one_layout"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginBottom="@dimen/_10sdp"
-            >
+                android:layout_marginBottom="@dimen/_10sdp">
 
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:id="@+id/cate3_image"
@@ -163,7 +161,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:gravity="center"
-                    android:text="News"
+                    android:text="@string/news"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_14sdp"
                     android:textStyle="bold"/>
@@ -194,7 +192,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:gravity="center"
-                    android:text="Nutritions"
+                    android:text="@string/nutritions"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_14sdp"
                     android:textStyle="bold"/>
@@ -216,7 +214,8 @@
                     android:id="@+id/progress_title"
                     android:layout_width="@dimen/_100sdp"
                     android:layout_height="@dimen/_100sdp"
-                    android:src="@drawable/ic_progress"                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_progress"
+                    android:scaleType="centerCrop"
                     app:riv_corner_radius="10dp" />
 
                 <TextView
@@ -225,7 +224,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:gravity="center"
-                    android:text="Progress"
+                    android:text="@string/progress"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_14sdp"
                     android:textStyle="bold"/>

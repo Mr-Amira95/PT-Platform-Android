@@ -13,8 +13,7 @@
         android:layout_height="@dimen/_175sdp"
         android:padding="10dp"
         android:scaleType="centerCrop"
-        app:riv_corner_radius="@dimen/_15sdp"
-        android:src="@drawable/follwous"/>
+        app:riv_corner_radius="@dimen/_15sdp"/>
 
     <TextView
         android:id="@+id/trainer_name"
@@ -22,7 +21,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_5sdp"
         android:gravity="center"
-        android:text="PT Platform"
         android:textColor="@color/white"
         android:textSize="@dimen/_12sdp"
         android:textStyle="bold"/>

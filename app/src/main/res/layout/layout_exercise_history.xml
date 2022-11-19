@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/exercise_layout"
-    android:layout_marginBottom="@dimen/_20sdp"
+    android:layout_marginBottom="@dimen/_25sdp"
     android:layout_marginHorizontal="@dimen/_20sdp">
 
     <com.makeramen.roundedimageview.RoundedImageView
@@ -14,8 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_125sdp"
         android:scaleType="centerCrop"
-        app:riv_corner_radius="@dimen/_15sdp"
-        android:src="@drawable/follwous"/>
+        app:riv_corner_radius="@dimen/_15sdp"/>
 
     <TextView
         android:id="@+id/exercise_name"
@@ -23,7 +22,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_5sdp"
         android:gravity="center"
-        android:text="PT Platform"
         android:textColor="@color/white"
         android:textSize="@dimen/_12sdp"
         android:textStyle="bold"/>
@@ -32,7 +30,7 @@
         android:id="@+id/records_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_10sdp"
         android:visibility="gone"/>
 
 </LinearLayout>

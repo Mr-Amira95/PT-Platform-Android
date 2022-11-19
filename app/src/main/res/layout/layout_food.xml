@@ -15,21 +15,20 @@
 
     <TextView
         android:id="@+id/food_title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Chicken"
         android:textColor="@color/white"
         android:textSize="@dimen/_12sdp"
         app:layout_constraintTop_toBottomOf="@id/line"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="@dimen/_20sdp"
+        app:layout_constraintEnd_toStartOf="@id/food_value"
+        android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_10sdp"/>
 
     <TextView
         android:id="@+id/food_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="100"
         android:textColor="@color/white"
         android:textSize="@dimen/_12sdp"
         app:layout_constraintTop_toBottomOf="@id/line"
@@ -41,7 +40,6 @@
         android:id="@+id/food_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Grilled chicken, 4.0 oz"
         android:textColor="@color/primary_color"
         android:textSize="@dimen/_10sdp"
         app:layout_constraintTop_toBottomOf="@id/food_title"

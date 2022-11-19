@@ -8,16 +8,16 @@ public class Food {
 
     @SerializedName("breakfast")
     @Expose
-    private List<Snack> breakfast = null;
+    private List<Snack> breakfast;
     @SerializedName("dinner")
     @Expose
-    private List<Snack> dinner = null;
+    private List<Snack> dinner;
     @SerializedName("snack")
     @Expose
-    private List<Snack> snack = null;
+    private List<Snack> snack;
     @SerializedName("supplements")
     @Expose
-    private List<Snack> supplements = null;
+    private List<Snack> supplements;
     @SerializedName("lunch")
     @Expose
     private List<Snack> lunch = null;

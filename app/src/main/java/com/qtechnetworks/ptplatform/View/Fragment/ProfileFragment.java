@@ -130,7 +130,7 @@ public class ProfileFragment extends Fragment implements CallBack {
             @Override
             public void onClick(View v) {
 
-//                setFragment(new SettingsFragment());
+                setFragment(new SettingsFragment());
 
             }
         });
@@ -147,7 +147,7 @@ public class ProfileFragment extends Fragment implements CallBack {
 
     private void logoutAPI() {
 
-        HashMap<String ,Object> params=new HashMap<>();
+        HashMap<String ,Object> params = new HashMap<>();
 
         params.put("device_player_id", PreferencesUtils.getPlayerId());
 
@@ -169,7 +169,6 @@ public class ProfileFragment extends Fragment implements CallBack {
     }
 
     private void initial(View v){
-
         username=v.findViewById(R.id.username);
         joining_date=v.findViewById(R.id.joining_date);
         profile_img=v.findViewById(R.id.profile_img);
@@ -182,7 +181,8 @@ public class ProfileFragment extends Fragment implements CallBack {
         settings=v.findViewById(R.id.settings);
         logout=v.findViewById(R.id.logout);
 
-        Glide.with(getContext()).load(PreferencesUtils.getUser(getContext()).getAvatar()).placeholder(R.drawable.logo).into(profile_img);
+        if (PreferencesUtils.getUser(getContext()).getAvatar() != null)
+            Glide.with(getContext()).load(PreferencesUtils.getUser(getContext()).getAvatar()).placeholder(R.drawable.logo).into(profile_img);
         joining_date.setText(PreferencesUtils.getUser(getContext()).getEmail());
         if (PreferencesUtils.getUser(getContext()).getLastName() != null)
             username.setText(PreferencesUtils.getUser(getContext()).getFirstName() + " " + PreferencesUtils.getUser(getContext()).getLastName());
@@ -221,8 +221,11 @@ public class ProfileFragment extends Fragment implements CallBack {
                 case AppConstants.LOGOUT_TAG:
                     General general = (General) result;
 
+                    String lang = PreferencesUtils.getLanguage();
+
                     Toast.makeText(getContext(), general.getData(), Toast.LENGTH_SHORT).show();
                     PreferencesUtils.clearDefaults(getContext());
+                    PreferencesUtils.setLanguage(lang);
                     startActivity(new Intent(getContext(), SplashActivity.class));
                     getActivity().finish();
                     break;

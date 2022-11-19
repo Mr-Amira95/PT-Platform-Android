@@ -74,7 +74,7 @@ public class HttpHelper {
                         dialog.dismiss();
 
                         try {
-                            Toast.makeText(context,((HttpException) e).response().errorBody().source().readUtf8().toString().split(":")[4].replace("\\}}","").replace(")",""),Toast.LENGTH_LONG).show();
+                            Toast.makeText(context,((HttpException) e).response().errorBody().source().readUtf8().toString().split(":")[3].replace("\\}}","").replace(")",""),Toast.LENGTH_LONG).show();
                         }catch (Exception g){
                             g.printStackTrace();
                         }

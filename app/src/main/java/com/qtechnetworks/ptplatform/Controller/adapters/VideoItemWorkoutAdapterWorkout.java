@@ -54,15 +54,15 @@ public class VideoItemWorkoutAdapterWorkout extends RecyclerView.Adapter<VideoIt
         holder.title.setText(current.getTitle().toString());
        // holder.time.setText();
 
-        if (current.getIsFavourite()){
-            add_to_favourite.setText("Remove from favourite");
-        }
-        if (current.getIsTodayLog()){
-            add_to_log.setText("Remove from log");
-        }
-        if (current.getIsWorkout()){
-            add_to_workout.setText("Remove from Workout");
-        }
+//        if (current.getIsFavourite()){
+//            add_to_favourite.setText("Remove from favourite");
+//        }
+//        if (current.getIsTodayLog()){
+//            add_to_log.setText("Remove from log");
+//        }
+//        if (current.getIsWorkout()){
+//            add_to_workout.setText("Remove from Workout");
+//        }
 
         exercisesSingleFragment.VideoID=current.getId().toString();
 

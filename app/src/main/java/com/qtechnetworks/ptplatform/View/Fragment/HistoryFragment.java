@@ -9,15 +9,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 
 public class HistoryFragment extends Fragment {
 
     Button workoutHistory, exerciseHistory, nutritionHistory;
+    public static String userID;
 
     public HistoryFragment() {
         // Required empty public constructor
+    }
+
+    public HistoryFragment(String userID) {
+        this.userID = userID;
     }
 
     @Override
@@ -45,13 +51,16 @@ public class HistoryFragment extends Fragment {
         workoutHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setFragment(new HistoryWorkoutFragment("Workout"));
+
+                setFragment(new HistoryWorkoutFragment());
+
             }
         });
 
         exerciseHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 setFragment(new HistoryExerciseFragment());
             }
         });
@@ -59,7 +68,9 @@ public class HistoryFragment extends Fragment {
         nutritionHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 setFragment(new HistoryNutritionFragment());
+
             }
         });
 
@@ -74,7 +85,7 @@ public class HistoryFragment extends Fragment {
 
     }
 
-    private void initials(View view) {
+    private void initials (View view) {
         workoutHistory = view.findViewById(R.id.workout_histry);
         exerciseHistory = view.findViewById(R.id.exercise_history);
         nutritionHistory = view.findViewById(R.id.nutrition_histrory);

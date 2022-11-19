@@ -1,5 +1,6 @@
 package com.qtechnetworks.ptplatform.Controller.NewNetworking;
 
+import com.qtechnetworks.ptplatform.Model.Beans.FoodHome.Foodhome;
 import com.qtechnetworks.ptplatform.Model.Beans.General;
 
 import java.util.ArrayList;
@@ -26,5 +27,9 @@ public interface Api {
     @FormUrlEncoded
     @POST
     Call<General> supportForm(@Url String url, @FieldMap Map<String, Object> params);
+
+    @GET
+    @Headers({"Accept: application/json"})
+    Call<Foodhome> getFood(@Url String url, @QueryMap Map<String, Object> params);
 
 }

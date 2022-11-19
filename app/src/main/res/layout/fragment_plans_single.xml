@@ -12,7 +12,7 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Recipes and Diet Plans"
+            android:text="@string/recipes_and_diet_plans"
             android:textColor="@color/primary_color"
             android:textSize="@dimen/_20sdp"
             android:fontFamily="@font/aeonikbold"
@@ -69,7 +69,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ingredients"
+            android:text="@string/ingredients"
             android:background="@color/txt_grey"
             android:paddingHorizontal="@dimen/_20sdp"
             android:paddingVertical="@dimen/_10sdp"
@@ -86,7 +86,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="How to make it"
+            android:text="@string/how_to_make_it"
             android:background="@color/txt_grey"
             android:paddingHorizontal="@dimen/_20sdp"
             android:paddingVertical="@dimen/_10sdp"

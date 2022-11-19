@@ -18,18 +18,15 @@ import com.qtechnetworks.ptplatform.R;
 
 import java.util.List;
 
-
 public class FoodSnackAdapter extends RecyclerView.Adapter<FoodSnackAdapter.ViewHolder>  {
 
     private Context context;
     List<Snack> data;
 
-
     public FoodSnackAdapter(Context context, List<Snack> data) {
         this.context=context;
         this.data=data;
     }
-
 
     @NonNull
     @Override

@@ -28,6 +28,9 @@ public class SubscriptionPackage  {
         @SerializedName("style")
         @Expose
         private String style;
+        @SerializedName("is_free")
+        @Expose
+        private boolean isFree;
 
         public Integer getId() {
             return id;
@@ -83,6 +86,14 @@ public class SubscriptionPackage  {
 
         public void setPermissions(Permissions permissions) {
             this.permissions = permissions;
+        }
+
+        public boolean getIsFree() {
+            return isFree;
+        }
+
+        public void setIsFree(boolean isFree) {
+            this.isFree = isFree;
         }
 
     }

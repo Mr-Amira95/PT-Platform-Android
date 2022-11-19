@@ -79,27 +79,32 @@ public class ChalengesVideosAdapter extends RecyclerView.Adapter<ChalengesVideos
         holder.completeCheckbox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                holder.completeCheckbox.setChecked(holder.completeCheckbox.isChecked());
+                if (PreferencesUtils.getUserType().equalsIgnoreCase("trainee")) {
+                    holder.completeCheckbox.setChecked(holder.completeCheckbox.isChecked());
+                }
             }
         });
 
         holder.completeCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(b) {
-                    if (!completedVideosIds.contains(current.getId())) {
-                        completedVideosIds.add(current.getId());
-                    }
-                }else{
-                    if (completedVideosIds.contains(current.getId())) {
-                        completedVideosIds.remove(current.getId());
+
+                if (PreferencesUtils.getUserType().equalsIgnoreCase("trainee")) {
+                    if(b) {
+                        if (!completedVideosIds.contains(current.getId())) {
+                            completedVideosIds.add(current.getId());
+                        }
+                    } else {
+                        if (completedVideosIds.contains(current.getId())) {
+                            completedVideosIds.remove(current.getId());
+                        }
                     }
                 }
             }
         });
 
         if (PreferencesUtils.getUserType().equalsIgnoreCase("coach")){
-            holder.completeCheckbox.setVisibility(View.GONE);
+            holder.completeCheckbox.setClickable(false);
         } else if (PreferencesUtils.getUserType().equalsIgnoreCase("trainee")){
             holder.completeCheckbox.setVisibility(View.VISIBLE);
         }

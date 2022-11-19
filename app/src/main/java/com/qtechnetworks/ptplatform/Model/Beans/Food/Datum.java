@@ -16,13 +16,13 @@ public class Datum {
     private Integer calorie;
     @SerializedName("carb")
     @Expose
-    private Integer carb;
+    private double carb;
     @SerializedName("fat")
     @Expose
-    private Integer fat;
+    private double fat;
     @SerializedName("protein")
     @Expose
-    private Integer protein;
+    private double protein;
     @SerializedName("name")
     @Expose
     private String name;
@@ -54,27 +54,27 @@ public class Datum {
         this.calorie = calorie;
     }
 
-    public Integer getCarb() {
+    public double getCarb() {
         return carb;
     }
 
-    public void setCarb(Integer carb) {
+    public void setCarb(double carb) {
         this.carb = carb;
     }
 
-    public Integer getFat() {
+    public double getFat() {
         return fat;
     }
 
-    public void setFat(Integer fat) {
+    public void setFat(double fat) {
         this.fat = fat;
     }
 
-    public Integer getProtein() {
+    public double getProtein() {
         return protein;
     }
 
-    public void setProtein(Integer protein) {
+    public void setProtein(double protein) {
         this.protein = protein;
     }
 

@@ -145,15 +145,15 @@ public class AddLogDialog extends Dialog implements CallBack {
 
             } else {
                 dismiss();
-                if (adtofavlog.getData().getIsFavourite())
-                    add_to_favourite.setText("Remove from favourite");
-                else
-                    add_to_favourite.setText("Add to favourite");
-
-                if (adtofavlog.getData().getIsWorkout())
-                    add_to_workout.setText("Remove from Workout");
-                else
-                    add_to_workout.setText("Add to Workout");
+//                if (adtofavlog.getData().getIsFavourite())
+//                    add_to_favourite.setText("Remove from favourite");
+//                else
+//                    add_to_favourite.setText("Add to favourite");
+//
+//                if (adtofavlog.getData().getIsWorkout())
+//                    add_to_workout.setText("Remove from Workout");
+//                else
+//                    add_to_workout.setText("Add to Workout");
             }
         }
     }

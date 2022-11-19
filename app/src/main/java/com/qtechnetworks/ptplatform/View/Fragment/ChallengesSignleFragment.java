@@ -37,11 +37,18 @@ public class ChallengesSignleFragment extends Fragment implements CallBack {
     TextView subtitle;
     private int challengeId;
 
+    private String traineeID;
+    int completed=0;
+
+    public ChallengesSignleFragment (int challengeId, String traineeID) {
+        this.challengeId = challengeId;
+        this.traineeID = traineeID;
+    }
+
     public ChallengesSignleFragment(int challengeId){
         this.challengeId = challengeId;
     }
 
-    int completed=0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,7 +57,11 @@ public class ChallengesSignleFragment extends Fragment implements CallBack {
 
         initials(view);
         clicks();
-        getChallengeVideos();
+
+        if (PreferencesUtils.getUserType().equalsIgnoreCase("trainee"))
+            getChallengeVideos();
+        else if (PreferencesUtils.getUserType().equalsIgnoreCase("coach"))
+            getCoachChallengeVideos();
 
         // Inflate the layout for this fragment
         return view;
@@ -102,6 +113,17 @@ public class ChallengesSignleFragment extends Fragment implements CallBack {
 
         HashMap<String ,Object> params=new HashMap<>();
         params.put("challenge_id", challengeId);
+        params.put("skip",0);
+
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.CHALLENGES_VIDEOS_URL, AppConstants.CHALLENGES_VIDEOS_TAG, VideoChallenge.class, params);
+    }
+
+    private void getCoachChallengeVideos () {
+
+        HashMap<String ,Object> params=new HashMap<>();
+        params.put("challenge_id", challengeId);
+        params.put("user_id", traineeID);
         params.put("skip",0);
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);

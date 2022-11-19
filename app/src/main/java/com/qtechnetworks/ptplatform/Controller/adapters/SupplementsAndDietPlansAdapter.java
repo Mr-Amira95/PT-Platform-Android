@@ -53,9 +53,7 @@ public class SupplementsAndDietPlansAdapter extends RecyclerView.Adapter<Supplem
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         Datum current= data.get(position);
-
         holder.title.setText(current.getTitle().toString());
-
 
         try{
 

@@ -30,10 +30,10 @@ import io.reactivex.disposables.Disposable;
 public class ChallengesFragment extends Fragment implements CallBack {
 
     private RecyclerView otherRecyclerview, historyRecyclerview;
-    private Integer userID;
+    public static Integer userID;
 
     public ChallengesFragment(Integer userID) {
-        this.userID = userID;
+        ChallengesFragment.userID = userID;
     }
 
     public ChallengesFragment() {
@@ -48,9 +48,9 @@ public class ChallengesFragment extends Fragment implements CallBack {
         initials(view);
 
         if (PreferencesUtils.getUserType().equalsIgnoreCase("Trainee"))
-            getChallengesUser();
+            getChallengesUser(PreferencesUtils.getCoach(getContext()).getId());
         else if (PreferencesUtils.getUserType().equalsIgnoreCase("Coach"))
-            getChallengesUser();
+            getChallengesUser(PreferencesUtils.getUser(getContext()).getId());
 
         // Inflate the layout for this fragment
         return view;
@@ -78,20 +78,10 @@ public class ChallengesFragment extends Fragment implements CallBack {
         fragmentTransaction.commit();
     }
 
-    private void getChallengesUser(){
+    private void getChallengesUser(int id) {
         HashMap<String ,Object> params=new HashMap<>();
 
-        params.put("coach_id", PreferencesUtils.getCoach(getContext()).getId());
-        params.put("skip","0");
-
-        MyApplication.getInstance().getHttpHelper().setCallback(this);
-        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.CHALLENGES_URL, AppConstants.CHALLENGES_TAG, Challenge.class, params);
-    }
-
-    private void getChallengesCoach(){
-        HashMap<String ,Object> params=new HashMap<>();
-
-        params.put("coach_id", PreferencesUtils.getCoach(getContext()).getId());
+        params.put("coach_id", id);
         params.put("skip","0");
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);

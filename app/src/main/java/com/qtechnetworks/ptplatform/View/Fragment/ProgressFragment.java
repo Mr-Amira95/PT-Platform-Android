@@ -34,12 +34,14 @@ import io.reactivex.disposables.Disposable;
 
 public class ProgressFragment extends Fragment  implements CallBack {
 
-    private TextView weightTitle, weightValue, muscleTitle, muscleValue, fatTitle, fatValue, waterTitle, waterValue, activeCaloriesTitle, activeCaloriesValue, stepsTitle, stepsValue;
-    private TextView beforeDate,afterDate,beforeNick,afterNick,beforeChest,afterChest,beforeLeftArm,afterLeftArm,
+    private TextView weightTitle, weightValue, muscleTitle, muscleValue, fatTitle, fatValue, waterTitle, waterValue, activeCaloriesTitle, activeCaloriesValue, stepsTitle, stepsValue,
+            beforeDate,afterDate,beforeNick,afterNick,beforeChest,afterChest,beforeLeftArm,afterLeftArm,
             beforeRightArm,afterRightArm,beforeWaist,afterWaist,beforeHips,afterHips,
             beforeLeftThigh,afterLeftThigh,beforeLeftCalf,afterLeftCalf,beforeRightCalf,
-            afterRightCalf,beforeBelly,afterBelly,beforeUpperBelly,afterUpperBelly,beforelowerBelly,afterlowerBelly,fatPercentage,musclePercentae,weightPercentage,waterPercentage;
-    private ImageView fatIncrease,fatDecrease,muscleIncrease,muscleDecrease,weightIncrease,weightDecrease,waterIncrease,waterDecrease;
+            afterRightCalf,beforeBelly,afterBelly,beforeUpperBelly,afterUpperBelly,beforelowerBelly,
+            afterlowerBelly,fatPercentage,musclePercentae,weightPercentage,waterPercentage;
+
+    private ImageView fatIncrease, fatDecrease, muscleIncrease,muscleDecrease,weightIncrease,weightDecrease,waterIncrease,waterDecrease;
 
     private Button updateProgressBtn,updateMeasurementsBtn;
 
@@ -219,7 +221,9 @@ public class ProgressFragment extends Fragment  implements CallBack {
         waterIncrease=view.findViewById(R.id.water_increase_iv);
         waterDecrease=view.findViewById(R.id.water_decrease_iv);
 
-        if (PreferencesUtils.getUserType().equalsIgnoreCase("Coach")){
+        if (PreferencesUtils.getUserType().equalsIgnoreCase("Coach")) {
+            getPrrogressCoach();
+            getMeasurementsCoach();
             updateProgressBtn.setVisibility(View.GONE);
             updateMeasurementsBtn.setVisibility(View.GONE);
         } else if (PreferencesUtils.getUserType().equalsIgnoreCase("Trainee")){
@@ -232,16 +236,35 @@ public class ProgressFragment extends Fragment  implements CallBack {
     }
 
     private void getMeasurements(){
-
         HashMap<String ,Object> params=new HashMap<>();
 
         MyApplication.getInstance().getBackgroundHttpHelper().setCallback(this);
         MyApplication.getInstance().getBackgroundHttpHelper().get((MainActivity) getActivity(), AppConstants.BODYMAESUREMENTS_URL, AppConstants.BODYMAESUREMENTS_TAG, BodyMeasurement.class, params);
-
     }
+
     private void getPrrogress(){
 
         HashMap<String ,Object> params=new HashMap<>();
+
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().get(getActivity(), AppConstants.HEALTHS_URL, AppConstants.HEALTHS_TAG, Progress.class, params);
+
+    }
+
+    private void getMeasurementsCoach(){
+        HashMap<String ,Object> params=new HashMap<>();
+
+        params.put("user_id", userID);
+
+        MyApplication.getInstance().getBackgroundHttpHelper().setCallback(this);
+        MyApplication.getInstance().getBackgroundHttpHelper().get((MainActivity) getActivity(), AppConstants.BODYMAESUREMENTS_URL, AppConstants.BODYMAESUREMENTS_TAG, BodyMeasurement.class, params);
+    }
+
+    private void getPrrogressCoach(){
+
+        HashMap<String ,Object> params=new HashMap<>();
+
+        params.put("user_id", userID);
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);
         MyApplication.getInstance().getHttpHelper().get(getActivity(), AppConstants.HEALTHS_URL, AppConstants.HEALTHS_TAG, Progress.class, params);

@@ -13,7 +13,7 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Shop"
+        android:text="@string/shop"
         android:textColor="@color/primary_color"
         android:textSize="@dimen/_20sdp"
         android:fontFamily="@font/aeonikbold"
@@ -37,7 +37,6 @@
             android:id="@+id/package_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Silver Package"
             android:textColor="@color/white"
             android:textSize="@dimen/_16sdp"
             android:fontFamily="@font/aeonikregular"
@@ -46,22 +45,9 @@
             app:layout_constraintStart_toStartOf="parent"/>
 
         <TextView
-            android:id="@+id/package_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="$9.99"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_16sdp"
-            android:fontFamily="@font/aeonikregular"
-            android:layout_marginStart="@dimen/_15sdp"
-            app:layout_constraintStart_toEndOf="@id/package_type"
-            app:layout_constraintTop_toTopOf="parent"/>
-
-        <TextView
             android:id="@+id/package_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lorem ipsum dolor sit amet"
             android:textColor="@color/white"
             android:textSize="@dimen/_12sdp"
             android:fontFamily="@font/aeonikregular"
@@ -87,7 +73,7 @@
             android:id="@+id/package_features_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Package features"
+            android:text="@string/package_features"
             android:textColor="@color/white"
             android:textSize="@dimen/_16sdp"
             android:fontFamily="@font/aeonikregular"
@@ -106,6 +92,185 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <TextView
+        android:id="@+id/payment_method_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/payment_method"
+        android:textColor="@color/txt_grey"
+        app:layout_constraintTop_toBottomOf="@id/features_layout"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginStart="@dimen/_20sdp"/>
+
+    <RadioGroup
+        android:id="@+id/payment_method_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="3"
+        android:orientation="horizontal"
+        android:layout_marginHorizontal="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:layout_constraintTop_toBottomOf="@id/payment_method_title">
+
+        <RadioButton
+            android:id="@+id/credit_card_radiobutton"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/credit_card"
+            android:textColor="@color/white"
+            android:checked="true"
+            android:buttonTint="@color/primary_color"/>
+
+        <RadioButton
+            android:id="@+id/paypal_radiobutton"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/paypal"
+            android:textColor="@color/white"
+            android:buttonTint="@color/primary_color"/>
+
+        <RadioButton
+            android:id="@+id/in_app_radiobutton"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/in_app_purchase"
+            android:textColor="@color/white"
+            android:buttonTint="@color/primary_color"
+            android:visibility="gone"/>
+
+    </RadioGroup>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:paddingTop="@dimen/_20sdp"
+        android:background="@color/backapp">
+
+    <TextView
+        android:id="@+id/package_data_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/duration"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_16sdp"
+        android:fontFamily="@font/aeonikregular"
+        app:layout_constraintBottom_toTopOf="@id/discount_title"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_20sdp" />
+
+    <TextView
+        android:id="@+id/package_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_16sdp"
+        android:fontFamily="@font/aeonikregular"
+        android:layout_marginEnd="@dimen/_20sdp"
+        app:layout_constraintTop_toTopOf="@id/package_data_title"
+        app:layout_constraintBottom_toBottomOf="@id/package_data_title"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/discount_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/discount"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_16sdp"
+        android:fontFamily="@font/aeonikregular"
+        app:layout_constraintBottom_toTopOf="@id/package_title"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_20sdp"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/discount_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_16sdp"
+        android:fontFamily="@font/aeonikregular"
+        android:layout_marginEnd="@dimen/_20sdp"
+        app:layout_constraintTop_toTopOf="@id/discount_title"
+        app:layout_constraintBottom_toBottomOf="@id/discount_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/package_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/price"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_16sdp"
+        android:fontFamily="@font/aeonikregular"
+        app:layout_constraintBottom_toTopOf="@id/promo_code"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:layout_marginStart="@dimen/_20sdp" />
+
+    <TextView
+        android:id="@+id/package_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_16sdp"
+        android:fontFamily="@font/aeonikregular"
+        android:layout_marginEnd="@dimen/_20sdp"
+        app:layout_constraintTop_toTopOf="@id/package_title"
+        app:layout_constraintBottom_toBottomOf="@id/package_title"
+        app:layout_constraintEnd_toStartOf="@id/package_price_new"/>
+
+    <TextView
+        android:id="@+id/package_price_new"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_16sdp"
+        android:fontFamily="@font/aeonikregular"
+        android:layout_marginEnd="@dimen/_20sdp"
+        app:layout_constraintTop_toTopOf="@id/package_title"
+        app:layout_constraintBottom_toBottomOf="@id/package_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"/>
+
+    <EditText
+        android:id="@+id/promo_code"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_35sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/background_radius_20"
+        android:backgroundTint="@color/white"
+        android:drawableEnd="@drawable/ic_search"
+        android:hint="@string/promo_code"
+        android:paddingStart="@dimen/_20sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:textColor="@color/backapp"
+        android:textColorHint="@color/textcolor"
+        android:maxLines="1"
+        android:inputType="text"
+        android:layout_margin="@dimen/_20sdp"
+        app:layout_constraintBottom_toTopOf="@id/checkout_btn"/>
+
+    <Button
+        android:id="@+id/promo_code_button"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@drawable/button_background"
+        android:text="@string/check"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@id/promo_code"
+        app:layout_constraintTop_toTopOf="@id/promo_code"
+        app:layout_constraintBottom_toBottomOf="@id/promo_code"/>
+
+
     <Button
         android:id="@+id/checkout_btn"
         android:layout_width="match_parent"
@@ -113,10 +278,12 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_margin="@dimen/_20sdp"
         android:background="@drawable/button_background"
-        android:text="Checkout"
+        android:text="@string/checkout"
         android:textSize="@dimen/_18sdp"
         android:fontFamily="@font/aeonikbold"
         android:textColor="@color/white"
         android:textAllCaps="false"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

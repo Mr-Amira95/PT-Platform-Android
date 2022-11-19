@@ -26,6 +26,7 @@ import com.qtechnetworks.ptplatform.View.Fragment.AddTraineeDetailsFragment;
 import com.qtechnetworks.ptplatform.View.Fragment.ChallengesFragment;
 import com.qtechnetworks.ptplatform.View.Fragment.ChatFragment;
 import com.qtechnetworks.ptplatform.View.Fragment.ChatSingleFragment;
+import com.qtechnetworks.ptplatform.View.Fragment.HistoryFragment;
 import com.qtechnetworks.ptplatform.View.Fragment.MainCoachFragment;
 import com.qtechnetworks.ptplatform.View.Fragment.MainFragment;
 import com.qtechnetworks.ptplatform.View.Fragment.ProgressFragment;
@@ -45,7 +46,6 @@ public class TreineeAdapter extends RecyclerView.Adapter<TreineeAdapter.ViewHold
         this.mContext=mContext;
         this.data=data;
     }
-
 
     @NonNull
     @Override
@@ -76,7 +76,7 @@ public class TreineeAdapter extends RecyclerView.Adapter<TreineeAdapter.ViewHold
                         setFragment(new ChallengesFragment(current.getId()));
                         break;
                     case "history":
-//                        setFragment(new ChallengesFragment());
+                        setFragment(new HistoryFragment(String.valueOf(current.getId())));
                         break;
                     case "kyc":
                         setFragment(new AddTraineeDetailsFragment(current.getId()));

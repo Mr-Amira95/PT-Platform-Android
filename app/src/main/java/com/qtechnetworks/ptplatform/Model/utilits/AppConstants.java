@@ -13,7 +13,6 @@ public class AppConstants {
     public static final int NOTIFICATION_ID_BIG_IMAGE = 101;
     public static final String PUSH_NOTIFICATION = "pushNotification";
     public static String version= String.valueOf(BuildConfig.VERSION_CODE);
-    public static final String ONESIGNAL_APP_ID = "ea046acc-4916-4bb3-8ae6-c7fe2bafaf4d";
     public static final String login_URL = "auth/login";
     public static final int login_TAG = 0;
     public static final String SOCIAL_LOGIN_URL = "auth/social-login";
@@ -162,6 +161,15 @@ public class AppConstants {
 
     public static final String Coach_Video_Chat_URL = "coach-calendar/coach";
     public static final int Coach_Video_Chat_TAG =53 ;
+
+    public static final String Promo_Code_URL = "promo-code/check";
+    public static final int Promo_Code_TAG =54 ;
+
+    public static final String Notification_URL = "users/update/notifications";
+    public static final int Notification_TAG =55;
+
+    public static final String Chat_URL = "chats";
+    public static final int Chat_TAG = 25;
 
     public static void Trace(String tag, String msg) {
 

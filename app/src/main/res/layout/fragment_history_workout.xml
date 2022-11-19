@@ -12,7 +12,7 @@
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Workout History"
+        android:text="@string/workout_history"
         android:textColor="@color/primary_color"
         android:textSize="@dimen/_20sdp"
         android:fontFamily="@font/aeonikbold"
@@ -38,7 +38,7 @@
             android:backgroundTint="@color/primary_color"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Today"
+            android:text="@string/today"
             android:textSize="@dimen/_12sdp"
             android:textColor="@color/white"
             android:gravity="center" />

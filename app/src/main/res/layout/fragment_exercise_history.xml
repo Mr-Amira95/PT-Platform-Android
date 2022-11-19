@@ -13,7 +13,7 @@
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Exercises History"
+        android:text="@string/exercises_history"
         android:textColor="@color/primary_color"
         android:textSize="@dimen/_20sdp"
         android:fontFamily="@font/aeonikbold"

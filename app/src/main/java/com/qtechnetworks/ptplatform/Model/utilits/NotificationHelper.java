@@ -43,10 +43,8 @@ public class NotificationHelper {
 
         PendingIntent pendingIntent = PendingIntent.getActivity((context), 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT| PendingIntent.FLAG_ONE_SHOT);
     
-    
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-    
-        
+
         Notification.Builder builder = new Notification.Builder(context);
         if (bitmap != null)
             builder.setStyle(new Notification.BigPictureStyle().bigPicture(bitmap));

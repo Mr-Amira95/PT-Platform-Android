@@ -15,7 +15,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.gson.JsonObject;
-import com.onesignal.OneSignal;
 import com.qtechnetworks.ptplatform.BuildConfig;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.CheckCode.CheckCode;

@@ -70,7 +70,13 @@ public class FoodAddFragment extends Fragment implements CallBack {
         doneIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addFood();
+                if (selectedFoodIndex != -1) {
+                    addFood();
+                } else {
+                    Toast.makeText(getContext(), "Please select food", Toast.LENGTH_SHORT).show();
+                    foodDialog = new FoodDialog(getContext());
+                    foodDialog.show();
+                }
             }
         });
 
@@ -78,18 +84,22 @@ public class FoodAddFragment extends Fragment implements CallBack {
             @Override
             public void onClick(View view) {
                 int i = Integer.parseInt(weightnumber_edit.getText().toString())-1;
-                if (i>0){
+                if (i>0 && selectedFoodIndex != -1){
                     weightnumber_edit.setText(String.valueOf(i));
 
-                    int carb= FoodDialog.food.getData().get(selectedFoodIndex).getCarb() * i;
-                    int fat=FoodDialog.food.getData().get(selectedFoodIndex).getFat() * i;
-                    int protein=FoodDialog.food.getData().get(selectedFoodIndex).getProtein() * i;
+                    double carb= FoodDialog.food.getData().get(selectedFoodIndex).getCarb() * i;
+                    double fat=FoodDialog.food.getData().get(selectedFoodIndex).getFat() * i;
+                    double protein=FoodDialog.food.getData().get(selectedFoodIndex).getProtein() * i;
                     int calories=FoodDialog.food.getData().get(selectedFoodIndex).getCalorie() * i;
                     fat_text.setText(String.valueOf(fat));
                     carb_text.setText(String.valueOf(carb));
                     protine_text.setText(String.valueOf(protein));
                     calories_text.setText(String.valueOf(calories));
 
+                } else if (selectedFoodIndex == -1) {
+                    Toast.makeText(getContext(), "Please select food", Toast.LENGTH_SHORT).show();
+                    foodDialog = new FoodDialog(getContext());
+                    foodDialog.show();
                 }
             }
         });
@@ -97,18 +107,24 @@ public class FoodAddFragment extends Fragment implements CallBack {
         increase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int i = Integer.parseInt(weightnumber_edit.getText().toString())+ 1;
-                weightnumber_edit.setText(String.valueOf(i));
 
-                int carb=FoodDialog.food.getData().get(selectedFoodIndex).getCarb() * i;
-                int fat=FoodDialog.food.getData().get(selectedFoodIndex).getFat() * i;
-                int protein=FoodDialog.food.getData().get(selectedFoodIndex).getProtein() * i;
-                int calories=FoodDialog.food.getData().get(selectedFoodIndex).getCalorie() * i;
-                fat_text.setText(String.valueOf(fat));
-                carb_text.setText(String.valueOf(carb));
-                protine_text.setText(String.valueOf(protein));
-                calories_text.setText(String.valueOf(calories));
+                if (selectedFoodIndex != -1) {
+                    int i = Integer.parseInt(weightnumber_edit.getText().toString()) + 1;
+                    weightnumber_edit.setText(String.valueOf(i));
 
+                    double carb = FoodDialog.food.getData().get(selectedFoodIndex).getCarb() * i;
+                    double fat = FoodDialog.food.getData().get(selectedFoodIndex).getFat() * i;
+                    double protein = FoodDialog.food.getData().get(selectedFoodIndex).getProtein() * i;
+                    int calories = FoodDialog.food.getData().get(selectedFoodIndex).getCalorie() * i;
+                    fat_text.setText(String.valueOf(fat));
+                    carb_text.setText(String.valueOf(carb));
+                    protine_text.setText(String.valueOf(protein));
+                    calories_text.setText(String.valueOf(calories));
+                } else {
+                    Toast.makeText(getContext(), "Please select food", Toast.LENGTH_SHORT).show();
+                    foodDialog = new FoodDialog(getContext());
+                    foodDialog.show();
+                }
             }
         });
 
@@ -128,7 +144,6 @@ public class FoodAddFragment extends Fragment implements CallBack {
         weightnumber_edit = view.findViewById(R.id.weightnumber_edit);
 
         foodDialog = new FoodDialog(getContext());
-        foodDialog.setCancelable(false);
         foodDialog.show();
 
         Foodname_spinner.setOnClickListener(new View.OnClickListener() {

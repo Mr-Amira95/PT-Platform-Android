@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/aeonikbold"
-            android:text="Thank you!"
+            android:text="@string/thank_you"
             android:textColor="@color/white"
             android:textSize="@dimen/_27sdp" />
 
@@ -37,7 +37,7 @@
             android:layout_marginTop="@dimen/_10sdp"
             android:fontFamily="@font/aeonikbold"
             android:gravity="center"
-            android:text="Our team will get back to you soon!"
+            android:text="@string/our_team_will_get_back_to_you_soon"
             android:textColor="@color/white"
             android:textSize="@dimen/_17sdp" />
     </LinearLayout>

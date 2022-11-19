@@ -1,6 +1,7 @@
 package com.qtechnetworks.ptplatform.View.Fragment;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,7 +20,9 @@ import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.qtechnetworks.ptplatform.Controller.NewNetworking.RetrofitClient;
 import com.qtechnetworks.ptplatform.Controller.adapters.FoodAdapter;
 import com.qtechnetworks.ptplatform.Controller.adapters.FoodDinnerAdapter;
 import com.qtechnetworks.ptplatform.Controller.adapters.FoodSnackAdapter;
@@ -27,10 +30,12 @@ import com.qtechnetworks.ptplatform.Controller.adapters.NewsAdapter;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.Food.Food;
 import com.qtechnetworks.ptplatform.Model.Beans.FoodHome.Foodhome;
+import com.qtechnetworks.ptplatform.Model.Beans.General;
 import com.qtechnetworks.ptplatform.Model.Beans.Target.Target;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.R;
+import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 
 import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.models.PieModel;
@@ -42,6 +47,8 @@ import java.util.Date;
 import java.util.HashMap;
 
 import io.reactivex.disposables.Disposable;
+import retrofit2.Call;
+import retrofit2.Callback;
 
 public class FoodFragment extends Fragment implements CallBack {
 
@@ -57,7 +64,6 @@ public class FoodFragment extends Fragment implements CallBack {
 
     PieChart fatChart, carbChart, proteinChart;
 
-    Target target;
     Foodhome food;
 
     @Override
@@ -252,13 +258,82 @@ public class FoodFragment extends Fragment implements CallBack {
 
     private void getFood(String Date){
 
+//        HashMap<String, Object> params = new HashMap<>();
+//        params.put("date",Date);
+//
+//        Call<Foodhome> call = RetrofitClient.getInstance().getMyApi().getFood(AppConstants.fooduser_URL, params);
+//        call.enqueue(new Callback<Foodhome>() {
+//            @RequiresApi(api = Build.VERSION_CODES.N)
+//            @Override
+//            public void onResponse(Call<Foodhome> call, retrofit2.Response<Foodhome> response) {
+//
+//                if (response.isSuccessful()) {
+//                    food = response.body();
+//
+//                    if (food.getSuccess()){
+//
+//                        progressBar.setProgress((food.getData().getFoodTarget())*100/targetCalories, true);
+//                        progressTxt.setText((food.getData().getFoodTarget())+""+"/"+targetCalories +" Cal");
+//
+//                        target_value.setText(food.getData().getUserTarget().toString());
+//                        food_value.setText(food.getData().getFoodTarget().toString());
+//                        exercise_value.setText(food.getData().getExerciseTarget().toString());
+//
+//                        carbChart.clearChart();
+//                        fatChart.clearChart();
+//                        proteinChart.clearChart();
+//
+//                        carbChart.addPieSlice(new PieModel( food.getData().getCarb(), Color.parseColor("#1EB1FC")));
+//                        fatChart.addPieSlice(new PieModel( food.getData().getFat(), Color.parseColor("#FF0000"))) ;
+//                        proteinChart.addPieSlice(new PieModel(food.getData().getProtein(), Color.parseColor("#8DC63F"))) ;
+//
+//                        carbChart.addPieSlice(new PieModel( food.getData().getUser().getTargetCarb()-food.getData().getCarb(), Color.parseColor("#FFFFFF")));
+//                        fatChart.addPieSlice(new PieModel( food.getData().getUser().getTargetFat()-food.getData().getFat(), Color.parseColor("#FFFFFF"))) ;
+//                        proteinChart.addPieSlice(new PieModel( food.getData().getUser().getTargetProtein()-food.getData().getProtein(), Color.parseColor("#FFFFFF"))) ;
+//
+//                        carbChart.startAnimation();
+//                        fatChart.startAnimation();
+//                        proteinChart.startAnimation();
+//
+//                        carbs_title.setText(food.getData().getCarb().toString());
+//                        fat_title.setText(food.getData().getFat().toString());
+//                        protein_title.setText(food.getData().getProtein().toString());
+//
+//                        total_val.setText(String.valueOf((food.getData().getUserTarget()-food.getData().getFoodTarget())+food.getData().getExerciseTarget()));
+//
+//                        FoodSnackAdapter foodAdapter = new FoodSnackAdapter(getContext(),food.getData().getFood().getBreakfast());
+//                        breakfastRecyclerview.setAdapter(foodAdapter);
+//
+//                        FoodSnackAdapter foodAdapterdine = new FoodSnackAdapter(getContext(),food.getData().getFood().getDinner());
+//                        dinnerRecyclerview.setAdapter(foodAdapterdine);
+//
+//                        FoodSnackAdapter foodsnackAdapter = new FoodSnackAdapter(getContext(),food.getData().getFood().getSnack());
+//                        snacksRecyclerview.setAdapter(foodsnackAdapter);
+//
+//                        FoodSnackAdapter foodsnackAdapter1 = new FoodSnackAdapter(getContext(),food.getData().getFood().getSnack());
+//                        snacksRecyclerview.setAdapter(foodsnackAdapter1);
+//
+//                        FoodSnackAdapter foodsnackAdapter2 = new FoodSnackAdapter(getContext(),food.getData().getFood().getSnack());
+//                        snacksRecyclerview.setAdapter(foodsnackAdapter2);
+//
+//                    }
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Foodhome> call, Throwable t) {
+//                Toast.makeText(getContext(), "An error has occured", Toast.LENGTH_LONG).show();
+//            }
+//
+//        });
+
         HashMap<String ,Object> params=new HashMap<>();
 
         params.put("date",Date);
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);
         MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.fooduser_URL, AppConstants.fooduser_TAG, Foodhome.class, params);
-
     }
 
     @Override
@@ -276,22 +351,51 @@ public class FoodFragment extends Fragment implements CallBack {
 
                 food=(Foodhome) result;
 
-                if (food.getSuccess()){
+                if (food.getSuccess()) {
 
                     progressBar.setProgress((food.getData().getFoodTarget())*100/targetCalories, true);
-                    progressTxt.setText((food.getData().getFoodTarget())+""+"/"+targetCalories +" Cal");
+                    progressTxt.setText((food.getData().getFoodTarget())+"/"+targetCalories +" Cal");
 
                     target_value.setText(food.getData().getUserTarget().toString());
                     food_value.setText(food.getData().getFoodTarget().toString());
                     exercise_value.setText(food.getData().getExerciseTarget().toString());
 
-                    carbChart.addPieSlice(new PieModel( food.getData().getCarb(), Color.parseColor("#1EB1FC")));
-                    fatChart.addPieSlice(new PieModel( food.getData().getFat(), Color.parseColor("#FF0000"))) ;
-                    proteinChart.addPieSlice(new PieModel(food.getData().getProtein(), Color.parseColor("#8DC63F"))) ;
+                    carbChart.clearChart();
+                    fatChart.clearChart();
+                    proteinChart.clearChart();
 
-                    carbChart.addPieSlice(new PieModel( food.getData().getUser().getTargetCarb(), Color.parseColor("#FFFFFF")));
-                    fatChart.addPieSlice(new PieModel( food.getData().getUser().getTargetFat(), Color.parseColor("#FFFFFF"))) ;
-                    proteinChart.addPieSlice(new PieModel( food.getData().getUser().getTargetProtein(), Color.parseColor("#FFFFFF"))) ;
+//                    "Watch Over YourSelf Please"
+//                    "Advice: Please Think about the actions and decissions you are making"
+//                    "Your personality is changing to someone who is not you and you are getting lost in thoughts"
+//                    "Try to find your true self again"
+//                    "Love you <3"
+
+                    if (food.getData().getFoodTarget()>food.getData().getUserTarget()) {
+                        progressBar.setProgressDrawable(getContext().getResources().getDrawable(R.drawable.custom_red_progressbar));
+                    } else {
+                        progressBar.setProgressDrawable(getContext().getResources().getDrawable(R.drawable.custom_green_progressbar));
+                    }
+
+                    if (food.getData().getCarb() < food.getData().getUser().getTargetCarb()){
+                        carbChart.addPieSlice(new PieModel( food.getData().getCarb(), Color.parseColor("#1EB1FC")));
+                        carbChart.addPieSlice(new PieModel( food.getData().getUser().getTargetCarb()-food.getData().getCarb(), Color.parseColor("#FFFFFF")));
+                    } else {
+                        carbChart.addPieSlice(new PieModel( 1, Color.parseColor("#1EB1FC")));
+                    }
+
+                    if (food.getData().getFat() < food.getData().getUser().getTargetFat()){
+                        fatChart.addPieSlice(new PieModel( food.getData().getFat(), Color.parseColor("#FF0000"))) ;
+                        fatChart.addPieSlice(new PieModel( food.getData().getUser().getTargetFat()-food.getData().getFat(), Color.parseColor("#FFFFFF"))) ;
+                    } else {
+                        fatChart.addPieSlice(new PieModel( 1, Color.parseColor("#FF0000"))) ;
+                    }
+
+                    if (food.getData().getProtein() < food.getData().getUser().getTargetProtein()){
+                        proteinChart.addPieSlice(new PieModel(food.getData().getProtein(), Color.parseColor("#8DC63F"))) ;
+                        proteinChart.addPieSlice(new PieModel( food.getData().getUser().getTargetProtein()-food.getData().getProtein(), Color.parseColor("#FFFFFF"))) ;
+                    } else {
+                        proteinChart.addPieSlice(new PieModel(1, Color.parseColor("#8DC63F"))) ;
+                    }
 
                     carbChart.startAnimation();
                     fatChart.startAnimation();
@@ -312,18 +416,18 @@ public class FoodFragment extends Fragment implements CallBack {
                     FoodSnackAdapter foodsnackAdapter = new FoodSnackAdapter(getContext(),food.getData().getFood().getSnack());
                     snacksRecyclerview.setAdapter(foodsnackAdapter);
 
-                    FoodSnackAdapter foodsnackAdapter1 = new FoodSnackAdapter(getContext(),food.getData().getFood().getSnack());
-                    snacksRecyclerview.setAdapter(foodsnackAdapter1);
+                    FoodSnackAdapter foodsnackAdapter1 = new FoodSnackAdapter(getContext(),food.getData().getFood().getLunch());
+                    lunchRecyclerview.setAdapter(foodsnackAdapter1);
 
-                    FoodSnackAdapter foodsnackAdapter2 = new FoodSnackAdapter(getContext(),food.getData().getFood().getSnack());
-                    snacksRecyclerview.setAdapter(foodsnackAdapter2);
-
+                    FoodSnackAdapter foodsnackAdapter2 = new FoodSnackAdapter(getContext(),food.getData().getFood().getSupplements());
+                    supplemnetsRecyclerview.setAdapter(foodsnackAdapter2);
 
                 }
+
                 break;
 
             case AppConstants.target_TAG:
-                target = (Target) result;
+                Target target = (Target) result;
                 targetCalories=target.getData().getTargetCalorie();
                 getFood(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
 

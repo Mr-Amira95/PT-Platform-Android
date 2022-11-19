@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout bottomBar;
 
     public static Activity me;
+    String flag = " ", id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,19 +37,26 @@ public class MainActivity extends AppCompatActivity {
 
         me = this;
 
-        if (PreferencesUtils.getUserType().equalsIgnoreCase("coach")) {
-            setFragmentwithoutBack(new MainCoachFragment());
-        } else if (PreferencesUtils.getUserType().equalsIgnoreCase("trainee")){
-            if (PreferencesUtils.getCoach(MainActivity.this) != null) {
-                if (getIntent().getExtras() != null && getIntent().getExtras().getString("page").equals("shop"))
-                    setFragmentwithoutBack(new MainFragment("shop"));
-                else
-                    setFragmentwithoutBack(new MainFragment());
-            } else {
-                setFragmentwithoutBack(new HomeFragment());
-            }
-        }
+        if (flag.equalsIgnoreCase("new_coach") || flag.equalsIgnoreCase("end_subscription") || flag.equalsIgnoreCase("end_package") || flag.equalsIgnoreCase("personal_trainer") || flag.equalsIgnoreCase("approved_session") || flag.equalsIgnoreCase("session_reminder") || flag.equalsIgnoreCase("chat") || flag.equalsIgnoreCase("cancel")){
+            setFragmentwithoutBack(new MainFragment(flag, id));
+        } else if (flag.equalsIgnoreCase("news") || flag.equalsIgnoreCase("general")){
+            setFragmentwithoutBack(new HomeFragment(flag, id));
+        } else {
 
+            if (PreferencesUtils.getUserType().equalsIgnoreCase("coach")) {
+                setFragmentwithoutBack(new MainCoachFragment());
+            } else if (PreferencesUtils.getUserType().equalsIgnoreCase("trainee")){
+                if (PreferencesUtils.getCoach(MainActivity.this) != null) {
+                    if (getIntent().getExtras() != null && getIntent().getExtras().getString("page").equals("shop"))
+                        setFragmentwithoutBack(new MainFragment("shop"));
+                    else
+                        setFragmentwithoutBack(new MainFragment());
+                } else {
+                    setFragmentwithoutBack(new HomeFragment());
+                }
+            }
+
+        }
     }
 
     private void clicks() {
@@ -81,12 +89,16 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
     private void initials() {
         bottomBar = findViewById(R.id.bottom_nav_bar);
 
         home = findViewById(R.id.home);
         profile = findViewById(R.id.profile);
         coach = findViewById(R.id.coach);
+
+        flag = getIntent().getStringExtra("flag");
+        id = getIntent().getStringExtra("id");
 
         if (PreferencesUtils.getUserType().equalsIgnoreCase("coach")){
             bottomBar.setVisibility(View.GONE);

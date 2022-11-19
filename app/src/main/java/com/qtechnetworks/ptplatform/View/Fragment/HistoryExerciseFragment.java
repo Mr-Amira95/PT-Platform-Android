@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.exoplayer2.MediaItem;
 import com.google.android.exoplayer2.SimpleExoPlayer;
@@ -18,12 +19,21 @@ import com.qtechnetworks.ptplatform.Controller.adapters.ExerciseHRecordAdapter;
 import com.qtechnetworks.ptplatform.Controller.adapters.ExerciseHistoryAdapter;
 import com.qtechnetworks.ptplatform.Controller.adapters.VideoItemAdapter;
 import com.qtechnetworks.ptplatform.Controller.adapters.WorkoutHistoryAdapter;
+import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
+import com.qtechnetworks.ptplatform.Model.Beans.FavoriteandWorkout.FavoriteandWorkout;
+import com.qtechnetworks.ptplatform.Model.Beans.WorkoutHistory.WorkoutHistoryResults;
+import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
+import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
+import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Dialogs.AddLogDialog;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
-public class HistoryExerciseFragment extends Fragment {
+import io.reactivex.disposables.Disposable;
+
+public class HistoryExerciseFragment extends Fragment implements CallBack {
 
     RecyclerView exercisesRecyclerview;
 
@@ -46,11 +56,34 @@ public class HistoryExerciseFragment extends Fragment {
 
         initial(view);
 
-        // Inflate the layout for this fragment
+        if (PreferencesUtils.getUserType().equalsIgnoreCase("trainee"))
+            getExercisesTrainee();
+        else if (PreferencesUtils.getUserType().equalsIgnoreCase("coach"))
+            getExercisesCoach();
+
+        //Inflate the layout for this fragment
         return view;
     }
 
-    private void initial(View view) {
+    private void getExercisesCoach() {
+        HashMap<String ,Object> params=new HashMap<>();
+
+        params.put("user_id", HistoryFragment.userID);
+
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.Add_Log_URL, AppConstants.Add_Log_TAG, WorkoutHistoryResults.class, params);
+    }
+
+    private void getExercisesTrainee() {
+        HashMap<String ,Object> params=new HashMap<>();
+
+        params.put("coach_id", PreferencesUtils.getCoach(getContext()).getId());
+
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.Add_Log_URL, AppConstants.Add_Log_TAG, WorkoutHistoryResults.class, params);
+    }
+
+    private void initial (View view) {
 
         exercisesRecyclerview = view.findViewById(R.id.exercises_recyclerview);
 
@@ -58,8 +91,38 @@ public class HistoryExerciseFragment extends Fragment {
         layoutManagerhorizantalleader.setOrientation(LinearLayoutManager.VERTICAL);
         exercisesRecyclerview.setLayoutManager(layoutManagerhorizantalleader);
 
-        ExerciseHistoryAdapter exerciseHistoryAdapter = new ExerciseHistoryAdapter(getContext());
-        exercisesRecyclerview.setAdapter(exerciseHistoryAdapter);
     }
 
+
+
+    @Override
+    public void onSubscribe(Disposable d) {
+
+    }
+
+    @Override
+    public void onNext(int tag, boolean isSuccess, Object result) {
+
+        if (isSuccess) {
+
+            WorkoutHistoryResults workoutHistoryResults = (WorkoutHistoryResults) result;
+
+            ExerciseHistoryAdapter exerciseHistoryAdapter = new ExerciseHistoryAdapter(getContext(), workoutHistoryResults);
+            exercisesRecyclerview.setAdapter(exerciseHistoryAdapter);
+
+            if (workoutHistoryResults.getData().size() == 0) {
+                Toast.makeText(getContext(), "There is no Exercises to show", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    @Override
+    public void onError(Throwable e) {
+
+    }
+
+    @Override
+    public void onComplete() {
+
+    }
 }

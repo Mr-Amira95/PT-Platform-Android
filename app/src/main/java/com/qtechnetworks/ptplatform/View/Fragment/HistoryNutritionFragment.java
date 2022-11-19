@@ -68,17 +68,32 @@ public class HistoryNutritionFragment extends Fragment implements CallBack {
         initial(view);
         clicks();
 
-        getNutritionHistory(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+        if (PreferencesUtils.getUserType().equalsIgnoreCase("Trainee"))
+            getNutritionHistoryTrainee(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+        else if (PreferencesUtils.getUserType().equalsIgnoreCase("Coach"))
+            getNutritionHistoryCoach(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
 
         // Inflate the layout for this fragment
         return view;
     }
 
-    private void getNutritionHistory(String date) {
+    private void getNutritionHistoryTrainee(String date) {
 
         HashMap<String ,Object> params=new HashMap<>();
 
         params.put("date",date);
+
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.fooduser_URL, AppConstants.food_TAG, Foodhome.class, params);
+
+    }
+
+    private void getNutritionHistoryCoach(String date) {
+
+        HashMap<String ,Object> params=new HashMap<>();
+
+        params.put("date",date);
+        params.put("user_id",HistoryFragment.userID);
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);
         MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.fooduser_URL, AppConstants.food_TAG, Foodhome.class, params);
@@ -135,7 +150,12 @@ public class HistoryNutritionFragment extends Fragment implements CallBack {
         StartTime = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 selectedDate.setText(year + "-" +(monthOfYear+1) + "-" + dayOfMonth);
-                getNutritionHistory(year + "-" +(monthOfYear+1) + "-" + dayOfMonth);
+
+                if (PreferencesUtils.getUserType().equalsIgnoreCase("Trainee"))
+                    getNutritionHistoryTrainee(year + "-" +(monthOfYear+1) + "-" + dayOfMonth);
+                else if (PreferencesUtils.getUserType().equalsIgnoreCase("Trainee"))
+                    getNutritionHistoryCoach(year + "-" +(monthOfYear+1) + "-" + dayOfMonth);
+
             }
         }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
 
@@ -150,7 +170,7 @@ public class HistoryNutritionFragment extends Fragment implements CallBack {
     @Override
     public void onNext(int tag, boolean isSuccess, Object result) {
 
-        if (isSuccess){
+        if (isSuccess) {
             Foodhome foodhome = (Foodhome) result;
 
             if (foodhome.getData().getFoodTarget() > 0){
@@ -161,28 +181,31 @@ public class HistoryNutritionFragment extends Fragment implements CallBack {
                 progressTxt.setText("0 Calories");
             }
 
-            if (foodhome.getData().getCarb() > 0)
+            if (foodhome.getData().getCarb() > 0) {
                 carbChart.addPieSlice(new PieModel( foodhome.getData().getCarb(), Color.parseColor("#1EB1FC")));
-            else
+                carbChart.addPieSlice(new PieModel( foodhome.getData().getUser().getTargetCarb()-foodhome.getData().getCarb(), Color.parseColor("#1EB1FC")));
+            } else
                 carbChart.addPieSlice(new PieModel( 1, Color.parseColor("#FFFFFF")));
 
-            if (foodhome.getData().getFat() > 0)
-                fatChart.addPieSlice(new PieModel( foodhome.getData().getFat(), Color.parseColor("#FF0000")));
-            else
+            if (foodhome.getData().getFat() > 0) {
+                fatChart.addPieSlice(new PieModel(foodhome.getData().getFat(), Color.parseColor("#FF0000")));
+                fatChart.addPieSlice(new PieModel(foodhome.getData().getUser().getTargetFat() - foodhome.getData().getFat(), Color.parseColor("#FF0000")));
+            } else
                 fatChart.addPieSlice(new PieModel( 1, Color.parseColor("#FFFFFF")));
 
-            if (foodhome.getData().getProtein() > 0)
-                proteinChart.addPieSlice(new PieModel(foodhome.getData().getProtein(), Color.parseColor("#8DC63F"))) ;
-            else
+            if (foodhome.getData().getProtein() > 0) {
+                proteinChart.addPieSlice(new PieModel(foodhome.getData().getProtein(), Color.parseColor("#8DC63F")));
+                proteinChart.addPieSlice(new PieModel(foodhome.getData().getUser().getTargetProtein()-foodhome.getData().getProtein(), Color.parseColor("#8DC63F")));
+            } else
                 proteinChart.addPieSlice(new PieModel(1, Color.parseColor("#FFFFFF"))) ;
 
             carbChart.startAnimation();
             fatChart.startAnimation();
             proteinChart.startAnimation();
 
-            carbChart.setInnerValueString(foodhome.getData().getCarb().toString());
-            fatChart.setInnerValueString(foodhome.getData().getFat().toString());
-            proteinChart.setInnerValueString(foodhome.getData().getProtein().toString());
+            carbChart.setInnerValueString(foodhome.getData().getUser().getTargetCarb().toString());
+            fatChart.setInnerValueString(foodhome.getData().getUser().getTargetFat().toString());
+            proteinChart.setInnerValueString(foodhome.getData().getUser().getTargetProtein().toString());
 
             NutritionHistoryAdapter nutritionHistoryAdapter1 = new NutritionHistoryAdapter(getContext(), foodhome.getData().getFood().getBreakfast(), "Breakfast");
             nutritionRecyclerviewBreakfast.setAdapter(nutritionHistoryAdapter1);

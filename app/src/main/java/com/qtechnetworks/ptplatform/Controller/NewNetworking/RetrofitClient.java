@@ -22,6 +22,7 @@ public class RetrofitClient {
         public Response intercept(Chain chain) throws IOException {
             Request newRequest  = chain.request().newBuilder()
                     .addHeader("Authorization", "Bearer " + PreferencesUtils.getUserToken())
+                    .addHeader("Accept-Language", PreferencesUtils.getLanguage())
                     .build();
             return chain.proceed(newRequest);
         }

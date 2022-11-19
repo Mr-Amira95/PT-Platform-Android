@@ -26,7 +26,7 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Calender"
+        android:text="@string/calendar"
         android:textColor="@color/primary_color"
         android:textSize="@dimen/_20sdp"
         android:fontFamily="@font/aeonikbold"
@@ -49,7 +49,7 @@
             android:layout_weight="1"
             android:textColor="@color/primary_color"
             android:textSize="@dimen/_12sdp"
-            android:text="Name"
+            android:text="@string/name"
             android:textStyle="bold"/>
 
         <TextView
@@ -59,7 +59,7 @@
             android:layout_weight="1"
             android:textColor="@color/primary_color"
             android:textSize="@dimen/_12sdp"
-            android:text="Label"
+            android:text="@string/label"
             android:textStyle="bold"/>
 
         <TextView
@@ -69,7 +69,7 @@
             android:layout_weight="1"
             android:textColor="@color/primary_color"
             android:textSize="@dimen/_12sdp"
-            android:text="Date"
+            android:text="@string/date"
             android:textStyle="bold"/>
 
         <TextView
@@ -79,7 +79,7 @@
             android:layout_weight="1"
             android:textColor="@color/primary_color"
             android:textSize="@dimen/_12sdp"
-            android:text="Time"
+            android:text="@string/time"
             android:textStyle="bold"/>
 
         <TextView
@@ -89,7 +89,7 @@
             android:layout_weight="1"
             android:textColor="@color/primary_color"
             android:textSize="@dimen/_12sdp"
-            android:text="Status"
+            android:text="@string/status"
             android:textStyle="bold"/>
 
     </LinearLayout>

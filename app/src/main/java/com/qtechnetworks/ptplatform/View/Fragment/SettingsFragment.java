@@ -7,14 +7,31 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
 
+import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
+import com.qtechnetworks.ptplatform.Model.Beans.General;
+import com.qtechnetworks.ptplatform.Model.Beans.PromoCode.PromoCodeResults;
+import com.qtechnetworks.ptplatform.Model.Beans.RegisterAndLogin.Register;
+import com.qtechnetworks.ptplatform.Model.Beans.RegisterAndLogin.UpdateUserResults;
+import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
+import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
+import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
+import com.qtechnetworks.ptplatform.View.Activity.SignInActivity;
+import com.qtechnetworks.ptplatform.View.Dialogs.LanguagesDialog;
 
-public class SettingsFragment extends Fragment {
+import java.util.HashMap;
 
-    TextView contactUs;
+import io.reactivex.disposables.Disposable;
+
+public class SettingsFragment extends Fragment implements CallBack {
+
+    TextView contactUs, language;
+    Switch pushNotifications;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,10 +53,28 @@ public class SettingsFragment extends Fragment {
             }
         });
 
+        language.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LanguagesDialog languagesDialog = new LanguagesDialog(getContext());
+                languagesDialog.show();
+            }
+        });
+
+        pushNotifications.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                setPushNotifications();
+            }
+        });
     }
 
     private void initials(View view) {
         contactUs = view.findViewById(R.id.contact_us);
+        language = view.findViewById(R.id.language);
+        pushNotifications = view.findViewById(R.id.push_notificataions);
+
+        pushNotifications.setChecked(PreferencesUtils.getUser(getContext()).getNotification());
     }
 
     private void setFragment(Fragment fragment) {
@@ -48,7 +83,36 @@ public class SettingsFragment extends Fragment {
         fragment.setArguments(args);
 
         ((MainActivity) getContext()).getSupportFragmentManager().beginTransaction().replace(R.id.home_frame, fragment, "OptionsFragment").addToBackStack(null).commit();
+    }
+
+    private void setPushNotifications(){
+        HashMap<String ,Object> params = new HashMap<>();
+
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().Post(getContext(), AppConstants.Notification_URL, AppConstants.Notification_TAG, UpdateUserResults.class, params);
+    }
+
+    @Override
+    public void onSubscribe(Disposable d) {
 
     }
 
+    @Override
+    public void onNext(int tag, boolean isSuccess, Object result) {
+
+        UpdateUserResults register = (UpdateUserResults) result;
+        PreferencesUtils.setUser(register.getData(), getContext());
+        pushNotifications.setChecked(PreferencesUtils.getUser(getContext()).getNotification());
+
+    }
+
+    @Override
+    public void onError(Throwable e) {
+
+    }
+
+    @Override
+    public void onComplete() {
+
+    }
 }

@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.gson.JsonObject;
-import com.onesignal.OneSignal;
 import com.qtechnetworks.ptplatform.BuildConfig;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.CheckEmail.CheckEmailResults;

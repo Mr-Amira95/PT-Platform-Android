@@ -21,7 +21,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_5sdp"
         android:gravity="start"
-        android:text="PT Platform"
         android:textColor="@color/white"
         android:textSize="@dimen/_12sdp"
         android:textStyle="bold"

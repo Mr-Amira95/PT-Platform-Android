@@ -1,5 +1,6 @@
 package com.qtechnetworks.ptplatform.View.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -21,6 +22,7 @@ import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
+import com.qtechnetworks.ptplatform.View.Activity.ShopTestActivity;
 import com.qtechnetworks.ptplatform.View.Dialogs.CoachesDialog;
 
 import java.util.HashMap;
@@ -57,6 +59,11 @@ public class MainFragment extends Fragment implements CallBack {
     public MainFragment(){
 
     }
+
+    public MainFragment(String flag, String id) {
+
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -138,6 +145,8 @@ public class MainFragment extends Fragment implements CallBack {
         shopLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                Intent i = new Intent(getContext(), ShopTestActivity.class);
+//                startActivity(i);
                 setFragment(new ShopFragment());
             }
         });
@@ -183,6 +192,14 @@ public class MainFragment extends Fragment implements CallBack {
             public void onClick(View view) {
 
                 setFragment( new VideoChatFragment());
+            }
+        });
+
+        liveChatLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                setFragment( new ChatSingleFragment());
             }
         });
 

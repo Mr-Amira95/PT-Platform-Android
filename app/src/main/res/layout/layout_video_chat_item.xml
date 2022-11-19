@@ -18,7 +18,6 @@
         android:id="@+id/session_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Video Chat"
         android:textColor="@color/primary_color"
         android:textSize="@dimen/_12sdp"
         android:fontFamily="@font/aeonikbold"
@@ -28,7 +27,6 @@
             android:id="@+id/session_date_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="date / Time"
             android:textColor="@color/white"
             android:textSize="@dimen/_8sdp"
             android:fontFamily="@font/aeonikbold"
@@ -45,7 +43,7 @@
         android:padding="5dp"
         android:background="@drawable/btn_rounded_green"
         android:gravity="center"
-        android:text="Cancel"
+        android:text="@string/cancel"
         android:textSize="@dimen/_10sdp"
         android:textColor="@color/black"
         android:layout_marginEnd="@dimen/_5sdp" />
@@ -59,7 +57,7 @@
         android:padding="5dp"
         android:background="@drawable/btn_rounded_green"
         android:gravity="center"
-        android:text="Join"
+        android:text="@string/join"
         android:textSize="@dimen/_10sdp"
         android:textColor="@color/white"
         android:layout_marginStart="@dimen/_5sdp"/>

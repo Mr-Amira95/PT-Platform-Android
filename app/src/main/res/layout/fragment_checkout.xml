@@ -12,8 +12,7 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Shop"
-        android:visibility="gone"
+        android:text="@string/shop"
         android:textColor="@color/primary_color"
         android:textSize="@dimen/_20sdp"
         android:fontFamily="@font/aeonikbold"
@@ -28,7 +27,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginHorizontal="@dimen/_20sdp"
-        android:visibility="gone"
         android:layout_marginTop="@dimen/_25sdp"
         app:layout_constraintTop_toBottomOf="@id/title"
         app:layout_constraintStart_toStartOf="parent">
@@ -36,7 +34,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cart Total"
+            android:text="@string/cart_total"
             android:textSize="@dimen/_12sdp"
             android:textColor="@color/white"/>
 
@@ -44,18 +42,13 @@
             android:id="@+id/cart_total_value"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Xxx"
             android:textSize="@dimen/_12sdp"
             android:textColor="@color/white"
             android:gravity="end"/>
 
-
-
-
     </LinearLayout>
 
     <View
-        android:visibility="gone"
         android:id="@+id/line"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_1sdp"
@@ -70,14 +63,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginHorizontal="@dimen/_20sdp"
-        android:layout_marginTop="@dimen/_15sdp" android:visibility="gone"
-
+        android:layout_marginTop="@dimen/_15sdp"
         app:layout_constraintTop_toBottomOf="@id/line">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SubTotal"
+            android:text="@string/subtotal"
             android:textSize="@dimen/_12sdp"
             android:textColor="@color/white"/>
 
@@ -85,8 +77,6 @@
             android:id="@+id/subtotal_value"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Xxx"
-
             android:textSize="@dimen/_12sdp"
             android:textColor="@color/white"
             android:gravity="end"/>
@@ -97,8 +87,7 @@
         android:id="@+id/payment_method_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Payment Method"
-        android:visibility="gone"
+        android:text="@string/payment_method"
         android:textColor="@color/txt_grey"
         app:layout_constraintTop_toBottomOf="@id/subtotal_layout"
         app:layout_constraintStart_toStartOf="parent"
@@ -110,7 +99,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:weightSum="3"
-        android:visibility="gone"
         android:orientation="horizontal"
         android:layout_margin="@dimen/_20sdp"
         app:layout_constraintTop_toBottomOf="@id/payment_method_title">
@@ -120,7 +108,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Credit Card"
+            android:text="@string/credit_card"
             android:textColor="@color/white"
             android:checked="true"
             android:buttonTint="@color/primary_color"/>
@@ -130,7 +118,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="PayPal"
+            android:text="@string/paypal"
             android:textColor="@color/white"
             android:buttonTint="@color/primary_color"/>
 
@@ -139,9 +127,10 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="In-App Purchase"
+            android:text="@string/in_app_purchase"
             android:textColor="@color/white"
-            android:buttonTint="@color/primary_color"/>
+            android:buttonTint="@color/primary_color"
+            android:visibility="gone"/>
 
     </RadioGroup>
 
@@ -161,7 +150,7 @@
             android:id="@+id/google_pay_radiobutton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Credit Card"
+            android:text="@string/credit_card"
             android:textColor="@color/white"
             android:buttonTint="@color/primary_color"/>
 
@@ -169,7 +158,7 @@
             android:id="@+id/apple_pay_radiobutton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="PayPal"
+            android:text="@string/paypal"
             android:textColor="@color/white"
             android:layout_marginStart="@dimen/_20sdp"
             android:buttonTint="@color/primary_color"/>
@@ -180,7 +169,7 @@
         android:id="@+id/card_number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Card Number"
+        android:hint="@string/card_number"
         android:visibility="gone"
         app:hintTextColor="@color/txt_grey"
         android:layout_marginHorizontal="@dimen/_20sdp"
@@ -203,7 +192,7 @@
         android:id="@+id/cardholder_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Cardholder Name"
+        android:hint="@string/cardholder_name"
         android:visibility="gone"
         app:hintTextColor="@color/txt_grey"
         android:layout_marginHorizontal="@dimen/_20sdp"
@@ -238,7 +227,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:hint="Month"
+            android:hint="@string/month"
             android:visibility="gone"
             app:hintTextColor="@color/txt_grey"
             android:layout_marginEnd="@dimen/_10sdp"
@@ -260,7 +249,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:hint="Year"
+            android:hint="@string/year"
             android:visibility="gone"
             app:hintTextColor="@color/txt_grey"
             android:layout_marginStart="@dimen/_10sdp"
@@ -283,7 +272,7 @@
         android:id="@+id/cvv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="CVV"
+        android:hint="@string/cvv"
         android:visibility="gone"
         app:hintTextColor="@color/txt_grey"
         android:layout_marginHorizontal="@dimen/_20sdp"
@@ -302,14 +291,6 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <WebView
-        android:id="@+id/payment_webview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintTop_toBottomOf="@id/cvv"
-
-        tools:layout_editor_absoluteX="0dp" />
-
     <Button
         android:id="@+id/confirm_purchase_btn"
         android:layout_width="match_parent"
@@ -318,8 +299,7 @@
         android:layout_marginBottom="24dp"
         android:background="@drawable/button_background"
         android:fontFamily="@font/aeonikbold"
-        android:text="Confirm Purchase"
-        android:visibility="gone"
+        android:text="@string/confirm_purchase"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="@dimen/_18sdp"

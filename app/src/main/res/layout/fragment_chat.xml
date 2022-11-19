@@ -12,7 +12,7 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Chat"
+        android:text="@string/chat"
         android:textColor="@color/primary_color"
         android:textSize="@dimen/_20sdp"
         android:fontFamily="@font/aeonikbold"
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_20sdp"
             android:background="@drawable/button_background"
-            android:text="Chat with coach"
+            android:text="@string/chat_with_coach"
             android:textColor="@color/white"
             android:textSize="@dimen/_16sdp"/>
 
@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_20sdp"
             android:background="@drawable/button_background"
-            android:text="Technical support"
+            android:text="@string/technical_support"
             android:textColor="@color/white"
             android:textSize="@dimen/_16sdp"
             android:layout_marginTop="@dimen/_20sdp"/>

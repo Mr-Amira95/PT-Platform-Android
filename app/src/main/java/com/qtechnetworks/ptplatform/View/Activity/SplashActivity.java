@@ -1,7 +1,4 @@
 package com.qtechnetworks.ptplatform.View.Activity;
-
-import static com.qtechnetworks.ptplatform.Model.utilits.AppConstants.ONESIGNAL_APP_ID;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -35,11 +32,60 @@ public class SplashActivity extends AppCompatActivity implements CallBack {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
+        switchLocal(this);
+
+//        Intent i = new Intent(this, MainActivity.class);
+//        i.putExtra("flag", "new_coach");
+//        i.putExtra("id", "coach_id");
+//        startActivity(i); MainFragment
+//
+//        Intent i = new Intent(this, MainActivity.class);
+//        i.putExtra("flag", "news");
+//        i.putExtra("id", "news_id");
+//        startActivity(i); HomeFragment ==> News
+//
+//        Intent i = new Intent(this, MainActivity.class);
+//        i.putExtra("flag", "general");
+//        startActivity(i); HomeFragment
+//
+//        Intent i = new Intent(this, MainActivity.class);
+//        i.putExtra("flag", "end_subscription");
+//        i.putExtra("id", "coach_id");
+//        startActivity(i); MainFragment ==> Shop
+//
+//        Intent i = new Intent(this, MainActivity.class);
+//        i.putExtra("flag", "end_package");
+//        i.putExtra("id", "coach_id");
+//        startActivity(i); MainFragment ==> Shop
+//
+//        Intent i = new Intent(this, MainActivity.class);
+//        i.putExtra("flag", "personal_trainer");
+//        i.putExtra("id", "coach_id");
+//        startActivity(i); MainFragment ==> Personal Training
+//
+//        Intent i = new Intent(this, MainActivity.class);
+//        i.putExtra("flag", "approved_session");
+//        i.putExtra("id", "coach_id");
+//        startActivity(i); MainFragment ==> Calender
+//
+//        Intent i = new Intent(this, MainActivity.class);
+//        i.putExtra("flag", "session_reminder");
+//        i.putExtra("id", "coach_id");
+//        startActivity(i); MainFragment ==> Calender
+//
+//        Intent i = new Intent(this, MainActivity.class);
+//        i.putExtra("flag", "chat");
+//        i.putExtra("id", "coach_id");
+//        startActivity(i); MainFragment ==> Chat
+//
+//        Intent i = new Intent(this, MainActivity.class);
+//        i.putExtra("flag", "cancel");
+//        startActivity(i); MainFragment
 
         // OneSignal Initialization
+        OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
         OneSignal.initWithContext(this);
-        OneSignal.setAppId(ONESIGNAL_APP_ID);
+        OneSignal.setAppId(BuildConfig.ONESIGNAL_APP_ID);
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -50,8 +96,6 @@ public class SplashActivity extends AppCompatActivity implements CallBack {
                     finish();
                 }else {
                     devicetoken();
-                    startActivity(new Intent(SplashActivity.this,MainActivity.class));
-                    finish();
                 }
             }
         },SPLASH_TIME_OUT);
@@ -71,18 +115,16 @@ public class SplashActivity extends AppCompatActivity implements CallBack {
         MyApplication.getInstance().getBackgroundHttpHelper().Post(SplashActivity.this, AppConstants.deviceToken_URL,AppConstants.deviceToken_TAG , DeviceToken.class,tokenMap);
     }
 
-    private void switchLocal(Context context, String lcode) {
-        if (lcode.equalsIgnoreCase(""))
+    private void switchLocal(Context context) {
+        if (PreferencesUtils.getLanguage().equalsIgnoreCase(""))
             return;
         Resources resources = context.getResources();
-        Locale locale = new Locale(lcode);
+        Locale locale = new Locale(PreferencesUtils.getLanguage());
         Locale.setDefault(locale);
         android.content.res.Configuration config = new
                 android.content.res.Configuration();
         config.locale = locale;
         resources.updateConfiguration(config, resources.getDisplayMetrics());
-        //restart base activity
-
     }
 
     @Override
@@ -92,7 +134,8 @@ public class SplashActivity extends AppCompatActivity implements CallBack {
 
     @Override
     public void onNext(int tag, boolean isSuccess, Object result) {
-
+        startActivity(new Intent(SplashActivity.this,MainActivity.class));
+        finish();
     }
 
     @Override

@@ -11,7 +11,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Contact Us"
+        android:text="@string/contact_us"
         android:textColor="@color/primary_color"
         android:textSize="@dimen/_20sdp"
         android:fontFamily="@font/aeonikbold"
@@ -26,7 +26,7 @@
         android:background="@drawable/button_background"
         android:textColor="@color/white"
         android:fontFamily="@font/aeonikregular"
-        android:text="Technical Support"
+        android:text="@string/technical_support"
         android:textSize="@dimen/_14sdp"
         android:textAllCaps="false"
         android:layout_marginHorizontal="@dimen/_20sdp"
@@ -41,7 +41,7 @@
         android:textColor="@color/white"
         android:fontFamily="@font/aeonikregular"
         android:layout_marginTop="@dimen/_15sdp"
-        android:text="Submit Feedback"
+        android:text="@string/submit_feedback"
         android:textSize="@dimen/_14sdp"
         android:textAllCaps="false"
         android:layout_marginHorizontal="@dimen/_20sdp"/>

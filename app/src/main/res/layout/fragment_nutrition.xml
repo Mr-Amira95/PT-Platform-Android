@@ -18,7 +18,7 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nutrition"
+        android:text="@string/nutrition"
         android:textColor="@color/primary_color"
         android:textSize="@dimen/_20sdp"
         android:fontFamily="@font/aeonikbold"
@@ -49,7 +49,7 @@
             android:layout_width="@dimen/_75sdp"
             android:layout_height="wrap_content"
             android:maxLines="1"
-            android:text="Food"
+            android:text="@string/food"
             android:textSize="@dimen/_10sdp"
             android:textColor="@color/primary_color"
             android:gravity="center"/>
@@ -79,7 +79,7 @@
             android:layout_width="@dimen/_75sdp"
             android:layout_height="wrap_content"
             android:maxLines="1"
-            android:text="Suplements"
+            android:text="@string/supplements"
             android:textSize="@dimen/_10sdp"
             android:textColor="@color/primary_color"
             android:gravity="center"/>
@@ -108,7 +108,7 @@
             android:id="@+id/calorie_calculator_icon"
             android:layout_width="@dimen/_75sdp"
             android:layout_height="wrap_content"
-            android:text="Calorie Calculator"
+            android:text="@string/calorie_calculator"
             android:textSize="@dimen/_10sdp"
             android:textColor="@color/primary_color"
             android:gravity="center"/>
@@ -137,7 +137,7 @@
             android:id="@+id/Recipes_Diet_Plans_icon"
             android:layout_width="@dimen/_75sdp"
             android:layout_height="wrap_content"
-            android:text="Recipes and Diet Plans"
+            android:text="@string/recipes_and_diet_plans"
             android:textSize="@dimen/_10sdp"
             android:textColor="@color/primary_color"
             android:gravity="center"/>

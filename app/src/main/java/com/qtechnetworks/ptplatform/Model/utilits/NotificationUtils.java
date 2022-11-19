@@ -31,13 +31,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-
-/**
- * Created by Yousef Nasr
- * Email you96m@gmail.com on 1/16/2018.
- */
-
-
 public class NotificationUtils {
 
     private static String TAG = NotificationUtils.class.getSimpleName();
@@ -51,6 +44,7 @@ public class NotificationUtils {
     /**
      * Method checks if the app is in background or not
      */
+
     @RequiresApi(api = Build.VERSION_CODES.Q)
     public static boolean isAppIsInBackground(Context context) {
         boolean isInBackground = true;
@@ -109,6 +103,7 @@ public class NotificationUtils {
         final int icon = R.drawable.logo;
 
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+
         final PendingIntent resultPendingIntent =
                 PendingIntent.getActivity(
                         mContext,

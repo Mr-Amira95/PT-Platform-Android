@@ -36,11 +36,11 @@ import io.reactivex.disposables.Disposable;
 public class CheckoutFragment extends Fragment implements CallBack {
 
     Button confirmPurchase;
-   // RadioButton inAppPurchase, creditCard, payPal;
-   // RadioGroup inAppLayout;
+    RadioButton inAppPurchase, creditCard, payPal;
+    RadioGroup inAppLayout;
     SubscriptionPackage subscriptionPackage;
-    WebView paymentWebview;
     TextView total,subtotal;
+
     public CheckoutFragment(SubscriptionPackage subscriptionPackage){
         this.subscriptionPackage=subscriptionPackage;
     }
@@ -50,13 +50,16 @@ public class CheckoutFragment extends Fragment implements CallBack {
         View view = inflater.inflate(R.layout.fragment_checkout, container, false);
 
         initials(view);
+
         subtotal.setText(subscriptionPackage.getPrice());
         total.setText(subscriptionPackage.getPrice());
+
         getPaymentUrl(subscriptionPackage.getId());
+
         confirmPurchase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            //    setFragment( new AddTraineeDetailsFragment());
+//                setFragment( new CheckoutWebviewFragment(subscriptionPackage));
             }
         });
 
@@ -87,12 +90,11 @@ public class CheckoutFragment extends Fragment implements CallBack {
     private void getPaymentUrl(int packageId){
         HashMap<String ,Object> params=new HashMap<>();
 
-        //  params.put("skip",skip);
-        params.put("package_id",packageId);
+//        params.put("code", SinglePackageFragment.promoCode.getText().toString());
+        params.put("package_id", packageId);
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);
         MyApplication.getInstance().getHttpHelper().Post(getContext(), AppConstants.PACKAGES_URL, AppConstants.PACKAGES_TAG, General.class, params);
-
     }
 
     private void setFragment( Fragment fragment) {
@@ -106,7 +108,6 @@ public class CheckoutFragment extends Fragment implements CallBack {
 
     private void initials(View view) {
         confirmPurchase = view.findViewById(R.id.confirm_purchase_btn);
-        paymentWebview=view.findViewById(R.id.payment_webview);
         total=view.findViewById(R.id.cart_total_value);
         subtotal=view.findViewById(R.id.subtotal_value);
 //        inAppPurchase = view.findViewById(R.id.in_app_radiobutton);
@@ -122,9 +123,12 @@ public class CheckoutFragment extends Fragment implements CallBack {
 
     @Override
     public void onNext(int tag, boolean isSuccess, Object result) {
+        /*
         try {
             if (isSuccess) {
+
                 General paymentResult = (General) result;
+
                 paymentWebview.getSettings().setLoadsImagesAutomatically(true);
                 paymentWebview.getSettings().setJavaScriptEnabled(true);
                 paymentWebview.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
@@ -203,6 +207,8 @@ public class CheckoutFragment extends Fragment implements CallBack {
                 //setFragment(new HomeFragment());
             }
 
+
+         */
 
     }
 

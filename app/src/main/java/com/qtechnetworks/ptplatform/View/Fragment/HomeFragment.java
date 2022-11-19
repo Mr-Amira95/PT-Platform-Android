@@ -52,6 +52,14 @@ public class HomeFragment extends Fragment implements CallBack {
 
     LinearLayout followUs, contactUs, news, coaches, nutritions, progress;
 
+    public HomeFragment(String flag, String id) {
+
+    }
+
+    public HomeFragment() {
+
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

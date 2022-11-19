@@ -14,8 +14,7 @@
             android:layout_width="@dimen/_100sdp"
             android:layout_height="@dimen/_100sdp"
             android:scaleType="centerCrop"
-            app:riv_corner_radius="10dp"
-            android:src="@drawable/follwous"/>
+            app:riv_corner_radius="10dp"/>
 
         <TextView
             android:id="@+id/categ1_name"
@@ -23,7 +22,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_5sdp"
             android:gravity="center"
-            android:text="pt platform"
             android:textColor="@color/white"
             android:textSize="@dimen/_14sdp"
             android:textStyle="bold"/>

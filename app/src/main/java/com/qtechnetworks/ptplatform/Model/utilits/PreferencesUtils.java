@@ -66,13 +66,13 @@ public class PreferencesUtils {
 
     }
 
-    public static String getUserlanguage() {
-        return PreferencesUtils.getString(PrefKeys.language, "-1");
-
-    }
-
     public static String getUserType() {
-        return PreferencesUtils.getString(PrefKeys.type, "-1");
+
+        if (PreferencesUtils.getString(PrefKeys.type, "-1").equalsIgnoreCase("user")){
+            return "trainee";
+        } else {
+            return PreferencesUtils.getString(PrefKeys.type, "-1");
+        }
     }
 
     public static void setUserType(String type) {
@@ -82,6 +82,14 @@ public class PreferencesUtils {
     public static String getUserToken() {
         return PreferencesUtils.getString(PrefKeys.userToken, "-1");
 
+    }
+
+    public static String getLanguage() {
+        return PreferencesUtils.getString(PrefKeys.language, "en");
+    }
+
+    public static void setLanguage(String lang) {
+        PreferencesUtils.set(PrefKeys.language, lang);
     }
 
     public static void setUserToken(String token) {
@@ -134,6 +142,7 @@ public class PreferencesUtils {
         return PreferencesUtils.getString(PrefKeys.playerId, "");
 
     }
+
     public static void setPlayerId(String playerId) {
         PreferencesUtils.set(PrefKeys.playerId, playerId);
     }

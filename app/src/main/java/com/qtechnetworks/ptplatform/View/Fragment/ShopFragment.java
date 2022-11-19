@@ -1,7 +1,10 @@
 package com.qtechnetworks.ptplatform.View.Fragment;
 
+import android.app.Activity;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,7 +12,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
+import com.android.billingclient.api.BillingClient;
+import com.android.billingclient.api.BillingClientStateListener;
+import com.android.billingclient.api.BillingFlowParams;
+import com.android.billingclient.api.BillingResult;
+import com.android.billingclient.api.Purchase;
+import com.android.billingclient.api.PurchasesUpdatedListener;
+import com.android.billingclient.api.SkuDetails;
+import com.android.billingclient.api.SkuDetailsParams;
+import com.android.billingclient.api.SkuDetailsResponseListener;
 import com.qtechnetworks.ptplatform.Controller.adapters.PackageAdapter;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.Recipes.Recipes;
@@ -19,7 +33,9 @@ import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import io.reactivex.disposables.Disposable;
 
@@ -36,6 +52,8 @@ public class ShopFragment extends Fragment implements CallBack {
 
         initials(view);
         getSubscriptions(PreferencesUtils.getCoach(getContext()).getId().toString());
+
+
         // Inflate the layout for this fragment
         return view;
     }

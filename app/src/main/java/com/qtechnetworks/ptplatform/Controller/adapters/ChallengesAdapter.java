@@ -1,5 +1,7 @@
 package com.qtechnetworks.ptplatform.Controller.adapters;
 
+import static com.qtechnetworks.ptplatform.Model.utilits.PrefKeys.userID;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -25,6 +27,7 @@ import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 import com.qtechnetworks.ptplatform.View.Dialogs.CoachesDialog;
+import com.qtechnetworks.ptplatform.View.Fragment.ChallengesFragment;
 import com.qtechnetworks.ptplatform.View.Fragment.ChallengesSignleFragment;
 import com.qtechnetworks.ptplatform.View.Fragment.MainFragment;
 
@@ -54,16 +57,15 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
 
         holder.challengeName.setText(current.getTitle());
 
-        try{
-            Glide.with(context).load(current.getIcon()).placeholder(R.drawable.logo).into(holder.ChallengeImg);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+        Glide.with(context).load(current.getIcon()).placeholder(R.drawable.logo).into(holder.ChallengeImg);
 
         holder.challengeLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setFragment(new ChallengesSignleFragment(current.getId()));
+                if (PreferencesUtils.getUserType().equalsIgnoreCase("Coach"))
+                    setFragment(new ChallengesSignleFragment(current.getId(), String.valueOf(ChallengesFragment.userID)));
+                else if (PreferencesUtils.getUserType().equalsIgnoreCase("Trainee"))
+                    setFragment(new ChallengesSignleFragment(current.getId()));
             }
         });
 

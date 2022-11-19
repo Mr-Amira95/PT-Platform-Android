@@ -38,10 +38,8 @@ public class HistoryWorkoutFragment extends Fragment implements CallBack {
     TextView selectedDate, title;
     DatePickerDialog StartTime;
 
-    String flag;
+    public HistoryWorkoutFragment() {
 
-    public HistoryWorkoutFragment(String flag) {
-        this.flag = flag;
     }
 
     @Override
@@ -60,10 +58,11 @@ public class HistoryWorkoutFragment extends Fragment implements CallBack {
         initial(view);
         clicks();
 
-        if (flag.equalsIgnoreCase("Workout"))
-            getWorkoutHistory(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
-        else if (flag.equalsIgnoreCase("Exercises"))
-            getExercisesHistory(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+        if (PreferencesUtils.getUserType().equalsIgnoreCase("Trainee")) {
+            getWorkoutHistoryTrainee(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+        } else if (PreferencesUtils.getUserType().equalsIgnoreCase("Trainee")) {
+            getWorkoutHistoryCoach(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+        }
 
         // Inflate the layout for this fragment
         return view;
@@ -85,11 +84,6 @@ public class HistoryWorkoutFragment extends Fragment implements CallBack {
         workoutRecyclerview= view.findViewById(R.id.workout_recyclerview);
         selectedDate= view.findViewById(R.id.selected_date);
 
-        if (flag.equalsIgnoreCase("Workout"))
-            title.setText("Workouts History");
-        else if (flag.equalsIgnoreCase("Exercises"))
-            title.setText("Exercises History");
-
         GridLayoutManager layoutManagerhorizantalleader = new GridLayoutManager(getContext(), 2);
         layoutManagerhorizantalleader.setOrientation(LinearLayoutManager.VERTICAL);
         workoutRecyclerview.setLayoutManager(layoutManagerhorizantalleader);
@@ -99,15 +93,16 @@ public class HistoryWorkoutFragment extends Fragment implements CallBack {
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 selectedDate.setText(year + "-" +(monthOfYear+1) + "-" + dayOfMonth);
 
-                if (flag.equalsIgnoreCase("Workout"))
-                    getWorkoutHistory(year + "-" +(monthOfYear+1) + "-" + dayOfMonth);
-                else if (flag.equalsIgnoreCase("Exercises"))
-                    getExercisesHistory(year + "-" +(monthOfYear+1) + "-" + dayOfMonth);
+                if (PreferencesUtils.getUserType().equalsIgnoreCase("Trainee")) {
+                    getWorkoutHistoryTrainee(year + "-" +(monthOfYear+1) + "-" + dayOfMonth);
+                } else if (PreferencesUtils.getUserType().equalsIgnoreCase("Trainee")) {
+                    getWorkoutHistoryCoach(year + "-" +(monthOfYear+1) + "-" + dayOfMonth);
+                }
             }
         }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
     }
 
-    private void getWorkoutHistory(String date) {
+    private void getWorkoutHistoryTrainee(String date) {
 
         HashMap<String ,Object> params=new HashMap<>();
 
@@ -120,16 +115,17 @@ public class HistoryWorkoutFragment extends Fragment implements CallBack {
 
     }
 
-    private void getExercisesHistory(String date) {
+    private void getWorkoutHistoryCoach(String date) {
 
         HashMap<String ,Object> params=new HashMap<>();
 
         params.put("date",date);
         params.put("skip","0");
-        params.put("coach_id", PreferencesUtils.getCoach(getContext()).getId());
+        params.put("user_id", HistoryFragment.userID);
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);
-        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.Add_Log_URL, AppConstants.Add_Log_TAG, FavoriteandWorkout.class, params);
+        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.Add_Workout_URL, AppConstants.Add_Workout_TAG, FavoriteandWorkout.class, params);
+
     }
 
     @Override

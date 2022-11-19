@@ -71,6 +71,8 @@ public class ChoosingActivity extends AppCompatActivity {
 
         imageView_coach.setImageResource(R.drawable.checked);
         imageView_trainee.setImageResource(R.drawable.notcheck);
+
+        PreferencesUtils.setUserType("coach");
     }
 
 }

@@ -106,9 +106,9 @@ public class FoodDialog extends Dialog implements CallBack {
             food=(Food) result;
 
             if (food.getData().size() >0) {
-                int carb=food.getData().get(0).getCarb() * Integer.parseInt(weightnumber_edit.getText().toString());
-                int fat=food.getData().get(0).getFat() * Integer.parseInt(weightnumber_edit.getText().toString());
-                int protein=food.getData().get(0).getProtein() * Integer.parseInt(weightnumber_edit.getText().toString());
+                double carb = food.getData().get(0).getCarb() * Integer.parseInt(weightnumber_edit.getText().toString());
+                double fat = food.getData().get(0).getFat() * Integer.parseInt(weightnumber_edit.getText().toString());
+                double protein=food.getData().get(0).getProtein() * Integer.parseInt(weightnumber_edit.getText().toString());
                 int calories=food.getData().get(0).getCalorie() * Integer.parseInt(weightnumber_edit.getText().toString());
                 fat_text.setText(fat+"");
                 carb_text.setText(carb+"");

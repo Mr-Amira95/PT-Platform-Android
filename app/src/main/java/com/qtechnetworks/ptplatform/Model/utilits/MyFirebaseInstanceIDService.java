@@ -19,12 +19,11 @@ import org.json.JSONObject;
 
 import java.math.BigInteger;
 
-
 /**
  * FirebaseInstanceIdService Gets FCM instance ID token from Firebase Cloud Messaging Server
  */
 @SuppressWarnings("unused")
-public class MyFirebaseInstanceIDService extends  FirebaseMessagingService implements OSRemoteNotificationReceivedHandler, OneSignalApiResponseHandler {
+public class MyFirebaseInstanceIDService extends  FirebaseMessagingService implements OSRemoteNotificationReceivedHandler, OneSignalApiResponseHandler{
 
 
     //*********** Called whenever the Token is Generated or Refreshed ********//

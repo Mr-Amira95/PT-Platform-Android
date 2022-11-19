@@ -24,7 +24,7 @@ public class PrefKeys {
             userAge = "age",
             notificationEnabled = "enabled",
             valintro = "valintro",
-            language="language",
+            language="en",
             accounttype="accounttype",
             type = "true";
 

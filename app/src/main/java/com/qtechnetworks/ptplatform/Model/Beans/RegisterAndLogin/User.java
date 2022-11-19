@@ -40,7 +40,10 @@ public class User {
     private String role;
     @SerializedName("avatar")
     @Expose
-    private Object avatar;
+    private String avatar;
+    @SerializedName("is_send_notification")
+    @Expose
+    private boolean notification;
 
     public Integer getId() {
         return id;
@@ -122,12 +125,28 @@ public class User {
         this.status = status;
     }
 
-    public Object getAvatar() {
+    public String getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(Object avatar) {
+    public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public boolean getNotification() {
+        return notification;
+    }
+
+    public void setNotification(boolean notification) {
+        this.notification = notification;
     }
 
 }

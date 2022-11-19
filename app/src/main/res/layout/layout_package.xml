@@ -12,8 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:id="@+id/background_layout"
-        android:background="@drawable/background_package_gold">
+        android:id="@+id/background_layout">
 
         <TextView
             android:id="@+id/package_type"
@@ -24,7 +23,8 @@
             android:layout_marginTop="@dimen/_20sdp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            android:gravity="center"/>
 
         <TextView
             android:id="@+id/package_desc"
@@ -36,7 +36,8 @@
             android:layout_marginTop="@dimen/_5sdp"
             app:layout_constraintTop_toBottomOf="@id/package_type"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            android:gravity="center"/>
 
         <LinearLayout
             android:id="@+id/price_layout"
@@ -71,18 +72,16 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="#21000000"
-
             android:paddingHorizontal="@dimen/_20sdp"
             app:layout_constraintTop_toBottomOf="@id/price_layout"
             app:layout_constraintBottom_toTopOf="@id/buy_now"
-
             android:layout_marginVertical="@dimen/_15sdp"/>
 
         <Button
             android:id="@+id/buy_now"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="BUYNOW"
+            android:text="@string/buy_now"
             android:textColor="@color/black"
             android:background="@drawable/button_rounded_background"
             android:paddingHorizontal="@dimen/_40sdp"

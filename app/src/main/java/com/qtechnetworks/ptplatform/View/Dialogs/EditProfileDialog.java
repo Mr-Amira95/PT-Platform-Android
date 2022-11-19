@@ -59,7 +59,7 @@ public class EditProfileDialog  extends Dialog implements CallBack {
             @Override
             public void onClick(View view) {
 
-                if(validation(firstNameEt) && validation(lastNameEt) && validation(emailEt)) {
+                if(validation(firstNameEt) && validation(lastNameEt)) {
                     updateName();
                 } else {
                     Toast.makeText(mContext, "Please Check info", Toast.LENGTH_SHORT).show();
@@ -69,7 +69,7 @@ public class EditProfileDialog  extends Dialog implements CallBack {
 
     }
 
-    private void updateEmail(){
+    private void updateEmail() {
 
         HashMap<String ,Object> params=new HashMap<>();
 
@@ -131,7 +131,12 @@ public class EditProfileDialog  extends Dialog implements CallBack {
             switch (tag){
 
                 case AppConstants.UPDATE_NAME_TAG:
-                    updateEmail();
+//                    updateEmail();
+                    Toast.makeText(mContext, "Updated", Toast.LENGTH_SHORT).show();
+                    PreferencesUtils.setUser(updateUserResults.getData(),getContext());
+                    setFragment(new ProfileFragment());
+                    dismiss();
+
                     break;
 
                 case AppConstants.UPDATE_EMAIL_TAG:

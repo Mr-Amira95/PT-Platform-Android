@@ -13,14 +13,12 @@
         android:layout_height="@dimen/_60sdp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:src="@drawable/demoslider"
         android:scaleType="centerCrop"/>
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="1. Squats"
         android:textSize="@dimen/_10sdp"
         android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@id/video_view"
@@ -31,7 +29,6 @@
         android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="00:00:00"
         android:textSize="@dimen/_10sdp"
         android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@id/video_view"

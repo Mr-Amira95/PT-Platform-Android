@@ -8,6 +8,9 @@ public class Data {
     @SerializedName("user_target")
     @Expose
     private Integer userTarget;
+    @SerializedName("user")
+    @Expose
+    private User user;
     @SerializedName("food_target")
     @Expose
     private Integer foodTarget;
@@ -23,9 +26,6 @@ public class Data {
     @SerializedName("protein")
     @Expose
     private Integer protein;
-    @SerializedName("user")
-    @Expose
-    private User user;
     @SerializedName("food")
     @Expose
     private Food food;

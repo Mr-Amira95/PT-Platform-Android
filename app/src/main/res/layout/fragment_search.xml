@@ -55,7 +55,7 @@
         android:drawableEnd="@drawable/ic_search"
         android:hint="@string/search"
         android:paddingStart="@dimen/_20sdp"
-        android:paddingEnd="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_50sdp"
         android:textColor="@color/backapp"
         android:textColorHint="@color/textcolor"
         android:maxLines="1"

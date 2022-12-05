@@ -50,8 +50,13 @@ public class SupplementSingleFragment extends Fragment {
         title_text_pa=v.findViewById(R.id.title_text_pa);
         share_icon=v.findViewById(R.id.share_icon);
 
-        title_text_pa.setText(title);
-        description_text.setText(Html.fromHtml(descrip));
+        if (title != null){
+            title_text_pa.setText(title);
+        }
+
+        if (descrip != null){
+            description_text.setText(Html.fromHtml(descrip));
+        }
 
         try{
             Glide.with(getContext()).load(image).placeholder(R.drawable.logo).into(supplement_img);

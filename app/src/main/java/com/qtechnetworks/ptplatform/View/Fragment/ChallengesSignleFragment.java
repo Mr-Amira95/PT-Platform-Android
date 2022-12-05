@@ -49,7 +49,6 @@ public class ChallengesSignleFragment extends Fragment implements CallBack {
         this.challengeId = challengeId;
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -100,6 +99,7 @@ public class ChallengesSignleFragment extends Fragment implements CallBack {
 
         if(adapter.completedVideosIds.size()>0) {
             HashMap<String, Object> params = new HashMap<>();
+
             params.put("challenge_video_ids", adapter.completedVideosIds);
 
             MyApplication.getInstance().getHttpHelper().setCallback(this);
@@ -112,7 +112,9 @@ public class ChallengesSignleFragment extends Fragment implements CallBack {
     private void getChallengeVideos () {
 
         HashMap<String ,Object> params=new HashMap<>();
+
         params.put("challenge_id", challengeId);
+        params.put("coach_id", PreferencesUtils.getCoach(getContext()).getId());
         params.put("skip",0);
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);

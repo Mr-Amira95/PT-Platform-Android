@@ -91,10 +91,10 @@ public class FoodAddFragment extends Fragment implements CallBack {
                     double fat=FoodDialog.food.getData().get(selectedFoodIndex).getFat() * i;
                     double protein=FoodDialog.food.getData().get(selectedFoodIndex).getProtein() * i;
                     int calories=FoodDialog.food.getData().get(selectedFoodIndex).getCalorie() * i;
-                    fat_text.setText(String.valueOf(fat));
-                    carb_text.setText(String.valueOf(carb));
-                    protine_text.setText(String.valueOf(protein));
-                    calories_text.setText(String.valueOf(calories));
+                    fat_text.setText(UtilisMethods.doubleFormat(fat));
+                    carb_text.setText(UtilisMethods.doubleFormat(carb));
+                    protine_text.setText(UtilisMethods.doubleFormat(protein));
+                    calories_text.setText(UtilisMethods.doubleFormat(calories));
 
                 } else if (selectedFoodIndex == -1) {
                     Toast.makeText(getContext(), R.string.please_select_food, Toast.LENGTH_SHORT).show();
@@ -116,10 +116,10 @@ public class FoodAddFragment extends Fragment implements CallBack {
                     double fat = FoodDialog.food.getData().get(selectedFoodIndex).getFat() * i;
                     double protein = FoodDialog.food.getData().get(selectedFoodIndex).getProtein() * i;
                     int calories = FoodDialog.food.getData().get(selectedFoodIndex).getCalorie() * i;
-                    fat_text.setText(String.valueOf(fat));
-                    carb_text.setText(String.valueOf(carb));
-                    protine_text.setText(String.valueOf(protein));
-                    calories_text.setText(String.valueOf(calories));
+                    fat_text.setText(UtilisMethods.doubleFormat(fat));
+                    carb_text.setText(UtilisMethods.doubleFormat(carb));
+                    protine_text.setText(UtilisMethods.doubleFormat(protein));
+                    calories_text.setText(UtilisMethods.doubleFormat(calories));
                 } else {
                     Toast.makeText(getContext(), getString(R.string.please_select_food), Toast.LENGTH_SHORT).show();
                     foodDialog = new FoodDialog(getContext());

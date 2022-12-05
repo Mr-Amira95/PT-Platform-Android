@@ -46,7 +46,8 @@ public class VideoItemworkoutAdapter extends RecyclerView.Adapter<VideoItemworko
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Datum current= data.get(position);
 
-        holder.title.setText(current.getTitle().toString());
+        if (current.getTitle() != null)
+            holder.title.setText(current.getTitle().toString());
        // holder.time.setText();
 
 //        if (current.getIsFavourite()){
@@ -75,14 +76,25 @@ public class VideoItemworkoutAdapter extends RecyclerView.Adapter<VideoItemworko
 
                 exercisesSingleFragment.VideoID=current.getId().toString();
 
+                if (current.getIsFavourite())
+                    ExercisesSingleFragment.add_to_favourite.setText(R.string.remove_favourites);
+
+                if (current.getIsWorkout())
+                    ExercisesSingleFragment.add_to_workout.setText(R.string.remove_workouts);
+
+
                 try {
                     exercisesSingleFragment.video_view.setDefaultArtwork(exercisesSingleFragment.drawableFromUrl(current.getImage()));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
 
-                exercisesSingleFragment.desc.setText(Html.fromHtml(current.getDescription().toString()));
+                if (current.getDescription() != null)
+                    exercisesSingleFragment.desc.setText(Html.fromHtml(current.getDescription()));
+
                 exercisesSingleFragment.playinitial(current.getVideo());
+
+
             }
         });
 

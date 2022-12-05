@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import com.google.gson.JsonObject;
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
+import com.qtechnetworks.ptplatform.R;
+import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 
 import org.json.JSONObject;
 
@@ -40,7 +42,7 @@ public class HttpHelper {
     public void Post(Context context, final String url, final int tag, final Class clazz, final Map<String, Object> params) {
 
         dialog=new ProgressDialog(context);
-        dialog.setMessage("Loading ...");
+        dialog.setMessage(context.getResources().getString(R.string.loading));
         dialog.setCancelable(false);
         dialog.show();
 
@@ -121,7 +123,7 @@ public class HttpHelper {
     public void PostRaw(Context context,final String url, final int tag, final Class clazz, final Map<String, Object> params) {
 
         dialog=new ProgressDialog(context);
-        dialog.setMessage("Loading ...");
+        dialog.setMessage(context.getResources().getString(R.string.loading));
         dialog.setCancelable(false);
         dialog.show();
 
@@ -203,7 +205,7 @@ public class HttpHelper {
     public void get(Context context,String url, final int tag, final Class clazz, HashMap<String, Object> map) {
 
         dialog=new ProgressDialog(context);
-        dialog.setMessage("Loading ...");
+        dialog.setMessage(context.getResources().getString(R.string.loading));
         dialog.setCancelable(false);
         dialog.show();
 
@@ -274,7 +276,7 @@ public class HttpHelper {
     public void delete(Context context,String url, final int tag, final Class clazz) {
 
         dialog=new ProgressDialog(context);
-        dialog.setMessage("Loading ...");
+        dialog.setMessage(context.getResources().getString(R.string.loading));
         dialog.setCancelable(false);
         dialog.show();
 
@@ -355,7 +357,7 @@ public class HttpHelper {
     public void put(Context context,String url, final int tag, final Class clazz,HashMap<String, Object> map) {
 
         dialog=new ProgressDialog(context);
-        dialog.setMessage("Loading ...");
+        dialog.setMessage(context.getResources().getString(R.string.loading));
         dialog.setCancelable(false);
         dialog.show();
 
@@ -440,7 +442,7 @@ public class HttpHelper {
     public void PostFile(Context context, final String url, final int tag, final Class clazz, MultipartBody.Part file) {
 
         dialog=new ProgressDialog(context);
-        dialog.setMessage("Loading ...");
+        dialog.setMessage(context.getResources().getString(R.string.loading));
         dialog.setCancelable(false);
         dialog.show();
 
@@ -523,7 +525,7 @@ public class HttpHelper {
     public void postLogin(Context context, final String url, final int tag, final Class clazz, final JsonObject params) {
 
         dialog=new ProgressDialog(context);
-        dialog.setMessage("Loading ...");
+        dialog.setMessage(context.getResources().getString(R.string.loading));
         dialog.setCancelable(false);
         dialog.show();
 

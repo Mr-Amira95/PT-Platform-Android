@@ -68,14 +68,37 @@ public class VideoChatAdapter extends RecyclerView.Adapter<VideoChatAdapter.View
         holder.joinSessionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_VIEW,
-                        Uri.parse(current.getCoachTimeReservation().getZoom().getData().getStartUrl()));
-                try{
-                    context.startActivity(intent);}
-                catch(Exception e) {
-                    Toast.makeText(view.getContext(), "Can't start Video chat", Toast.LENGTH_SHORT).show();
-                    e.printStackTrace();
-                }
+                if (current.getCoachTimeReservation() != null){
+                    if (current.getCoachTimeReservation().getStatus().equalsIgnoreCase("accept")){
+                        Intent intent = new Intent(Intent.ACTION_VIEW,
+                                Uri.parse(current.getCoachTimeReservation().getZoom().getData().getStartUrl()));
+                        try{
+                            context.startActivity(intent);}
+                        catch(Exception e) {
+                            Toast.makeText(view.getContext(), "Can't start Video chat", Toast.LENGTH_SHORT).show();
+                            e.printStackTrace();
+                        }
+                    } else {
+                        Toast.makeText(view.getContext(), "wait until coach approval", Toast.LENGTH_SHORT).show();
+                    }
+                } else if (current.getCoachReservation() != null){
+                    if (current.getCoachReservation().getStatus().equalsIgnoreCase("accept")) {
+                        Intent intent = new Intent(Intent.ACTION_VIEW,
+                                Uri.parse(current.getCoachReservation().getZoom().getData().getStartUrl()));
+                        try{
+                            context.startActivity(intent);}
+                        catch(Exception e) {
+                            Toast.makeText(view.getContext(), "Can't start Video chat", Toast.LENGTH_SHORT).show();
+                            e.printStackTrace();
+                        }
+                    } else {
+                        Toast.makeText(view.getContext(), "wait until coach approval", Toast.LENGTH_SHORT).show();
+                    }
+                        Intent intent = new Intent(Intent.ACTION_VIEW,
+                            Uri.parse(current.getCoachReservation().getZoom().getData().getStartUrl()));
+                } else
+                    Toast.makeText(view.getContext(), "Wait for coach accept", Toast.LENGTH_SHORT).show();
+
             }
         });
 

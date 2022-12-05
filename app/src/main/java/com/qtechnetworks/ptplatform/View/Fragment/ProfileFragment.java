@@ -66,6 +66,8 @@ public class ProfileFragment extends Fragment implements CallBack {
     String filePath = "";
     File file;
 
+    int tag = 0;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -147,6 +149,8 @@ public class ProfileFragment extends Fragment implements CallBack {
 
     private void logoutAPI() {
 
+        tag = AppConstants.LOGOUT_TAG;
+
         HashMap<String ,Object> params = new HashMap<>();
 
         params.put("device_player_id", PreferencesUtils.getPlayerId());
@@ -180,6 +184,9 @@ public class ProfileFragment extends Fragment implements CallBack {
         kyc=v.findViewById(R.id.kyc);
         settings=v.findViewById(R.id.settings);
         logout=v.findViewById(R.id.logout);
+
+        if (PreferencesUtils.getLanguage().equalsIgnoreCase("ar"))
+            assigned_coaches.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_left_icon, 0, 0, 0);
 
         if (PreferencesUtils.getUser(getContext()).getAvatar() != null)
             Glide.with(getContext()).load(PreferencesUtils.getUser(getContext()).getAvatar()).placeholder(R.drawable.logo).into(profile_img);
@@ -221,11 +228,8 @@ public class ProfileFragment extends Fragment implements CallBack {
                 case AppConstants.LOGOUT_TAG:
                     General general = (General) result;
 
-                    String lang = PreferencesUtils.getLanguage();
-
                     Toast.makeText(getContext(), general.getData(), Toast.LENGTH_SHORT).show();
                     PreferencesUtils.clearDefaults(getContext());
-                    PreferencesUtils.setLanguage(lang);
                     startActivity(new Intent(getContext(), SplashActivity.class));
                     getActivity().finish();
                     break;
@@ -245,6 +249,13 @@ public class ProfileFragment extends Fragment implements CallBack {
 
     @Override
     public void onError(Throwable e) {
+
+        if (tag == AppConstants.LOGOUT_TAG){
+            PreferencesUtils.clearDefaults(getContext());
+            startActivity(new Intent(getContext(), SplashActivity.class));
+            getActivity().finish();
+        }
+
 
     }
 

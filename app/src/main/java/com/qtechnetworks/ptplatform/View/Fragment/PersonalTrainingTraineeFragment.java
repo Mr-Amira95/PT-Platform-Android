@@ -214,7 +214,7 @@ public class PersonalTrainingTraineeFragment extends Fragment implements CallBac
                     imagesRecyclerview.setVisibility(View.GONE);
                 }
 
-                if (personalized.getData().getPdf().size() > 0){
+                if (personalized.getData().getPdf().size() > 0) {
                     notesAdapter=new PersonalizedItemAdapter(getContext(),personalized.getData(),PersonalizedItemAdapter.NOTE_PERSONAL_TAG);
                     notesRecyclerview.setAdapter(notesAdapter);
                 } else {

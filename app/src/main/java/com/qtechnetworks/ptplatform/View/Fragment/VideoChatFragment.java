@@ -91,8 +91,8 @@ public class VideoChatFragment extends Fragment implements CallBack {
                     } else {
                         emptyTxt.setVisibility(View.GONE);
                     }
-                }else{
-                    Toast.makeText(getContext(), "No Reservations", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getContext(), R.string.no_reservation, Toast.LENGTH_SHORT).show();
                 }
                 break;
 

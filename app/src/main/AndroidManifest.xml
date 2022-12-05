@@ -30,8 +30,9 @@
     </queries>
 
     <application
+        android:allowBackup="false"
+        tools:replace="android:allowBackup"
         android:name=".Model.basic.MyApplication"
-        android:allowBackup="true"
         android:duplicateParentState="true"
         android:hardwareAccelerated="true"
         android:icon="@drawable/logo"
@@ -42,7 +43,7 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
-        android:usesCleartextTraffic="true" >
+        android:usesCleartextTraffic="true">
 
         <activity
             android:name=".View.Activity.MediaViewActivity"
@@ -97,9 +98,19 @@
 
         </activity>
 
+        <activity
+            android:name=".View.Activity.ShopTestActivity"
+            android:exported="false"
+            android:screenOrientation="portrait">
+        </activity>
+
         <meta-data
             android:name="com.onesignal.NotificationServiceExtension"
-            android:value=".Model.utilits.MyFirebaseInstanceIDService" />
+            android:value="com.qtechnetworks.ptplatform.Model.utilits.NotificationServiceExtension" />
+
+<!--        <meta-->
+<!--            android:name="google-signin-client_id"-->
+<!--            android:value="906920280148-ld4u6nrcio2u3n85ib7fgmshp50bd7hq.apps.googleusercontent.com"/>-->
 
         <receiver
             android:name=".Model.utilits.MyFirebaseInstanceIDService"

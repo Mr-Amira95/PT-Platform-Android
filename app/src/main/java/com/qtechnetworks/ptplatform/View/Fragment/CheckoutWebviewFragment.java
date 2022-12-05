@@ -83,7 +83,6 @@ public class CheckoutWebviewFragment extends Fragment {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
 
-
                 if (url.contains("payment/success")) {
                     setFragment(new SuccessFragment("Checkout"));
                 }

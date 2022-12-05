@@ -80,7 +80,7 @@ public class PreferencesUtils {
     }
 
     public static String getUserToken() {
-        return PreferencesUtils.getString(PrefKeys.userToken, "-1");
+        return PreferencesUtils.getString(PrefKeys.token, "-1");
 
     }
 
@@ -93,7 +93,7 @@ public class PreferencesUtils {
     }
 
     public static void setUserToken(String token) {
-        PreferencesUtils.set(PrefKeys.userToken, token);
+        PreferencesUtils.set(PrefKeys.token, token);
     }
 
     public static void setUsertype(String accounttype) {

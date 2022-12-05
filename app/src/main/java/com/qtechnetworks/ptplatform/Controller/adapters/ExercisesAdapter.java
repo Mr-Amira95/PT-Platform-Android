@@ -17,6 +17,7 @@ import com.qtechnetworks.ptplatform.Model.Beans.Exercises.ExercisesResults;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.Model.utilits.EndlessRecyclerViewScrollListener;
+import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 
@@ -59,13 +60,17 @@ public class ExercisesAdapter extends RecyclerView.Adapter<ExercisesAdapter.View
         adapter = new ChestAndBicepsAdapter (context, current.getExercises());
         holder.exercise_recyclerview.setAdapter(adapter);
 
-        holder.title_text.setText(current.getTitle().toString());
+        if (current.getTitle() != null)
+            holder.title_text.setText(current.getTitle().toString());
 
         holder.exercise_recyclerview.addOnScrollListener(new EndlessRecyclerViewScrollListener(linearLayoutManager3) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-
-                getCategoryExercises(String.valueOf(current.getId()),totalItemsCount);
+                if (PreferencesUtils.getUserType().equalsIgnoreCase("coach")){
+                    getCategoryExercisesCoach(String.valueOf(current.getId()),totalItemsCount);
+                } else {
+                    getCategoryExercises(String.valueOf(current.getId()),totalItemsCount);
+                }
             }
         });
 
@@ -79,6 +84,19 @@ public class ExercisesAdapter extends RecyclerView.Adapter<ExercisesAdapter.View
     private void getCategoryExercises(String categoryID, int skip) {
 
         HashMap<String ,Object> params = new HashMap<>();
+
+        params.put("coach_id", PreferencesUtils.getCoach(context).getId());
+        params.put("category_id", categoryID);
+        params.put("skip", skip);
+
+        MyApplication.getInstance().getBackgroundHttpHelper().setCallback(this);
+        MyApplication.getInstance().getBackgroundHttpHelper().get(context, AppConstants.exercise_URL, AppConstants.exercise_TAG, ExercisesResults.class, params);
+    }
+
+    private void getCategoryExercisesCoach(String categoryID, int skip) {
+
+        HashMap<String ,Object> params = new HashMap<>();
+
         params.put("category_id", categoryID);
         params.put("skip", skip);
 

@@ -71,7 +71,7 @@ public class SuccessFragment extends Fragment {
         addToCalenderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addEvent("Appointment with Coach "+ PreferencesUtils.getCoach(getContext()).getFirstName(),"on Zoom",CalendarFragment.selectedDate+" "+CalendarFragment.SELECTED_TIME_STRING,"Zoom URL");
+                addEvent("Appointment with Coach "+ PreferencesUtils.getCoach(getContext()).getLastName(),"on Zoom",CalendarFragment.selectedDate+" "+CalendarFragment.SELECTED_TIME_STRING,"Zoom URL");
             }
         });
 
@@ -96,7 +96,7 @@ public class SuccessFragment extends Fragment {
     }
 
     public void addEvent(String title, String location, String begin, String description) {
-        Log.d("AddEvent",title+location+begin+description);
+        Log.d("AddEvent",title + location + begin+description);
         ContentResolver cr = getActivity().getContentResolver();
         ContentValues values = new ContentValues();
         String dateString = begin;

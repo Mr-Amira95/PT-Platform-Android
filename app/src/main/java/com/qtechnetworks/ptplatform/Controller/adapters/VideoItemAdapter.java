@@ -54,7 +54,8 @@ public class VideoItemAdapter extends RecyclerView.Adapter<VideoItemAdapter.View
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Datum current= data.get(position);
 
-        holder.title.setText(current.getTitle().toString());
+        if (current.getTitle() != null)
+            holder.title.setText(current.getTitle().toString());
         try{
             Glide.with(context).load(current.getImage()).placeholder(R.drawable.logo).into(holder.video_view);
         }catch (Exception e){
@@ -92,13 +93,14 @@ public class VideoItemAdapter extends RecyclerView.Adapter<VideoItemAdapter.View
                 }
 
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                    exercisesSingleFragment.desc.setText(Html.fromHtml(current.getDescription().toString(),Html.FROM_HTML_MODE_LEGACY));
+                    if (current.getDescription() != null)
+                        exercisesSingleFragment.desc.setText(Html.fromHtml(current.getDescription().toString(),Html.FROM_HTML_MODE_LEGACY));
                 } else {
-                    exercisesSingleFragment.desc.setText(Html.fromHtml(current.getDescription().toString()));
+                    if (current.getDescription() != null)
+                        exercisesSingleFragment.desc.setText(Html.fromHtml(current.getDescription().toString()));
                 }
 
                 exercisesSingleFragment.playinitial(current.getVideo());
-
             }
         });
 

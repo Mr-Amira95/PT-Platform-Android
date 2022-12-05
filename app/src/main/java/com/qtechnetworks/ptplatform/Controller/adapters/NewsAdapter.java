@@ -68,20 +68,20 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>  {
         holder.newsLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setFragment(new NewsSingleFragment(),current.getImage().toString(),current.getTitle().toString(),current.getDescription().toString());
+                setFragment(new NewsSingleFragment(String.valueOf(current.getId())));
             }
         });
 
     }
 
-    private void setFragment(Fragment fragment, String image, String title, String description) {
+    private void setFragment(Fragment fragment) {
 
         Bundle args = new Bundle();
 
-        args.putString("image",image);
-        args.putString("title",title);
-        args.putString("description",description);
-
+//        args.putString("image",image);
+//        args.putString("title",title);
+//        args.putString("description",description);
+//
         fragment.setArguments(args);
 
         ((MainActivity) context).getSupportFragmentManager().beginTransaction().replace(R.id.home_frame, fragment, "OptionsFragment").addToBackStack(null).commit();

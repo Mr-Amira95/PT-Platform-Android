@@ -10,7 +10,7 @@ public class PrefKeys {
             traineeId = "traineeId",
             playerId="playerId",
             countryID = "countryID",
-            userToken = "token",
+            token = "token",
             location = "Location",
             title = "title",
             strFav = "fav",

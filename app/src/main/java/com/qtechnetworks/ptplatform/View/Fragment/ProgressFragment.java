@@ -1,6 +1,7 @@
 package com.qtechnetworks.ptplatform.View.Fragment;
 
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -21,10 +22,14 @@ import com.qtechnetworks.ptplatform.Model.Beans.Progress.Progress;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
+import com.qtechnetworks.ptplatform.Model.utilits.UtilisMethods;
 import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 import com.qtechnetworks.ptplatform.View.Dialogs.AddMeasurementsDialog;
 import com.qtechnetworks.ptplatform.View.Dialogs.AddProgressDialog;
+
+import org.eazegraph.lib.charts.PieChart;
+import org.eazegraph.lib.models.PieModel;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -49,6 +54,8 @@ public class ProgressFragment extends Fragment  implements CallBack {
     private AddMeasurementsDialog maesurementsDialog;
 
     Integer userID;
+
+    PieChart fatChart, muscleChart, weightChart, waterChart;
 
     public ProgressFragment(Integer userID) {
         this.userID = userID;
@@ -165,6 +172,12 @@ public class ProgressFragment extends Fragment  implements CallBack {
     }
 
     private void initials(View view) {
+
+        fatChart = view.findViewById(R.id.fat_chart);
+        muscleChart = view.findViewById(R.id.muscle_chart);
+        weightChart = view.findViewById(R.id.weight_chart);
+        waterChart = view.findViewById(R.id.water_chart);
+
         weightTitle = view.findViewById(R.id.weight_title);
         weightValue = view.findViewById(R.id.weight_value);
         muscleTitle = view.findViewById(R.id.muscle_title);
@@ -284,70 +297,137 @@ public class ProgressFragment extends Fragment  implements CallBack {
 
                     Progress myProgress=(Progress) result;
 
+                    fatChart.clearChart();
+
                     for (Datum myp :myProgress.getData()) {
                         if(myp.getFat()!=null){
-                            fatValue.setText(myp.getFat().toString()+"%");
-                            Percentage percentage=myp.getPercentage();
-                            fatPercentage.setText(percentage.getValue().toString()+"%");
-                            if(percentage.getType().equals("decrease")){
+
+                            fatChart.setInnerValueString(UtilisMethods.doubleFormat((myp.getPercentage().getValue())));
+                            if (myp.getPercentage().getValue() < 100){
+                                fatChart.addPieSlice(new PieModel( myp.getPercentage().getValue(), Color.parseColor("#FFFF00"))) ;
+                                fatChart.addPieSlice(new PieModel( 100 - myp.getPercentage().getValue(), Color.parseColor("#FFFFFF"))) ;
+                            } else {
+                                fatChart.addPieSlice(new PieModel( 1, Color.parseColor("#FFFF00"))) ;
+                            }
+
+//                            fatValue.setText(myp.getFat().toString()+"%");
+//                            Percentage percentage=myp.getPercentage();
+                            fatValue.setText(UtilisMethods.doubleFormat((myp.getFat())));
+//
+                            if(myp.getPercentage().getType().equals("decrease")){
                                 fatDecrease.setVisibility(View.VISIBLE);
                                 fatIncrease.setVisibility(View.GONE);
                             }else{
                                 fatDecrease.setVisibility(View.GONE);
                                 fatIncrease.setVisibility(View.VISIBLE);
                             }
+
+                            fatChart.startAnimation();
                         }
 
                         if(myp.getMuscle()!=null){
-                            muscleValue.setText(myp.getMuscle().toString()+"%");
-                            Percentage percentage=myp.getPercentage();
-                            musclePercentae.setText(percentage.getValue().toString()+"%");
-                            if(percentage.getType().equals("decrease")){
+
+                            muscleChart.setInnerValueString(UtilisMethods.doubleFormat((myp.getPercentage().getValue())));
+                            if (myp.getPercentage().getValue() < 100){
+                                muscleChart.addPieSlice(new PieModel( myp.getPercentage().getValue(), Color.parseColor("#FF0000"))) ;
+                                muscleChart.addPieSlice(new PieModel( 100 - myp.getPercentage().getValue(), Color.parseColor("#FFFFFF"))) ;
+                            } else {
+                                muscleChart.addPieSlice(new PieModel( 1, Color.parseColor("#FF0000"))) ;
+                            }
+
+//                            muscleValue.setText(myp.getMuscle().toString()+"%");
+//                            Percentage percentage=myp.getPercentage();
+                            muscleValue.setText(UtilisMethods.doubleFormat((myp.getMuscle())));
+
+
+                            if(myp.getPercentage().getType().equals("decrease")){
                                 muscleDecrease.setVisibility(View.VISIBLE);
                                 muscleIncrease.setVisibility(View.GONE);
                             }else{
                                 muscleDecrease.setVisibility(View.GONE);
                                 muscleIncrease.setVisibility(View.VISIBLE);
                             }
-                        }
 
+                            muscleChart.startAnimation();
+
+                        }
+//
                         if(myp.getWeight()!=null){
-                            weightValue.setText(myp.getWeight().toString()+"kg");
-                            Percentage percentage=myp.getPercentage();
-                            weightPercentage.setText(percentage.getValue().toString()+"%");
-                            if(percentage.getType().equals("decrease")){
+
+                            weightChart.setInnerValueString(UtilisMethods.doubleFormat((myp.getPercentage().getValue())));
+                            if (myp.getPercentage().getValue() < 100){
+                                weightChart.addPieSlice(new PieModel( myp.getPercentage().getValue(), Color.parseColor("#00FF00"))) ;
+                                weightChart.addPieSlice(new PieModel( 100 - myp.getPercentage().getValue(), Color.parseColor("#FFFFFF"))) ;
+                            } else {
+                                weightChart.addPieSlice(new PieModel( 1, Color.parseColor("#00FF00"))) ;
+                            }
+
+//                            muscleValue.setText(myp.getMuscle().toString()+"%");
+//                            Percentage percentage=myp.getPercentage();
+                            weightValue.setText(UtilisMethods.doubleFormat((myp.getWeight())));
+
+                            if(myp.getPercentage().getType().equals("decrease")){
                                 weightDecrease.setVisibility(View.VISIBLE);
                                 weightIncrease.setVisibility(View.GONE);
                             }else{
                                 weightDecrease.setVisibility(View.GONE);
                                 weightIncrease.setVisibility(View.VISIBLE);
                             }
-                        }
 
+                            weightChart.startAnimation();
+
+//                            weightValue.setText(myp.getWeight().toString()+"kg");
+//                            Percentage percentage=myp.getPercentage();
+//                            weightPercentage.setText(percentage.getValue().toString()+"%");
+//                            if(percentage.getType().equals("decrease")){
+//                                weightDecrease.setVisibility(View.VISIBLE);
+//                                weightIncrease.setVisibility(View.GONE);
+//                            }else{
+//                                weightDecrease.setVisibility(View.GONE);
+//                                weightIncrease.setVisibility(View.VISIBLE);
+//                            }
+                        }
+//
                         if(myp.getWater()!=null){
-                            waterValue.setText(myp.getWater().toString()+"%");
-                            Percentage percentage=myp.getPercentage();
-                            waterPercentage.setText(percentage.getValue().toString()+"%");
-                            if(percentage.getType().equals("decrease")){
+
+                            waterChart.setInnerValueString(UtilisMethods.doubleFormat((myp.getPercentage().getValue())));
+                            if (myp.getPercentage().getValue() < 100){
+                                waterChart.addPieSlice(new PieModel( myp.getPercentage().getValue(), Color.parseColor("#0000FF"))) ;
+                                waterChart.addPieSlice(new PieModel( 100 - myp.getPercentage().getValue(), Color.parseColor("#FFFFFF"))) ;
+                            } else {
+                                waterChart.addPieSlice(new PieModel( 1, Color.parseColor("#0000FF"))) ;
+                            }
+
+                            waterValue.setText(UtilisMethods.doubleFormat((myp.getWater())));
+
+                            if(myp.getPercentage().getType().equals("decrease")){
                                 waterDecrease.setVisibility(View.VISIBLE);
                                 waterIncrease.setVisibility(View.GONE);
                             }else{
                                 waterDecrease.setVisibility(View.GONE);
                                 waterIncrease.setVisibility(View.VISIBLE);
                             }
-                        }
 
+                            waterChart.startAnimation();
+
+//                            waterValue.setText(myp.getWater().toString()+"%");
+//                            Percentage percentage=myp.getPercentage();
+//                            waterPercentage.setText(percentage.getValue().toString()+"%");
+//                            if(percentage.getType().equals("decrease")){
+//                                waterDecrease.setVisibility(View.VISIBLE);
+//                                waterIncrease.setVisibility(View.GONE);
+//                            }else{
+//                                waterDecrease.setVisibility(View.GONE);
+//                                waterIncrease.setVisibility(View.VISIBLE);
+//                            }
+                        }
+//
                         if(myp.getActive_calories()!=null){
-                            activeCaloriesValue.setText(myp.getActive_calories().toString()+" " + getString(R.string.calories_1));
-                            Percentage percentage=myp.getPercentage();
-                            musclePercentae.setText(percentage.getValue().toString()+"%");
-
+                            activeCaloriesValue.setText(UtilisMethods.doubleFormat(myp.getActive_calories()) +" " + getString(R.string.calories_1));
                         }
-
+//
                         if(myp.getSteps()!=null){
-                            stepsValue.setText(myp.getSteps().toString()+" Steps");
-                            Percentage percentage=myp.getPercentage();
-                            musclePercentae.setText(percentage.getValue().toString()+"%");
+                            stepsValue.setText(UtilisMethods.doubleFormat(myp.getSteps())+" Steps");
                         }
                     }
 
@@ -361,54 +441,54 @@ public class ProgressFragment extends Fragment  implements CallBack {
                         if (beforeMeasurement!= null) {
 
                             //TODO Edit Names Like Nick
-                            beforeNick.append(beforeMeasurement.getNeck().toString());
-                            beforeChest.append(beforeMeasurement.getChest().toString());
-                            beforeLeftArm.append(beforeMeasurement.getLeftArm().toString());
-                            beforeRightArm.append(beforeMeasurement.getRightArm().toString());
-                            beforeWaist.append(beforeMeasurement.getWaist().toString());
-                            beforeHips.append(beforeMeasurement.getHips().toString());
-                            beforeLeftThigh.append(beforeMeasurement.getLeftThigh().toString());
-                            beforeLeftCalf.append(beforeMeasurement.getLiftCalf().toString());
-                            beforeRightCalf.append(beforeMeasurement.getRightCalf().toString());
+                            beforeNick.append(UtilisMethods.doubleFormat(beforeMeasurement.getNeck()));
+                            beforeChest.append(UtilisMethods.doubleFormat(beforeMeasurement.getChest()));
+                            beforeLeftArm.append(UtilisMethods.doubleFormat(beforeMeasurement.getLeftArm()));
+                            beforeRightArm.append(UtilisMethods.doubleFormat(beforeMeasurement.getRightArm()));
+                            beforeWaist.append(UtilisMethods.doubleFormat(beforeMeasurement.getWaist()));
+                            beforeHips.append(UtilisMethods.doubleFormat(beforeMeasurement.getHips()));
+                            beforeLeftThigh.append(UtilisMethods.doubleFormat(beforeMeasurement.getLeftThigh()));
+                            beforeLeftCalf.append(UtilisMethods.doubleFormat(beforeMeasurement.getLiftCalf()));
+                            beforeRightCalf.append(UtilisMethods.doubleFormat(beforeMeasurement.getRightCalf()));
                             beforeDate.append(changeDateFormat(beforeMeasurement.getDate()));
-                            beforeBelly.append(String.valueOf(beforeMeasurement.getBelly()));
-                            beforeUpperBelly.append(String.valueOf(beforeMeasurement.getUpper_belly()));
-                            beforelowerBelly.append(String.valueOf(beforeMeasurement.getLower_belly()));
+                            beforeBelly.append(UtilisMethods.doubleFormat(beforeMeasurement.getBelly()));
+                            beforeUpperBelly.append(UtilisMethods.doubleFormat(beforeMeasurement.getUpper_belly()));
+                            beforelowerBelly.append(UtilisMethods.doubleFormat(beforeMeasurement.getLower_belly()));
 
                         }
                         if (afterMeasurement!= null) {
-                            afterNick.append(afterMeasurement.getNeck().toString());
-                            afterChest.append(afterMeasurement.getChest().toString());
-                            afterLeftArm.append(afterMeasurement.getLeftArm().toString());
-                            afterRightArm.append(afterMeasurement.getRightArm().toString());
-                            afterWaist.append(afterMeasurement.getWaist().toString());
-                            afterHips.append(afterMeasurement.getHips().toString());
-                            afterLeftThigh.append(afterMeasurement.getLeftThigh().toString());
-                            afterLeftCalf.append(afterMeasurement.getLiftCalf().toString());
-                            afterRightCalf.append(afterMeasurement.getRightCalf().toString());
+                            afterNick.append(UtilisMethods.doubleFormat(afterMeasurement.getNeck()));
+                            afterChest.append(UtilisMethods.doubleFormat(afterMeasurement.getChest()));
+                            afterLeftArm.append(UtilisMethods.doubleFormat(afterMeasurement.getLeftArm()));
+                            afterRightArm.append(UtilisMethods.doubleFormat(afterMeasurement.getRightArm()));
+                            afterWaist.append(UtilisMethods.doubleFormat(afterMeasurement.getWaist()));
+                            afterHips.append(UtilisMethods.doubleFormat(afterMeasurement.getHips()));
+                            afterLeftThigh.append(UtilisMethods.doubleFormat(afterMeasurement.getLeftThigh()));
+                            afterLeftCalf.append(UtilisMethods.doubleFormat(afterMeasurement.getLiftCalf()));
+                            afterRightCalf.append(UtilisMethods.doubleFormat(afterMeasurement.getRightCalf()));
                             afterDate.append(changeDateFormat(afterMeasurement.getDate()));
-                            afterBelly.append(String.valueOf(afterMeasurement.getBelly()));
-                            afterUpperBelly.append(String.valueOf(afterMeasurement.getUpper_belly()));
-                            afterlowerBelly.append(String.valueOf(afterMeasurement.getLower_belly()));
+                            afterBelly.append(UtilisMethods.doubleFormat(afterMeasurement.getBelly()));
+                            afterUpperBelly.append(UtilisMethods.doubleFormat(afterMeasurement.getUpper_belly()));
+                            afterlowerBelly.append(UtilisMethods.doubleFormat(afterMeasurement.getLower_belly()));
                         }
                     }
 
                     if(bodyMeasurement.getData().size()==1) {
                         com.qtechnetworks.ptplatform.Model.Beans.BodyMeasurement.Datum beforeMeasurement=bodyMeasurement.getData().get(0);
                         if (beforeMeasurement!= null) {
-                            beforeNick.append(beforeMeasurement.getNeck().toString());
-                            beforeChest.append(beforeMeasurement.getChest().toString());
-                            beforeLeftArm.append(beforeMeasurement.getLeftArm().toString());
-                            beforeRightArm.append(beforeMeasurement.getRightArm().toString());
-                            beforeWaist.append(beforeMeasurement.getWaist().toString());
-                            beforeHips.append(beforeMeasurement.getHips().toString());
-                            beforeLeftThigh.append(beforeMeasurement.getLeftThigh().toString());
-                            beforeLeftCalf.append(beforeMeasurement.getLiftCalf().toString());
-                            beforeRightCalf.append(beforeMeasurement.getRightCalf().toString());
+                            beforeNick.append(UtilisMethods.doubleFormat(beforeMeasurement.getNeck()));
+                            beforeChest.append(UtilisMethods.doubleFormat(beforeMeasurement.getChest()));
+                            beforeLeftArm.append(UtilisMethods.doubleFormat(beforeMeasurement.getLeftArm()));
+                            beforeRightArm.append(UtilisMethods.doubleFormat(beforeMeasurement.getRightArm()));
+                            beforeWaist.append(UtilisMethods.doubleFormat(beforeMeasurement.getWaist()));
+                            beforeHips.append(UtilisMethods.doubleFormat(beforeMeasurement.getHips()));
+                            beforeLeftThigh.append(UtilisMethods.doubleFormat(beforeMeasurement.getLeftThigh()));
+                            beforeLeftCalf.append(UtilisMethods.doubleFormat(beforeMeasurement.getLiftCalf()));
+                            beforeRightCalf.append(UtilisMethods.doubleFormat(beforeMeasurement.getRightCalf()));
                             beforeDate.append(changeDateFormat(beforeMeasurement.getDate()));
-                            beforeBelly.append(String.valueOf(beforeMeasurement.getBelly()));
-                            beforeUpperBelly.append(String.valueOf(beforeMeasurement.getUpper_belly()));
-                            beforelowerBelly.append(String.valueOf(beforeMeasurement.getLower_belly()));
+                            beforeBelly.append(UtilisMethods.doubleFormat(beforeMeasurement.getBelly()));
+                            beforeUpperBelly.append(UtilisMethods.doubleFormat(beforeMeasurement.getUpper_belly()));
+                            beforelowerBelly.append(UtilisMethods.doubleFormat(beforeMeasurement.getLower_belly()));
                         }
                     }
 

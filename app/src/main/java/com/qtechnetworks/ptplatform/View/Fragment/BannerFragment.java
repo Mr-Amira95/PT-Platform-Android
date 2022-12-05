@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.qtechnetworks.ptplatform.Controller.adapters.SliderAdapter;
+import com.qtechnetworks.ptplatform.Controller.adapters.SliderAdapterExample;
 import com.qtechnetworks.ptplatform.Controller.adapters.SliderInnerAdapter;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.Banner.Banner;
@@ -17,6 +18,9 @@ import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
+import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
+import com.smarteist.autoimageslider.SliderAnimations;
+import com.smarteist.autoimageslider.SliderView;
 
 import java.util.HashMap;
 import java.util.Timer;
@@ -27,12 +31,13 @@ import me.relex.circleindicator.CircleIndicator;
 
 public class BannerFragment extends Fragment implements CallBack {
 
-    private ViewPager sliderViewPager;
-    private CircleIndicator sliderCircleIndicator;
-    private SliderInnerAdapter sliderAdapter;
+//    private ViewPager sliderViewPager;
+//    private CircleIndicator sliderCircleIndicator;
+//    private SliderInnerAdapter sliderAdapter;
     private Banner banner;
-    private Timer timer;
-    private int page = 0;
+    SliderView sliderView;
+//    private Timer timer;
+//    private int page = 0;
 
     String flag;
 
@@ -67,8 +72,13 @@ public class BannerFragment extends Fragment implements CallBack {
     }
 
     private void initials(View view) {
-        sliderViewPager=view.findViewById(R.id.slider_viewPager);
-        sliderCircleIndicator=view.findViewById(R.id.slider_indicator_unselected);
+//        sliderViewPager=view.findViewById(R.id.slider_viewPager);
+//        sliderCircleIndicator=view.findViewById(R.id.slider_indicator_unselected);
+        sliderView = view.findViewById(R.id.imageSlider);
+        sliderView.setIndicatorAnimation(IndicatorAnimationType.WORM);
+        sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
+        sliderView.startAutoCycle();
+
     }
 
     private void getHomeTraineeBanner() {
@@ -102,10 +112,10 @@ public class BannerFragment extends Fragment implements CallBack {
     }
 
 
-    public void pageSwitcher() {
-        timer = new Timer();
-        timer.scheduleAtFixedRate(new BannerFragment.RemindTask(), 0, 5000); // delay
-    }
+//    public void pageSwitcher() {
+//        timer = new Timer();
+//        timer.scheduleAtFixedRate(new BannerFragment.RemindTask(), 0, 5000); // delay
+//    }
 
     @Override
     public void onSubscribe (Disposable d) {
@@ -116,11 +126,13 @@ public class BannerFragment extends Fragment implements CallBack {
     public void onNext(int tag, boolean isSuccess, Object result) {
 
         banner = (Banner) result;
+        sliderView.setSliderAdapter(new SliderAdapterExample(getContext(), banner.getData(), "inner"));
 
-        sliderAdapter = new SliderInnerAdapter(banner.getData(), getActivity());
-        sliderViewPager.setAdapter(sliderAdapter);
-        sliderCircleIndicator.setViewPager(sliderViewPager);
-        pageSwitcher();
+
+//        sliderAdapter = new SliderInnerAdapter(banner.getData(), getActivity());
+//        sliderViewPager.setAdapter(sliderAdapter);
+//        sliderCircleIndicator.setViewPager(sliderViewPager);
+//        pageSwitcher();
 
     }
 
@@ -134,26 +146,26 @@ public class BannerFragment extends Fragment implements CallBack {
 
     }
 
-    class RemindTask extends TimerTask {
-
-        @Override
-        public void run() {
-
-            if (getActivity() != null){
-
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (page > banner.getData().size()-1) {
-                            page = 0;
-                            sliderViewPager.setCurrentItem(page);
-                        } else {
-                            sliderViewPager.setCurrentItem(page++);
-                        }
-                    }
-                });
-            }
-        }
-    }
+//    class RemindTask extends TimerTask {
+//
+//        @Override
+//        public void run() {
+//
+//            if (getActivity() != null){
+//
+//                getActivity().runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        if (page > banner.getData().size()-1) {
+//                            page = 0;
+//                            sliderViewPager.setCurrentItem(page);
+//                        } else {
+//                            sliderViewPager.setCurrentItem(page++);
+//                        }
+//                    }
+//                });
+//            }
+//        }
+//    }
 
 }

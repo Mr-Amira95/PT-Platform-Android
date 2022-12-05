@@ -90,7 +90,7 @@ public class VideoChatCoachFragment extends Fragment implements CallBack {
             if(sessions.getData().size()>0){
                 videoChatRv.setVisibility(View.VISIBLE);
             } else {
-                Toast.makeText(getContext(), "No Reservations", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), R.string.no_reservation, Toast.LENGTH_SHORT).show();
                 videoChatRv.setVisibility(View.GONE);
             }
         }

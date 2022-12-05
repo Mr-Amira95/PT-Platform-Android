@@ -50,7 +50,8 @@
             android:textColor="@color/primary_color"
             android:textSize="@dimen/_12sdp"
             android:text="@string/username"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:layout_marginEnd="@dimen/_5sdp"/>
 
         <TextView
             android:id="@+id/start_date"
@@ -59,8 +60,9 @@
             android:layout_weight="1"
             android:textColor="@color/primary_color"
             android:textSize="@dimen/_12sdp"
-            android:text="Start Date"
-            android:textStyle="bold"/>
+            android:text="@string/start_date"
+            android:textStyle="bold"
+            android:layout_marginHorizontal="@dimen/_5sdp"/>
 
         <TextView
             android:id="@+id/package_type"
@@ -70,7 +72,8 @@
             android:textColor="@color/primary_color"
             android:textSize="@dimen/_12sdp"
             android:text="@string/end_date"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:layout_marginHorizontal="@dimen/_5sdp"/>
 
         <TextView
             android:id="@+id/end_date"
@@ -80,7 +83,8 @@
             android:textColor="@color/primary_color"
             android:textSize="@dimen/_12sdp"
             android:text="@string/package_title"
-            android:textStyle="bold"/>
+            android:textStyle="bold"
+            android:layout_marginStart="@dimen/_5sdp"/>
 
     </LinearLayout>
 

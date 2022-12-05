@@ -1,5 +1,7 @@
 package com.qtechnetworks.ptplatform.View.Fragment;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -30,7 +32,7 @@ import io.reactivex.disposables.Disposable;
 
 public class SettingsFragment extends Fragment implements CallBack {
 
-    TextView contactUs, language;
+    TextView contactUs, language, termsConditions;
     Switch pushNotifications;
 
     @Override
@@ -67,14 +69,30 @@ public class SettingsFragment extends Fragment implements CallBack {
                 setPushNotifications();
             }
         });
+
+        termsConditions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse("https://pt.qtechnetworks.co/app/terms-conditions"));
+                startActivity(i);
+            }
+        });
     }
 
     private void initials(View view) {
         contactUs = view.findViewById(R.id.contact_us);
         language = view.findViewById(R.id.language);
         pushNotifications = view.findViewById(R.id.push_notificataions);
+        termsConditions = view.findViewById(R.id.terms_conditions);
 
         pushNotifications.setChecked(PreferencesUtils.getUser(getContext()).getNotification());
+
+        if (PreferencesUtils.getLanguage().equalsIgnoreCase("ar")){
+            language.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_left_icon, 0, 0, 0);
+            termsConditions.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_left_icon, 0, 0, 0);
+        }
+
     }
 
     private void setFragment(Fragment fragment) {

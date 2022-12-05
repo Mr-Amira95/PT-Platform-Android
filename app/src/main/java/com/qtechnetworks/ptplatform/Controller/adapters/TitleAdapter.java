@@ -43,8 +43,8 @@ public class TitleAdapter extends RecyclerView.Adapter<TitleAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         Datum current= datum.get(position);
-
-        holder.title.setText(current.getTitle().toString());
+        if (current.getTitle() != null)
+            holder.title.setText(current.getTitle().toString());
 
         textViewList.add(holder.title);
 

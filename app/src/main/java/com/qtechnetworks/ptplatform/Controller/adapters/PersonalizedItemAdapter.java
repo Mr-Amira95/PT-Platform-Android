@@ -22,6 +22,7 @@ import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 import com.qtechnetworks.ptplatform.View.Activity.MediaViewActivity;
 import com.qtechnetworks.ptplatform.View.Fragment.MainFragment;
+import com.qtechnetworks.ptplatform.View.Fragment.PersonalTrainingInnerFragment;
 
 public class PersonalizedItemAdapter extends RecyclerView.Adapter<PersonalizedItemAdapter.ViewHolder>  {
 
@@ -65,7 +66,6 @@ public class PersonalizedItemAdapter extends RecyclerView.Adapter<PersonalizedIt
         switch (Rtype){
             case PersonalizedItemAdapter.VIDEO_PERSONAL_TAG:
                 i=new Intent((MainActivity)context, MediaViewActivity.class).putExtra("url",data.getVideo().get(position).getValue());
-
                 holder.dataName.setText("View video");
                 break;
             case PersonalizedItemAdapter.IMAGE_PERSONAL_TAG:
@@ -83,15 +83,25 @@ public class PersonalizedItemAdapter extends RecyclerView.Adapter<PersonalizedIt
         holder.coachLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity)context).startActivity(i);
+                switch (Rtype){
+                    case PersonalizedItemAdapter.VIDEO_PERSONAL_TAG:
+                        setFragment(new PersonalTrainingInnerFragment(Rtype, data.getVideo().get(position).getValue()));
+                        break;
+                    case PersonalizedItemAdapter.IMAGE_PERSONAL_TAG:
+                        setFragment(new PersonalTrainingInnerFragment(Rtype, data.getImage().get(position).getValue()));
+                        break;
+                    case PersonalizedItemAdapter.NOTE_PERSONAL_TAG:
+                        setFragment(new PersonalTrainingInnerFragment(Rtype, data.getPdf().get(position).getValue()));
+                        break;
+                }
             }
         });
 
     }
 
-    private void setFragment(int frameLayout, Fragment fragment, AppCompatActivity activity) {
-        FragmentTransaction fragmentTransaction= activity.getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(frameLayout, fragment);
+    private void setFragment(Fragment fragment) {
+        FragmentTransaction fragmentTransaction= ((MainActivity)context).getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.home_frame, fragment);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }

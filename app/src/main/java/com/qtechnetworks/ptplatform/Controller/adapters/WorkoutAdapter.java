@@ -50,7 +50,8 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.ViewHold
 
         Category current= data.get(position);
 
-        holder.title_text.setText(current.getTitle().toString());
+        if (current.getTitle() != null)
+            holder.title_text.setText(current.getTitle().toString());
 
         LinearLayoutManager linearLayoutManager3 = new LinearLayoutManager(context);
         linearLayoutManager3.setOrientation(LinearLayoutManager.HORIZONTAL);

@@ -1,6 +1,7 @@
 package com.qtechnetworks.ptplatform.Model.utilits;
 
 
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -28,7 +29,6 @@ import java.math.BigInteger;
 @SuppressWarnings("unused")
 public class MyFirebaseInstanceIDService extends  FirebaseMessagingService implements OSRemoteNotificationReceivedHandler, OneSignalApiResponseHandler{
 
-
     //*********** Called whenever the Token is Generated or Refreshed ********//
 
     @Override
@@ -55,23 +55,44 @@ public class MyFirebaseInstanceIDService extends  FirebaseMessagingService imple
 
             //Force remove push from Notification Center after 30 seconds
             builder.setTimeoutAfter(30000);
+
+            JSONObject data = notification.getAdditionalData();
+
+            Intent notificationIntent;
+
+            notificationIntent = new Intent(context.getApplicationContext(), MainActivity.class);
+            notificationIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+//            try {
+//                notificationIntent.putExtra("flag", data.get("custom").);
+//                notificationIntent.putExtra("id", data.getString("id"));
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+
+            Log.d("Notification_Date", data.toString());
+
+            PendingIntent pendingIntent = PendingIntent.getActivity((context), 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT| PendingIntent.FLAG_ONE_SHOT);
+
+            builder.setContentIntent(pendingIntent);
             return builder;
         });
 
-        JSONObject data = notification.getAdditionalData();
-        Log.i("OneSignalExample", "Received Notification Data: " + data);
-        try {
-            if(data!=null){
+//        Log.i("OneSignalExample", "Received Notification Data: " + data);
 
-                Intent i = new Intent(context, MainActivity.class);
-                i.putExtra("flag", data.getString("flag"));
-                i.putExtra("id", data.getString("id"));
-                startActivity(i);
-                ((MainActivity)context).finish();
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            if(data!=null){
+//
+//                Intent i = new Intent(context, MainActivity.class);
+//                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                i.putExtra("flag", data.getString("flag"));
+//                i.putExtra("id", data.getString("id"));
+//                startActivity(i);
+//                ((MainActivity)context).finish();
+//            }
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
 
 //        getorder(data.getString("id"));
 //         If complete isn't call within a time period of 25 seconds, OneSignal internal logic will show the original notification

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.FreePackage.FreePackageResults;
-import com.qtechnetworks.ptplatform.Model.Beans.General;
 import com.qtechnetworks.ptplatform.Model.Beans.Subscription.SubscriptionPackage;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
@@ -40,9 +40,14 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHold
     private PermissionAdapter permissionsAdapter;
     private List<SubscriptionPackage> packages;
 
-    public PackageAdapter(Context context,List<SubscriptionPackage> packages) {
+    ArrayList <Boolean> inShop;
+    boolean canBuy;
+
+    public PackageAdapter(Context context, List<SubscriptionPackage> packages, ArrayList<Boolean> inShopPersonal, boolean canBuyPersonal) {
         this.packages=packages;
         this.context=context;
+        this.inShop = inShopPersonal;
+        this.canBuy = canBuyPersonal;
     }
 
     @NonNull
@@ -56,9 +61,19 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder,int position) {
 
+        if (inShop.get(position)){
+            holder.buyNowBtn.setText(R.string.bought);
+        } else if (!canBuy) {
+            holder.buyNowBtn.setVisibility(View.GONE);
+        } else {
+            holder.buyNowBtn.setText(R.string.buy_now);
+            holder.buyNowBtn.setVisibility(View.VISIBLE);
+        }
+
         LinearLayoutManager layoutManagerhorizantalleader = new LinearLayoutManager(context);
         layoutManagerhorizantalleader.setOrientation(LinearLayoutManager.VERTICAL);
         holder.featureRecyclerview.setLayoutManager(layoutManagerhorizantalleader);
+
         List<String> permissions=new ArrayList<>();
 
         if(packages.get(position).getPermissions()!=null) {
@@ -88,15 +103,20 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHold
         holder.buyNowBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!packages.get(position).getIsFree())
-                    setFragment(R.id.home_frame ,new SinglePackageFragment(packages.get(holder.getAbsoluteAdapterPosition())), (AppCompatActivity) v.getContext());
-                else
-                    buyPackage(packages.get(position).getId());
+                if (canBuy) {
+                    if (!packages.get(position).getIsFree())
+                        setFragment(R.id.home_frame ,new SinglePackageFragment(packages.get(holder.getAbsoluteAdapterPosition())), (AppCompatActivity) v.getContext());
+                    else
+                        buyPackage(packages.get(position).getId());
+                } else {
+                    Toast.makeText(context, "you already have package", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
 
     private void buyPackage(int packageId) {
+
         HashMap<String ,Object> params=new HashMap<>();
         params.put("package_id", packageId);
         params.put("payment_method", "free");

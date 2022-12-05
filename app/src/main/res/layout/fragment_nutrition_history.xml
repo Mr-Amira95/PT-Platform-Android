@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,6 +8,11 @@
     tools:context=".View.Fragment.HistoryNutritionFragment"
     android:orientation="vertical"
     android:background="@color/backapp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
     <TextView
         android:id="@+id/title"
@@ -168,36 +174,81 @@
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
-
+        <TextView
+            android:id="@+id/breakfast_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/breakfast"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_16sdp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="@dimen/_20sdp"/>
 
 <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/nutrition_history_recyclerview_breakfast"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_20sdp"/>
+        android:layout_height="wrap_content"/>
 
-    <androidx.recyclerview.widget.RecyclerView
+        <TextView
+            android:id="@+id/lunch_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lunch"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_16sdp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="@dimen/_20sdp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/nutrition_history_recyclerview_lunch"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_20sdp"/>
+        android:layout_height="wrap_content"/>
 
-    <androidx.recyclerview.widget.RecyclerView
+        <TextView
+            android:id="@+id/dinner_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dinner"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_16sdp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="@dimen/_20sdp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/nutrition_history_recyclerview_dinner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_20sdp"/>
+        android:layout_height="wrap_content"/>
 
-    <androidx.recyclerview.widget.RecyclerView
+        <TextView
+            android:id="@+id/snacks_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/snacks"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_16sdp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="@dimen/_20sdp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/nutrition_history_recyclerview_snacks"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_20sdp"/>
+        android:layout_height="wrap_content"/>
 
-    <androidx.recyclerview.widget.RecyclerView
+        <TextView
+            android:id="@+id/supplement_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/supplements"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_16sdp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="@dimen/_20sdp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/nutrition_history_recyclerview_supplements"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_20sdp"/>
+        android:layout_height="wrap_content"/>
 
-</LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

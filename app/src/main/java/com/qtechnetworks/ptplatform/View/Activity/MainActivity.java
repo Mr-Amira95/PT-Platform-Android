@@ -40,24 +40,49 @@ public class MainActivity extends AppCompatActivity {
 
         if (flag != null) {
 
-            if (flag.equalsIgnoreCase("new_coach") || flag.equalsIgnoreCase("end_subscription") || flag.equalsIgnoreCase("end_package") || flag.equalsIgnoreCase("personal_trainer") || flag.equalsIgnoreCase("approved_session") || flag.equalsIgnoreCase("session_reminder") || flag.equalsIgnoreCase("chat")){
-                setFragmentwithoutBack(new MainFragment(flag, id));
-            } else if (flag.equalsIgnoreCase("news") || flag.equalsIgnoreCase("general") || flag.equalsIgnoreCase("cancel")){
+            if (flag.equalsIgnoreCase("news_feed") ||
+                    flag.equalsIgnoreCase("admin")) {
                 setFragmentwithoutBack(new HomeFragment(flag, id));
+            } else if (flag.equalsIgnoreCase("expired_package") ||
+                    flag.equalsIgnoreCase("calender") ||
+                    flag.equalsIgnoreCase("approved_video_chat") ||
+                    flag.equalsIgnoreCase("message") ||
+                    flag.equalsIgnoreCase("new_coach") ||
+                    flag.equalsIgnoreCase("personal_training") ||
+                    flag.equalsIgnoreCase("shop")) {
+                setFragmentwithoutBack(new MainFragment(flag, id));
+            } else if (flag.equalsIgnoreCase("support")){
+                setFragmentwithoutBack(new HomeFragment());
             } else {
                 if (PreferencesUtils.getUserType().equalsIgnoreCase("coach")) {
                     setFragmentwithoutBack(new MainCoachFragment());
                 } else if (PreferencesUtils.getUserType().equalsIgnoreCase("trainee")){
                     if (PreferencesUtils.getCoach(MainActivity.this) != null) {
-                        if (getIntent().getExtras() != null && getIntent().getExtras().getString("page").equals("shop"))
-                            setFragmentwithoutBack(new MainFragment("shop"));
-                        else
-                            setFragmentwithoutBack(new MainFragment());
+                        setFragmentwithoutBack(new MainFragment());
                     } else {
                         setFragmentwithoutBack(new HomeFragment());
                     }
                 }
             }
+
+//            if (flag.equalsIgnoreCase("new_coach") || flag.equalsIgnoreCase("expired_package") || flag.equalsIgnoreCase("personal_trainer") || flag.equalsIgnoreCase("approved_video_chat") || flag.equalsIgnoreCase("session_reminder") || flag.equalsIgnoreCase("chat")){
+//                setFragmentwithoutBack(new MainFragment(flag, id));
+//            } else if (flag.equalsIgnoreCase("news_feed") || flag.equalsIgnoreCase("admin") || flag.equalsIgnoreCase("cancel")){
+//                setFragmentwithoutBack(new HomeFragment(flag, id));
+//            } else {
+//                if (PreferencesUtils.getUserType().equalsIgnoreCase("coach")) {
+//                    setFragmentwithoutBack(new MainCoachFragment());
+//                } else if (PreferencesUtils.getUserType().equalsIgnoreCase("trainee")){
+//                    if (PreferencesUtils.getCoach(MainActivity.this) != null) {
+//                        if (getIntent().getExtras() != null && getIntent().getExtras().getString("page").equals("shop"))
+//                            setFragmentwithoutBack(new MainFragment("shop"));
+//                        else
+//                            setFragmentwithoutBack(new MainFragment());
+//                    } else {
+//                        setFragmentwithoutBack(new HomeFragment());
+//                    }
+//                }
+//            }
 
         } else {
 
@@ -65,9 +90,9 @@ public class MainActivity extends AppCompatActivity {
                 setFragmentwithoutBack(new MainCoachFragment());
             } else if (PreferencesUtils.getUserType().equalsIgnoreCase("trainee")){
                 if (PreferencesUtils.getCoach(MainActivity.this) != null) {
-                    if (getIntent().getExtras() != null && getIntent().getExtras().getString("page").equals("shop"))
-                        setFragmentwithoutBack(new MainFragment("shop"));
-                    else
+//                    if (page != null)
+//                        setFragmentwithoutBack(new MainFragment("shop"));
+//                    else
                         setFragmentwithoutBack(new MainFragment());
                 } else {
                     setFragmentwithoutBack(new HomeFragment());
@@ -118,11 +143,17 @@ public class MainActivity extends AppCompatActivity {
         flag = getIntent().getStringExtra("flag");
         id = getIntent().getStringExtra("id");
 
+//        if (getIntent().getExtras().getString("page") != null)
+//            page = getIntent().getExtras().getString("page");
+
         if (PreferencesUtils.getUserType().equalsIgnoreCase("coach")){
             bottomBar.setVisibility(View.GONE);
         } else if (PreferencesUtils.getUserType().equalsIgnoreCase("trainee")){
             bottomBar.setVisibility(View.VISIBLE);
         }
+
+        Log.d("flag_main", flag + "/" + id);
+
     }
 
     private void setFragment(Fragment fragment) {

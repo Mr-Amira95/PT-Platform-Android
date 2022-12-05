@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.qtechnetworks.ptplatform.Controller.adapters.SliderAdapter;
+import com.qtechnetworks.ptplatform.Controller.adapters.SliderAdapterExample;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.Banner.Banner;
 import com.qtechnetworks.ptplatform.Model.Beans.Coach.Coach;
@@ -26,6 +27,9 @@ import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 import com.qtechnetworks.ptplatform.View.Activity.ShopTestActivity;
 import com.qtechnetworks.ptplatform.View.Dialogs.CoachesDialog;
+import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
+import com.smarteist.autoimageslider.SliderAnimations;
+import com.smarteist.autoimageslider.SliderView;
 
 import java.util.HashMap;
 import java.util.Timer;
@@ -36,12 +40,13 @@ import me.relex.circleindicator.CircleIndicator;
 
 public class MainFragment extends Fragment implements CallBack {
 
-    private ViewPager sliderViewPager;
-    private CircleIndicator sliderCircleIndicator;
-    private SliderAdapter sliderAdapter;
+//    private ViewPager sliderViewPager;
+//    private CircleIndicator sliderCircleIndicator;
+//    private SliderAdapter sliderAdapter;
     private Banner banner;
-    private Timer timer;
-    private int page = 0;
+//    private Timer timer;
+//    private int page = 0;x
+    SliderView sliderView;
 
     private LinearLayout
             exercisesLayout, workoutsLayout, nutritionLayout, progressLayout,
@@ -55,10 +60,6 @@ public class MainFragment extends Fragment implements CallBack {
 
     String flag =" ", id;
 
-    public MainFragment(String flag) {
-        this.flag = flag;
-    }
-
     public MainFragment(){
 
     }
@@ -69,7 +70,7 @@ public class MainFragment extends Fragment implements CallBack {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate (Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if ( getArguments() != null) {
 
@@ -209,10 +210,8 @@ public class MainFragment extends Fragment implements CallBack {
 
     }
 
-    private void setFragment(Fragment fragment ) {
-
+    private void setFragment(Fragment fragment) {
         ((MainActivity) requireContext()).getSupportFragmentManager().beginTransaction().replace(R.id.home_frame, fragment, "OptionsFragment").addToBackStack(null).commit();
-
     }
 
     private void setFragmentWithoutBack(Fragment fragment ) {
@@ -232,8 +231,13 @@ public class MainFragment extends Fragment implements CallBack {
     }
 
     private void initial(View view) {
-        sliderViewPager=view.findViewById(R.id.slider_viewPager);
-        sliderCircleIndicator=view.findViewById(R.id.slider_indicator_unselected);
+//        sliderViewPager=view.findViewById(R.id.slider_viewPager);
+//        sliderCircleIndicator=view.findViewById(R.id.slider_indicator_unselected);
+
+        sliderView = view.findViewById(R.id.imageSlider);
+        sliderView.setIndicatorAnimation(IndicatorAnimationType.WORM);
+        sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
+        sliderView.startAutoCycle();
 
         exercisesLayout = view.findViewById(R.id.exercise_layout);
         workoutsLayout = view.findViewById(R.id.workout_layout);
@@ -259,7 +263,6 @@ public class MainFragment extends Fragment implements CallBack {
         nametext.setText(PreferencesUtils.getCoach(getContext()).getLastName());
 
         try{
-            nametext.setText(PreferencesUtils.getCoach(getContext()).getLastName());
             Glide.with(getContext()).load(PreferencesUtils.getCoach(getContext()).getAvatar()).placeholder(R.drawable.logo).into(cate1_image);
         }catch (Exception e){
             e.printStackTrace();
@@ -275,8 +278,8 @@ public class MainFragment extends Fragment implements CallBack {
 
         params.put("user_id",PreferencesUtils.getCoach(getContext()).getId().toString());
 
-        MyApplication.getInstance().getHttpHelper().setCallback(this);
-        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.banner_URL, AppConstants.banner_TAG, Banner.class, params);
+        MyApplication.getInstance().getBackgroundHttpHelper().setCallback(this);
+        MyApplication.getInstance().getBackgroundHttpHelper().get(getContext(), AppConstants.banner_URL, AppConstants.banner_TAG, Banner.class, params);
 
     }
 
@@ -290,17 +293,18 @@ public class MainFragment extends Fragment implements CallBack {
 
         switch (tag){
             case AppConstants.users_coaches_TAG:
+
                 SingleCoach singleCoach = (SingleCoach) result;
                 PreferencesUtils.setCoach(singleCoach.getData(), getContext());
 
-                if (flag.equalsIgnoreCase("end_subscription") || flag.equalsIgnoreCase("end_package")){
+                if (flag.equalsIgnoreCase("expired_package")) {
                     setFragment(new ShopFragment());
-                } else if (flag.equalsIgnoreCase("personal_trainer")){
-                    setFragment(new PersonalTrainingTraineeFragment());
-                } else if (flag.equalsIgnoreCase("approved_session") || flag.equalsIgnoreCase("session_reminder") ){
+                } else if (flag.equalsIgnoreCase("calender") || flag.equalsIgnoreCase("approved_video_chat") ){
                     setFragment(new CalendarFragment());
-                } else if (flag.equalsIgnoreCase("chat")){
+                } else if (flag.equalsIgnoreCase("message")){
                     setFragment(new ChatSingleFragment());
+                } else if (flag.equalsIgnoreCase("personal_training")){
+                    setFragment(new PersonalTrainingTraineeFragment());
                 } else {
                     nametext.setText(PreferencesUtils.getCoach(getContext()).getLastName());
 
@@ -311,24 +315,42 @@ public class MainFragment extends Fragment implements CallBack {
                     }
                 }
 
+//                if (flag.equalsIgnoreCase("end_subscription") || flag.equalsIgnoreCase("end_package")){
+//                    setFragment(new ShopFragment());
+//                } else if (flag.equalsIgnoreCase("personal_trainer")){
+//                    setFragment(new PersonalTrainingTraineeFragment());
+//                } else if (flag.equalsIgnoreCase("approved_session") || flag.equalsIgnoreCase("session_reminder") ){
+//                    setFragment(new CalendarFragment());
+//                } else if (flag.equalsIgnoreCase("chat")){
+//                    setFragment(new ChatSingleFragment());
+//                } else {
+//                    nametext.setText(PreferencesUtils.getCoach(getContext()).getLastName());
+//
+//                    try{
+//                        Glide.with(getContext()).load(PreferencesUtils.getCoach(getContext()).getAvatar()).placeholder(R.drawable.logo).into(cate1_image);
+//                    }catch (Exception e){
+//                        e.printStackTrace();
+//                    }
+//                }
+//
                 break;
 
             case AppConstants.banner_TAG:
                 try {
                     banner=(Banner) result;
+                    sliderView.setSliderAdapter(new SliderAdapterExample(getContext(), banner.getData(), "MainTrainee"));
 
-                    sliderAdapter = new SliderAdapter(banner.getData(), getActivity(), "MainTrainee");
-                    sliderViewPager.setAdapter(sliderAdapter);
-                    sliderCircleIndicator.setViewPager(sliderViewPager);
-                    pageSwitcher();
-
+//                    sliderAdapter = new SliderAdapter(banner.getData(), getActivity(), "MainTrainee");
+//                    sliderViewPager.setAdapter(sliderAdapter);
+//                    sliderCircleIndicator.setViewPager(sliderViewPager);
+//                    pageSwitcher();
 
                 }catch (Exception e){
                     setFragmentWithoutBack(new MainFragment());
                     e.printStackTrace();
                 }
 
-                if (flag!= null){
+                if (flag!= null) {
                     if(flag.equals("shop")){
                         setFragment(new ShopFragment());
                         flag="";
@@ -360,36 +382,36 @@ public class MainFragment extends Fragment implements CallBack {
 
     }
 
-    public void pageSwitcher() {
-        timer = new Timer();
-        timer.scheduleAtFixedRate(new RemindTask(), 0, 5000); // delay
-    }
-
-
-    class RemindTask extends TimerTask {
-
-        @Override
-        public void run() {
-
-            if (getActivity() != null){
-
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        if (page > banner.getData().size()-1) {
-                            page = 0;
-                            sliderViewPager.setCurrentItem(page);
-                        } else {
-                            sliderViewPager.setCurrentItem(page++);
-                        }
-
-                    }
-                });
-
-            }
-
-        }
-    }
+//    public void pageSwitcher() {
+//        timer = new Timer();
+//        timer.scheduleAtFixedRate(new RemindTask(), 0, 5000); // delay
+//    }
+//
+//
+//    class RemindTask extends TimerTask {
+//
+//        @Override
+//        public void run() {
+//
+//            if (getActivity() != null){
+//
+//                getActivity().runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//
+//                        if (page > banner.getData().size()-1) {
+//                            page = 0;
+//                            sliderViewPager.setCurrentItem(page);
+//                        } else {
+//                            sliderViewPager.setCurrentItem(page++);
+//                        }
+//
+//                    }
+//                });
+//
+//            }
+//
+//        }
+//    }
 
 }

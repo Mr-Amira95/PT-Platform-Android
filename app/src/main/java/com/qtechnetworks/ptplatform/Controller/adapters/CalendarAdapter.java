@@ -63,13 +63,12 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView name, label, date, time, status;
+        public TextView name, date, time, status;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             name = itemView.findViewById(R.id.name);
-            label = itemView.findViewById(R.id.label);
             date = itemView.findViewById(R.id.date);
             time = itemView.findViewById(R.id.time);
             status = itemView.findViewById(R.id.status);

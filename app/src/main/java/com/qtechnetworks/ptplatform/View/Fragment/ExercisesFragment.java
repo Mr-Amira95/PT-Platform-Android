@@ -114,6 +114,7 @@ public class ExercisesFragment extends Fragment implements CallBack {
     private void getExercises(String coachid){
 
         HashMap<String ,Object> params = new HashMap<>();
+
         params.put("coach_id",coachid);
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);

@@ -33,7 +33,7 @@ public class WorkoutSingleFragment extends Fragment  {
     TextView titleTxt, desc;
     ImageView img;
 
-    String title,description,id, imgUrl;
+    String title, description, id, imgUrl;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,6 @@ public class WorkoutSingleFragment extends Fragment  {
             description=getArguments().getString("description");
             imgUrl=getArguments().getString("img");
             id=getArguments().getString("ID");
-
         }
     }
 
@@ -55,16 +54,19 @@ public class WorkoutSingleFragment extends Fragment  {
 
         initials(view);
 
-        titleTxt.setText(title);
-        desc.setText(description);
-        Glide.with(getContext()).load(imgUrl).placeholder(R.drawable.logo).into(img);
+        if (titleTxt != null)
+            titleTxt.setText(title);
 
+        if (description != null)
+            desc.setText(description);
+
+        Glide.with(getContext()).load(imgUrl).placeholder(R.drawable.logo).into(img);
 
         explore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (PreferencesUtils.getUserType().equalsIgnoreCase("trainee"))
-                    setFragment( new ExercisesSingleFragment(),"Workout",id);
+                    setFragmentWithoutBack ( new ExercisesSingleFragment(),"Workout",id);
                 else
                     setFragmentWithoutBack( new ExercisesSingleFragment(),"Workout",id);
             }

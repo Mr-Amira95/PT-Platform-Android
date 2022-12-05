@@ -57,7 +57,9 @@ public class ChestAndBicepsAdapter extends RecyclerView.Adapter<ChestAndBicepsAd
             e.printStackTrace();
         }
 
-        holder.title.setText(current.getTitle().toString());
+        if (current.getTitle() != null)
+            holder.title.setText(current.getTitle().toString());
+
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

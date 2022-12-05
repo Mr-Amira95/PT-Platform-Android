@@ -1,5 +1,6 @@
 package com.qtechnetworks.ptplatform.Model.Beans.Banner;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -8,7 +9,7 @@ public class Banner {
 
     @SerializedName("data")
     @Expose
-    private List<Datum> data = null;
+    private ArrayList<Datum> data = null;
     @SerializedName("success")
     @Expose
     private Boolean success;
@@ -16,11 +17,11 @@ public class Banner {
     @Expose
     private Object errors;
 
-    public List<Datum> getData() {
+    public ArrayList<Datum> getData() {
         return data;
     }
 
-    public void setData(List<Datum> data) {
+    public void setData(ArrayList<Datum> data) {
         this.data = data;
     }
 

@@ -26,7 +26,6 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
         this.context=context;
     }
 
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -40,7 +39,8 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
 
         String current= datum.get(position);
 
-        holder.title.setText(current.toString());
+        if (current != null)
+            holder.title.setText(current);
 
     }
 

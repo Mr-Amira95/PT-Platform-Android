@@ -21,6 +21,7 @@ import com.qtechnetworks.ptplatform.Model.Beans.FavoriteandWorkout.FavoriteandWo
 import com.qtechnetworks.ptplatform.Model.Beans.videoExercises.VideoExercises;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
+import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
 
 import java.text.SimpleDateFormat;
@@ -90,6 +91,7 @@ public class LogFragment extends Fragment implements CallBack {
 
         HashMap<String ,Object> params=new HashMap<>();
 
+        params.put("date", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         params.put("coach_id",Coachid);
         params.put("skip","0");
 

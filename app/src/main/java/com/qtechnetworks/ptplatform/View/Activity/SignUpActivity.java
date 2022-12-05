@@ -180,6 +180,7 @@ public class SignUpActivity extends AppCompatActivity implements CallBack{
                     General general = (General) result;
                     Toast.makeText(this, general.getData(), Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(SignUpActivity.this, ThankCoashActivity.class);
+                    i.putExtra("flag", "signUp");
                     startActivity(i);
                     break;
 

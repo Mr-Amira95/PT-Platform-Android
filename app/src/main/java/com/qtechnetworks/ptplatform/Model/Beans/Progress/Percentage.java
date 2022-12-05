@@ -14,9 +14,8 @@ public class Percentage {
     @Expose
     private String type;
 
-    public String getValue() {
-        DecimalFormat df = new DecimalFormat("#.#");
-        return df.format(value);
+    public Float getValue() {
+        return value;
     }
 
     public void setValue(Float value) {

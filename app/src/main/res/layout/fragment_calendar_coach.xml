@@ -38,7 +38,7 @@
         android:id="@+id/title_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="5"
+        android:weightSum="4"
         android:layout_marginHorizontal="@dimen/_20sdp"
         app:layout_constraintTop_toBottomOf="@id/header">
 
@@ -50,16 +50,6 @@
             android:textColor="@color/primary_color"
             android:textSize="@dimen/_12sdp"
             android:text="@string/name"
-            android:textStyle="bold"/>
-
-        <TextView
-            android:id="@+id/label"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textColor="@color/primary_color"
-            android:textSize="@dimen/_12sdp"
-            android:text="@string/label"
             android:textStyle="bold"/>
 
         <TextView

@@ -112,6 +112,7 @@ public class FeedbackAndSupportFragment extends Fragment {
                         Toast.makeText(getContext(), String.valueOf(general.getData()), Toast.LENGTH_LONG).show();
 
                         Intent i = new Intent(getContext(), MainActivity.class);
+                        i.putExtra("flag","support");
                         startActivity(i);
                         getActivity().finish();
                     } else {
@@ -148,6 +149,7 @@ public class FeedbackAndSupportFragment extends Fragment {
                         Toast.makeText(getContext(), String.valueOf(general.getData()), Toast.LENGTH_LONG).show();
 
                         Intent i = new Intent(getContext(), MainActivity.class);
+                        i.putExtra("flag","support");
                         startActivity(i);
                         getActivity().finish();
                     } else {
@@ -164,6 +166,13 @@ public class FeedbackAndSupportFragment extends Fragment {
             }
 
         });
+    }
+
+    private void setFragment(Fragment fragment) {
+        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.home_frame, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
     }
 
 }

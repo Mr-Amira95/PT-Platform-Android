@@ -45,14 +45,20 @@
                     android:layout_height="80dp"
                     android:layout_gravity="center">
 
-                    <ProgressBar
+                    <org.eazegraph.lib.charts.PieChart
+                        android:id="@+id/fat_chart"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:indeterminateOnly="false"
-                        android:progress="17"
-                        android:progressDrawable="@drawable/ring_progress_red"
+                        app:egLegendTextSize="18sp"
+                        app:layout_constraintEnd_toStartOf="@id/fat_chart"
+                        app:layout_constraintTop_toBottomOf="@id/cal_background"
+                        app:egInnerValueSize="@dimen/_12sdp"
+                        app:egUseInnerValue="true"
+                        app:egInnerValueString="0"
+                        app:egInnerValueColor="@color/white"
+                        app:egInnerPaddingColor="@color/backapp"
+                        app:egInnerPadding="90"/>
 
-                        />
 
                     <TextView
                         android:id="@+id/fat_percentage"
@@ -61,7 +67,8 @@
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:padding="10dp"
-                        android:textColor="@color/white">
+                        android:textColor="@color/white"
+                        android:layout_marginHorizontal="@dimen/_10sdp">
 
                     </TextView>
                 </FrameLayout>
@@ -116,14 +123,19 @@
                     android:layout_height="80dp"
                     android:layout_gravity="center">
 
-                    <ProgressBar
+                    <org.eazegraph.lib.charts.PieChart
+                        android:id="@+id/muscle_chart"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:indeterminateOnly="false"
-                        android:progress="17"
-                        android:progressDrawable="@drawable/ring_progress_green"
-
-                        />
+                        app:egLegendTextSize="18sp"
+                        app:layout_constraintEnd_toStartOf="@id/fat_chart"
+                        app:layout_constraintTop_toBottomOf="@id/cal_background"
+                        app:egInnerValueSize="@dimen/_12sdp"
+                        app:egUseInnerValue="true"
+                        app:egInnerValueString="0"
+                        app:egInnerValueColor="@color/white"
+                        app:egInnerPaddingColor="@color/backapp"
+                        app:egInnerPadding="90"/>
 
                     <TextView
                         android:id="@+id/muscle_percentage"
@@ -188,14 +200,19 @@
                     android:layout_height="80dp"
                     android:layout_gravity="center">
 
-                    <ProgressBar
+                    <org.eazegraph.lib.charts.PieChart
+                        android:id="@+id/weight_chart"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:indeterminateOnly="false"
-                        android:progress="17"
-                        android:progressDrawable="@drawable/ring_progress_green_l"
-
-                        />
+                        app:egLegendTextSize="18sp"
+                        app:layout_constraintEnd_toStartOf="@id/fat_chart"
+                        app:layout_constraintTop_toBottomOf="@id/cal_background"
+                        app:egInnerValueSize="@dimen/_12sdp"
+                        app:egUseInnerValue="true"
+                        app:egInnerValueString="0"
+                        app:egInnerValueColor="@color/white"
+                        app:egInnerPaddingColor="@color/backapp"
+                        app:egInnerPadding="90"/>
 
                     <TextView
                         android:id="@+id/weight_percentage"
@@ -260,14 +277,19 @@
                     android:layout_height="80dp"
                     android:layout_gravity="center">
 
-                    <ProgressBar
+                    <org.eazegraph.lib.charts.PieChart
+                        android:id="@+id/water_chart"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:indeterminateOnly="false"
-                        android:progress="17"
-                        android:progressDrawable="@drawable/ring_progress_blue"
-
-                        />
+                        app:egLegendTextSize="18sp"
+                        app:layout_constraintEnd_toStartOf="@id/fat_chart"
+                        app:layout_constraintTop_toBottomOf="@id/cal_background"
+                        app:egInnerValueSize="@dimen/_12sdp"
+                        app:egUseInnerValue="true"
+                        app:egInnerValueString="0"
+                        app:egInnerValueColor="@color/white"
+                        app:egInnerPaddingColor="@color/backapp"
+                        app:egInnerPadding="90"/>
 
                     <TextView
                         android:id="@+id/water_percentage"

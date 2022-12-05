@@ -126,7 +126,7 @@ public class SinglePackageFragment extends Fragment implements CallBack {
 
         packageType.setText(packages.getName());
         packageDesc.setText(packages.getDescription());
-        packageData.setText(packages.getDate() + getString(R.string.months));
+        packageData.setText(packages.getDate() +" "+ getString(R.string.months));
         packagePrice.setText(packages.getPrice());
         discountTitle.setVisibility(View.GONE);
         discountValue.setVisibility(View.GONE);

@@ -26,6 +26,7 @@ import io.reactivex.disposables.Disposable;
 public class SplashActivity extends AppCompatActivity implements CallBack {
 
     public static int SPLASH_TIME_OUT=4000;
+    String flag = " ", id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,53 +35,8 @@ public class SplashActivity extends AppCompatActivity implements CallBack {
 
         switchLocal(this);
 
-//        Intent i = new Intent(this, MainActivity.class);
-//        i.putExtra("flag", "new_coach");
-//        i.putExtra("id", "coach_id");
-//        startActivity(i); MainFragment
-//
-//        Intent i = new Intent(this, MainActivity.class);
-//        i.putExtra("flag", "news");
-//        i.putExtra("id", "news_id");
-//        startActivity(i); HomeFragment ==> News
-//
-//        Intent i = new Intent(this, MainActivity.class);
-//        i.putExtra("flag", "general");
-//        startActivity(i); HomeFragment
-//
-//        Intent i = new Intent(this, MainActivity.class);
-//        i.putExtra("flag", "end_subscription");
-//        i.putExtra("id", "coach_id");
-//        startActivity(i); MainFragment ==> Shop
-//
-//        Intent i = new Intent(this, MainActivity.class);
-//        i.putExtra("flag", "end_package");
-//        i.putExtra("id", "coach_id");
-//        startActivity(i); MainFragment ==> Shop
-//
-//        Intent i = new Intent(this, MainActivity.class);
-//        i.putExtra("flag", "personal_trainer");
-//        i.putExtra("id", "coach_id");
-//        startActivity(i); MainFragment ==> Personal Training
-//
-//        Intent i = new Intent(this, MainActivity.class);
-//        i.putExtra("flag", "approved_session");
-//        i.putExtra("id", "coach_id");
-//        startActivity(i); MainFragment ==> Calender
-//
-//        Intent i = new Intent(this, MainActivity.class);
-//        i.putExtra("flag", "session_reminder");
-//        i.putExtra("id", "coach_id");
-//        startActivity(i); MainFragment ==> Calender
-//
-//        Intent i = new Intent(this, MainActivity.class);
-//        i.putExtra("flag", "chat");
-//        i.putExtra("id", "coach_id");
-//        startActivity(i); MainFragment ==> Chat
-//
-//        Intent i = new Intent(this, MainActivity.class);
-//        i.putExtra("flag", "cancel");
-//        startActivity(i); MainFragment
+        flag = getIntent().getStringExtra("flag");
+        id = getIntent().getStringExtra("id");
 
         // OneSignal Initialization
         OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
@@ -94,9 +50,10 @@ public class SplashActivity extends AppCompatActivity implements CallBack {
                 if (PreferencesUtils.getUserToken().equalsIgnoreCase("-1")){
                     startActivity(new Intent(SplashActivity.this, ChoosingActivity.class));
                     finish();
-                }else {
+                } else {
                     devicetoken();
                 }
+
             }
         },SPLASH_TIME_OUT);
 
@@ -134,7 +91,10 @@ public class SplashActivity extends AppCompatActivity implements CallBack {
 
     @Override
     public void onNext(int tag, boolean isSuccess, Object result) {
-        startActivity(new Intent(SplashActivity.this,MainActivity.class));
+        Intent i = new Intent(SplashActivity.this,MainActivity.class);
+        i.putExtra("flag", flag);
+        i.putExtra("id", id);
+        startActivity(i);
         finish();
     }
 

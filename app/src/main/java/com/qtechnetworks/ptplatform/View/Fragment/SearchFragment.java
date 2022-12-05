@@ -22,6 +22,7 @@ import com.qtechnetworks.ptplatform.Model.Beans.Exercises.GroupResults;
 import com.qtechnetworks.ptplatform.Model.Beans.Exercises.SearchResults;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
+import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
 
 import java.util.HashMap;
@@ -107,6 +108,7 @@ public class SearchFragment extends Fragment implements CallBack {
         HashMap<String ,Object> params = new HashMap<>();
         params.put("skip","0");
         params.put("search", word);
+        params.put("coach_id", PreferencesUtils.getCoach(getContext()).getId());
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);
         MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.workout_URL, AppConstants.workout_TAG, SearchResults.class, params);
@@ -118,6 +120,7 @@ public class SearchFragment extends Fragment implements CallBack {
         HashMap<String ,Object> params = new HashMap<>();
         params.put("skip","0");
         params.put("search", word);
+        params.put("coach_id", PreferencesUtils.getCoach(getContext()).getId());
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);
         MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.exercise_URL, AppConstants.workout_TAG, SearchResults.class, params);

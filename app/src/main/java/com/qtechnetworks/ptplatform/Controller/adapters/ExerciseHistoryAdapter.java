@@ -86,7 +86,7 @@ public class ExerciseHistoryAdapter extends RecyclerView.Adapter<ExerciseHistory
 
                     if (PreferencesUtils.getUserType().equalsIgnoreCase("Trainee"))
                         getLogTrainee(String.valueOf(current.getId()));
-                    else if (PreferencesUtils.getUserType().equalsIgnoreCase("Trainee"))
+                    else if (PreferencesUtils.getUserType().equalsIgnoreCase("Coach"))
                         getLogCoach(String.valueOf(current.getId()));
 
                 }

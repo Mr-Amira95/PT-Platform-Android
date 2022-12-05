@@ -18,6 +18,7 @@ import com.google.android.exoplayer2.source.dash.manifest.BaseUrl;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.qtechnetworks.ptplatform.BuildConfig;
 import com.qtechnetworks.ptplatform.Controller.adapters.SliderAdapter;
+import com.qtechnetworks.ptplatform.Controller.adapters.SliderAdapterExample;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.Banner.Banner;
 import com.qtechnetworks.ptplatform.Model.Beans.General;
@@ -28,6 +29,10 @@ import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 import com.qtechnetworks.ptplatform.View.Activity.SplashActivity;
 import com.qtechnetworks.ptplatform.View.Dialogs.CoachesDialog;
+import com.qtechnetworks.ptplatform.View.Dialogs.LanguagesDialog;
+import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
+import com.smarteist.autoimageslider.SliderAnimations;
+import com.smarteist.autoimageslider.SliderView;
 
 import java.util.HashMap;
 import java.util.Timer;
@@ -38,18 +43,21 @@ import me.relex.circleindicator.CircleIndicator;
 
 public class MainCoachFragment extends Fragment implements CallBack {
 
-    private ViewPager sliderViewPager;
-    private CircleIndicator sliderCircleIndicator;
-    private SliderAdapter sliderAdapter;
+//    private ViewPager sliderViewPager;
+//    private CircleIndicator sliderCircleIndicator;
+//    private SliderAdapter sliderAdapter;
     private Banner banner;
-    private Timer timer;
-    private int page = 0;
+    SliderView sliderView;
+
+//    private Timer timer;
+//    private int page = 0;
 
     private LinearLayout
             exercisesLayout, workoutsLayout, challengesLayout,
             shopLayout, personalLayout, calenderLayout,
             videoChatLayout, liveChatLayout, kycLayout,
-            historyLayout, logoutLayout, progressLayout;
+            historyLayout, logoutLayout, progressLayout,
+            languagesLayout;
 
     public MainCoachFragment() {
         // Required empty public constructor
@@ -169,6 +177,14 @@ public class MainCoachFragment extends Fragment implements CallBack {
                 logout();
             }
         });
+
+        languagesLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LanguagesDialog languagesDialog = new LanguagesDialog(getContext());
+                languagesDialog.show();
+            }
+        });
     }
 
     private void logout() {
@@ -183,9 +199,15 @@ public class MainCoachFragment extends Fragment implements CallBack {
 
     private void initial(View view) {
 
-        sliderViewPager=view.findViewById(R.id.slider_viewPager);
-        sliderCircleIndicator=view.findViewById(R.id.slider_indicator_unselected);
+//        sliderViewPager=view.findViewById(R.id.slider_viewPager);
+//        sliderCircleIndicator=view.findViewById(R.id.slider_indicator_unselected);
 
+        sliderView = view.findViewById(R.id.imageSlider);
+        sliderView.setIndicatorAnimation(IndicatorAnimationType.WORM);
+        sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
+        sliderView.startAutoCycle();
+
+        languagesLayout = view.findViewById(R.id.languages_layout);
         progressLayout = view.findViewById(R.id.progress_layout);
         exercisesLayout = view.findViewById(R.id.exercise_layout);
         workoutsLayout = view.findViewById(R.id.workout_layout);
@@ -199,7 +221,7 @@ public class MainCoachFragment extends Fragment implements CallBack {
         kycLayout = view.findViewById(R.id.kyc_layout);
         logoutLayout = view.findViewById(R.id.logout_layout);
 
-        getBanner();
+//        getBanner();
 
     }
 
@@ -225,15 +247,15 @@ public class MainCoachFragment extends Fragment implements CallBack {
 
         params.put("user_id", PreferencesUtils.getUser(getContext()).getId().toString());
 
-        MyApplication.getInstance().getHttpHelper().setCallback(this);
-        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.banner_URL, AppConstants.banner_TAG, Banner.class, params);
+        MyApplication.getInstance().getBackgroundHttpHelper().setCallback(this);
+        MyApplication.getInstance().getBackgroundHttpHelper().get(getContext(), AppConstants.banner_URL, AppConstants.banner_TAG, Banner.class, params);
 
     }
 
-    public void pageSwitcher() {
-        timer = new Timer();
-        timer.scheduleAtFixedRate(new MainCoachFragment.RemindTask(), 0, 5000); // delay
-    }
+//    public void pageSwitcher() {
+//        timer = new Timer();
+//        timer.scheduleAtFixedRate(new MainCoachFragment.RemindTask(), 0, 5000); // delay
+//    }
 
     @Override
     public void onSubscribe(Disposable d) {
@@ -248,11 +270,12 @@ public class MainCoachFragment extends Fragment implements CallBack {
                 case AppConstants.banner_TAG:
 
                     banner = (Banner) result;
+                    sliderView.setSliderAdapter(new SliderAdapterExample(getContext(), banner.getData(), "MainCoach"));
 
-                    sliderAdapter = new SliderAdapter(banner.getData(), getActivity(), "MainCoach");
-                    sliderViewPager.setAdapter(sliderAdapter);
-                    sliderCircleIndicator.setViewPager(sliderViewPager);
-                    pageSwitcher();
+//                    sliderAdapter = new SliderAdapter(banner.getData(), getActivity(), "MainCoach");
+//                    sliderViewPager.setAdapter(sliderAdapter);
+//                    sliderCircleIndicator.setViewPager(sliderViewPager);
+//                    pageSwitcher();
 
                     break;
 
@@ -280,30 +303,36 @@ public class MainCoachFragment extends Fragment implements CallBack {
 
     }
 
-    class RemindTask extends TimerTask {
-
-        @Override
-        public void run() {
-
-            if (getActivity() != null){
-
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        if (page > banner.getData().size()-1) {
-                            page = 0;
-                            sliderViewPager.setCurrentItem(page);
-                        } else {
-                            sliderViewPager.setCurrentItem(page++);
-                        }
-
-                    }
-                });
-
-            }
-
-        }
+    @Override
+    public void onResume() {
+        super.onResume();
+        getBanner();
     }
+
+//    class RemindTask extends TimerTask {
+//
+//        @Override
+//        public void run() {
+//
+//            if (getActivity() != null){
+//
+//                getActivity().runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//
+//                        if (page > banner.getData().size()-1) {
+//                            page = 0;
+//                            sliderViewPager.setCurrentItem(page);
+//                        } else {
+//                            sliderViewPager.setCurrentItem(page++);
+//                        }
+//
+//                    }
+//                });
+//
+//            }
+//
+//        }
+//    }
 
 }

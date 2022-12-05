@@ -85,7 +85,7 @@ public class CalendarFragment extends Fragment implements CallBack {
                 EasyPermissions.requestPermissions(getActivity(), "Please accept permission", 233, Manifest.permission.WRITE_CALENDAR);
                  if (SELECTED_TIME != null && thereTimes){
                         requestReservation(String.valueOf(SELECTED_TIME));
-                } else if (!thereTimes){
+                } else if (!thereTimes) {
                      Toast.makeText(getContext(), "There are no available appointments on " + selectedDate, Toast.LENGTH_SHORT).show();
                  } else {
                      Toast.makeText(getContext(), "Please select time", Toast.LENGTH_SHORT).show();
@@ -120,7 +120,9 @@ public class CalendarFragment extends Fragment implements CallBack {
     private void requestReservation(String time_id){
 
         HashMap<String ,Object> params=new HashMap<>();
+
         params.put("time_id",time_id);
+        params.put("coach_id",PreferencesUtils.getCoach(getContext()).getId());
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);
         MyApplication.getInstance().getHttpHelper().Post(getContext(), AppConstants.COACH_CALENDAR_RESERVATION_URL, AppConstants.COACH_CALENDAR_RESERVATION_TAG , CoachTime.class, params);
@@ -147,7 +149,11 @@ public class CalendarFragment extends Fragment implements CallBack {
         timesRecyclerview.setLayoutManager(linearLayoutManager3);
         coachNameTv=view.findViewById(R.id.coach_name_tv);
 
-        coachNameTv.setText(PreferencesUtils.getCoach(getContext()).getFirstName() + " availability:");
+        if (PreferencesUtils.getLanguage().equalsIgnoreCase("en"))
+            coachNameTv.setText(PreferencesUtils.getCoach(getContext()).getLastName() + " availability:");
+        else
+            coachNameTv.setText("الأوقات المتاحة للمدرب " + PreferencesUtils.getCoach(getContext()).getLastName());
+
         selectedDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         getAvailableTimes(selectedDate);
     }
@@ -183,7 +189,8 @@ public class CalendarFragment extends Fragment implements CallBack {
                             thereTimes = false;
                             CoachTimesAdapter timesAdapter = new CoachTimesAdapter(getContext(), times.getData());
                             timesRecyclerview.setAdapter(timesAdapter);
-                            Toast.makeText(getContext(), "There are no available appointments on " + selectedDate, Toast.LENGTH_SHORT).show();
+
+                            Toast.makeText(getContext(), getString(R.string.no_available) + selectedDate, Toast.LENGTH_SHORT).show();
                             CalendarFragment.SELECTED_TIME = null;
                             CalendarFragment.SELECTED_TIME_STRING=  "";
                         }

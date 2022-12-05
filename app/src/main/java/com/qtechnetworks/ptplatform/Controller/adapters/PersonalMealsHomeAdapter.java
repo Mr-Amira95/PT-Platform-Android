@@ -52,7 +52,8 @@ public class PersonalMealsHomeAdapter extends RecyclerView.Adapter<PersonalMeals
             }
         });
 
-        holder.trainerName.setText(current.getTitle().toString());
+        if (current.getTitle() != null)
+            holder.trainerName.setText(current.getTitle().toString());
 
         try{
 

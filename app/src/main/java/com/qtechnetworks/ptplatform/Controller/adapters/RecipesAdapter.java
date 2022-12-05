@@ -54,7 +54,8 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
 
         Datum current= data.get(position);
 
-        holder.title.setText(current.getTitle().toString());
+        if (current.getTitle() != null)
+            holder.title.setText(current.getTitle().toString());
 
 
         try{

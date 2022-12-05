@@ -35,6 +35,9 @@ public class Datum {
     @SerializedName("coach_time_reservation_accept")
     @Expose
     private CoachTimeReservation coachTimeReservation;
+    @SerializedName("coach_time_reservation")
+    @Expose
+    private CoachTimeReservation coachReservation;
 
     public Integer getId() {
         return id;
@@ -106,6 +109,14 @@ public class Datum {
 
     public void setCoachTimeReservation(CoachTimeReservation coachTimeReservation) {
         this.coachTimeReservation = coachTimeReservation;
+    }
+
+    public CoachTimeReservation getCoachReservation() {
+        return coachReservation;
+    }
+
+    public void setCoachReservation(CoachTimeReservation coachReservation) {
+        this.coachReservation = coachReservation;
     }
 
 }

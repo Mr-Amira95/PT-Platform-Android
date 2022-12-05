@@ -83,8 +83,12 @@ public class NewsSingleFragment extends Fragment implements CallBack {
 
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_SUBJECT, title);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, "Text" + Html.fromHtml(decription));
+                if (title!= null)
+                    sendIntent.putExtra(Intent.EXTRA_SUBJECT, title);
+
+                if (decription != null)
+                    sendIntent.putExtra(Intent.EXTRA_TEXT, "News: " + Html.fromHtml(decription));
+
                 sendIntent.setType("text/plain");
                 startActivity(sendIntent);
 
@@ -144,8 +148,16 @@ public class NewsSingleFragment extends Fragment implements CallBack {
             e.printStackTrace();
         }
 
-        title_text.setText(singleNews.getData().getTitle());
-        news_details.setText(Html.fromHtml(singleNews.getData().getDescription()));
+        if (singleNews.getData().getTitle() != null){
+            title = singleNews.getData().getTitle();
+            title_text.setText(title);
+
+        }
+
+        if (singleNews.getData().getDescription() != null){
+            decription = singleNews.getData().getDescription();
+            news_details.setText(Html.fromHtml(decription));
+        }
 
     }
 

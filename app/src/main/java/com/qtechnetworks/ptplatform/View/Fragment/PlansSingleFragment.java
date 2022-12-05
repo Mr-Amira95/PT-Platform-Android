@@ -64,16 +64,23 @@ public class PlansSingleFragment extends Fragment {
         time_text=view.findViewById(R.id.time_text);
         name_text=view.findViewById(R.id.name_text);
 
-        title_text.setText(current.getTitle());
+        if (current.getTitle() != null)
+            title_text.setText(current.getTitle());
+
         time_text.setText(current.getTime().toString());
-        name_text.setText(current.getName().toString());
+
+        if (current.getName() != null)
+            name_text.setText(current.getName());
 
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            decrirtion_text.setText(Html.fromHtml(current.getDescription(),Html.FROM_HTML_MODE_LEGACY));
-        } else {
-            decrirtion_text.setText(Html.fromHtml(current.getDescription()));
-        }
+            if (current.getDescription() != null)
+                decrirtion_text.setText(Html.fromHtml(current.getDescription(), Html.FROM_HTML_MODE_LEGACY));
+            } else {
+                if (current.getDescription() != null)
+                    decrirtion_text.setText(Html.fromHtml(current.getDescription()));
+            }
+
 
 
         try{
@@ -88,9 +95,10 @@ public class PlansSingleFragment extends Fragment {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         ingredientsRecyclerview.setLayoutManager(linearLayoutManager);
 
-        ingredientsAdapter=new IngredientsAdapter(getContext(),"Recipe",current.getIngredients());
-        ingredientsRecyclerview.setAdapter(ingredientsAdapter);
-
+        if (current.getIngredients() != null){
+            ingredientsAdapter=new IngredientsAdapter(getContext(),"Recipe",current.getIngredients());
+            ingredientsRecyclerview.setAdapter(ingredientsAdapter);
+        }
 
     }
 }

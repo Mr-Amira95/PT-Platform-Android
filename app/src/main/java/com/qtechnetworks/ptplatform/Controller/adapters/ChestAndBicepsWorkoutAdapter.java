@@ -53,12 +53,13 @@ public class ChestAndBicepsWorkoutAdapter extends RecyclerView.Adapter<ChestAndB
             e.printStackTrace();
         }
 
-        holder.title.setText(current.getTitle().toString());
+        if (current.getTitle() != null)
+            holder.title.setText(current.getTitle().toString());
 
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setFragment( new WorkoutSingleFragment(), current.getTitle().toString(),current.getDescription().toString(),current.getIcon().toString(),current.getId().toString());
+                setFragment( new WorkoutSingleFragment(), current.getTitle(),current.getDescription(),current.getIcon(),String.valueOf(current.getId()));
             }
         });
     }

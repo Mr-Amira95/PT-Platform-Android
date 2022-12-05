@@ -60,7 +60,7 @@ public class HistoryWorkoutFragment extends Fragment implements CallBack {
 
         if (PreferencesUtils.getUserType().equalsIgnoreCase("Trainee")) {
             getWorkoutHistoryTrainee(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
-        } else if (PreferencesUtils.getUserType().equalsIgnoreCase("Trainee")) {
+        } else if (PreferencesUtils.getUserType().equalsIgnoreCase("coach")) {
             getWorkoutHistoryCoach(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
         }
 

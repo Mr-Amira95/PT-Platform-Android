@@ -198,7 +198,10 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
         }
 
         if (flag.equalsIgnoreCase("Workout")) {
-            getWorkout(ID);
+            if (PreferencesUtils.getUserType().equalsIgnoreCase("Coach"))
+                getWorkoutCoach(ID);
+            else
+                getWorkout(ID);
         } else if (flag.equalsIgnoreCase("log")){
             playinitial(videolink);
 
@@ -209,7 +212,11 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
             }
 
         } else {
-            getExcerisis(ID);
+            if (PreferencesUtils.getUserType().equalsIgnoreCase("coach"))
+                getExcerisisCoach(ID);
+            else
+                getExcerisis(ID);
+
         }
 
         player.addListener(new Player.Listener() {
@@ -304,6 +311,19 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
         HashMap<String ,Object> params=new HashMap<>();
 
         params.put("exercise_id",Exid);
+        params.put("coach_id", PreferencesUtils.getCoach(getContext()).getId());
+        params.put("skip","0");
+
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.workout_videos_URL, AppConstants.SHOW_WORKOUT_VIDS_TAG, VideoWorkout.class, params);
+
+    }
+
+    private void getWorkoutCoach(String Exid){
+
+        HashMap<String ,Object> params=new HashMap<>();
+
+        params.put("exercise_id",Exid);
         params.put("skip","0");
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);
@@ -313,6 +333,18 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
 
 
     private void getExcerisis(String Exid){
+
+        HashMap<String ,Object> params=new HashMap<>();
+
+        params.put("exercise_id",Exid);
+        params.put("coach_id",PreferencesUtils.getCoach(getContext()).getId());
+        params.put("skip","0");
+
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.exercise_videos_URL, AppConstants.exercise_videos_TAG, VideoExercises.class, params);
+    }
+
+    private void getExcerisisCoach(String Exid){
 
         HashMap<String ,Object> params=new HashMap<>();
 
@@ -353,12 +385,13 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
                 VideoExercises videoExercises=(VideoExercises) result;
 
                 if (videoExercises.getData().size()>0){
-//                    if (videoExercises.getData().get(0).getIsFavourite()){
-//                        add_to_favourite.setText("Remove from favourite");
-//                    }
-//                    if (videoExercises.getData().get(0).getIsWorkout()){
-//                        add_to_workout.setText("Remove from Workout");
-//                    }
+                    if (videoExercises.getData().get(0).getIsFavourite()){
+                        add_to_favourite.setText(R.string.remove_favourites);
+                    }
+
+                    if (videoExercises.getData().get(0).getIsWorkout()){
+                        add_to_workout.setText(R.string.remove_workouts);
+                    }
 
                     try {
                         video_view.setDefaultArtwork(drawableFromUrl(videoExercises.getData().get(0).getImage()));
@@ -368,9 +401,11 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
 
 
                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                        desc.setText(Html.fromHtml(videoExercises.getData().get(0).getDescription(),Html.FROM_HTML_MODE_LEGACY));
+                        if (videoExercises.getData().get(0).getDescription() != null)
+                            desc.setText(Html.fromHtml(videoExercises.getData().get(0).getDescription(),Html.FROM_HTML_MODE_LEGACY));
                     } else {
-                        desc.setText(Html.fromHtml(videoExercises.getData().get(0).getDescription()));
+                        if (videoExercises.getData().get(0).getDescription() != null)
+                            desc.setText(Html.fromHtml(videoExercises.getData().get(0).getDescription()));
                     }
 
                     playinitial(videoExercises.getData().get(0).getVideo());
@@ -390,12 +425,13 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
 
                 VideoWorkout videoWorkout = (VideoWorkout) result;
                 if(!videoWorkout.getData().isEmpty()) {
-//                    if (videoWorkout.getData().get(0).getIsFavourite()) {
-//                        add_to_favourite.setText("Remove from favourite");
-//                    }
-//                    if (videoWorkout.getData().get(0).getIsWorkout()) {
-//                        add_to_workout.setText("Remove from Workout");
-//                    }
+                    if (videoWorkout.getData().get(0).getIsFavourite()) {
+                        add_to_favourite.setText(R.string.remove_favourites);
+                    }
+
+                    if (videoWorkout.getData().get(0).getIsWorkout()) {
+                        add_to_workout.setText(R.string.remove_workouts);
+                    }
 
                     if (videoWorkout.getData().size() > 0) {
                         try {
@@ -404,7 +440,8 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
                             e.printStackTrace();
                         }
 
-                        desc.setText(Html.fromHtml(videoWorkout.getData().get(0).getDescription()));
+                        if (videoWorkout.getData().get(0).getDescription() != null)
+                            desc.setText(Html.fromHtml(videoWorkout.getData().get(0).getDescription()));
 
                         playinitial(videoWorkout.getData().get(0).getVideo());
 

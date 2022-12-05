@@ -40,7 +40,7 @@ public class User {
     private String role;
     @SerializedName("avatar")
     @Expose
-    private String avatar;
+    private Object avatar;
     @SerializedName("is_send_notification")
     @Expose
     private boolean notification;
@@ -125,11 +125,11 @@ public class User {
         this.status = status;
     }
 
-    public String getAvatar() {
+    public Object getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(String avatar) {
+    public void setAvatar(Object avatar) {
         this.avatar = avatar;
     }
 

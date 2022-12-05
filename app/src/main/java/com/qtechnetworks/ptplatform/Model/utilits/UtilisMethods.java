@@ -28,12 +28,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -401,6 +401,11 @@ public class UtilisMethods {
         }
     }
 
+    public static String doubleFormat(double num){
+        DecimalFormat df = new DecimalFormat("0.00");
+
+        return df.format(num);
+    }
 
     public static String getTimeChat(String time) {
         try {

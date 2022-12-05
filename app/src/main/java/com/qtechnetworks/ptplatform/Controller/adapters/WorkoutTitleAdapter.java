@@ -51,7 +51,8 @@ public class WorkoutTitleAdapter extends RecyclerView.Adapter<WorkoutTitleAdapte
 
         Datum current= datum.get(position);
 
-        holder.title.setText(current.getTitle().toString());
+        if (current.getTitle() != null)
+            holder.title.setText(current.getTitle().toString());
 
         textViewList.add(holder.title);
 

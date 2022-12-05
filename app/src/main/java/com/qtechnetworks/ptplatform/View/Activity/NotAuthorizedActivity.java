@@ -25,7 +25,7 @@ public class NotAuthorizedActivity extends AppCompatActivity {
         subscribeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(NotAuthorizedActivity.this,MainActivity.class).putExtra("page","shop"));
+                startActivity(new Intent(NotAuthorizedActivity.this,MainActivity.class).putExtra("flag","shop"));
                 finish();
             }
         });

@@ -167,7 +167,7 @@ public class SignInActivity extends AppCompatActivity implements CallBack {
         } else if (PreferencesUtils.getUserType().equalsIgnoreCase("trainee")) {
             orTxt.setVisibility(View.VISIBLE);
             googlelogin_button.setVisibility(View.VISIBLE);
-            facebooklogin_button.setVisibility(View.VISIBLE);
+            facebooklogin_button.setVisibility(View.GONE);
         }
     }
 
@@ -207,16 +207,25 @@ public class SignInActivity extends AppCompatActivity implements CallBack {
 
         Register register = (Register) result;
 
-        PreferencesUtils.setUserToken(register.getData().getToken());
-        PreferencesUtils.setUser(register.getData().getUser(),SignInActivity.this);
-        PreferencesUtils.setPlayerId(OneSignal.getDeviceState().getUserId());
-        if (register.getData().getUser().getRole().equalsIgnoreCase("user"))
-            PreferencesUtils.setUserType("trainee");
-        else
-            PreferencesUtils.setUserType("coach");
+        if (register.getData().getUser().getStatus().equalsIgnoreCase("accept") || register.getData().getUser().getStatus().equalsIgnoreCase("waite")){
 
-        startActivity(new Intent(SignInActivity.this, MainActivity.class));
-        finish();
+            PreferencesUtils.setUserToken(register.getData().getToken());
+            PreferencesUtils.setUser(register.getData().getUser(),SignInActivity.this);
+            PreferencesUtils.setPlayerId(OneSignal.getDeviceState().getUserId());
+
+            if (register.getData().getUser().getRole().equalsIgnoreCase("user"))
+                PreferencesUtils.setUserType("trainee");
+            else
+                PreferencesUtils.setUserType("coach");
+
+            startActivity(new Intent(SignInActivity.this, MainActivity.class));
+            finish();
+
+        } else if (register.getData().getUser().getStatus().equalsIgnoreCase("reject")){
+            Toast.makeText(this, "your account is rejected, contact support", Toast.LENGTH_SHORT).show();
+        } else if  (register.getData().getUser().getStatus().equalsIgnoreCase("requested")){
+            Toast.makeText(this, "Please wait until admin approval", Toast.LENGTH_SHORT).show();
+        }
 
     }
 

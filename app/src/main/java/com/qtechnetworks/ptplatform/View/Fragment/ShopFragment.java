@@ -45,6 +45,12 @@ public class ShopFragment extends Fragment implements CallBack {
     PackageAdapter packageAdapter;
     PackageAdapter subscriptionAdapter;
 
+    ArrayList <Boolean> inShopSubscription = new ArrayList<>();
+    boolean canBuySubscription = true;
+
+    ArrayList <Boolean> inShopPersonal = new ArrayList<>();
+    boolean canBuyPersonal = true;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -95,8 +101,29 @@ public class ShopFragment extends Fragment implements CallBack {
             case AppConstants.PACKAGES_TAG:
                 if(isSuccess) {
                     Subscription packages = (Subscription) result;
-                    packageAdapter = new PackageAdapter(getContext(),packages.getData().getPersonalTraining());
-                    subscriptionAdapter = new PackageAdapter(getContext(),packages.getData().getSubscription());
+
+                    for (int i=0; i<packages.getData().getSubscription().size(); i++){
+                        if (packages.getData().getSubscription().get(i).getUserPackage() != null){
+                            inShopSubscription.add(true);
+                            canBuySubscription = false;
+                        } else {
+                            inShopSubscription.add(false);
+                        }
+
+                    }
+                    subscriptionAdapter = new PackageAdapter(getContext(),packages.getData().getSubscription(), inShopSubscription, canBuySubscription);
+
+
+                    for (int i=0; i<packages.getData().getPersonalTraining().size(); i++){
+                        if (packages.getData().getPersonalTraining().get(i).getUserPackage() != null){
+                            inShopPersonal.add(true);
+                            canBuyPersonal = false;
+                        } else {
+                            inShopPersonal.add(false);
+                        }
+                    }
+                    packageAdapter = new PackageAdapter(getContext(),packages.getData().getPersonalTraining(), inShopPersonal, canBuyPersonal);
+
                     ptPackagesRecyclerview.setAdapter(packageAdapter);
                     subscriptionsPackageRecyclerview.setAdapter(subscriptionAdapter);
                 }

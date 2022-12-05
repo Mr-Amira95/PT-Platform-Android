@@ -77,7 +77,6 @@ public class ChatSingleFragment extends Fragment implements CallBack {
         initials(view);
         clicks();
 
-
         if (PreferencesUtils.getUserType().equalsIgnoreCase("Coach")){
             createChat(String.valueOf(userID));
         } else if (PreferencesUtils.getUserType().equalsIgnoreCase("Trainee")){
@@ -89,9 +88,11 @@ public class ChatSingleFragment extends Fragment implements CallBack {
     }
 
     private void clicks() {
+
         sendIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                messageEditText.setText("");
                 connectSocketSend(chatID, String.valueOf(PreferencesUtils.getUser(getContext()).getId()), messageEditText.getText().toString());
             }
         });
@@ -119,7 +120,6 @@ public class ChatSingleFragment extends Fragment implements CallBack {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         chatRecyclerView.setLayoutManager(linearLayoutManager);
-
     }
 
     private final TrustManager[] trustAllCerts= new TrustManager[] { new X509TrustManager() {
@@ -364,6 +364,7 @@ public class ChatSingleFragment extends Fragment implements CallBack {
     }
 
     private void createChat(String receivedID) {
+
         tag = 2;
 
         HashMap <String,Object> params = new HashMap<>();

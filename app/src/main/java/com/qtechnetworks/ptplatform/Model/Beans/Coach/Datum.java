@@ -17,6 +17,9 @@ public class Datum {
     @SerializedName("avatar")
     @Expose
     private Object avatar;
+    @SerializedName("logo")
+    @Expose
+    private Object logo;
 
     public Integer getId() {
         return id;
@@ -48,6 +51,14 @@ public class Datum {
 
     public void setAvatar(Object avatar) {
         this.avatar = avatar;
+    }
+
+    public Object getLogo() {
+        return logo;
+    }
+
+    public void setLogo(Object logo) {
+        this.logo = logo;
     }
 
 }

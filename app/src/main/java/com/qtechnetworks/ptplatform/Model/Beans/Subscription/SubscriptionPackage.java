@@ -31,6 +31,9 @@ public class SubscriptionPackage  {
         @SerializedName("is_free")
         @Expose
         private boolean isFree;
+        @SerializedName("user_package")
+        @Expose
+        private userPackage userPackage;
 
         public Integer getId() {
             return id;
@@ -94,6 +97,14 @@ public class SubscriptionPackage  {
 
         public void setIsFree(boolean isFree) {
             this.isFree = isFree;
+        }
+
+        public userPackage getUserPackage() {
+            return userPackage;
+        }
+
+        public void setUserPackage(userPackage userPackage) {
+            this.userPackage = userPackage;
         }
 
     }

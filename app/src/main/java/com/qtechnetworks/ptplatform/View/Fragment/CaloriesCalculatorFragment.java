@@ -90,10 +90,10 @@ public class CaloriesCalculatorFragment extends Fragment {
 
                     if(isMale) {
                         double value = ((66.5 + (13.7 * weight) + (5 * height) - (6.8 * age)) * activityFactor);
-                        result.setText(value +getString(R.string.calories_per_day));
+                        result.setText(value + " " +getString(R.string.calories_per_day));
                     } else {
                         double value =((665.5 + (9.6 * weight) + (1.8 * height) - (4.7 * age)) * activityFactor);
-                        result.setText(value +getString(R.string.calories_per_day));
+                        result.setText(value + " " +getString(R.string.calories_per_day));
                     }
                 } else {
                     Toast.makeText(getContext(), R.string.fill_the_above, Toast.LENGTH_SHORT).show();

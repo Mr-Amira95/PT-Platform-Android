@@ -13,7 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_200sdp"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/black"/>
+        android:background="@color/black"
+        android:visibility="gone"/>
 
     <me.relex.circleindicator.CircleIndicator
         android:id="@+id/slider_indicator_unselected"
@@ -25,7 +26,26 @@
         app:ci_drawable_unselected="@drawable/unselected_slider"
         app:layout_constraintBottom_toBottomOf="@id/slider_viewPager"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"/>
+
+    <com.smarteist.autoimageslider.SliderView
+        android:id="@+id/imageSlider"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_200sdp"
+        app:sliderAnimationDuration="1000"
+        app:sliderAutoCycleEnabled="true"
+        app:sliderIndicatorAnimationDuration="1000"
+        app:sliderIndicatorGravity="center_horizontal|bottom"
+        app:sliderIndicatorMargin="15dp"
+        app:sliderIndicatorOrientation="horizontal"
+        app:sliderIndicatorPadding="3dp"
+        app:sliderIndicatorRadius="2dp"
+        app:sliderIndicatorSelectedColor="@color/primary_color"
+        app:sliderIndicatorUnselectedColor="#FFF"
+        app:sliderScrollTimeInSec="3"
+        app:sliderStartAutoCycle="true"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:id="@+id/info_card"
@@ -33,7 +53,7 @@
         android:layout_height="@dimen/_120sdp"
         android:background="@drawable/background_radius_gradient"
         android:layout_marginHorizontal="@dimen/_50sdp"
-        app:layout_constraintTop_toBottomOf="@id/slider_viewPager"
+        app:layout_constraintTop_toBottomOf="@id/imageSlider"
         android:layout_marginTop="@dimen/_8sdp"
         android:visibility="gone"/>
 
@@ -421,7 +441,7 @@
                         android:layout_width="@dimen/_75sdp"
                         android:layout_height="wrap_content"
                         android:maxLines="1"
-                        android:text="History"
+                        android:text="@string/history"
                         android:textSize="@dimen/_8sdp"
                         android:textColor="@color/white"
                         android:gravity="center"/>
@@ -450,8 +470,10 @@
                         android:id="@+id/progress_title"
                         android:layout_width="@dimen/_75sdp"
                         android:layout_height="@dimen/_75sdp"
-                        android:src="@drawable/ic_progress"                    android:scaleType="centerCrop"
-                        android:padding="@dimen/_20sdp" />
+                        android:src="@drawable/ic_progress"
+                        android:scaleType="centerCrop"
+                        android:padding="@dimen/_20sdp"
+                        android:background="@drawable/background_main_category"/>
 
                     <TextView
                         android:id="@+id/categ6_name"
@@ -459,9 +481,38 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:gravity="center"
-                        android:text="Progress"
+                        android:text="@string/progress"
                         android:textSize="@dimen/_8sdp"
                         android:textColor="@color/white"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/languages_layout"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_gravity="center">
+
+                    <ImageView
+                        android:id="@+id/languages_title"
+                        android:layout_width="@dimen/_75sdp"
+                        android:layout_height="@dimen/_75sdp"
+                        android:src="@drawable/languages_icon"
+                        android:padding="@dimen/_20sdp"
+                        android:background="@drawable/background_main_category"/>
+
+                    <TextView
+                        android:id="@+id/languages_icon"
+                        android:layout_width="@dimen/_75sdp"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="@string/language"
+                        android:textSize="@dimen/_8sdp"
+                        android:textColor="@color/white"
+                        android:gravity="center"/>
 
                 </LinearLayout>
 
@@ -478,8 +529,10 @@
                         android:id="@+id/logout_title"
                         android:layout_width="@dimen/_75sdp"
                         android:layout_height="@dimen/_75sdp"
-                        android:src="@drawable/ic_history"
-                        android:padding="@dimen/_20sdp"
+                        android:src="@drawable/logout_home_icon"
+                        android:paddingTop="@dimen/_20sdp"
+                        android:paddingBottom="@dimen/_20sdp"
+                        android:paddingRight="@dimen/_10sdp"
                         android:background="@drawable/background_main_category"/>
 
                     <TextView
@@ -487,25 +540,14 @@
                         android:layout_width="@dimen/_75sdp"
                         android:layout_height="wrap_content"
                         android:maxLines="1"
-                        android:text="Logout"
+                        android:text="@string/logout"
                         android:textSize="@dimen/_8sdp"
                         android:textColor="@color/white"
                         android:gravity="center"/>
 
                 </LinearLayout>
 
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:gravity="center"
-                    android:layout_gravity="center">
-
-                </LinearLayout>
-
-                </LinearLayout>
+            </LinearLayout>
 
         </LinearLayout>
 

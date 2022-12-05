@@ -50,7 +50,8 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.ViewHolder>  {
 
         Datum current= data.get(position);
 
-        holder.logTitle.setText(current.getTitle().toString());
+        if (current.getTitle() != null)
+        holder.logTitle.setText(current.getTitle());
 
         try{
 
@@ -63,7 +64,8 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.ViewHolder>  {
         holder.logLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setFragment(new ExercisesSingleFragment(),current.getId().toString(),current.getVideo(),current.getTitle().toString(),current.getDescription().toString());
+                if (current.getTitle() != null || current.getDescription() != null)
+                setFragment(new ExercisesSingleFragment(),current.getId().toString(),current.getVideo(),current.getTitle(),current.getDescription());
             }
         });
 

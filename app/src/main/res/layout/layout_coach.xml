@@ -13,7 +13,8 @@
         android:layout_height="@dimen/_175sdp"
         android:padding="10dp"
         android:scaleType="centerCrop"
-        app:riv_corner_radius="@dimen/_15sdp"/>
+        app:riv_corner_radius="@dimen/_15sdp"
+        android:src="@color/black"/>
 
     <TextView
         android:id="@+id/trainer_name"

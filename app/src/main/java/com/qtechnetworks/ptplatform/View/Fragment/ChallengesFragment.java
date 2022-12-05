@@ -36,9 +36,7 @@ public class ChallengesFragment extends Fragment implements CallBack {
         ChallengesFragment.userID = userID;
     }
 
-    public ChallengesFragment() {
-
-    }
+    public ChallengesFragment() { }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

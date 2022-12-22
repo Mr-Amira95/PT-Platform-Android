@@ -62,7 +62,7 @@ public class TreineeAdapter extends RecyclerView.Adapter<TreineeAdapter.ViewHold
         holder.trainerName.setText(current.getName());
 
         try {
-            Glide.with(mContext).load(current.getAvatar()).placeholder(R.drawable.logo).into(holder.trainerImage);
+            Glide.with(mContext).load(current.getAvatar()).placeholder(R.drawable.user_default).into(holder.trainerImage);
         }catch (Exception e){
             e.printStackTrace();
         }

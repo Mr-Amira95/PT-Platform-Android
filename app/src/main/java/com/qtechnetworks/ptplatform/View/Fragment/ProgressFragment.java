@@ -42,7 +42,7 @@ public class ProgressFragment extends Fragment  implements CallBack {
     private TextView weightTitle, weightValue, muscleTitle, muscleValue, fatTitle, fatValue, waterTitle, waterValue, activeCaloriesTitle, activeCaloriesValue, stepsTitle, stepsValue,
             beforeDate,afterDate,beforeNick,afterNick,beforeChest,afterChest,beforeLeftArm,afterLeftArm,
             beforeRightArm,afterRightArm,beforeWaist,afterWaist,beforeHips,afterHips,
-            beforeLeftThigh,afterLeftThigh,beforeLeftCalf,afterLeftCalf,beforeRightCalf,
+            beforeLeftThigh,afterLeftThigh, beforeRightThigh,afterRightThigh,beforeLeftCalf,afterLeftCalf,beforeRightCalf,
             afterRightCalf,beforeBelly,afterBelly,beforeUpperBelly,afterUpperBelly,beforelowerBelly,
             afterlowerBelly,fatPercentage,musclePercentae,weightPercentage,waterPercentage;
 
@@ -208,7 +208,9 @@ public class ProgressFragment extends Fragment  implements CallBack {
         beforeHips=view.findViewById(R.id.hips);
         afterHips=view.findViewById(R.id.hips_after);
         beforeLeftThigh=view.findViewById(R.id.left_thigh);
+        beforeRightThigh=view.findViewById(R.id.right_thigh);
         afterLeftThigh=view.findViewById(R.id.left_thigh_after);
+        afterRightThigh=view.findViewById(R.id.right_thigh_after);
         beforeLeftCalf=view.findViewById(R.id.left_calf);
         afterLeftCalf=view.findViewById(R.id.left_calf_after);
         beforeRightCalf=view.findViewById(R.id.right_calf);
@@ -302,8 +304,8 @@ public class ProgressFragment extends Fragment  implements CallBack {
                     for (Datum myp :myProgress.getData()) {
                         if(myp.getFat()!=null){
 
-                            fatChart.setInnerValueString(UtilisMethods.doubleFormat((myp.getPercentage().getValue())));
-                            if (myp.getPercentage().getValue() < 100){
+                            fatChart.setInnerValueString(UtilisMethods.doubleFormat((myp.getPercentage().getValue())) + "%");
+                            if (myp.getPercentage().getValue() < 100) {
                                 fatChart.addPieSlice(new PieModel( myp.getPercentage().getValue(), Color.parseColor("#FFFF00"))) ;
                                 fatChart.addPieSlice(new PieModel( 100 - myp.getPercentage().getValue(), Color.parseColor("#FFFFFF"))) ;
                             } else {
@@ -327,7 +329,7 @@ public class ProgressFragment extends Fragment  implements CallBack {
 
                         if(myp.getMuscle()!=null){
 
-                            muscleChart.setInnerValueString(UtilisMethods.doubleFormat((myp.getPercentage().getValue())));
+                            muscleChart.setInnerValueString(UtilisMethods.doubleFormat((myp.getPercentage().getValue())) + "%");
                             if (myp.getPercentage().getValue() < 100){
                                 muscleChart.addPieSlice(new PieModel( myp.getPercentage().getValue(), Color.parseColor("#FF0000"))) ;
                                 muscleChart.addPieSlice(new PieModel( 100 - myp.getPercentage().getValue(), Color.parseColor("#FFFFFF"))) ;
@@ -340,10 +342,10 @@ public class ProgressFragment extends Fragment  implements CallBack {
                             muscleValue.setText(UtilisMethods.doubleFormat((myp.getMuscle())));
 
 
-                            if(myp.getPercentage().getType().equals("decrease")){
+                            if (myp.getPercentage().getType().equals("decrease")) {
                                 muscleDecrease.setVisibility(View.VISIBLE);
                                 muscleIncrease.setVisibility(View.GONE);
-                            }else{
+                            } else {
                                 muscleDecrease.setVisibility(View.GONE);
                                 muscleIncrease.setVisibility(View.VISIBLE);
                             }
@@ -354,7 +356,7 @@ public class ProgressFragment extends Fragment  implements CallBack {
 //
                         if(myp.getWeight()!=null){
 
-                            weightChart.setInnerValueString(UtilisMethods.doubleFormat((myp.getPercentage().getValue())));
+                            weightChart.setInnerValueString(UtilisMethods.doubleFormat((myp.getPercentage().getValue())) + "%");
                             if (myp.getPercentage().getValue() < 100){
                                 weightChart.addPieSlice(new PieModel( myp.getPercentage().getValue(), Color.parseColor("#00FF00"))) ;
                                 weightChart.addPieSlice(new PieModel( 100 - myp.getPercentage().getValue(), Color.parseColor("#FFFFFF"))) ;
@@ -388,9 +390,9 @@ public class ProgressFragment extends Fragment  implements CallBack {
 //                            }
                         }
 //
-                        if(myp.getWater()!=null){
+                        if(myp.getWater()!=null) {
 
-                            waterChart.setInnerValueString(UtilisMethods.doubleFormat((myp.getPercentage().getValue())));
+                            waterChart.setInnerValueString(UtilisMethods.doubleFormat((myp.getPercentage().getValue())) + "%");
                             if (myp.getPercentage().getValue() < 100){
                                 waterChart.addPieSlice(new PieModel( myp.getPercentage().getValue(), Color.parseColor("#0000FF"))) ;
                                 waterChart.addPieSlice(new PieModel( 100 - myp.getPercentage().getValue(), Color.parseColor("#FFFFFF"))) ;
@@ -440,7 +442,6 @@ public class ProgressFragment extends Fragment  implements CallBack {
                         com.qtechnetworks.ptplatform.Model.Beans.BodyMeasurement.Datum afterMeasurement=bodyMeasurement.getData().get(0);
                         if (beforeMeasurement!= null) {
 
-                            //TODO Edit Names Like Nick
                             beforeNick.append(UtilisMethods.doubleFormat(beforeMeasurement.getNeck()));
                             beforeChest.append(UtilisMethods.doubleFormat(beforeMeasurement.getChest()));
                             beforeLeftArm.append(UtilisMethods.doubleFormat(beforeMeasurement.getLeftArm()));
@@ -448,6 +449,7 @@ public class ProgressFragment extends Fragment  implements CallBack {
                             beforeWaist.append(UtilisMethods.doubleFormat(beforeMeasurement.getWaist()));
                             beforeHips.append(UtilisMethods.doubleFormat(beforeMeasurement.getHips()));
                             beforeLeftThigh.append(UtilisMethods.doubleFormat(beforeMeasurement.getLeftThigh()));
+                            beforeRightThigh.append(UtilisMethods.doubleFormat(beforeMeasurement.getRightThigh()));
                             beforeLeftCalf.append(UtilisMethods.doubleFormat(beforeMeasurement.getLiftCalf()));
                             beforeRightCalf.append(UtilisMethods.doubleFormat(beforeMeasurement.getRightCalf()));
                             beforeDate.append(changeDateFormat(beforeMeasurement.getDate()));
@@ -464,6 +466,7 @@ public class ProgressFragment extends Fragment  implements CallBack {
                             afterWaist.append(UtilisMethods.doubleFormat(afterMeasurement.getWaist()));
                             afterHips.append(UtilisMethods.doubleFormat(afterMeasurement.getHips()));
                             afterLeftThigh.append(UtilisMethods.doubleFormat(afterMeasurement.getLeftThigh()));
+                            afterRightThigh.append(UtilisMethods.doubleFormat(afterMeasurement.getRightThigh()));
                             afterLeftCalf.append(UtilisMethods.doubleFormat(afterMeasurement.getLiftCalf()));
                             afterRightCalf.append(UtilisMethods.doubleFormat(afterMeasurement.getRightCalf()));
                             afterDate.append(changeDateFormat(afterMeasurement.getDate()));
@@ -483,6 +486,7 @@ public class ProgressFragment extends Fragment  implements CallBack {
                             beforeWaist.append(UtilisMethods.doubleFormat(beforeMeasurement.getWaist()));
                             beforeHips.append(UtilisMethods.doubleFormat(beforeMeasurement.getHips()));
                             beforeLeftThigh.append(UtilisMethods.doubleFormat(beforeMeasurement.getLeftThigh()));
+                            beforeRightThigh.append(UtilisMethods.doubleFormat(beforeMeasurement.getRightThigh()));
                             beforeLeftCalf.append(UtilisMethods.doubleFormat(beforeMeasurement.getLiftCalf()));
                             beforeRightCalf.append(UtilisMethods.doubleFormat(beforeMeasurement.getRightCalf()));
                             beforeDate.append(changeDateFormat(beforeMeasurement.getDate()));

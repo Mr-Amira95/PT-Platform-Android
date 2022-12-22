@@ -283,7 +283,7 @@ public class MainCoachFragment extends Fragment implements CallBack {
 
                     General general = (General) result;
 
-                    Toast.makeText(getContext(), general.getData(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), general.getData().toString(), Toast.LENGTH_SHORT).show();
                     PreferencesUtils.clearDefaults(getContext());
                     startActivity(new Intent(getContext(), SplashActivity.class));
                     getActivity().finish();

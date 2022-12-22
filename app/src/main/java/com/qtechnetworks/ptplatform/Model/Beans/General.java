@@ -7,7 +7,7 @@ public class General {
 
     @SerializedName("data")
     @Expose
-    private String data;
+    private Object data;
     @SerializedName("success")
     @Expose
     private Boolean success;
@@ -15,11 +15,11 @@ public class General {
     @Expose
     private Object errors;
 
-    public String getData() {
+    public Object getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(Object data) {
         this.data = data;
     }
 

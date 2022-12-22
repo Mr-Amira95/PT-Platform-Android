@@ -20,6 +20,9 @@ public class Datum {
     @SerializedName("logo")
     @Expose
     private Object logo;
+    @SerializedName("is_subscription")
+    @Expose
+    private boolean isSubscription;
 
     public Integer getId() {
         return id;
@@ -59,6 +62,14 @@ public class Datum {
 
     public void setLogo(Object logo) {
         this.logo = logo;
+    }
+
+    public boolean getSubscription() {
+        return isSubscription;
+    }
+
+    public void setSubscription(boolean isSubscription) {
+        this.isSubscription = isSubscription;
     }
 
 }

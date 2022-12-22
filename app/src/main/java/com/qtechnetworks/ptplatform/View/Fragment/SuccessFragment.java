@@ -35,7 +35,7 @@ public class SuccessFragment extends Fragment {
 
     Button doneBtn, addToCalenderBtn;
 
-    public SuccessFragment(String flag) {
+    public SuccessFragment (String flag) {
         this.flag = flag;
     }
 
@@ -60,11 +60,13 @@ public class SuccessFragment extends Fragment {
     }
 
     private void clicks() {
+
         doneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getContext(), MainActivity.class);
                 startActivity(i);
+                getActivity().finish();
             }
         });
 

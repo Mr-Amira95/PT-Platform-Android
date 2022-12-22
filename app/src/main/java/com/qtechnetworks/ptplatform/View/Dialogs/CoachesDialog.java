@@ -66,6 +66,7 @@ public class CoachesDialog extends Dialog implements CallBack {
         HashMap<String ,Object> params=new HashMap<>();
 
         params.put("skip","0");
+        params.put("filter","assigned_coaches");
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);
         MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.users_coaches_URL, AppConstants.users_coaches_TAG, Coach.class, params);

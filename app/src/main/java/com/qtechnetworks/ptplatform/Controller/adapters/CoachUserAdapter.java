@@ -1,6 +1,7 @@
 package com.qtechnetworks.ptplatform.Controller.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.qtechnetworks.ptplatform.Model.utilits.PrefKeys;
 import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
+import com.qtechnetworks.ptplatform.View.Activity.NotAuthorizedActivity;
 import com.qtechnetworks.ptplatform.View.Fragment.MainFragment;
 
 import java.util.List;
@@ -52,15 +54,22 @@ public class CoachUserAdapter extends RecyclerView.Adapter<CoachUserAdapter.View
         holder.coachLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                PreferencesUtils.setCoach(current, context);
-                setFragment(new MainFragment(),current.getId().toString(),current.getLastName(),String.valueOf(current.getAvatar()));
+                if (current.getSubscription()) {
+                    PreferencesUtils.setCoach(current, context);
+                    setFragment(new MainFragment(),current.getId().toString(),current.getLastName(),String.valueOf(current.getAvatar()));
+                } else {
+                    Intent i = new Intent(context, MainActivity.class);
+                    i.putExtra("flag","shop");
+                    String coachID = String.valueOf(current.getId());
+                    i.putExtra("id", coachID);
+                    ((MainActivity) context).startActivity(i);
+                }
             }
         });
 
 
         try{
-            Glide.with(context).load(current.getAvatar()).placeholder(R.drawable.logo).into(holder.trainerImage);
+            Glide.with(context).load(current.getAvatar()).placeholder(R.drawable.user_default).into(holder.trainerImage);
         }catch (Exception e){
             e.printStackTrace();
         }

@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 
 import com.qtechnetworks.ptplatform.R;
-import com.qtechnetworks.ptplatform.View.Fragment.ShopFragment;
 
 public class NotAuthorizedActivity extends AppCompatActivity {
     Button subscribeBtn;

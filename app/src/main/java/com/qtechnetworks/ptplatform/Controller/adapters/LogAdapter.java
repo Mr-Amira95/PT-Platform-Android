@@ -64,8 +64,8 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.ViewHolder>  {
         holder.logLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (current.getTitle() != null || current.getDescription() != null)
-                setFragment(new ExercisesSingleFragment(),current.getId().toString(),current.getVideo(),current.getTitle(),current.getDescription());
+//                if (current.getTitle() != null || current.getDescription() != null)
+                    setFragment(new ExercisesSingleFragment(),current.getId().toString(),current.getVideo(),current.getTitle(),current.getDescription());
             }
         });
 

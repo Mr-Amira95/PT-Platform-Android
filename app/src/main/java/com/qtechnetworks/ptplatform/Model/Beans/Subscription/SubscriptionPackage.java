@@ -28,12 +28,21 @@ public class SubscriptionPackage  {
         @SerializedName("style")
         @Expose
         private String style;
+        @SerializedName("purchase_apple_id")
+        @Expose
+        private String purchaseAppleId;
+        @SerializedName("purchase_android_id")
+        @Expose
+        private String purchaseAndroidId;
         @SerializedName("is_free")
         @Expose
         private boolean isFree;
         @SerializedName("user_package")
         @Expose
         private userPackage userPackage;
+        @SerializedName("price_object")
+        @Expose
+        private priceObject priceObject;
 
         public Integer getId() {
             return id;
@@ -49,6 +58,22 @@ public class SubscriptionPackage  {
 
         public void setName(String name) {
             this.name = name;
+        }
+
+        public String getPurchaseAndroidId() {
+            return purchaseAndroidId;
+        }
+
+        public void setPurchaseAndroidId(String purchaseAndroidId) {
+            this.purchaseAndroidId = purchaseAndroidId;
+        }
+
+        public String getPurchaseAppleId() {
+            return purchaseAppleId;
+        }
+
+        public void setPurchaseAppleId(String purchaseAppleId) {
+            this.purchaseAppleId = purchaseAppleId;
         }
 
         public String getStyle() {
@@ -105,6 +130,14 @@ public class SubscriptionPackage  {
 
         public void setUserPackage(userPackage userPackage) {
             this.userPackage = userPackage;
+        }
+
+        public priceObject getPriceObject() {
+            return priceObject;
+        }
+
+        public void setPriceObject(priceObject priceObject) {
+            this.priceObject = priceObject;
         }
 
     }

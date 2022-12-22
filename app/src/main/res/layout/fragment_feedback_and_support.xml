@@ -51,7 +51,8 @@
         android:background="@drawable/background_radius_10"
         android:backgroundTint="@color/white"
         android:textColor="@color/backapp"
-        android:hint="@string/title" />
+        android:hint="@string/title"
+        android:textColorHint="@color/color_hint"/>
 
     <EditText
         android:id="@+id/phone_edittext"
@@ -95,7 +96,8 @@
         android:padding="@dimen/_10sdp"
         android:layout_marginHorizontal="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_16sdp"
-        android:hint="@string/message" />
+        android:hint="@string/message"
+        android:textColorHint="@color/color_hint" />
 
     <Button
         android:id="@+id/send_button"

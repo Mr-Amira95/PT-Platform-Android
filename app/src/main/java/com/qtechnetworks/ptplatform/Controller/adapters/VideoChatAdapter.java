@@ -63,7 +63,7 @@ public class VideoChatAdapter extends RecyclerView.Adapter<VideoChatAdapter.View
         Datum current= datum.get(position);
 
         holder.dateTime.setText(current.getDate()+" / "+current.getTime());
-        holder.sessionName.setText(PreferencesUtils.getCoach(context).getFirstName());
+        holder.sessionName.setText(PreferencesUtils.getCoach(context).getLastName());
 
         holder.joinSessionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,8 +73,8 @@ public class VideoChatAdapter extends RecyclerView.Adapter<VideoChatAdapter.View
                         Intent intent = new Intent(Intent.ACTION_VIEW,
                                 Uri.parse(current.getCoachTimeReservation().getZoom().getData().getStartUrl()));
                         try{
-                            context.startActivity(intent);}
-                        catch(Exception e) {
+                            context.startActivity(intent);
+                        } catch(Exception e) {
                             Toast.makeText(view.getContext(), "Can't start Video chat", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }

@@ -49,6 +49,8 @@ public class ExercisesFragment extends Fragment implements CallBack {
     public static GroupResults exercise;
     public static ExercisesAdapter exercisesAdapter;
 
+    public static int counter = 0;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,7 +117,8 @@ public class ExercisesFragment extends Fragment implements CallBack {
 
         HashMap<String ,Object> params = new HashMap<>();
 
-        params.put("coach_id",coachid);
+        params.put("coach_id", coachid);
+        params.put("skip", counter);
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);
         MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.section_exercise_URL, AppConstants.section_exercise_TAG, GroupResults.class, params);
@@ -153,23 +156,18 @@ public class ExercisesFragment extends Fragment implements CallBack {
     public void onNext(int tag, boolean isSuccess, Object result) {
 
         if(isSuccess) {
-            switch (tag) {
-                case AppConstants.section_exercise_TAG:
-                    exercise = (GroupResults) result;
 
-                    if(exercise.getData().size()>0) {
-                        groupID = exercise.getData().get(0).getId();
-                        setGroupName();
-                        setItems(String.valueOf(groupID), getContext());
-                    } else {
-                        Toast.makeText(getContext(), R.string.there_are_no_exercises_to_show, Toast.LENGTH_SHORT).show();
-                    }
-                    break;
+            exercise = (GroupResults) result;
+            counter += exercise.getData().size();
 
+            if(exercise.getData().size()>0) {
+                groupID = exercise.getData().get(0).getId();
+                setGroupName();
+                setItems(String.valueOf(groupID), getContext());
+            } else {
+                Toast.makeText(getContext(), R.string.there_are_no_exercises_to_show, Toast.LENGTH_SHORT).show();
             }
         }
-
-
     }
 
     @Override

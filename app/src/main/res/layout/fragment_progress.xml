@@ -85,7 +85,7 @@
                         android:layout_gravity="center"
                         android:layout_marginEnd="@dimen/_5sdp"
                         android:gravity="center"
-                        android:text="Fat"
+                        android:text="@string/fat"
                         android:textColor="@color/white">
 
 
@@ -585,7 +585,6 @@
                     android:layout_marginTop="@dimen/_20sdp"
                     android:paddingHorizontal="@dimen/_5sdp"
                     android:paddingVertical="@dimen/_2sdp"
-                    android:text="@string/date"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_10sdp"
                     android:gravity="center"/>
@@ -708,6 +707,18 @@
                     android:textSize="@dimen/_10sdp" />
 
                 <TextView
+                    android:id="@+id/right_thigh"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/background_white_border"
+                    android:paddingHorizontal="@dimen/_5sdp"
+                    android:paddingVertical="@dimen/_2sdp"
+                    android:text="@string/right_thigh"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_10sdp" />
+
+                <TextView
                     android:id="@+id/left_calf"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -777,7 +788,6 @@
                     android:layout_marginTop="@dimen/_20sdp"
                     android:paddingHorizontal="@dimen/_5sdp"
                     android:paddingVertical="@dimen/_2sdp"
-                    android:text="@string/date"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_10sdp"
                     android:gravity="center"/>
@@ -895,6 +905,18 @@
                     android:paddingHorizontal="@dimen/_5sdp"
                     android:paddingVertical="@dimen/_2sdp"
                     android:text="@string/left_thigh"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_10sdp" />
+
+                <TextView
+                    android:id="@+id/right_thigh_after"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/background_white_border"
+                    android:paddingHorizontal="@dimen/_5sdp"
+                    android:paddingVertical="@dimen/_2sdp"
+                    android:text="@string/right_thigh"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_10sdp" />
 

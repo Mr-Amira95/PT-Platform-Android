@@ -100,24 +100,24 @@ public class PersonalTrainingTraineeFragment extends Fragment implements CallBac
         imagesRecyclerview = view.findViewById(R.id.image_recyclerView);
         notesRecyclerview = view.findViewById(R.id.notes_recyclerView);
 
-        GridLayoutManager linearLayoutManager = new GridLayoutManager(getContext(), 3);
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         assignedWorkoutsRecyclerview.setLayoutManager(linearLayoutManager);
 
-        GridLayoutManager linearLayoutManager1 = new GridLayoutManager(getContext(), 3);
-        linearLayoutManager1.setOrientation(LinearLayoutManager.VERTICAL);
+        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getContext());
+        linearLayoutManager1.setOrientation(LinearLayoutManager.HORIZONTAL);
         assignedMealsRecyclerview.setLayoutManager(linearLayoutManager1);
 
-        GridLayoutManager linearLayoutManager2 = new GridLayoutManager(getContext(), 3);
-        linearLayoutManager2.setOrientation(LinearLayoutManager.VERTICAL);
+        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(getContext());
+        linearLayoutManager2.setOrientation(LinearLayoutManager.HORIZONTAL);
         videosRecyclerview.setLayoutManager(linearLayoutManager2);
 
-        GridLayoutManager linearLayoutManager3 = new GridLayoutManager(getContext(), 3);
-        linearLayoutManager3.setOrientation(LinearLayoutManager.VERTICAL);
+        LinearLayoutManager linearLayoutManager3 = new LinearLayoutManager(getContext());
+        linearLayoutManager3.setOrientation(LinearLayoutManager.HORIZONTAL);
         imagesRecyclerview.setLayoutManager(linearLayoutManager3);
 
-        GridLayoutManager linearLayoutManager4 = new GridLayoutManager(getContext(), 3);
-        linearLayoutManager4.setOrientation(LinearLayoutManager.VERTICAL);
+        LinearLayoutManager linearLayoutManager4 = new LinearLayoutManager(getContext());
+        linearLayoutManager4.setOrientation(LinearLayoutManager.HORIZONTAL);
         notesRecyclerview.setLayoutManager(linearLayoutManager4);
 
         getworkout();

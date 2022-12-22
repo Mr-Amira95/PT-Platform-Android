@@ -28,8 +28,12 @@ public class CheckoutWebviewFragment extends Fragment {
     FreePackageResults paymentResult;
     WebView paymentWebview;
 
-    public CheckoutWebviewFragment(FreePackageResults paymentResult){
+    int counter = 0;
+    String flag;
+
+    public CheckoutWebviewFragment(FreePackageResults paymentResult, String flag){
         this.paymentResult=paymentResult;
+        this.flag=flag;
     }
 
     @Override
@@ -68,11 +72,14 @@ public class CheckoutWebviewFragment extends Fragment {
             @Override
             public void onLoadResource(WebView view, String url) {
 
-                if (url.contains("payment/success")) {
-                    setFragment(new SuccessFragment("Checkout"));
+                if (url.contains("success")) {
+                    counter++;
+                    if (!flag.equalsIgnoreCase("paypal") || counter > 3) {
+                        setFragment(new SuccessFragment("Checkout"));
+                    }
                 }
 
-                if (url.contains("payment/error")) {
+                if (url.contains("error")) {
                     Toast.makeText(getContext(), R.string.payment_failed, Toast.LENGTH_SHORT).show();
                     getFragmentManager().popBackStack();
                 }
@@ -83,11 +90,11 @@ public class CheckoutWebviewFragment extends Fragment {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
 
-                if (url.contains("payment/success")) {
+                if (url.contains("success")) {
                     setFragment(new SuccessFragment("Checkout"));
                 }
 
-                if (url.contains("payment/error")) {
+                if (url.contains("error")) {
                     Toast.makeText(getContext(), R.string.payment_failed, Toast.LENGTH_SHORT).show();
                     getFragmentManager().popBackStack();
                 }
@@ -104,7 +111,6 @@ public class CheckoutWebviewFragment extends Fragment {
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.home_frame, fragment)
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                .addToBackStack(null)
                 .commit();
     }
 

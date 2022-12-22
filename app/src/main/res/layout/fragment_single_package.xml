@@ -22,13 +22,26 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/checkout_btn"
+        android:layout_marginTop="@dimen/_50sdp"
+        android:layout_marginVertical="@dimen/_10sdp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/package_info_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingVertical="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_50sdp"
         android:background="@color/dark_grey"
         app:layout_constraintTop_toBottomOf="@id/title"
         app:layout_constraintStart_toStartOf="parent">
@@ -121,7 +134,8 @@
             android:text="@string/credit_card"
             android:textColor="@color/white"
             android:checked="true"
-            android:buttonTint="@color/primary_color"/>
+            android:buttonTint="@color/primary_color"
+            android:gravity="center_vertical"/>
 
         <RadioButton
             android:id="@+id/paypal_radiobutton"
@@ -130,7 +144,8 @@
             android:layout_height="wrap_content"
             android:text="@string/paypal"
             android:textColor="@color/white"
-            android:buttonTint="@color/primary_color"/>
+            android:buttonTint="@color/primary_color"
+            android:gravity="center_vertical"/>
 
         <RadioButton
             android:id="@+id/in_app_radiobutton"
@@ -140,7 +155,8 @@
             android:text="@string/in_app_purchase"
             android:textColor="@color/white"
             android:buttonTint="@color/primary_color"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            android:gravity="center_vertical"/>
 
     </RadioGroup>
 
@@ -257,7 +273,7 @@
         android:maxLines="1"
         android:inputType="text"
         android:layout_margin="@dimen/_20sdp"
-        app:layout_constraintBottom_toTopOf="@id/checkout_btn"/>
+        app:layout_constraintBottom_toTopOf="@id/agreement"/>
 
     <Button
         android:id="@+id/promo_code_button"
@@ -270,6 +286,24 @@
         app:layout_constraintTop_toTopOf="@id/promo_code"
         app:layout_constraintBottom_toBottomOf="@id/promo_code"/>
 
+        <androidx.appcompat.widget.AppCompatCheckBox
+            android:id="@+id/agreement"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/promo_code_button"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/white"
+            android:text="I agree that I will lose the current subscription"
+            android:buttonTint="@color/white"
+            android:paddingStart="@dimen/_10sdp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
     <Button
         android:id="@+id/checkout_btn"
@@ -283,7 +317,5 @@
         android:fontFamily="@font/aeonikbold"
         android:textColor="@color/white"
         android:textAllCaps="false"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

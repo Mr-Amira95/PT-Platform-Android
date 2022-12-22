@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,6 +22,7 @@ import com.qtechnetworks.ptplatform.Model.utilits.EndlessRecyclerViewScrollListe
 import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
+import com.qtechnetworks.ptplatform.View.Fragment.ExercisesFragment;
 
 import java.util.HashMap;
 import java.util.List;
@@ -113,6 +116,7 @@ public class ExercisesAdapter extends RecyclerView.Adapter<ExercisesAdapter.View
     public void onNext(int tag, boolean isSuccess, Object result) {
 
         ExercisesResults exercisesResults = (ExercisesResults) result;
+
         if(!exercisesResults.getData().isEmpty()) {
             for (int j = 0; j < data.size(); j++) {
                 if (data.get(j).getId() == selectedCategory) {
@@ -149,5 +153,14 @@ public class ExercisesAdapter extends RecyclerView.Adapter<ExercisesAdapter.View
             exercise_recyclerview=itemView.findViewById(R.id.exercise_recyclerview);
         }
     }
+
+//    @Override
+//    public int getItemViewType(int position) {
+//        if (position == ExercisesFragment.counter)
+//
+//        Toast.makeText(context, position + " Items", Toast.LENGTH_SHORT).show();
+//        return position;
+//    }
+
 
 }

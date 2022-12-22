@@ -19,6 +19,7 @@ import com.qtechnetworks.ptplatform.View.Fragment.HomeFragment;
 import com.qtechnetworks.ptplatform.View.Fragment.MainCoachFragment;
 import com.qtechnetworks.ptplatform.View.Fragment.MainFragment;
 import com.qtechnetworks.ptplatform.View.Fragment.ProfileFragment;
+import com.qtechnetworks.ptplatform.View.Fragment.ShopFragment;
 
 public class MainActivity extends AppCompatActivity {
 

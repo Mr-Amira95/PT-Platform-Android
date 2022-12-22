@@ -4,14 +4,19 @@ import static com.qtechnetworks.ptplatform.View.Fragment.ExercisesSingleFragment
 import static com.qtechnetworks.ptplatform.View.Fragment.ExercisesSingleFragment.add_to_workout;
 import static com.qtechnetworks.ptplatform.View.Fragment.FoodAddFragment.*;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -27,6 +32,7 @@ import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.Model.utilits.UtilisMethods;
 import com.qtechnetworks.ptplatform.R;
+import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 import com.qtechnetworks.ptplatform.View.Fragment.ExercisesSingleFragment;
 
 import java.util.HashMap;
@@ -91,6 +97,31 @@ public class FoodDialog extends Dialog implements CallBack {
                 getFood();
             }
         });
+
+        searchBar.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                if (i == EditorInfo.IME_ACTION_SEARCH) {
+                    hideKeyboard((MainActivity) context);
+                    getFood();
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
+
+    public static void hideKeyboard(Activity activity) {
+
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+
+//        View view = activity.getCurrentFocus();
+//
+//        if (view == null) {
+//            view = new View(activity);
+//        }
+//        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     @Override

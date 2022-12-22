@@ -42,7 +42,7 @@ import io.reactivex.disposables.Disposable;
 public class HistoryNutritionFragment extends Fragment implements CallBack {
 
     RecyclerView nutritionRecyclerviewBreakfast, nutritionRecyclerviewLunch, nutritionRecyclerviewDinner, nutritionRecyclerviewSnacks, nutritionRecyclerviewSupplements ;
-    TextView selectedDate, progressTxt;
+    TextView selectedDate, progressTxt, breakfastTitle, launchTitle, dinnerTitle, SnacksTitle, SupplementsTitle;
     DatePickerDialog StartTime;
 
     ProgressBar progressBar;
@@ -112,6 +112,12 @@ public class HistoryNutritionFragment extends Fragment implements CallBack {
     }
 
     private void initial(View view) {
+
+        breakfastTitle=view.findViewById(R.id.breakfast_title);
+        launchTitle=view.findViewById(R.id.lunch_title);
+        dinnerTitle=view.findViewById(R.id.dinner_title);
+        SnacksTitle=view.findViewById(R.id.snacks_title);
+        SupplementsTitle=view.findViewById(R.id.supplement_title);
 
         progressBar=view.findViewById(R.id.targetprogressBar);
         carbChart = view.findViewById(R.id.carbs_chart);
@@ -206,6 +212,37 @@ public class HistoryNutritionFragment extends Fragment implements CallBack {
             carbChart.setInnerValueString(foodhome.getData().getUser().getTargetCarb().toString());
             fatChart.setInnerValueString(foodhome.getData().getUser().getTargetFat().toString());
             proteinChart.setInnerValueString(foodhome.getData().getUser().getTargetProtein().toString());
+
+            if (foodhome.getData().getFood().getBreakfast().size() >0){
+                breakfastTitle.setVisibility(View.VISIBLE);
+            } else {
+                breakfastTitle.setVisibility(View.GONE);
+            }
+
+            if (foodhome.getData().getFood().getLunch().size() >0){
+                launchTitle.setVisibility(View.VISIBLE);
+            } else {
+                launchTitle.setVisibility(View.GONE);
+            }
+
+            if (foodhome.getData().getFood().getDinner().size() >0){
+                dinnerTitle.setVisibility(View.VISIBLE);
+            } else {
+                dinnerTitle.setVisibility(View.GONE);
+            }
+
+            if (foodhome.getData().getFood().getSnack().size() >0){
+                SnacksTitle.setVisibility(View.VISIBLE);
+            } else {
+                SnacksTitle.setVisibility(View.GONE);
+            }
+
+            if (foodhome.getData().getFood().getSupplements().size() >0){
+                SupplementsTitle.setVisibility(View.VISIBLE);
+            } else {
+                SupplementsTitle.setVisibility(View.GONE);
+            }
+
 
             NutritionHistoryAdapter nutritionHistoryAdapter1 = new NutritionHistoryAdapter(getContext(), foodhome.getData().getFood().getBreakfast(), "Breakfast");
             nutritionRecyclerviewBreakfast.setAdapter(nutritionHistoryAdapter1);

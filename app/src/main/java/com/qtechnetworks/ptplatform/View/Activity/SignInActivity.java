@@ -45,6 +45,8 @@ public class SignInActivity extends AppCompatActivity implements CallBack {
     GoogleSignInOptions gso;
     GoogleSignInClient mGoogleSignInClient;
 
+    String status = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -206,8 +208,9 @@ public class SignInActivity extends AppCompatActivity implements CallBack {
     public void onNext(int tag, boolean isSuccess, Object result) {
 
         Register register = (Register) result;
+        status = register.getData().getUser().getStatus();
 
-        if (register.getData().getUser().getStatus().equalsIgnoreCase("accept") || register.getData().getUser().getStatus().equalsIgnoreCase("waite")){
+        if (status.equalsIgnoreCase("accept") || status.equalsIgnoreCase("waite")){
 
             PreferencesUtils.setUserToken(register.getData().getToken());
             PreferencesUtils.setUser(register.getData().getUser(),SignInActivity.this);
@@ -221,11 +224,20 @@ public class SignInActivity extends AppCompatActivity implements CallBack {
             startActivity(new Intent(SignInActivity.this, MainActivity.class));
             finish();
 
-        } else if (register.getData().getUser().getStatus().equalsIgnoreCase("reject")){
-            Toast.makeText(this, "your account is rejected, contact support", Toast.LENGTH_SHORT).show();
-        } else if  (register.getData().getUser().getStatus().equalsIgnoreCase("requested")){
-            Toast.makeText(this, "Please wait until admin approval", Toast.LENGTH_SHORT).show();
+        } else {
+
+            runOnUiThread(new Runnable() {
+                public void run() {
+                    if (status.equalsIgnoreCase("reject"))
+                        Toast.makeText(getApplicationContext(), "your account is rejected, please contact admin", Toast.LENGTH_SHORT).show();
+                    else if (status.equalsIgnoreCase("requested"))
+                        Toast.makeText(getApplicationContext(), "Please wait until admin approval", Toast.LENGTH_SHORT).show();
+
+                }
+            });
+
         }
+
 
     }
 

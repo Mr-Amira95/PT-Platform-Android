@@ -43,9 +43,10 @@ public class MainFragment extends Fragment implements CallBack {
 //    private ViewPager sliderViewPager;
 //    private CircleIndicator sliderCircleIndicator;
 //    private SliderAdapter sliderAdapter;
-    private Banner banner;
 //    private Timer timer;
 //    private int page = 0;x
+
+    private Banner banner;
     SliderView sliderView;
 
     private LinearLayout
@@ -262,8 +263,8 @@ public class MainFragment extends Fragment implements CallBack {
 
         nametext.setText(PreferencesUtils.getCoach(getContext()).getLastName());
 
-        try{
-            Glide.with(getContext()).load(PreferencesUtils.getCoach(getContext()).getAvatar()).placeholder(R.drawable.logo).into(cate1_image);
+        try {
+            Glide.with(getContext()).load(PreferencesUtils.getCoach(getContext()).getLogo()).placeholder(R.drawable.user_default).into(cate1_image);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -272,7 +273,7 @@ public class MainFragment extends Fragment implements CallBack {
 
     }
 
-    private void getbanner(){
+    private void getbanner() {
 
         HashMap<String ,Object> params=new HashMap<>();
 
@@ -351,8 +352,8 @@ public class MainFragment extends Fragment implements CallBack {
                 }
 
                 if (flag!= null) {
-                    if(flag.equals("shop")){
-                        setFragment(new ShopFragment());
+                    if(flag.equals("shop")) {
+                        setFragmentWithoutBack(new ShopFragment(id));
                         flag="";
                     }  else if (flag.equalsIgnoreCase("new_coach")){
                         getCoach();

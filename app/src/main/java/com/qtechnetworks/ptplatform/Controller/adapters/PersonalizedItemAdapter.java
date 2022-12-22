@@ -34,6 +34,7 @@ public class PersonalizedItemAdapter extends RecyclerView.Adapter<PersonalizedIt
     private int Rtype;
     private int size=0;
     Intent i;
+
     public PersonalizedItemAdapter(Context context,Datum data,int Rtype) {
         this.context=context;
         this.data=data;
@@ -55,7 +56,7 @@ public class PersonalizedItemAdapter extends RecyclerView.Adapter<PersonalizedIt
     @NonNull
     @Override
     public PersonalizedItemAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_coach,parent,false);
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_personlise,parent,false);
 
         return new PersonalizedItemAdapter.ViewHolder(view);
     }

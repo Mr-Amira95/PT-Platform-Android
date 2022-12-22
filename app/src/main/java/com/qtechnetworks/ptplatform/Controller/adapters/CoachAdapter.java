@@ -51,7 +51,7 @@ public class CoachAdapter extends RecyclerView.Adapter<CoachAdapter.ViewHolder> 
         Datum current = coach.getData().get(position);
 
         holder.trainerName.setText(current.getLastName());
-        Glide.with(context).load(current.getAvatar()).placeholder(R.drawable.logo).into(holder.trainerImage);
+        Glide.with(context).load(current.getAvatar()).placeholder(R.drawable.user_default).into(holder.trainerImage);
 
         holder.coachLayout.setOnClickListener(new View.OnClickListener() {
             @Override

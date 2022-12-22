@@ -42,7 +42,6 @@ public class ShopTestActivity extends AppCompatActivity {
     TextView productName;
     Button buyItem;
     BillingClient billingClient;
-
     SkuDetails itemInfo;
 
     int qty = 100;
@@ -87,7 +86,7 @@ public class ShopTestActivity extends AppCompatActivity {
 
     }
 
-    private void callProduct(String sku) {
+        private void callProduct(String sku) {
 
         Call<General> call = RetrofitClient.getInstance().getMyApi().getProduct(sku);
         call.enqueue(new Callback<General>() {

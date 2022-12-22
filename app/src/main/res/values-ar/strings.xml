@@ -17,12 +17,12 @@
     <string name="repititions">التكرارات</string>
     <string name="note">ملاحظه</string>
     <string name="save">حفظ</string>
-    <string name="select_your_coach">اختار المدرب</string>
+    <string name="select_your_coach">اختر المدرب</string>
     <string name="calendar">التقويم</string>
     <string name="tell_us">قم بإعلامنا</string>
     <string name="about_you">عن نفسك</string>
-    <string name="i_am_a_coach">انا مدرب</string>
-    <string name="i_am_a_trainee">انا متدرب</string>
+    <string name="i_am_a_coach">مدرب</string>
+    <string name="i_am_a_trainee">متدرب</string>
     <string name="next">التالي</string>
     <string name="verify_email">تأكيد البريد الإلكتروني</string>
     <string name="email">بريدك الإلكتروني</string>
@@ -30,7 +30,7 @@
     <string name="home">القائمه الرئيسيه</string>
     <string name="coach">المدرب</string>
     <string name="profile">الملف الشخصي</string>
-    <string name="not_authorized">غير مخول لك</string>
+    <string name="not_authorized">غير مشترك</string>
     <string name="please_subscribe_to_proceed">الرجاء الإشتراك للمتابعه</string>
     <string name="subscribe">الإشتراك</string>
     <string name="please_enter_the_verification_code_that_we_have_sent_to_your_email">يرجى إدخال رمز التحقق الذي تم إرساله إلى بريدك الإلكتروني</string>
@@ -73,9 +73,9 @@
     <string name="right_thigh">الفخذ اليمين</string>
     <string name="left_calf">السمانه اليسرى</string>
     <string name="right_calf">السمانه اليمين</string>
-    <string name="update">تحديث</string>
+    <string name="update">تحديث البيانات</string>
     <string name="muscle">العضلات</string>
-    <string name="fat">نسبة الدهون</string>
+    <string name="fat">دهون</string>
     <string name="water">ماء</string>
     <string name="active_calories">السعرات المحروقه</string>
     <string name="steps">الخطوات</string>
@@ -123,7 +123,7 @@
     <string name="begin">بدأ</string>
     <string name="other_challenges">تحديات اخرى</string>
     <string name="history">السجل</string>
-    <string name="save_progress">تحديث التطورات</string>
+    <string name="save_progress">اتمام التحدي</string>
     <string name="chat">المحادثة</string>
     <string name="chat_with_coach">بدأ محادثة مع مدرب</string>
     <string name="technical_support">الدعم الفني</string>
@@ -150,8 +150,8 @@
     <string name="remove_favourites">حذف من المفضلة</string>
     <string name="remove_workouts">حذف من المجموعات</string>
     <string name="bought">مشترك</string>
-    <string name="add_to_today_s_workout">أضف إلى مجموعة اليوم</string>
-    <string name="add_to_log">أضف إلى السجل</string>
+    <string name="add_to_today_s_workout">أضف إلى تمارين اليوم</string>
+    <string name="add_to_log">اضف تفاصيل التمرين</string>
     <string name="log">السجلات</string>
     <string name="exercise_history">سجل التمرين</string>
     <string name="exercises">التمارين</string>
@@ -168,9 +168,9 @@
     <string name="today">اليوم</string>
     <string name="target">الهدف</string>
     <string name="view_history">عرض السجل</string>
-    <string name="carbs">النشويات</string>
+    <string name="carbs">نشويات</string>
     <string name="protein">بروتين</string>
-    <string name="exercise">تمرين</string>
+    <string name="exercise">التمرين</string>
     <string name="remaining">تبقى لديك</string>
     <string name="breakfast">الفطور</string>
     <string name="add_breakfast">إضافة فطور</string>
@@ -200,18 +200,18 @@
     <string name="kyc">معلومات عن العميل</string>
     <string name="personal_training">تمرين شخصي</string>
     <string name="favorites">المفضلة</string>
-    <string name="today_s_workout">مجموعة اليوم</string>
+    <string name="today_s_workout">تمارين اليوم</string>
     <string name="video_chat">محادثه فيديو</string>
     <string name="live_chat">محادثة مباشرة</string>
     <string name="recipes_and_diet_plans">الوصفات وخطه الحميه</string>
     <string name="your_content_will_be_ready_within_48_hours">سيكون المحتوى الخاص بك جاهزًا في غضون ٤٨ ساعة</string>
     <string name="search_workout">ابحث عن المجموعة</string>
     <string name="personalised">الصفحه الخاصه بك</string>
-    <string name="assigned_workouts">المجموعات المخصصة</string>
+    <string name="assigned_workouts">التمارين الخاصة بك</string>
     <string name="assigned_meals">الوجبات المخصصة</string>
     <string name="video">فيديو</string>
     <string name="image">صورة</string>
-    <string name="notes">ملحوظات</string>
+    <string name="notes">ملاحظات</string>
     <string name="end_date">الإنتهاء</string>
     <string name="package_title">الباقة</string>
     <string name="ingredients">المقادير</string>
@@ -230,7 +230,7 @@
     <string name="i_e_200_carbs">i.e. 200 Carbs</string>
     <string name="i_e_400_fat">i.e. 400 Fat</string>
     <string name="i_e_200_protein">i.e. 200 Protein</string>
-    <string name="push_notifications">ارسال إشعار</string>
+    <string name="push_notifications">ارسال الاشعارات</string>
     <string name="language">اللغه</string>
     <string name="silver_package">الباقه الفضيه</string>
     <string name="package_features">مميزات الباقة</string>
@@ -244,7 +244,7 @@
     <string name="return_to_main_screen">العوده الى الشاشه الرئيسيه</string>
     <string name="add_to_calender">إضافه الى التقويم</string>
     <string name="search_for_suplements">ابحث عن مكملات</string>
-    <string name="booked_sessions">الجلسات المحجوزة</string>
+    <string name="booked_sessions">المواعيد المحجوزة</string>
     <string name="please_book_a_session_from_calendar_first">يرجى حجز جلسة من التقويم أولاً</string>
     <string name="explore_workout">ابحث عن المجموعة</string>
     <string name="buy_now">شراء الآن</string>
@@ -256,7 +256,7 @@
     <string name="challenges_completed"> تحديات تم إتمامها</string>
     <string name="updated_successfully">تم التحديث!</string>
     <string name="please_select_food">الرجاء إختيار الطعام</string>
-    <string name="cal">سعرة حرارية</string>
+    <string name="cal">سعرة</string>
     <string name="calories_1">سعرات حرارية</string>
     <string name="months">أشهر</string>
     <string name="video_calls">مكالمات فيديو: </string>
@@ -300,17 +300,18 @@
     <string name="there_are_no_videos_to_show">لا توجد مقاطع فيديو لعرضها</string>
     <string name="please_fill_all_input_values">الرجاء تعبئة جميع القيم</string>
     <string name="no_workouts">لا يوجد مجموعات</string>
+    <string name="sets">مجموعات</string>
 
     <string-array name="activity">
-        <item>little or no exercise</item>
-        <item>sports 1–3 days/week</item>
-        <item>sports 6–7 days/week</item>
-        <item>sports and a physical job</item>
+        <item>خامل</item>
+        <item>قليل النشاط ١-٣ ايام/بالاسبوع</item>
+        <item>نشط ٤-٦ ايام/بالاسبوع</item>
+        <item>نشط للغاية</item>
     </string-array>
 
     <string-array name="languages">
         <item>English</item>
-        <item>Arabic</item>
+        <item>عربي</item>
 
     </string-array>
 

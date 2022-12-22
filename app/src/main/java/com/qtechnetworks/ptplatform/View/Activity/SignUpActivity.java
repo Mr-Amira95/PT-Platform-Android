@@ -178,7 +178,7 @@ public class SignUpActivity extends AppCompatActivity implements CallBack{
                 case AppConstants.signup_coach_TAG:
 
                     General general = (General) result;
-                    Toast.makeText(this, general.getData(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, general.getData().toString(), Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(SignUpActivity.this, ThankCoashActivity.class);
                     i.putExtra("flag", "signUp");
                     startActivity(i);

@@ -37,17 +37,14 @@ import io.reactivex.disposables.Disposable;
 public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHolder> implements CallBack {
 
     private Context context;
-    private PermissionAdapter permissionsAdapter;
     private List<SubscriptionPackage> packages;
 
     ArrayList <Boolean> inShop;
-    boolean canBuy;
 
-    public PackageAdapter(Context context, List<SubscriptionPackage> packages, ArrayList<Boolean> inShopPersonal, boolean canBuyPersonal) {
+    public PackageAdapter(Context context, List<SubscriptionPackage> packages, ArrayList<Boolean> inShopPersonal) {
         this.packages=packages;
         this.context=context;
-        this.inShop = inShopPersonal;
-        this.canBuy = canBuyPersonal;
+        inShop = inShopPersonal;
     }
 
     @NonNull
@@ -63,8 +60,6 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHold
 
         if (inShop.get(position)){
             holder.buyNowBtn.setText(R.string.bought);
-        } else if (!canBuy) {
-            holder.buyNowBtn.setVisibility(View.GONE);
         } else {
             holder.buyNowBtn.setText(R.string.buy_now);
             holder.buyNowBtn.setVisibility(View.VISIBLE);
@@ -81,14 +76,14 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHold
             permissions.add("Workout Schedule: "+packages.get(position).getPermissions().getWorkoutSchedule().toString());
             permissions.add("Food Plan: "+packages.get(position).getPermissions().getFoodPlan().toString());
 
-            permissionsAdapter = new PermissionAdapter(this.context,  permissions);
+            PermissionAdapter permissionsAdapter = new PermissionAdapter(this.context,  permissions);
             holder.featureRecyclerview.setAdapter(permissionsAdapter);
         }
 
         holder.packageType.setText(packages.get(position).getName());
         holder.packageDesc.setText(packages.get(position).getDescription());
         holder.packageDate.setText(packages.get(position).getDate()+" months");
-        holder.packagePrice.setText(packages.get(position).getPrice());
+        holder.packagePrice.setText((int)packages.get(position).getPriceObject().getAmount() + " " + packages.get(position).getPriceObject().getCurrency());
 
         if(packages.get(position).getStyle().equalsIgnoreCase("style_bronze")){
             holder.backgroundLayout.setBackgroundResource(R.drawable.background_package_bronze);
@@ -103,13 +98,13 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHold
         holder.buyNowBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (canBuy) {
+                if (!inShop.get(position)) {
                     if (!packages.get(position).getIsFree())
                         setFragment(R.id.home_frame ,new SinglePackageFragment(packages.get(holder.getAbsoluteAdapterPosition())), (AppCompatActivity) v.getContext());
                     else
                         buyPackage(packages.get(position).getId());
                 } else {
-                    Toast.makeText(context, "you already have package", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "you already have this package", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -147,6 +142,7 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHold
     public void onNext(int tag, boolean isSuccess, Object result) {
 
         if (isSuccess){
+            Toast.makeText(context, "Your Free Trial Has Started, Enjoy most of our life-changing features for free and start paving your way to a healthier life! ", Toast.LENGTH_SHORT).show();
             Intent i = new Intent(context, MainActivity.class);
             context.startActivity(i);
             ((MainActivity)context).finish();

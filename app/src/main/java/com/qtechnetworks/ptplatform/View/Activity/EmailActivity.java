@@ -43,11 +43,11 @@ public class EmailActivity extends AppCompatActivity implements CallBack {
             public void onClick(View view) {
 
                 if (!email.getText().toString().isEmpty())
-                    if (PreferencesUtils.getUserType().equalsIgnoreCase("trainee"))
+                    if (flag.equalsIgnoreCase("forgotPassword"))
                         checkEmail(email.getText().toString());
-                    else if (PreferencesUtils.getUserType().equalsIgnoreCase("coach"))
-                        checkCoachEmail(email.getText().toString());
                     else
+                        checkCoachEmail(email.getText().toString());
+                else
                     Toast.makeText(EmailActivity.this, getString(R.string.fill_the_email_field), Toast.LENGTH_SHORT).show();
 
             }

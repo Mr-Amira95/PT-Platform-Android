@@ -5,6 +5,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class Snack {
 
+    @SerializedName("user_food_id")
+    @Expose
+    private Integer userFoodID;
     @SerializedName("id")
     @Expose
     private Integer id;
@@ -29,6 +32,14 @@ public class Snack {
     @SerializedName("title")
     @Expose
     private String title;
+
+    public Integer getUserFoodID() {
+        return userFoodID;
+    }
+
+    public void setUserFoodID(Integer userFoodID) {
+        this.userFoodID = userFoodID;
+    }
 
     public Integer getId() {
         return id;

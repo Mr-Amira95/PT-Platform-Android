@@ -228,7 +228,7 @@ public class ProfileFragment extends Fragment implements CallBack {
                 case AppConstants.LOGOUT_TAG:
                     General general = (General) result;
 
-                    Toast.makeText(getContext(), general.getData(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), general.getData().toString(), Toast.LENGTH_SHORT).show();
                     PreferencesUtils.clearDefaults(getContext());
                     startActivity(new Intent(getContext(), SplashActivity.class));
                     getActivity().finish();

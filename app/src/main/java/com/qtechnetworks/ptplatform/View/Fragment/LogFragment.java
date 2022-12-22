@@ -33,7 +33,6 @@ import io.reactivex.disposables.Disposable;
 public class LogFragment extends Fragment implements CallBack {
 
     RecyclerView logRecyclerview;
-    LogAdapter logAdapter;
     String flag;
     TextView title;
 
@@ -70,7 +69,7 @@ public class LogFragment extends Fragment implements CallBack {
         gridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         logRecyclerview.setLayoutManager(gridLayoutManager);
 
-        if (flag.equalsIgnoreCase("Favourite")){
+        if (flag.equalsIgnoreCase("Favourite")) {
             getFavorite(coachid);
             title.setText(R.string.favorites);
         } else if (flag.equalsIgnoreCase("Log")){
@@ -141,7 +140,7 @@ public class LogFragment extends Fragment implements CallBack {
 
                 FavoriteandWorkout favoriteandWorkout=(FavoriteandWorkout) result;
 
-                logAdapter = new LogAdapter(getContext(), favoriteandWorkout.getData());
+                LogAdapter logAdapter = new LogAdapter(getContext(), favoriteandWorkout.getData());
                 logRecyclerview.setAdapter(logAdapter);
 
                 break;

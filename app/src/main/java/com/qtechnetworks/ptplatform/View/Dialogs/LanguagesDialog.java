@@ -80,10 +80,12 @@ public class LanguagesDialog extends Dialog {
                      PreferencesUtils.setLanguage("ar");
                      Intent i = new Intent(context ,SplashActivity.class);
                      context.startActivity(i);
+                     ((MainActivity) context).finish();
                  } else if (english.isChecked() && !PreferencesUtils.getLanguage().equalsIgnoreCase("en")) {
                      PreferencesUtils.setLanguage("en");
                      Intent i = new Intent(context ,SplashActivity.class);
                      context.startActivity(i);
+                     ((MainActivity) context).finish();
                  } else {
                      Toast.makeText(context, R.string.you_didnt_change_the_language, Toast.LENGTH_SHORT).show();
                  }

@@ -1,6 +1,5 @@
 package com.qtechnetworks.ptplatform.Model.utilits;
 
-import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -77,7 +76,6 @@ public class NotificationUtils {
         notificationManager.cancelAll();
     }
 
-    @SuppressLint("SimpleDateFormat")
     private static long getTimeMilliSec(String timeStamp) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {

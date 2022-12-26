@@ -1,6 +1,5 @@
 package com.qtechnetworks.ptplatform.Controller.adapters;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -62,7 +61,7 @@ public class PersonalizedItemAdapter extends RecyclerView.Adapter<PersonalizedIt
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PersonalizedItemAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull PersonalizedItemAdapter.ViewHolder holder, int position) {
 
         switch (Rtype){
             case PersonalizedItemAdapter.VIDEO_PERSONAL_TAG:

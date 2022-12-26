@@ -23,6 +23,9 @@ public class Datum {
     @SerializedName("package_name")
     @Expose
     private String packageName;
+    @SerializedName("type")
+    @Expose
+    private String type;
 
     public Integer getId() {
         return id;
@@ -70,6 +73,14 @@ public class Datum {
 
     public void setPackageName(String packageName) {
         this.packageName = packageName;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
 }

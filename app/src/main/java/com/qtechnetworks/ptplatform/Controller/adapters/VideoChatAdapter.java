@@ -3,7 +3,6 @@ package com.qtechnetworks.ptplatform.Controller.adapters;
 import static com.qtechnetworks.ptplatform.View.Fragment.VideoChatFragment.sessions;
 import static com.qtechnetworks.ptplatform.View.Fragment.VideoChatFragment.videoChatAdapter;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -58,7 +57,7 @@ public class VideoChatAdapter extends RecyclerView.Adapter<VideoChatAdapter.View
     }
 
     @Override
-    public void onBindViewHolder(@NonNull VideoChatAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull VideoChatAdapter.ViewHolder holder, int position) {
 
         Datum current= datum.get(position);
 

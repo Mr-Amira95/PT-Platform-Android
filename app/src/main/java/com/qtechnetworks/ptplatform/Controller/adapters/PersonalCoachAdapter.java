@@ -53,6 +53,10 @@ public class PersonalCoachAdapter extends RecyclerView.Adapter<PersonalCoachAdap
         holder.endDate.setText(current.getEndDate());
         holder.startDate.setText(current.getStartDate());
         holder.packageName.setText(current.getPackageName());
+        if (current.getType().equalsIgnoreCase("personal_training"))
+            holder.packageType.setText( "(PT)");
+        else
+            holder.packageType.setText( "(" +current.getType() + ")");
 
     }
 
@@ -63,7 +67,7 @@ public class PersonalCoachAdapter extends RecyclerView.Adapter<PersonalCoachAdap
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView username, endDate, startDate, packageName;
+        public TextView username, endDate, startDate, packageName, packageType;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -72,6 +76,7 @@ public class PersonalCoachAdapter extends RecyclerView.Adapter<PersonalCoachAdap
             endDate = itemView.findViewById(R.id.end_date);
             startDate = itemView.findViewById(R.id.start_date);
             packageName = itemView.findViewById(R.id.package_name);
+            packageType = itemView.findViewById(R.id.package_type);
         }
     }
 

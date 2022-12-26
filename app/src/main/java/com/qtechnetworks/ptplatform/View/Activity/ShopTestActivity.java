@@ -77,6 +77,7 @@ public class ShopTestActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
                         billingClient.launchBillingFlow(
                                 ShopTestActivity.this,
                                 BillingFlowParams.newBuilder().setSkuDetails(itemInfo).build());
@@ -135,6 +136,21 @@ public class ShopTestActivity extends AppCompatActivity {
                     }
                 }
         );
+    }
+
+    private void query (String sku){
+        List<String> skuList = new ArrayList<>();
+        skuList.add(sku);
+        SkuDetailsParams.Builder params = SkuDetailsParams.newBuilder();
+        params.setSkusList(skuList).setType(BillingClient.SkuType.INAPP);
+        billingClient.querySkuDetailsAsync(params.build(),
+                new SkuDetailsResponseListener() {
+                    @Override
+                    public void onSkuDetailsResponse(@NonNull BillingResult billingResult, @Nullable List<SkuDetails> list) {
+
+                    }
+         });
+
     }
 
     private void getProductDetails(){

@@ -25,6 +25,7 @@ import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
+import com.qtechnetworks.ptplatform.View.Fragment.ShopFragment;
 import com.qtechnetworks.ptplatform.View.Fragment.SinglePackageFragment;
 
 import java.util.ArrayList;
@@ -40,11 +41,13 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHold
     private List<SubscriptionPackage> packages;
 
     ArrayList <Boolean> inShop;
+    String flag;
 
-    public PackageAdapter(Context context, List<SubscriptionPackage> packages, ArrayList<Boolean> inShopPersonal) {
+    public PackageAdapter(Context context, List<SubscriptionPackage> packages, ArrayList<Boolean> inShopPersonal, String flag) {
         this.packages=packages;
         this.context=context;
         inShop = inShopPersonal;
+        this.flag = flag;
     }
 
     @NonNull
@@ -60,9 +63,8 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHold
 
         if (inShop.get(position)){
             holder.buyNowBtn.setText(R.string.bought);
-        } else {
-            holder.buyNowBtn.setText(R.string.buy_now);
-            holder.buyNowBtn.setVisibility(View.VISIBLE);
+        } else if ((flag.equalsIgnoreCase("subscription") && ShopFragment.haveSubscription) || (flag.equalsIgnoreCase("personal") && ShopFragment.havePersonalTrainer)){
+            holder.buyNowBtn.setText(R.string.cant_bought);
         }
 
         LinearLayoutManager layoutManagerhorizantalleader = new LinearLayoutManager(context);
@@ -99,10 +101,14 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHold
             @Override
             public void onClick(View v) {
                 if (!inShop.get(position)) {
-                    if (!packages.get(position).getIsFree())
-                        setFragment(R.id.home_frame ,new SinglePackageFragment(packages.get(holder.getAbsoluteAdapterPosition())), (AppCompatActivity) v.getContext());
-                    else
-                        buyPackage(packages.get(position).getId());
+                    if ((flag.equalsIgnoreCase("subscription") && ShopFragment.haveSubscription) || (flag.equalsIgnoreCase("personal") && ShopFragment.havePersonalTrainer)) {
+                        Toast.makeText(context, "you can't buy another package before your current package ending", Toast.LENGTH_SHORT).show();
+                    } else {
+                        if (!packages.get(position).getIsFree())
+                            setFragment(R.id.home_frame ,new SinglePackageFragment(packages.get(holder.getAbsoluteAdapterPosition())), (AppCompatActivity) v.getContext());
+                        else
+                            buyPackage(packages.get(position).getId());
+                    }
                 } else {
                     Toast.makeText(context, "you already have this package", Toast.LENGTH_SHORT).show();
                 }

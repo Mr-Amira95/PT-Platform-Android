@@ -87,9 +87,9 @@ public class ChooseCoachFragment extends Fragment implements CallBack {
             @Override
             public void onClick(View view) {
 
-                if (PreferencesUtils.getUserType().equalsIgnoreCase("Coach")){
+                if (PreferencesUtils.getUserType().equalsIgnoreCase("Coach")) {
                     getUsersSearch();
-                } else if (PreferencesUtils.getUserType().equalsIgnoreCase("Trainee")){
+                } else if (PreferencesUtils.getUserType().equalsIgnoreCase("Trainee")) {
                     getCoachSearch();
                 }
 
@@ -103,6 +103,7 @@ public class ChooseCoachFragment extends Fragment implements CallBack {
         HashMap<String ,Object> params=new HashMap<>();
 
         params.put("skip","0");
+        params.put("users","");
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);
         MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.Personal_Training_Coach_URL, AppConstants.Personal_Training_Coach_TAG, PersonalCoach.class, params);

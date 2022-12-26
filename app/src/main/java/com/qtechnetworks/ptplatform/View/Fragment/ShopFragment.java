@@ -28,6 +28,7 @@ import com.qtechnetworks.ptplatform.Controller.adapters.PackageAdapter;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.Recipes.Recipes;
 import com.qtechnetworks.ptplatform.Model.Beans.Subscription.Subscription;
+import com.qtechnetworks.ptplatform.Model.Beans.Subscription.SubscriptionPackage;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
@@ -46,9 +47,9 @@ public class ShopFragment extends Fragment implements CallBack {
     PackageAdapter subscriptionAdapter;
 
     ArrayList <Boolean> inShopSubscription = new ArrayList<>();
-    public static boolean haveSubscription = false;
-
     ArrayList <Boolean> inShopPersonal = new ArrayList<>();
+    public static boolean haveSubscription = false;
+    public static boolean havePersonalTrainer = false;
 
     String id = "x";
 
@@ -109,39 +110,37 @@ public class ShopFragment extends Fragment implements CallBack {
     @Override
     public void onNext(int tag, boolean isSuccess, Object result) {
 
-        switch (tag){
-            case AppConstants.PACKAGES_TAG:
-                if(isSuccess) {
-                    Subscription packages = (Subscription) result;
+        haveSubscription = false;
+        havePersonalTrainer = false;
 
-                    for (int i=0; i<packages.getData().getSubscription().size(); i++){
-                        if (packages.getData().getSubscription().get(i).getUserPackage() != null){
-                            inShopSubscription.add(true);
-                            haveSubscription = true;
-                        } else {
-                            inShopSubscription.add(false);
-                        }
+        if (isSuccess) {
+            Subscription packages = (Subscription) result;
 
-                    }
-
-                    subscriptionAdapter = new PackageAdapter(getContext(),packages.getData().getSubscription(), inShopSubscription);
-
-                    for (int i=0; i<packages.getData().getPersonalTraining().size(); i++){
-                        if (packages.getData().getPersonalTraining().get(i).getUserPackage() != null){
-                            inShopPersonal.add(true);
-                            haveSubscription = true;
-                        } else {
-                            inShopPersonal.add(false);
-                        }
-                    }
-                    packageAdapter = new PackageAdapter(getContext(),packages.getData().getPersonalTraining(), inShopPersonal);
-
-                    ptPackagesRecyclerview.setAdapter(packageAdapter);
-                    subscriptionsPackageRecyclerview.setAdapter(subscriptionAdapter);
+            for (SubscriptionPackage subscriptionPackage : packages.getData().getSubscription()) {
+                if (subscriptionPackage.getUserPackage() != null) {
+                    inShopSubscription.add(true);
+                    haveSubscription = true;
+                } else {
+                    inShopSubscription.add(false);
                 }
-                break;
+            }
 
+            for (SubscriptionPackage subscriptionPackage : packages.getData().getPersonalTraining()) {
+                if (subscriptionPackage.getUserPackage() != null) {
+                    inShopPersonal.add(true);
+                    havePersonalTrainer = true;
+                } else {
+                    inShopPersonal.add(false);
+                }
+            }
+
+            subscriptionAdapter = new PackageAdapter(getContext(), packages.getData().getSubscription(), inShopSubscription, "subscription");
+            packageAdapter = new PackageAdapter(getContext(), packages.getData().getPersonalTraining(), inShopPersonal, "personal");
+
+            ptPackagesRecyclerview.setAdapter(packageAdapter);
+            subscriptionsPackageRecyclerview.setAdapter(subscriptionAdapter);
         }
+
     }
 
     @Override

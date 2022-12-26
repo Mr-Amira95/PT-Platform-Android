@@ -25,7 +25,6 @@ import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
-import com.qtechnetworks.ptplatform.View.Activity.ShopTestActivity;
 import com.qtechnetworks.ptplatform.View.Dialogs.CoachesDialog;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
@@ -269,11 +268,11 @@ public class MainFragment extends Fragment implements CallBack {
             e.printStackTrace();
         }
 
-        getbanner();
+        getBanner();
 
     }
 
-    private void getbanner() {
+    private void getBanner() {
 
         HashMap<String ,Object> params=new HashMap<>();
 

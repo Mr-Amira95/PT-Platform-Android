@@ -9,7 +9,7 @@ public class Subscription {
 
     @SerializedName("data")
     @Expose
-    private Datum data = null;
+    private Datum data;
     @SerializedName("success")
     @Expose
     private Boolean success;

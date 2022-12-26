@@ -3,6 +3,8 @@ package com.qtechnetworks.ptplatform.View.Fragment;
 import android.graphics.Paint;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,7 +23,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.billingclient.api.BillingClient;
+import com.android.billingclient.api.BillingClientStateListener;
+import com.android.billingclient.api.BillingFlowParams;
+import com.android.billingclient.api.BillingResult;
+import com.android.billingclient.api.ConsumeResponseListener;
+import com.android.billingclient.api.Purchase;
+import com.android.billingclient.api.PurchasesUpdatedListener;
 import com.android.billingclient.api.SkuDetails;
+import com.android.billingclient.api.SkuDetailsParams;
+import com.android.billingclient.api.SkuDetailsResponseListener;
 import com.qtechnetworks.ptplatform.Controller.GoogleNetworking.RetrofitClient;
 import com.qtechnetworks.ptplatform.Controller.adapters.PermissionAdapter;
 import com.qtechnetworks.ptplatform.Controller.adapters.TitleAdapter;
@@ -35,6 +45,7 @@ import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
+import com.qtechnetworks.ptplatform.View.Activity.ShopTestActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,7 +55,7 @@ import io.reactivex.disposables.Disposable;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-public class SinglePackageFragment extends Fragment implements CallBack {
+public class SinglePackageFragment extends Fragment implements CallBack, PurchasesUpdatedListener {
 
     RecyclerView featuresRecyclerview;
     PermissionAdapter permissionsAdapter;
@@ -58,8 +69,7 @@ public class SinglePackageFragment extends Fragment implements CallBack {
 
     String promo, paymentMethod;
 
-    BillingClient billingClient;
-    SkuDetails itemInfo;
+    private BillingClient billingClient;
 
     public SinglePackageFragment(SubscriptionPackage packages){
         this.packages=packages;
@@ -75,6 +85,43 @@ public class SinglePackageFragment extends Fragment implements CallBack {
 
         // Inflate the layout for this fragment
         return view;
+    }
+
+    private void connectBilling(String sku){
+
+        billingClient.startConnection(new BillingClientStateListener() {
+            @Override
+            public void onBillingServiceDisconnected() {
+                connectBilling(sku);
+            }
+
+            @Override
+            public void onBillingSetupFinished(@NonNull BillingResult billingResult) {
+                query(sku);
+            }
+        });
+    }
+
+    private void query (String sku){
+        List<String> skuList = new ArrayList<>();
+        skuList.add(sku);
+        SkuDetailsParams.Builder params = SkuDetailsParams.newBuilder();
+        params.setSkusList(skuList).setType(BillingClient.SkuType.INAPP);
+        billingClient.querySkuDetailsAsync(params.build(),
+                new SkuDetailsResponseListener() {
+                    @Override
+                    public void onSkuDetailsResponse(@NonNull BillingResult billingResult, @Nullable List<SkuDetails> list) {
+                        purchaseFlow(list.get(0));
+                    }
+                });
+
+    }
+
+    private void purchaseFlow(SkuDetails itemInfo) {
+
+        billingClient.launchBillingFlow(getActivity(), BillingFlowParams.newBuilder()
+                        .setSkuDetails(itemInfo)
+                        .build());
     }
 
     private void clicks() {
@@ -109,7 +156,8 @@ public class SinglePackageFragment extends Fragment implements CallBack {
                         } else if (payPal.isChecked()){
                             getPaymentUrlWithoutPromo("paypal");
                         } else if (inAppPurchase.isChecked()) {
-                            callProduct(packages.getPurchaseAndroidId());
+                            connectBilling(packages.getPurchaseAndroidId());
+//                            callProduct(packages.getPurchaseAndroidId());
                         }
                     }
 
@@ -217,6 +265,12 @@ public class SinglePackageFragment extends Fragment implements CallBack {
         layoutManagerhorizantalleader.setOrientation(LinearLayoutManager.VERTICAL);
         featuresRecyclerview.setLayoutManager(layoutManagerhorizantalleader);
 
+        billingClient = BillingClient
+                .newBuilder(getActivity())
+                .setListener(this)
+                .enablePendingPurchases()
+                .build();
+
     }
 
     private void checkPromoCode(){
@@ -230,6 +284,7 @@ public class SinglePackageFragment extends Fragment implements CallBack {
         MyApplication.getInstance().getHttpHelper().Post(getContext(), AppConstants.Promo_Code_URL, AppConstants.Promo_Code_TAG, PromoCodeResults.class, params);
     }
 
+    /*
     private void callProduct(String sku) {
 
         Call<General> call = RetrofitClient.getInstance().getMyApi().getProduct(sku);
@@ -243,9 +298,6 @@ public class SinglePackageFragment extends Fragment implements CallBack {
                     if (general.getSuccess()){
                         Toast.makeText(getContext(), String.valueOf(general.getData()), Toast.LENGTH_LONG).show();
                         setFragmentWithoutBack(new SuccessFragment("Checkout"));
-//                        Intent i = new Intent(getContext(), MainActivity.class);
-//                        startActivity(i);
-//                        getActivity().finish();
                     } else {
                         Toast.makeText(getContext(), String.valueOf(general.getData()), Toast.LENGTH_LONG).show();
                     }
@@ -261,7 +313,7 @@ public class SinglePackageFragment extends Fragment implements CallBack {
 
         });
     }
-
+    */
     @Override
     public void onSubscribe(Disposable d) {
 
@@ -315,6 +367,22 @@ public class SinglePackageFragment extends Fragment implements CallBack {
 
     @Override
     public void onComplete() {
+
+    }
+
+    @Override
+    public void onPurchasesUpdated(@NonNull BillingResult billingResult, @Nullable List<Purchase> purchases) {
+
+        if (billingResult.getResponseCode() == BillingClient.ConnectionState.CONNECTED && purchases != null) {
+            Toast.makeText(getContext(), billingResult.getDebugMessage(), Toast.LENGTH_LONG).show();
+            setFragmentWithoutBack(new SuccessFragment("Checkout"));
+        } else if (billingResult.getResponseCode() == BillingClient.ConnectionState.CLOSED) {
+            Toast.makeText(getContext(), billingResult.getDebugMessage(), Toast.LENGTH_LONG).show();
+
+            // Handle an error caused by a user cancelling the purchase flow.
+        } else {
+            Toast.makeText(getContext(), R.string.cancel, Toast.LENGTH_LONG).show();
+        }
 
     }
 }

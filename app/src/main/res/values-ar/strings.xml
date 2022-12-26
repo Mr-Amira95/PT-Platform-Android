@@ -150,6 +150,7 @@
     <string name="remove_favourites">حذف من المفضلة</string>
     <string name="remove_workouts">حذف من المجموعات</string>
     <string name="bought">مشترك</string>
+    <string name="cant_bought">لا يمكنك الشراء</string>
     <string name="add_to_today_s_workout">أضف إلى تمارين اليوم</string>
     <string name="add_to_log">اضف تفاصيل التمرين</string>
     <string name="log">السجلات</string>

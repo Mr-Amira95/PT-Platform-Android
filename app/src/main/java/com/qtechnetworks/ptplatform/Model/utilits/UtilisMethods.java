@@ -3,7 +3,6 @@ package com.qtechnetworks.ptplatform.Model.utilits;
 
 import static com.qtechnetworks.ptplatform.Model.utilits.AppConstants.Trace;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -312,7 +311,6 @@ public class UtilisMethods {
 
     }
 
-    @SuppressLint("MissingPermission")
     public static void callPhone(Activity activity, String phone) {
         Trace("callPhone:", "" + phone);
 

@@ -10,14 +10,12 @@ android {
         applicationId "com.qtechnetworks.ptplatform"
         minSdk 23
         targetSdk 32
-        versionCode 4
-        versionName "1.4"
+        versionCode 6
+        versionName "1.6"
 
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
-
 
     dataBinding {
         enabled = true
@@ -36,6 +34,7 @@ android {
         release {
             minifyEnabled false
             multiDexEnabled true
+            debuggable false
             buildConfigField "String", "ONESIGNAL_APP_ID", "\"dbfd87e2-dcf9-402d-a7ae-afba14379cb1\""
             buildConfigField "String", "API_URL", "\"https://pt.qtechnetworks.co/public/api/v1/\""
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -155,4 +154,5 @@ dependencies {
     implementation "com.android.billingclient:billing-ktx:5.1.0"
 
     implementation 'com.github.smarteist:autoimageslider:1.4.0'
+
 }

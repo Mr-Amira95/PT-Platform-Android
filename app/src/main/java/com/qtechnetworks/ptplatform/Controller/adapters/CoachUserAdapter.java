@@ -62,6 +62,7 @@ public class CoachUserAdapter extends RecyclerView.Adapter<CoachUserAdapter.View
                     i.putExtra("flag","shop");
                     String coachID = String.valueOf(current.getId());
                     i.putExtra("id", coachID);
+                    PreferencesUtils.putString(PrefKeys.coachid, coachID);
                     ((MainActivity) context).startActivity(i);
                 }
             }

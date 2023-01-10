@@ -302,6 +302,7 @@
     <string name="please_fill_all_input_values">الرجاء تعبئة جميع القيم</string>
     <string name="no_workouts">لا يوجد مجموعات</string>
     <string name="sets">مجموعات</string>
+    <string name="description">الوصف</string>
 
     <string-array name="activity">
         <item>خامل</item>

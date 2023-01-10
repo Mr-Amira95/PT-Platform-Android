@@ -68,14 +68,22 @@ public class SearchFragment extends Fragment implements CallBack {
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                if (!searchEdittext.getText().toString().isEmpty()) {
-                    if (flag.equalsIgnoreCase("Exercises"))
-                        searchExercise(searchEdittext.getText().toString());
-                    else if (flag.equalsIgnoreCase("workouts"))
-                        searchWorkout(searchEdittext.getText().toString());
-
+                if (PreferencesUtils.getUserType().equalsIgnoreCase("coach")){
+                    if (!searchEdittext.getText().toString().isEmpty()) {
+                        if (flag.equalsIgnoreCase("Exercises"))
+                            searchExerciseCoach(searchEdittext.getText().toString());
+                        else if (flag.equalsIgnoreCase("workouts"))
+                            searchExerciseCoach(searchEdittext.getText().toString());
+                    }
+                } else {
+                    if (!searchEdittext.getText().toString().isEmpty()) {
+                        if (flag.equalsIgnoreCase("Exercises"))
+                            searchExercise(searchEdittext.getText().toString());
+                        else if (flag.equalsIgnoreCase("workouts"))
+                            searchWorkout(searchEdittext.getText().toString());
+                    }
                 }
+
 
             }
         });
@@ -92,10 +100,17 @@ public class SearchFragment extends Fragment implements CallBack {
 
         searchEdittext.setText(word);
 
-        if (flag.equalsIgnoreCase("Exercises"))
-            searchExercise(word);
-        else if (flag.equalsIgnoreCase("workouts"))
-            searchWorkout(word);
+        if (PreferencesUtils.getUserType().equalsIgnoreCase("coach")) {
+            if (flag.equalsIgnoreCase("Exercises"))
+                searchExerciseCoach(word);
+            else if (flag.equalsIgnoreCase("workouts"))
+                searchWorkoutCoach(word);
+        } else {
+            if (flag.equalsIgnoreCase("Exercises"))
+                searchExercise(word);
+            else if (flag.equalsIgnoreCase("workouts"))
+                searchWorkout(word);
+        }
     }
 
     private void displaySearch(List<Exercise> data) {
@@ -115,12 +130,34 @@ public class SearchFragment extends Fragment implements CallBack {
 
     }
 
+    private void searchExerciseCoach(String word) {
+
+        HashMap<String ,Object> params = new HashMap<>();
+        params.put("skip","0");
+        params.put("search", word);
+
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.workout_URL, AppConstants.workout_TAG, SearchResults.class, params);
+
+    }
+
     private void searchWorkout(String word) {
 
         HashMap<String ,Object> params = new HashMap<>();
         params.put("skip","0");
         params.put("search", word);
         params.put("coach_id", PreferencesUtils.getCoach(getContext()).getId());
+
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.exercise_URL, AppConstants.workout_TAG, SearchResults.class, params);
+
+    }
+
+    private void searchWorkoutCoach(String word) {
+
+        HashMap<String ,Object> params = new HashMap<>();
+        params.put("skip","0");
+        params.put("search", word);
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);
         MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.exercise_URL, AppConstants.workout_TAG, SearchResults.class, params);

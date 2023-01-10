@@ -260,15 +260,23 @@ public class MainFragment extends Fragment implements CallBack {
 
         nametext= view.findViewById(R.id.name);
 
-        nametext.setText(PreferencesUtils.getCoach(getContext()).getLastName());
+        if (flag!= null) {
+            if(flag.equals("shop")) {
+                setFragmentWithoutBack(new ShopFragment(id));
+                flag="";
+            }  else if (flag.equalsIgnoreCase("new_coach")) {
+                getCoach();
+            }
+        }
 
         try {
+            nametext.setText(PreferencesUtils.getCoach(getContext()).getLastName());
             Glide.with(getContext()).load(PreferencesUtils.getCoach(getContext()).getLogo()).placeholder(R.drawable.user_default).into(cate1_image);
+            getBanner();
         }catch (Exception e){
             e.printStackTrace();
         }
 
-        getBanner();
 
     }
 
@@ -348,15 +356,6 @@ public class MainFragment extends Fragment implements CallBack {
                 }catch (Exception e){
                     setFragmentWithoutBack(new MainFragment());
                     e.printStackTrace();
-                }
-
-                if (flag!= null) {
-                    if(flag.equals("shop")) {
-                        setFragmentWithoutBack(new ShopFragment(id));
-                        flag="";
-                    }  else if (flag.equalsIgnoreCase("new_coach")){
-                        getCoach();
-                    }
                 }
 
                 break;

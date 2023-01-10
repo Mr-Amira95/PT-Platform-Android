@@ -64,6 +64,9 @@ public class ChalengesVideosAdapter extends RecyclerView.Adapter<ChalengesVideos
             e.printStackTrace();
         }
 
+        if (PreferencesUtils.getUserType().equalsIgnoreCase("coach"))
+            holder.completeCheckbox.setVisibility(View.GONE);
+
         holder.challengeVideoLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

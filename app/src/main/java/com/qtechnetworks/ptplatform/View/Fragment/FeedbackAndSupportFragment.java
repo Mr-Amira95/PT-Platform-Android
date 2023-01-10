@@ -83,11 +83,12 @@ public class FeedbackAndSupportFragment extends Fragment {
 
     private void initial(View view) {
         title = view.findViewById(R.id.title_textview);
-        if (flag.equalsIgnoreCase("")){
+        if (flag.equalsIgnoreCase("Feedback")){
             title.setText(R.string.feedback);
         } else {
             title.setText(R.string.technical_support);
         }
+
         send_button=view.findViewById(R.id.send_button);
 
         name_edittext=view.findViewById(R.id.name_edittext);

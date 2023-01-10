@@ -301,6 +301,7 @@
     <string name="no_workouts">No Workouts</string>
     <string name="start_date">Start Date</string>
     <string name="sets">Sets</string>
+    <string name="description">Description</string>
 
     <string-array name="activity">
         <item>little or no exercise</item>

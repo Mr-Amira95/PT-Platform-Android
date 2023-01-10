@@ -67,12 +67,13 @@ public class SinglePackageFragment extends Fragment implements CallBack, Purchas
 
     RadioButton inAppPurchase, creditCard, payPal;
 
-    String promo, paymentMethod;
+    String promo, paymentMethod, id;
 
     private BillingClient billingClient;
 
-    public SinglePackageFragment(SubscriptionPackage packages){
+    public SinglePackageFragment(SubscriptionPackage packages, String id){
         this.packages=packages;
+        this.id=id;
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -353,6 +354,10 @@ public class SinglePackageFragment extends Fragment implements CallBack, Purchas
                      }
 
                      break;
+
+                 case AppConstants.PACKAGES_IN_APP_TAG:
+                     setFragmentWithoutBack(new SuccessFragment("Checkout"));
+                     break;
              }
 
 
@@ -370,12 +375,29 @@ public class SinglePackageFragment extends Fragment implements CallBack, Purchas
 
     }
 
+    private void buyPackage(String invoiceID) {
+
+        HashMap<String ,Object> params=new HashMap<>();
+        params.put("package_id", packages.getId());
+        params.put("payment_method", "free");
+
+        if (id.equalsIgnoreCase("x"))
+            params.put("coach_id", PreferencesUtils.getCoach(getContext()).getId().toString());
+        else
+            params.put("coach_id", id);
+
+        params.put("txn_id", invoiceID);
+
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().Post(getContext(), AppConstants.PACKAGES_URL, AppConstants.PACKAGES_IN_APP_TAG, General.class, params);
+    }
+
     @Override
     public void onPurchasesUpdated(@NonNull BillingResult billingResult, @Nullable List<Purchase> purchases) {
 
         if (billingResult.getResponseCode() == BillingClient.ConnectionState.CONNECTED && purchases != null) {
-            Toast.makeText(getContext(), billingResult.getDebugMessage(), Toast.LENGTH_LONG).show();
-            setFragmentWithoutBack(new SuccessFragment("Checkout"));
+            Toast.makeText(getContext(), R.string.purchase_successfull, Toast.LENGTH_LONG).show();
+            buyPackage(purchases.get(0).getPurchaseToken());
         } else if (billingResult.getResponseCode() == BillingClient.ConnectionState.CLOSED) {
             Toast.makeText(getContext(), billingResult.getDebugMessage(), Toast.LENGTH_LONG).show();
 

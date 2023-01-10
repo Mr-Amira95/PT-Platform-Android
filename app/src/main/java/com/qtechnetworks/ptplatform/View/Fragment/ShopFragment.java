@@ -31,6 +31,7 @@ import com.qtechnetworks.ptplatform.Model.Beans.Subscription.Subscription;
 import com.qtechnetworks.ptplatform.Model.Beans.Subscription.SubscriptionPackage;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
+import com.qtechnetworks.ptplatform.Model.utilits.PrefKeys;
 import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
 
@@ -67,7 +68,7 @@ public class ShopFragment extends Fragment implements CallBack {
         View view = inflater.inflate(R.layout.fragment_shop, container, false);
 
         initials(view);
-        getSubscriptions(PreferencesUtils.getCoach(getContext()).getId().toString());
+        getSubscriptions(PreferencesUtils.getString(PrefKeys.coachid, "0"));
 
 
         // Inflate the layout for this fragment
@@ -134,8 +135,8 @@ public class ShopFragment extends Fragment implements CallBack {
                 }
             }
 
-            subscriptionAdapter = new PackageAdapter(getContext(), packages.getData().getSubscription(), inShopSubscription, "subscription");
-            packageAdapter = new PackageAdapter(getContext(), packages.getData().getPersonalTraining(), inShopPersonal, "personal");
+            subscriptionAdapter = new PackageAdapter(getContext(), packages.getData().getSubscription(), inShopSubscription, "subscription", id);
+            packageAdapter = new PackageAdapter(getContext(), packages.getData().getPersonalTraining(), inShopPersonal, "personal", id);
 
             ptPackagesRecyclerview.setAdapter(packageAdapter);
             subscriptionsPackageRecyclerview.setAdapter(subscriptionAdapter);

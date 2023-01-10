@@ -132,6 +132,7 @@ public class AppConstants {
     public static final int COACH_QUESTIONS_ANSWER_TAG = 33;
     public static final String PACKAGES_URL = "packages";
     public static final int PACKAGES_TAG =34 ;
+    public static final int PACKAGES_IN_APP_TAG =56 ;
     public static final String CHALLENGES_URL = "challenges";
     public static final int CHALLENGES_TAG = 35;
     public static final String CHALLENGES_VIDEOS_URL = "challenges/videos";

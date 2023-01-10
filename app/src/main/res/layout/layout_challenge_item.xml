@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -8,22 +8,39 @@
     android:layout_marginBottom="@dimen/_15sdp">
 
     <com.makeramen.roundedimageview.RoundedImageView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/challenge_img"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_175sdp"
-        android:padding="10dp"
-        android:scaleType="centerCrop" />
+        android:layout_margin="@dimen/_10sdp"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
         android:id="@+id/challenge_name"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_5sdp"
         android:gravity="start"
         android:textColor="@color/white"
         android:textSize="@dimen/_12sdp"
         android:textStyle="bold"
-        android:paddingHorizontal="@dimen/_15sdp"/>
+        android:layout_margin="@dimen/_15sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/description_btn"
+        app:layout_constraintBottom_toBottomOf="@id/description_btn"
+        app:layout_constraintTop_toTopOf="@id/description_btn"/>
 
-</LinearLayout>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/description_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="@string/description"
+        android:textSize="@dimen/_10sdp"
+        android:textColor="@color/white"
+        android:background="@drawable/button_background"
+        android:paddingHorizontal="@dimen/_10sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/challenge_img"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_15sdp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

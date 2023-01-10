@@ -41,13 +41,14 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHold
     private List<SubscriptionPackage> packages;
 
     ArrayList <Boolean> inShop;
-    String flag;
+    String flag, id;
 
-    public PackageAdapter(Context context, List<SubscriptionPackage> packages, ArrayList<Boolean> inShopPersonal, String flag) {
+    public PackageAdapter(Context context, List<SubscriptionPackage> packages, ArrayList<Boolean> inShopPersonal, String flag, String id) {
         this.packages=packages;
         this.context=context;
         inShop = inShopPersonal;
         this.flag = flag;
+        this.id = id;
     }
 
     @NonNull
@@ -105,7 +106,7 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHold
                         Toast.makeText(context, "you can't buy another package before your current package ending", Toast.LENGTH_SHORT).show();
                     } else {
                         if (!packages.get(position).getIsFree())
-                            setFragment(R.id.home_frame ,new SinglePackageFragment(packages.get(holder.getAbsoluteAdapterPosition())), (AppCompatActivity) v.getContext());
+                            setFragment(R.id.home_frame ,new SinglePackageFragment(packages.get(holder.getAbsoluteAdapterPosition()), id), (AppCompatActivity) v.getContext());
                         else
                             buyPackage(packages.get(position).getId());
                     }

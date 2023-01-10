@@ -66,9 +66,9 @@ public class WorkoutSingleFragment extends Fragment  {
             @Override
             public void onClick(View v) {
                 if (PreferencesUtils.getUserType().equalsIgnoreCase("trainee"))
-                    setFragmentWithoutBack ( new ExercisesSingleFragment(),"Workout",id);
+                    setFragment ( new ExercisesSingleFragment(),"Workout",id);
                 else
-                    setFragmentWithoutBack( new ExercisesSingleFragment(),"Workout",id);
+                    setFragment( new ExercisesSingleFragment(),"Workout",id);
             }
         });
 

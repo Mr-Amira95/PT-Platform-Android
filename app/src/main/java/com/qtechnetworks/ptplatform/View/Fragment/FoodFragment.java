@@ -53,7 +53,7 @@ import retrofit2.Callback;
 public class FoodFragment extends Fragment implements CallBack {
 
     RecyclerView breakfastRecyclerview, lunchRecyclerview, dinnerRecyclerview, snacksRecyclerview, supplemnetsRecyclerview;
-    TextView addBreakfast, addLunch, addDinner, addSnack, addSupplement, target_value,food_value,exercise_value,total_val, breakfast, lunch, dinner, snacks, supplement, selectedDate;
+    TextView editTarget, addBreakfast, addLunch, addDinner, addSnack, addSupplement, target_value,food_value,exercise_value,total_val, breakfast, lunch, dinner, snacks, supplement, selectedDate;
 
     DatePickerDialog StartTime;
 
@@ -94,6 +94,12 @@ public class FoodFragment extends Fragment implements CallBack {
             }
         });
 
+        editTarget.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setFragment(new SetTargetCaloriesFragment());
+            }
+        });
 
         /*
         breakfast.setOnClickListener(new View.OnClickListener() {
@@ -177,6 +183,8 @@ public class FoodFragment extends Fragment implements CallBack {
     }
 
     private void initials(View view) {
+
+        editTarget = view.findViewById(R.id.edit_target);
 
         carbChart = view.findViewById(R.id.carbs_chart);
         fatChart = view.findViewById(R.id.fat_chart);
@@ -351,7 +359,7 @@ public class FoodFragment extends Fragment implements CallBack {
 
                 food=(Foodhome) result;
 
-                if (food.getSuccess()) {
+                if (food.getSuccess() && targetCalories>0) {
 
                     progressBar.setProgress((food.getData().getFoodTarget())*100/targetCalories, true);
                     progressTxt.setText((food.getData().getFoodTarget())+"/"+targetCalories +" Cal");

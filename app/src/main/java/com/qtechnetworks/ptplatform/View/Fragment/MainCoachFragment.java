@@ -303,11 +303,17 @@ public class MainCoachFragment extends Fragment implements CallBack {
 
     }
 
+
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
         getBanner();
+        super.onStart();
     }
+
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//    }
 
 //    class RemindTask extends TimerTask {
 //

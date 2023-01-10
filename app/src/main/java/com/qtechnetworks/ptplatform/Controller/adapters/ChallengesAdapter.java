@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,6 +29,7 @@ import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 import com.qtechnetworks.ptplatform.View.Dialogs.CoachesDialog;
+import com.qtechnetworks.ptplatform.View.Dialogs.NoteDialog;
 import com.qtechnetworks.ptplatform.View.Fragment.ChallengesFragment;
 import com.qtechnetworks.ptplatform.View.Fragment.ChallengesSignleFragment;
 import com.qtechnetworks.ptplatform.View.Fragment.MainFragment;
@@ -69,6 +72,14 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
             }
         });
 
+        holder.descriptionBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NoteDialog noteDialog = new NoteDialog(context, current.getDescription());
+                noteDialog.show();
+            }
+        });
+
     }
 
     private void setFragment(Fragment fragment) {
@@ -87,7 +98,8 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
 
         TextView challengeName;
         ImageView ChallengeImg;
-        LinearLayout challengeLinearLayout;
+        ConstraintLayout challengeLinearLayout;
+        Button descriptionBtn;
 
         CheckBox completeCheckbox;
         public ViewHolder(@NonNull View itemView) {
@@ -96,6 +108,7 @@ public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.Vi
             challengeName=itemView.findViewById(R.id.challenge_name);
             ChallengeImg=itemView.findViewById(R.id.challenge_img);
             challengeLinearLayout=itemView.findViewById(R.id.challenge_layout_item);
+            descriptionBtn=itemView.findViewById(R.id.description_btn);
 
         }
     }

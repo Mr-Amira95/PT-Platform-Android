@@ -28,6 +28,8 @@ import java.util.List;
 
 public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.ViewHolder> {
 
+    // Done
+
     private Context context;
     private ArrayList<Datum> data;
 

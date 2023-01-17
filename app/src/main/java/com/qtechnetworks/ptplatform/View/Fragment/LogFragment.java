@@ -46,7 +46,7 @@ public class LogFragment extends Fragment implements CallBack {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            coachid=getArguments().getString("coachid");
+            coachid= getArguments().getString("coachid");
         }
     }
 
@@ -57,7 +57,7 @@ public class LogFragment extends Fragment implements CallBack {
 
         initial(view);
 
-        // Inflate the layout for this fragment
+        //Inflate the layout for this fragment
         return view;
     }
 
@@ -78,7 +78,7 @@ public class LogFragment extends Fragment implements CallBack {
             Log.d("current Date",currentDate);
             getLog(coachid,currentDate);
             title.setText(R.string.log);
-        }else if (flag.equalsIgnoreCase("Today’s Workouts")){
+        } else if (flag.equalsIgnoreCase("Today’s Workouts")){
             getWorkout(coachid);
             title.setText(R.string.today_s_workout);
         }

@@ -92,7 +92,6 @@ public class ChatSingleFragment extends Fragment implements CallBack {
         sendIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                messageEditText.setText("");
                 connectSocketSend(chatID, String.valueOf(PreferencesUtils.getUser(getContext()).getId()), messageEditText.getText().toString());
             }
         });
@@ -319,8 +318,6 @@ public class ChatSingleFragment extends Fragment implements CallBack {
                             }
                         } );
 
-                        messageEditText.setText("");
-
                         mSocket.emit("send_message", jsonObject);
                         mSocket.disconnect();
                         connectSocket(chatID);
@@ -382,6 +379,8 @@ public class ChatSingleFragment extends Fragment implements CallBack {
     public void onNext(int tag, boolean isSuccess, Object result) {
 
         if (isSuccess) {
+
+            messageEditText.getText().clear();
 
             switch (tag){
                 case AppConstants.Chat_TAG:

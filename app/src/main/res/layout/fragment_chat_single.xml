@@ -82,7 +82,9 @@
             android:background="@drawable/background_radius_20_title"
             android:backgroundTint="@color/white"
             android:hint="@string/type_your_message_here"
-            android:paddingHorizontal="@dimen/_15sdp"/>
+            android:textColorHint="@color/txt_grey"
+            android:paddingHorizontal="@dimen/_15sdp"
+            android:textColor="@color/black"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

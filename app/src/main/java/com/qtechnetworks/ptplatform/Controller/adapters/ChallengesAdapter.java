@@ -38,6 +38,8 @@ import java.util.List;
 
 public class ChallengesAdapter extends RecyclerView.Adapter<ChallengesAdapter.ViewHolder>  {
 
+    // Done
+
     private Context context;
     List<ChallengeData> data;
 

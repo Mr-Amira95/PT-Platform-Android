@@ -283,7 +283,8 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
     }
 
 
-    private void addToWorkout(String Videoid){
+    private void
+    addToWorkout(String Videoid){
 
         HashMap<String ,Object> params=new HashMap<>();
 
@@ -296,7 +297,7 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
 
     private void addToFavorite(String Videoid){
 
-        HashMap<String ,Object> params=new HashMap<>();
+        HashMap<String ,Object> params = new HashMap<>();
 
         params.put("video_id",Videoid);
 

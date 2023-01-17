@@ -63,7 +63,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
 
             holder.message.setGravity(Gravity.END);
             holder.message.setBackgroundResource(R.drawable.background_radius_20_title);
-
+            holder.message.setTextColor(context.getColor(R.color.white));
         } else {
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             params.setMargins(0,0,100,0);
@@ -73,6 +73,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
 
             holder.message.setGravity(Gravity.START);
             holder.message.setBackgroundResource(R.drawable.background_radius_20);
+            holder.message.setTextColor(context.getColor(R.color.white));
         }
 
     }

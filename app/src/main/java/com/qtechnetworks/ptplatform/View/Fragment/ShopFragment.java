@@ -68,7 +68,7 @@ public class ShopFragment extends Fragment implements CallBack {
         View view = inflater.inflate(R.layout.fragment_shop, container, false);
 
         initials(view);
-        getSubscriptions(PreferencesUtils.getString(PrefKeys.coachid, "0"));
+        getSubscriptions();
 
 
         // Inflate the layout for this fragment
@@ -88,13 +88,13 @@ public class ShopFragment extends Fragment implements CallBack {
         ptPackagesRecyclerview.setLayoutManager(linearLayoutManager);
     }
 
-    private void getSubscriptions(String coachid){
+    private void getSubscriptions(){
 
         HashMap<String ,Object> params=new HashMap<>();
 
-      //  params.put("skip",skip);
+//        params.put("skip",skip);
         if (id.equalsIgnoreCase("x"))
-            params.put("coach_id",coachid);
+            params.put("coach_id",PreferencesUtils.getCoach(getContext()).getId());
         else
             params.put("coach_id", id);
 

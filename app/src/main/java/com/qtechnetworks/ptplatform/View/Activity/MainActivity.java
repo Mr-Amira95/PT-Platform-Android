@@ -116,9 +116,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (PreferencesUtils.getCoach(MainActivity.this) != null)
-                    setFragment(new MainFragment());
-                else{
+                if (PreferencesUtils.getCoach(MainActivity.this) != null) {
+                    if (PreferencesUtils.getCoach(MainActivity.this).getSubscription())
+                        setFragment(new MainFragment());
+                } else {
                     Toast.makeText(MainActivity.this, "Please choose coach", Toast.LENGTH_SHORT).show();
                     setFragment(new ChooseCoachFragment());
                 }

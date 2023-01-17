@@ -32,6 +32,8 @@ import java.util.List;
 
 public class ChalengesVideosAdapter extends RecyclerView.Adapter<ChalengesVideosAdapter.ViewHolder>  {
 
+    // Done
+
     private Context context;
     List<VideoChallengeData> data;
 

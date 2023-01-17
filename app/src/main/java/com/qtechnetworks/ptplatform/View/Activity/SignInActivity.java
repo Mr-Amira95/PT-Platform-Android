@@ -196,6 +196,7 @@ public class SignInActivity extends AppCompatActivity implements CallBack {
     private void googleSignIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, 100);
+        finish();
     }
 
 

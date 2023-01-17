@@ -2,6 +2,7 @@ package com.qtechnetworks.ptplatform.View.Fragment;
 
 import android.os.Bundle;
 
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,11 +16,13 @@ import com.qtechnetworks.ptplatform.Controller.adapters.CalendarAdapter;
 import com.qtechnetworks.ptplatform.Controller.adapters.PersonalCoachAdapter;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.CoachCalendarResults.CoachCalendarResults;
+import com.qtechnetworks.ptplatform.Model.Beans.CoachCalendarResults.Datum;
 import com.qtechnetworks.ptplatform.Model.Beans.PersonalCoach.PersonalCoach;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.R;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import io.reactivex.disposables.Disposable;
@@ -27,6 +30,8 @@ import io.reactivex.disposables.Disposable;
 public class CalendarCoachFragment extends Fragment implements CallBack {
 
     RecyclerView calendarRecyclerview;
+    int skip = 0;
+    ArrayList<Datum> data = new ArrayList<>();
 
     public CalendarCoachFragment() {
         // Required empty public constructor
@@ -58,11 +63,36 @@ public class CalendarCoachFragment extends Fragment implements CallBack {
         LinearLayoutManager layoutManagerhorizantalleader = new LinearLayoutManager(getContext());
         layoutManagerhorizantalleader.setOrientation(LinearLayoutManager.VERTICAL);
         calendarRecyclerview.setLayoutManager(layoutManagerhorizantalleader);
+
+        calendarRecyclerview.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(View view, int i, int i1, int i2, int i3) {
+
+                LinearLayoutManager layoutManager = (LinearLayoutManager) calendarRecyclerview.getLayoutManager();
+                if (layoutManager.findLastVisibleItemPosition() == data.size() - 1) {
+                    skip += data.size();
+                    getCalendarBackground();
+                }
+            }
+        });
+
     }
 
     private void getCalendar() {
 
         HashMap<String ,Object> params=new HashMap<>();
+
+        params.put("skip", skip);
+
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.Coach_Calendar_URL, AppConstants.Coach_Calendar_TAG, CoachCalendarResults.class, params);
+    }
+
+    private void getCalendarBackground() {
+
+        HashMap<String ,Object> params=new HashMap<>();
+
+        params.put("skip", skip);
 
         MyApplication.getInstance().getBackgroundHttpHelper().setCallback(this);
         MyApplication.getInstance().getBackgroundHttpHelper().get(getContext(), AppConstants.Coach_Calendar_URL, AppConstants.Coach_Calendar_TAG, CoachCalendarResults.class, params);
@@ -78,11 +108,13 @@ public class CalendarCoachFragment extends Fragment implements CallBack {
 
         if (isSuccess) {
             CoachCalendarResults coachCalendarResults =(CoachCalendarResults) result;
+            data.addAll(coachCalendarResults.getData());
             if (coachCalendarResults.getData().size() > 0) {
-                CalendarAdapter calendarAdapter = new CalendarAdapter(getContext(), coachCalendarResults.getData());
+                CalendarAdapter calendarAdapter = new CalendarAdapter(getContext(), data);
                 calendarRecyclerview.setAdapter(calendarAdapter);
-            } else {
-                calendarRecyclerview.setVisibility(View.GONE);
+            }
+
+            if (data.size() == 0) {
                 Toast.makeText(getContext(), "There are no results to show", Toast.LENGTH_SHORT).show();
             }
         }

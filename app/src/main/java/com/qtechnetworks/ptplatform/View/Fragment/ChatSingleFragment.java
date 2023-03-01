@@ -96,7 +96,6 @@ public class ChatSingleFragment extends Fragment implements CallBack {
             }
         });
 
-
 //        chatRecyclerView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
 //            @Override
 //            public void onScrollChange(View view, int i, int i1, int i2, int i3) {
@@ -155,6 +154,7 @@ public class ChatSingleFragment extends Fragment implements CallBack {
                 return true;
             }
         };
+
         TrustManager[] trustAllCerts= new TrustManager[] { new X509TrustManager() {
             public void checkClientTrusted(X509Certificate[] chain, String authType) {
             }
@@ -182,7 +182,7 @@ public class ChatSingleFragment extends Fragment implements CallBack {
             IO.setDefaultOkHttpWebSocketFactory((okhttp3.WebSocket.Factory) okHttpClient);
             IO.setDefaultOkHttpCallFactory((Call.Factory) okHttpClient);
 
-            mSocket = IO.socket("https://qtechnetworks.co:3001",options);
+            mSocket = IO.socket("https://ptplatform.app:3001",options);
             mSocket.connect();
 
                 mSocket.on(Socket.EVENT_CONNECT, new io.socket.emitter.Emitter.Listener() {
@@ -198,6 +198,7 @@ public class ChatSingleFragment extends Fragment implements CallBack {
                         }
 
                         mSocket.emit("join_room", jsonObject);
+
                         mSocket.on("receive_message", new io.socket.emitter.Emitter.Listener() {
                             @RequiresApi(api = Build.VERSION_CODES.N)
                             @Override
@@ -251,6 +252,7 @@ public class ChatSingleFragment extends Fragment implements CallBack {
     private void connectSocketSend(String chatID, String senderID, String message) {
 
         SSLContext mySSLContext = null;
+
         try {
             mySSLContext = SSLContext.getInstance("TLS");
             try {
@@ -295,7 +297,7 @@ public class ChatSingleFragment extends Fragment implements CallBack {
             IO.setDefaultOkHttpWebSocketFactory((okhttp3.WebSocket.Factory) okHttpClient);
             IO.setDefaultOkHttpCallFactory((Call.Factory) okHttpClient);
 
-            mSocket = IO.socket("https://qtechnetworks.co:3001",options);
+            mSocket = IO.socket("https://ptplatform.app:3001",options);
             mSocket.connect();
                 mSocket.on(Socket.EVENT_CONNECT, new io.socket.emitter.Emitter.Listener() {
                     @Override

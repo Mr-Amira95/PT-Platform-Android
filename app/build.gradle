@@ -10,8 +10,8 @@ android {
         applicationId "com.qtechnetworks.ptplatform"
         minSdk 23
         targetSdk 32
-        versionCode 8
-        versionName "1.8"
+        versionCode 10
+        versionName "1.10"
 
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -28,7 +28,7 @@ android {
 //dbfd87e2-dcf9-402d-a7ae-afba14379cb1
     buildTypes {
         debug {
-            buildConfigField "String", "API_URL", "\"https://pt.qtechnetworks.co/public/api/v1/\""
+            buildConfigField "String", "API_URL", "\"https://ptplatform.app/public/api/v1/\""
             buildConfigField "String", "ONESIGNAL_APP_ID", "\"dbfd87e2-dcf9-402d-a7ae-afba14379cb1\""
         }
         release {
@@ -36,7 +36,7 @@ android {
             multiDexEnabled true
             debuggable false
             buildConfigField "String", "ONESIGNAL_APP_ID", "\"dbfd87e2-dcf9-402d-a7ae-afba14379cb1\""
-            buildConfigField "String", "API_URL", "\"https://pt.qtechnetworks.co/public/api/v1/\""
+            buildConfigField "String", "API_URL", "\"https://ptplatform.app/public/api/v1/\""
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

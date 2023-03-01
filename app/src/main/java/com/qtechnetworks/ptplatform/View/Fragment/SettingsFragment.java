@@ -74,7 +74,7 @@ public class SettingsFragment extends Fragment implements CallBack {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse("https://pt.qtechnetworks.co/app/terms-conditions"));
+                i.setData(Uri.parse("https://ptplatform.app/public/app/terms-conditions"));
                 startActivity(i);
             }
         });

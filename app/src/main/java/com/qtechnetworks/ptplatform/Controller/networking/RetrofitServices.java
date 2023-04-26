@@ -3,6 +3,7 @@ package com.qtechnetworks.ptplatform.Controller.networking;
 
 import com.fasterxml.jackson.annotation.JsonRawValue;
 import com.google.gson.JsonObject;
+import com.qtechnetworks.ptplatform.Model.Beans.Challenge.ChallengeID;
 
 import org.json.JSONObject;
 
@@ -19,6 +20,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -42,6 +44,10 @@ public interface RetrofitServices {
 
     @Headers({"Accept: application/json"})
     @POST
+    Observable<ResponseBody> postChallenge(@Url String url, @Body ChallengeID request);
+
+    @Headers({"Accept: application/json"})
+    @POST
     Observable<ResponseBody> postRaw(@Url String url, @Body Map<String, Object> params);
 
     @Headers("Accept: application/json")
@@ -52,7 +58,6 @@ public interface RetrofitServices {
     @FormUrlEncoded
     @PUT
     Observable<ResponseBody> put(@Url String url, @FieldMap Map<String, Object> params);
-
 
     @Headers({"Accept: application/json"})
     @DELETE

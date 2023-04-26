@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 
 import com.google.gson.JsonObject;
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
+import com.qtechnetworks.ptplatform.Model.Beans.Challenge.ChallengeID;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
@@ -120,6 +121,87 @@ public class HttpHelper {
                 } );
     }
 
+    public void PostChallenges(Context context, final String url, final int tag, final Class clazz, ChallengeID params) {
+
+        dialog=new ProgressDialog(context);
+        dialog.setMessage(context.getResources().getString(R.string.loading));
+        dialog.setCancelable(false);
+        dialog.show();
+
+        RetrofitServices service = MyApplication.getInstance().getHttpMethods(context);
+
+        service.postChallenge(url, params)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ResponseBody>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        callback.onSubscribe(d);
+                    }
+
+                    @Override
+                    public void onNext(@NonNull ResponseBody responseBody) {
+
+                        dialog.dismiss();
+
+                        try {
+
+                            result(clazz, responseBody.source().readUtf8().toString(), tag, true);
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        dialog.dismiss();
+
+                        try {
+                            Toast.makeText(context,((HttpException) e).response().errorBody().source().readUtf8().toString().split(":")[3].replace("\\}}","").replace(")",""),Toast.LENGTH_LONG).show();
+                        }catch (Exception g){
+                            g.printStackTrace();
+                        }
+
+                        if (e instanceof SocketTimeoutException)
+                        {
+                            // "Connection Timeout";
+                            try {
+                                Toast.makeText(context,"Connection Timeout",Toast.LENGTH_LONG).show();
+                            }catch (Exception g){
+                                g.printStackTrace();
+                            }
+                        }
+                        else if (e instanceof IOException)
+                        {
+                            // "Timeout";
+                            try {
+                                Toast.makeText(context,"Timeout",Toast.LENGTH_LONG).show();
+                            }catch (Exception g){
+                                g.printStackTrace();
+                            }
+
+                        }
+                        else
+                        {
+
+                        }
+                        callback.onError(e);
+                        e.printStackTrace();
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                        dialog.dismiss();
+
+                        callback.onComplete();
+
+                    }
+                } );
+    }
+
     public void PostRaw(Context context,final String url, final int tag, final Class clazz, final Map<String, Object> params) {
 
         dialog=new ProgressDialog(context);
@@ -135,9 +217,7 @@ public class HttpHelper {
                 .subscribe(new Observer<ResponseBody>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-
                         callback.onSubscribe(d);
-
                     }
 
                     @Override

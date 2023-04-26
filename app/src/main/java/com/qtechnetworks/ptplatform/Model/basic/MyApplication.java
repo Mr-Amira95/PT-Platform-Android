@@ -58,6 +58,17 @@ public class MyApplication extends Application {
     private Gson gson;
     private SharedPreferences preferences;
 
+    OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
+        @Override
+        public Response intercept(Chain chain) throws IOException {
+            Request newRequest  = chain.request().newBuilder()
+                    .addHeader("Authorization", "Bearer " + PreferencesUtils.getUserToken())
+                    .addHeader("Accept-Language", PreferencesUtils.getLanguage())
+                    .build();
+            return chain.proceed(newRequest);
+        }
+    }).build();
+
     public synchronized RetrofitServices getHttpMethods(Context context) {
         if (httpMethods == null) {
             gson = new GsonBuilder()
@@ -67,6 +78,7 @@ public class MyApplication extends Application {
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create(getGson()))
                     .validateEagerly(true)
+                    .client(client)
                     .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                     .baseUrl(BuildConfig.API_URL)
                     .client(createClient(context))

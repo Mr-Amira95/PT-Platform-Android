@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.qtechnetworks.ptplatform.Model.Beans.Challenge.ChallengeData;
+import com.qtechnetworks.ptplatform.Model.Beans.Challenge.ChallengeID;
 import com.qtechnetworks.ptplatform.Model.Beans.Challenge.VideoChallengeData;
 import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
@@ -37,7 +38,7 @@ public class ChalengesVideosAdapter extends RecyclerView.Adapter<ChalengesVideos
     private Context context;
     List<VideoChallengeData> data;
 
-    public List<Integer> completedVideosIds=new ArrayList<>();
+    public static ArrayList<Integer> completedVideosIds = new ArrayList<>();
 
     public ChalengesVideosAdapter(Context context, List<VideoChallengeData> data) {
         this.context=context;

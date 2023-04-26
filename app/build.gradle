@@ -4,12 +4,13 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.qtechnetworks.ptplatform"
         minSdk 23
-        targetSdk 32
+        targetSdkVersion 33
+        targetSdk 33
         versionCode 10
         versionName "1.10"
 
@@ -48,16 +49,25 @@ android {
 
 dependencies {
 
-    implementation 'androidx.appcompat:appcompat:1.4.0'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
-    implementation 'com.google.android.gms:play-services-basement:18.0.0'
-    implementation 'com.google.assistant.appactions:suggestions:+'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'com.google.firebase:firebase-messaging:23.1.0'
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+//    implementation 'androidx.appcompat:appcompat:1.5.1'
+//    implementation 'com.google.android.material:material:1.7.0'
+//    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+//    testImplementation 'junit:junit:4.13.2'
+//    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
+//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+//    implementation 'com.google.assistant.appactions:suggestions:1.0.0'
+//    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+//    implementation 'com.google.firebase:firebase-messaging:23.1.2'
+
+    implementation 'com.google.android.gms:play-services-basement:18.2.0'
 
     // https://github.com/ReactiveX/RxAndroid
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
@@ -71,7 +81,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-jackson:2.1.0'
 
     // GSON body parser
-    implementation 'com.google.code.gson:gson:2.8.8'
+    implementation 'com.google.code.gson:gson:2.8.9'
 
     implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.2'
 
@@ -88,19 +98,19 @@ dependencies {
 
     implementation 'io.reactivex.rxjava3:rxjava:3.0.0'
 
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.8.1'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.9.0'
 
     implementation 'com.google.dagger:dagger-android:2.35.1'
-    implementation 'com.google.dagger:dagger-android-support:2.27' // if you use the support libraries
-    annotationProcessor 'com.google.dagger:dagger-android-processor:2.27'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.27'
+    implementation 'com.google.dagger:dagger-android-support:2.28' // if you use the support libraries
+    annotationProcessor 'com.google.dagger:dagger-android-processor:2.41'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.41'
 
-    implementation "com.android.billingclient:billing:5.0.0"
-    implementation "com.android.billingclient:billing-ktx:5.0.0"
+    implementation "com.android.billingclient:billing:5.2.0"
+    implementation "com.android.billingclient:billing-ktx:5.2.0"
 
     implementation "androidx.multidex:multidex:2.0.1"
 
-    implementation 'com.intuit.sdp:sdp-android:1.0.6'
+    implementation 'com.intuit.sdp:sdp-android:1.1.0'
 
     //slider
     implementation 'com.ss.bannerslider:bannerslider:2.0.0'
@@ -115,11 +125,11 @@ dependencies {
     implementation 'com.makeramen:roundedimageview:2.3.0'
 
     //glide
-    implementation 'com.github.bumptech.glide:glide:4.12.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+    implementation 'com.github.bumptech.glide:glide:4.14.2'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.14.2'
 
     //ViewPager PlaceHolder
-    implementation 'me.relex:circleindicator:2.1.4@aar'
+    implementation 'me.relex:circleindicator:2.1.6@aar'
 
     // Chart and graph library
     implementation 'com.github.blackfizz:eazegraph:1.2.5l@aar'
@@ -128,18 +138,18 @@ dependencies {
     //one signal
     implementation 'com.onesignal:OneSignal:[4.0.0, 4.99.99]'
 
-    implementation 'com.google.android.gms:play-services-auth:20.1.0'
+    implementation 'com.google.android.gms:play-services-auth:20.5.0'
 
 
     //facebook login
-
     implementation 'com.facebook.android:facebook-android-sdk:latest.release'
+
     ///video player
     //implementation 'com.github.HamidrezaAmz:MagicalExoPlayer:1.0.16'
 
-    implementation 'com.google.android.exoplayer:exoplayer:2.18.1'
+    implementation 'com.google.android.exoplayer:exoplayer:2.18.6'
     implementation 'com.google.android.gms:play-services-fitness:21.1.0'
-    implementation 'com.google.android.gms:play-services-auth:20.3.0'
+    implementation 'com.google.android.gms:play-services-auth:20.5.0'
 
     implementation "com.github.skydoves:powerspinner:1.2.3"
 
@@ -150,8 +160,8 @@ dependencies {
         exclude group: 'org.json', module: 'json'
     }
 
-    implementation "com.android.billingclient:billing:5.1.0"
-    implementation "com.android.billingclient:billing-ktx:5.1.0"
+    implementation "com.android.billingclient:billing:5.2.0"
+    implementation "com.android.billingclient:billing-ktx:5.2.0"
 
     implementation 'com.github.smarteist:autoimageslider:1.4.0'
 

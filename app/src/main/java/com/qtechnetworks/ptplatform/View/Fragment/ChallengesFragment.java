@@ -75,22 +75,23 @@ public class ChallengesFragment extends Fragment implements CallBack {
         linearLayoutManager1.setOrientation(LinearLayoutManager.HORIZONTAL);
         historyRecyclerview.setLayoutManager(linearLayoutManager1);
 
-        historyRecyclerview.setOnScrollChangeListener(new View.OnScrollChangeListener() {
-            @Override
-            public void onScrollChange(View view, int i, int i1, int i2, int i3) {
+//        historyRecyclerview.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+//            @Override
+//            public void onScrollChange(View view, int i, int i1, int i2, int i3) {
+//
+//                LinearLayoutManager layoutManager = (LinearLayoutManager) historyRecyclerview.getLayoutManager();
+//                if (layoutManager.findLastVisibleItemPosition() == data.size() - 1) {
+//                    skip += data.size();
+//
+//                    if (PreferencesUtils.getUserType().equalsIgnoreCase("Trainee"))
+//                        getChallengesUserBackground(PreferencesUtils.getCoach(getContext()).getId());
+//                    else if (PreferencesUtils.getUserType().equalsIgnoreCase("Coach"))
+//                        getChallengesUserBackground(PreferencesUtils.getUser(getContext()).getId());
+//
+//                }
+//            }
+//        });
 
-                LinearLayoutManager layoutManager = (LinearLayoutManager) historyRecyclerview.getLayoutManager();
-                if (layoutManager.findLastVisibleItemPosition() == data.size() - 1) {
-                    skip += data.size();
-
-                    if (PreferencesUtils.getUserType().equalsIgnoreCase("Trainee"))
-                        getChallengesUserBackground(PreferencesUtils.getCoach(getContext()).getId());
-                    else if (PreferencesUtils.getUserType().equalsIgnoreCase("Coach"))
-                        getChallengesUserBackground(PreferencesUtils.getUser(getContext()).getId());
-
-                }
-            }
-        });
 
     }
 

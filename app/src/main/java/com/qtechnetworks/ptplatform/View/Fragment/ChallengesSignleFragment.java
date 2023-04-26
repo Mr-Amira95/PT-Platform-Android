@@ -19,6 +19,7 @@ import com.qtechnetworks.ptplatform.Controller.adapters.ChalengesVideosAdapter;
 import com.qtechnetworks.ptplatform.Controller.adapters.CoachAdapter;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.Challenge.Challenge;
+import com.qtechnetworks.ptplatform.Model.Beans.Challenge.ChallengeID;
 import com.qtechnetworks.ptplatform.Model.Beans.Challenge.VideoChallenge;
 import com.qtechnetworks.ptplatform.Model.Beans.Challenge.VideoChallengeData;
 import com.qtechnetworks.ptplatform.Model.Beans.General;
@@ -28,6 +29,7 @@ import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -44,8 +46,6 @@ public class ChallengesSignleFragment extends Fragment implements CallBack {
     private String traineeID;
     int completed=0;
 
-    int skip = 0;
-    ArrayList<VideoChallengeData> data = new ArrayList<>();
 
     public ChallengesSignleFragment (int challengeId, String traineeID) {
         this.challengeId = challengeId;
@@ -102,35 +102,56 @@ public class ChallengesSignleFragment extends Fragment implements CallBack {
         gridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         challengesRecyclerview.setLayoutManager(gridLayoutManager);
 
-        challengesRecyclerview.setOnScrollChangeListener(new View.OnScrollChangeListener() {
-            @Override
-            public void onScrollChange(View view, int i, int i1, int i2, int i3) {
-
-                LinearLayoutManager layoutManager = (LinearLayoutManager) challengesRecyclerview.getLayoutManager();
-                if (layoutManager.findLastVisibleItemPosition() == data.size() - 1) {
-                    skip += data.size();
-
-                    if (PreferencesUtils.getUserType().equalsIgnoreCase("coach"))
-                        getCoachChallengeVideosBackground();
-                    else if (PreferencesUtils.getUserType().equalsIgnoreCase("trainee"))
-                        getChallengeVideosBackground();
-
-                }
-            }
-        });
+//        challengesRecyclerview.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+//            @Override
+//            public void onScrollChange(View view, int i, int i1, int i2, int i3) {
+//
+//                LinearLayoutManager layoutManager = (LinearLayoutManager) challengesRecyclerview.getLayoutManager();
+//                if (layoutManager.findLastVisibleItemPosition() == data.size() - 1) {
+//                    skip += data.size();
+//
+//                    if (PreferencesUtils.getUserType().equalsIgnoreCase("coach"))
+//                        getCoachChallengeVideosBackground();
+//                    else if (PreferencesUtils.getUserType().equalsIgnoreCase("trainee"))
+//                        getChallengeVideosBackground();
+//
+//                }
+//            }
+//        });
 
     }
 
     private void completeChallenges(){
 
-        if(adapter.completedVideosIds.size()>0) {
-            HashMap<String, Object> params = new HashMap<>();
 
-            params.put("challenge_video_ids", adapter.completedVideosIds);
+        if(ChalengesVideosAdapter.completedVideosIds.size()>0) {
+            ChallengeID challengeID = new ChallengeID(PreferencesUtils.getCoach(getContext()).getId(), ChalengesVideosAdapter.completedVideosIds);
+
+//            HashMap<String, Object> params = new HashMap<>();
+//
+//            ArrayList<ChallengeID> IDs = new ArrayList<>();
+//
+//            for (int i=0; i<ChalengesVideosAdapter.completedVideosIds.size(); i++) {
+//                IDs.add(challengeID);
+//            }
+//
+//            StringBuilder id = new StringBuilder("[");
+//
+////            int[] ids = new int[adapter.completedVideosIds.size()];
+//            for (int i=0; i<ChalengesVideosAdapter.completedVideosIds.size(); i++) {
+//                if (i < ChalengesVideosAdapter.completedVideosIds.size()-1) {
+//                    id.append(ChalengesVideosAdapter.completedVideosIds.get(i)).append(",");
+//                } else {
+//                    id.append(ChalengesVideosAdapter.completedVideosIds.get(i)).append("]");
+//                }
+//            }
+//
+//            params.put("challenge_video_ids", IDs);
+//            params.put("coach_id", PreferencesUtils.getCoach(getContext()).getId());
 
             MyApplication.getInstance().getHttpHelper().setCallback(this);
-            MyApplication.getInstance().getHttpHelper().PostRaw(getContext(), AppConstants.CHALLENGES_COMPLETE_URL, AppConstants.CHALLENGES_COMPLETE_TAG, General.class, params);
-        }else{
+            MyApplication.getInstance().getHttpHelper().PostChallenges(getContext(), AppConstants.CHALLENGES_COMPLETE_URL, AppConstants.CHALLENGES_COMPLETE_TAG, General.class, challengeID);
+        }else {
             Toast.makeText(getContext(), R.string.select_challenge_to_finish, Toast.LENGTH_SHORT).show();
         }
 
@@ -141,7 +162,6 @@ public class ChallengesSignleFragment extends Fragment implements CallBack {
 
         params.put("challenge_id", challengeId);
         params.put("coach_id", PreferencesUtils.getCoach(getContext()).getId());
-        params.put("skip",skip);
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);
         MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.CHALLENGES_VIDEOS_URL, AppConstants.CHALLENGES_VIDEOS_TAG, VideoChallenge.class, params);
@@ -152,7 +172,6 @@ public class ChallengesSignleFragment extends Fragment implements CallBack {
         HashMap<String ,Object> params=new HashMap<>();
         params.put("challenge_id", challengeId);
         params.put("user_id", traineeID);
-        params.put("skip",skip);
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);
         MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.CHALLENGES_VIDEOS_URL, AppConstants.CHALLENGES_VIDEOS_TAG, VideoChallenge.class, params);
@@ -164,7 +183,6 @@ public class ChallengesSignleFragment extends Fragment implements CallBack {
 
         params.put("challenge_id", challengeId);
         params.put("coach_id", PreferencesUtils.getCoach(getContext()).getId());
-        params.put("skip",skip);
 
         MyApplication.getInstance().getBackgroundHttpHelper().setCallback(this);
         MyApplication.getInstance().getBackgroundHttpHelper().get(getContext(), AppConstants.CHALLENGES_VIDEOS_URL, AppConstants.CHALLENGES_VIDEOS_TAG, VideoChallenge.class, params);
@@ -175,7 +193,6 @@ public class ChallengesSignleFragment extends Fragment implements CallBack {
         HashMap<String ,Object> params=new HashMap<>();
         params.put("challenge_id", challengeId);
         params.put("user_id", traineeID);
-        params.put("skip",skip);
 
         MyApplication.getInstance().getBackgroundHttpHelper().setCallback(this);
         MyApplication.getInstance().getBackgroundHttpHelper().get(getContext(), AppConstants.CHALLENGES_VIDEOS_URL, AppConstants.CHALLENGES_VIDEOS_TAG, VideoChallenge.class, params);
@@ -190,12 +207,11 @@ public class ChallengesSignleFragment extends Fragment implements CallBack {
         switch (tag){
             case AppConstants.CHALLENGES_VIDEOS_TAG:
                 if(isSuccess){
-                    VideoChallenge videoChallenge=(VideoChallenge)result;
+                    VideoChallenge videoChallenge = (VideoChallenge)result;
 
                     if (videoChallenge.getData().size() > 0 ){
 
-                        data.addAll(videoChallenge.getData());
-                        adapter = new ChalengesVideosAdapter(getContext(), data);
+                        adapter = new ChalengesVideosAdapter(getContext(), videoChallenge.getData());
                         challengesRecyclerview.setAdapter(adapter);
                         completed=0;
 
@@ -206,8 +222,7 @@ public class ChallengesSignleFragment extends Fragment implements CallBack {
 
                         subtitle.setText(completed+"/"+videoChallenge.getData().size()+getString(R.string.challenges_completed));
 
-                    }
-                    if (data.size()==0) {
+                    } else {
                         Toast.makeText(getContext(), "There are no results to show", Toast.LENGTH_SHORT).show();
                     }
 

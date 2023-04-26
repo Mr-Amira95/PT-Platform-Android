@@ -73,7 +73,6 @@ public class FoodDialog extends Dialog implements CallBack {
 
         HashMap <String ,Object> params=new HashMap<>();
 
-        params.put("skip","0");
         params.put("name", searchBar.getText().toString());
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);

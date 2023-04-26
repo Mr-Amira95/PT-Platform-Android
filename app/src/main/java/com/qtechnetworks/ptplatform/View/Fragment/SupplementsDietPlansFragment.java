@@ -68,7 +68,6 @@ public class SupplementsDietPlansFragment extends Fragment implements CallBack{
 
         }
 
-
         recyclerView = view.findViewById(R.id.recyclerView);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),3);

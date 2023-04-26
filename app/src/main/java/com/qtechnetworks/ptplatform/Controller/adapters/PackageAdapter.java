@@ -90,12 +90,12 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHold
 
         if(packages.get(position).getStyle().equalsIgnoreCase("style_bronze")){
             holder.backgroundLayout.setBackgroundResource(R.drawable.background_package_bronze);
-        }
-        if(packages.get(position).getStyle().equalsIgnoreCase("style_gold")){
+        } else if(packages.get(position).getStyle().equalsIgnoreCase("style_gold")){
             holder.backgroundLayout.setBackgroundResource(R.drawable.background_package_gold);
-        }
-        if(packages.get(position).getStyle().equalsIgnoreCase("style_silver")){
+        } else if(packages.get(position).getStyle().equalsIgnoreCase("style_silver")){
             holder.backgroundLayout.setBackgroundResource(R.drawable.background_package_silver);
+        } else {
+            holder.backgroundLayout.setBackgroundResource(R.drawable.follwous);
         }
 
         holder.buyNowBtn.setOnClickListener(new View.OnClickListener() {

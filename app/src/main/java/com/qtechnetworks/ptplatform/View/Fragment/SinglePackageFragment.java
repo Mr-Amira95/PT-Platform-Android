@@ -176,7 +176,10 @@ public class SinglePackageFragment extends Fragment implements CallBack, Purchas
         params.put("code", promoCode.getText().toString());
         params.put("payment_method", paymentMethod);
         params.put("package_id", packages.getId());
-        params.put("coach_id", PreferencesUtils.getCoach(getContext()).getId());
+        if (id.equalsIgnoreCase("x"))
+            params.put("coach_id", PreferencesUtils.getCoach(getContext()).getId().toString());
+        else
+            params.put("coach_id", id);
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);
         MyApplication.getInstance().getHttpHelper().Post(getContext(), AppConstants.PACKAGES_URL, AppConstants.PACKAGES_TAG, FreePackageResults.class, params);
@@ -187,7 +190,11 @@ public class SinglePackageFragment extends Fragment implements CallBack, Purchas
 
         params.put("payment_method", paymentMethod);
         params.put("package_id", packages.getId());
-        params.put("coach_id", PreferencesUtils.getCoach(getContext()).getId());
+
+        if (id.equalsIgnoreCase("x"))
+            params.put("coach_id", PreferencesUtils.getCoach(getContext()).getId().toString());
+        else
+            params.put("coach_id", id);
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);
         MyApplication.getInstance().getHttpHelper().Post(getContext(), AppConstants.PACKAGES_URL, AppConstants.PACKAGES_TAG, FreePackageResults.class, params);

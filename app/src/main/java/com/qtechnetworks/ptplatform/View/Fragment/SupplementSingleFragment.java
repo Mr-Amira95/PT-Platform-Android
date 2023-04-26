@@ -1,6 +1,7 @@
 package com.qtechnetworks.ptplatform.View.Fragment;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;

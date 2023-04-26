@@ -66,16 +66,16 @@ public class ExercisesAdapter extends RecyclerView.Adapter<ExercisesAdapter.View
         if (current.getTitle() != null)
             holder.title_text.setText(current.getTitle().toString());
 
-        holder.exercise_recyclerview.addOnScrollListener(new EndlessRecyclerViewScrollListener(linearLayoutManager3) {
-            @Override
-            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-                if (PreferencesUtils.getUserType().equalsIgnoreCase("coach")){
-                    getCategoryExercisesCoach(String.valueOf(current.getId()),totalItemsCount);
-                } else {
-                    getCategoryExercises(String.valueOf(current.getId()),totalItemsCount);
-                }
-            }
-        });
+//        holder.exercise_recyclerview.addOnScrollListener(new EndlessRecyclerViewScrollListener(linearLayoutManager3) {
+//            @Override
+//            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+//                if (PreferencesUtils.getUserType().equalsIgnoreCase("coach")){
+//                    getCategoryExercisesCoach(String.valueOf(current.getId()),totalItemsCount);
+//                } else {
+//                    getCategoryExercises(String.valueOf(current.getId()),totalItemsCount);
+//                }
+//            }
+//        });
 
     }
 

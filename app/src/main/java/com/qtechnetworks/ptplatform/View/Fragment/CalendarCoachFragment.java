@@ -64,17 +64,17 @@ public class CalendarCoachFragment extends Fragment implements CallBack {
         layoutManagerhorizantalleader.setOrientation(LinearLayoutManager.VERTICAL);
         calendarRecyclerview.setLayoutManager(layoutManagerhorizantalleader);
 
-        calendarRecyclerview.setOnScrollChangeListener(new View.OnScrollChangeListener() {
-            @Override
-            public void onScrollChange(View view, int i, int i1, int i2, int i3) {
-
-                LinearLayoutManager layoutManager = (LinearLayoutManager) calendarRecyclerview.getLayoutManager();
-                if (layoutManager.findLastVisibleItemPosition() == data.size() - 1) {
-                    skip += data.size();
-                    getCalendarBackground();
-                }
-            }
-        });
+//        calendarRecyclerview.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+//            @Override
+//            public void onScrollChange(View view, int i, int i1, int i2, int i3) {
+//
+//                LinearLayoutManager layoutManager = (LinearLayoutManager) calendarRecyclerview.getLayoutManager();
+//                if (layoutManager.findLastVisibleItemPosition() == data.size() - 1) {
+//                    skip += data.size();
+//                    getCalendarBackground();
+//                }
+//            }
+//        });
 
     }
 

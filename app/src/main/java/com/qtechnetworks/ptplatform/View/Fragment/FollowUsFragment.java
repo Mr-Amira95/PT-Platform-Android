@@ -43,7 +43,7 @@ public class FollowUsFragment extends Fragment {
         instagramBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String geoUri = "https://www.instagram.com/pt.platform.app/";
+                String geoUri = "https://www.instagram.com/pt.platform/";
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(geoUri));
                 startActivity(intent);
             }

@@ -121,7 +121,6 @@ public class SearchFragment extends Fragment implements CallBack {
     private void searchExercise(String word) {
 
         HashMap<String ,Object> params = new HashMap<>();
-        params.put("skip","0");
         params.put("search", word);
         params.put("coach_id", PreferencesUtils.getCoach(getContext()).getId());
 

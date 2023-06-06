@@ -2,26 +2,20 @@ package com.qtechnetworks.ptplatform.Controller.adapters;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.qtechnetworks.ptplatform.Model.Beans.Challenge.ChallengeData;
-import com.qtechnetworks.ptplatform.Model.Beans.Challenge.ChallengeID;
 import com.qtechnetworks.ptplatform.Model.Beans.Challenge.VideoChallengeData;
 import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;

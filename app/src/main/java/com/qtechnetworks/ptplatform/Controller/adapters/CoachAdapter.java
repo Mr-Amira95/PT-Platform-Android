@@ -20,10 +20,7 @@ import com.qtechnetworks.ptplatform.Model.Beans.Coach.Datum;
 import com.qtechnetworks.ptplatform.Model.utilits.PrefKeys;
 import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
-import com.qtechnetworks.ptplatform.View.Fragment.ContactFragment;
 import com.qtechnetworks.ptplatform.View.Fragment.MainFragment;
-
-import java.util.List;
 
 
 public class CoachAdapter extends RecyclerView.Adapter<CoachAdapter.ViewHolder>  {

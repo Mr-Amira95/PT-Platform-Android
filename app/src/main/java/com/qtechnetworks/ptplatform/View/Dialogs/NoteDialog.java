@@ -7,23 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
-import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
-import com.qtechnetworks.ptplatform.Model.Beans.General;
-import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
-import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.R;
-import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
-import com.qtechnetworks.ptplatform.View.Fragment.VideoChatFragment;
-
-import java.util.HashMap;
-
-import io.reactivex.disposables.Disposable;
 
 
 public class NoteDialog extends Dialog {

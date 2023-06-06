@@ -2,7 +2,6 @@ package com.qtechnetworks.ptplatform.View.Fragment;
 
 import android.os.Bundle;
 
-import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,11 +12,9 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.qtechnetworks.ptplatform.Controller.adapters.CalendarAdapter;
-import com.qtechnetworks.ptplatform.Controller.adapters.PersonalCoachAdapter;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
-import com.qtechnetworks.ptplatform.Model.Beans.CoachCalendarResults.CoachCalendarResults;
-import com.qtechnetworks.ptplatform.Model.Beans.CoachCalendarResults.Datum;
-import com.qtechnetworks.ptplatform.Model.Beans.PersonalCoach.PersonalCoach;
+import com.qtechnetworks.ptplatform.Model.Beans.Banner.CoachCalendarResults.CoachCalendarResults;
+import com.qtechnetworks.ptplatform.Model.Beans.Banner.CoachCalendarResults.Datum;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.R;

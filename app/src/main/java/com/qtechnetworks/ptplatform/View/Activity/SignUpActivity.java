@@ -22,11 +22,6 @@ import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-
 import io.reactivex.disposables.Disposable;
 
 public class SignUpActivity extends AppCompatActivity implements CallBack{

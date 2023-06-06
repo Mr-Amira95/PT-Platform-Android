@@ -1,12 +1,5 @@
 package com.qtechnetworks.ptplatform.Controller.adapters;
 
-import static com.qtechnetworks.ptplatform.View.Fragment.FoodAddFragment.Foodname_spinner;
-import static com.qtechnetworks.ptplatform.View.Fragment.FoodAddFragment.calories_text;
-import static com.qtechnetworks.ptplatform.View.Fragment.FoodAddFragment.carb_text;
-import static com.qtechnetworks.ptplatform.View.Fragment.FoodAddFragment.fat_text;
-import static com.qtechnetworks.ptplatform.View.Fragment.FoodAddFragment.protine_text;
-import static com.qtechnetworks.ptplatform.View.Fragment.FoodAddFragment.weightnumber_edit;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,13 +22,10 @@ import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
-import com.qtechnetworks.ptplatform.View.Dialogs.FoodDialog;
-import com.qtechnetworks.ptplatform.View.Fragment.FoodAddFragment;
 import com.qtechnetworks.ptplatform.View.Fragment.HistoryFragment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import io.reactivex.disposables.Disposable;
 

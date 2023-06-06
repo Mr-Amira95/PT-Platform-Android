@@ -5,8 +5,9 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginBottom="@dimen/_10sdp"
-    android:background="@drawable/background_radius_20_title"
-    android:layout_marginEnd="@dimen/_30sdp">
+    android:background="@drawable/background_radius_20"
+    android:layout_marginStart="@dimen/_30sdp"
+    android:layout_gravity="end">
 
     <TextView
         android:id="@+id/message"
@@ -15,11 +16,11 @@
         android:textColor="@color/white"
         android:textSize="@dimen/_12sdp"
         android:paddingTop="@dimen/_10sdp"
-        android:paddingStart="@dimen/_10sdp"
-        android:paddingEnd="@dimen/_70sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:paddingStart="@dimen/_70sdp"
         android:layout_marginEnd="@dimen/_20sdp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:gravity="start"
         android:text="Blah Blah"/>
 
@@ -29,11 +30,11 @@
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:textSize="@dimen/_10sdp"
-        android:paddingEnd="@dimen/_10sdp"
+        android:paddingStart="@dimen/_10sdp"
         android:paddingBottom="@dimen/_10sdp"
         android:gravity="end"
         app:layout_constraintTop_toBottomOf="@id/message"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         android:text="12:00pm"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

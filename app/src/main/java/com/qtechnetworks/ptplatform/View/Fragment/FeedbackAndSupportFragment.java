@@ -14,22 +14,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.JsonObject;
-import com.onesignal.OneSignal;
 import com.qtechnetworks.ptplatform.Controller.NewNetworking.RetrofitClient;
-import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
-import com.qtechnetworks.ptplatform.Model.Beans.Banner.Banner;
 import com.qtechnetworks.ptplatform.Model.Beans.General;
-import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
-import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 
-import java.io.IOException;
 import java.util.HashMap;
 
-import io.reactivex.disposables.Disposable;
 import retrofit2.Call;
 import retrofit2.Callback;
 

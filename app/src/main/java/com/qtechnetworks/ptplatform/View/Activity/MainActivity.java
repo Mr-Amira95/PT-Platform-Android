@@ -4,7 +4,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,7 +18,6 @@ import com.qtechnetworks.ptplatform.View.Fragment.HomeFragment;
 import com.qtechnetworks.ptplatform.View.Fragment.MainCoachFragment;
 import com.qtechnetworks.ptplatform.View.Fragment.MainFragment;
 import com.qtechnetworks.ptplatform.View.Fragment.ProfileFragment;
-import com.qtechnetworks.ptplatform.View.Fragment.ShopFragment;
 
 public class MainActivity extends AppCompatActivity {
 

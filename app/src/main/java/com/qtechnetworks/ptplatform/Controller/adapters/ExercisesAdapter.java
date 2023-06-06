@@ -1,15 +1,12 @@
 package com.qtechnetworks.ptplatform.Controller.adapters;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,11 +15,8 @@ import com.qtechnetworks.ptplatform.Model.Beans.Exercises.Category;
 import com.qtechnetworks.ptplatform.Model.Beans.Exercises.ExercisesResults;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
-import com.qtechnetworks.ptplatform.Model.utilits.EndlessRecyclerViewScrollListener;
 import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
-import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
-import com.qtechnetworks.ptplatform.View.Fragment.ExercisesFragment;
 
 import java.util.HashMap;
 import java.util.List;
@@ -84,7 +78,7 @@ public class ExercisesAdapter extends RecyclerView.Adapter<ExercisesAdapter.View
         return data.size();
     }
 
-    private void getCategoryExercises(String categoryID, int skip) {
+    private void getCategoryExercises (String categoryID, int skip) {
 
         HashMap<String ,Object> params = new HashMap<>();
 

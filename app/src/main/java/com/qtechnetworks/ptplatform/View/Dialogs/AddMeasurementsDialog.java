@@ -16,7 +16,6 @@ import androidx.fragment.app.Fragment;
 
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.BodyMeasurement.BodyMeasurementSingle;
-import com.qtechnetworks.ptplatform.Model.Beans.General;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.R;

@@ -18,7 +18,6 @@ import com.onesignal.OneSignal.OSRemoteNotificationReceivedHandler;
 import com.onesignal.OneSignalApiResponseHandler;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.math.BigInteger;

@@ -10,19 +10,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.gson.JsonObject;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.CheckCode.CheckCode;
 import com.qtechnetworks.ptplatform.Model.Beans.CheckCode.ResendCodeResults;
-import com.qtechnetworks.ptplatform.Model.Beans.General;
-import com.qtechnetworks.ptplatform.Model.Beans.RegisterAndLogin.Register;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
-import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
 
 import io.reactivex.disposables.Disposable;

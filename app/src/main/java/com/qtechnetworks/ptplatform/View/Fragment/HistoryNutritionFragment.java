@@ -16,12 +16,9 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.qtechnetworks.ptplatform.Controller.adapters.NutritionHistoryAdapter;
-import com.qtechnetworks.ptplatform.Controller.adapters.WorkoutHistoryAdapter;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
-import com.qtechnetworks.ptplatform.Model.Beans.FavoriteandWorkout.FavoriteandWorkout;
 import com.qtechnetworks.ptplatform.Model.Beans.FoodHome.Foodhome;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
@@ -32,7 +29,6 @@ import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.models.PieModel;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -189,19 +185,19 @@ public class HistoryNutritionFragment extends Fragment implements CallBack {
 
             if (foodhome.getData().getCarb() > 0) {
                 carbChart.addPieSlice(new PieModel( foodhome.getData().getCarb(), Color.parseColor("#1EB1FC")));
-                carbChart.addPieSlice(new PieModel( foodhome.getData().getUser().getTargetCarb()-foodhome.getData().getCarb(), Color.parseColor("#1EB1FC")));
+                carbChart.addPieSlice(new PieModel( foodhome.getData().getUser().getTargetCarb()-foodhome.getData().getCarb(), Color.parseColor("#FFFFFF")));
             } else
                 carbChart.addPieSlice(new PieModel( 1, Color.parseColor("#FFFFFF")));
 
             if (foodhome.getData().getFat() > 0) {
                 fatChart.addPieSlice(new PieModel(foodhome.getData().getFat(), Color.parseColor("#FF0000")));
-                fatChart.addPieSlice(new PieModel(foodhome.getData().getUser().getTargetFat() - foodhome.getData().getFat(), Color.parseColor("#FF0000")));
+                fatChart.addPieSlice(new PieModel(foodhome.getData().getUser().getTargetFat() - foodhome.getData().getFat(), Color.parseColor("#FFFFFF")));
             } else
                 fatChart.addPieSlice(new PieModel( 1, Color.parseColor("#FFFFFF")));
 
             if (foodhome.getData().getProtein() > 0) {
                 proteinChart.addPieSlice(new PieModel(foodhome.getData().getProtein(), Color.parseColor("#8DC63F")));
-                proteinChart.addPieSlice(new PieModel(foodhome.getData().getUser().getTargetProtein()-foodhome.getData().getProtein(), Color.parseColor("#8DC63F")));
+                proteinChart.addPieSlice(new PieModel(foodhome.getData().getUser().getTargetProtein()-foodhome.getData().getProtein(), Color.parseColor("#FFFFFF")));
             } else
                 proteinChart.addPieSlice(new PieModel(1, Color.parseColor("#FFFFFF"))) ;
 
@@ -209,9 +205,9 @@ public class HistoryNutritionFragment extends Fragment implements CallBack {
             fatChart.startAnimation();
             proteinChart.startAnimation();
 
-            carbChart.setInnerValueString(foodhome.getData().getUser().getTargetCarb().toString());
-            fatChart.setInnerValueString(foodhome.getData().getUser().getTargetFat().toString());
-            proteinChart.setInnerValueString(foodhome.getData().getUser().getTargetProtein().toString());
+            carbChart.setInnerValueString(foodhome.getData().getCarb().toString());
+            fatChart.setInnerValueString(foodhome.getData().getFat().toString());
+            proteinChart.setInnerValueString(foodhome.getData().getProtein().toString());
 
             if (foodhome.getData().getFood().getBreakfast().size() >0){
                 breakfastTitle.setVisibility(View.VISIBLE);

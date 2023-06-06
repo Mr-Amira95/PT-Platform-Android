@@ -9,24 +9,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.qtechnetworks.ptplatform.Model.Beans.Exercises.Category;
 import com.qtechnetworks.ptplatform.Model.Beans.Exercises.Exercise;
 import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 import com.qtechnetworks.ptplatform.View.Fragment.ExercisesSingleFragment;
-import com.qtechnetworks.ptplatform.View.Fragment.PlansSingleFragment;
-import com.qtechnetworks.ptplatform.View.Fragment.SupplementSingleFragment;
-import com.qtechnetworks.ptplatform.View.Fragment.WorkoutSingleFragment;
 
-import java.security.AccessControlContext;
 import java.util.List;
-import java.util.Locale;
 
 public class ChestAndBicepsAdapter extends RecyclerView.Adapter<ChestAndBicepsAdapter.ViewHolder>  {
 

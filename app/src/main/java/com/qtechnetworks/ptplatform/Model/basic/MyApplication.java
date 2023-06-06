@@ -1,7 +1,5 @@
 package com.qtechnetworks.ptplatform.Model.basic;
 
-import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
-
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
@@ -9,31 +7,21 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import com.qtechnetworks.ptplatform.BuildConfig;
 import com.qtechnetworks.ptplatform.Controller.networking.HttpHelper;
 import com.qtechnetworks.ptplatform.Controller.networking.HttpHelperBackground;
 import com.qtechnetworks.ptplatform.Controller.networking.RetrofitServices;
 import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
-import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 import com.qtechnetworks.ptplatform.View.Activity.NotAuthorizedActivity;
-import com.qtechnetworks.ptplatform.View.Fragment.MainFragment;
+
 import java.io.IOException;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import javax.inject.Singleton;
-
-import dagger.Provides;
 import io.reactivex.rxjava3.annotations.NonNull;
-import okhttp3.Credentials;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -41,7 +29,6 @@ import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MyApplication extends Application {

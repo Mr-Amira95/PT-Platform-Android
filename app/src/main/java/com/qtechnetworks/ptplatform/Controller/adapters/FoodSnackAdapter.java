@@ -14,8 +14,6 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
-import com.qtechnetworks.ptplatform.Model.Beans.FoodHome.Dinner;
-import com.qtechnetworks.ptplatform.Model.Beans.FoodHome.Foodhome;
 import com.qtechnetworks.ptplatform.Model.Beans.FoodHome.Snack;
 import com.qtechnetworks.ptplatform.Model.Beans.General;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;

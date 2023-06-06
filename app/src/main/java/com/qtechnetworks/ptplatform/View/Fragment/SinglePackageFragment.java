@@ -10,7 +10,6 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,17 +24,13 @@ import com.android.billingclient.api.BillingClient;
 import com.android.billingclient.api.BillingClientStateListener;
 import com.android.billingclient.api.BillingFlowParams;
 import com.android.billingclient.api.BillingResult;
-import com.android.billingclient.api.ConsumeResponseListener;
 import com.android.billingclient.api.Purchase;
 import com.android.billingclient.api.PurchasesUpdatedListener;
 import com.android.billingclient.api.SkuDetails;
 import com.android.billingclient.api.SkuDetailsParams;
 import com.android.billingclient.api.SkuDetailsResponseListener;
-import com.qtechnetworks.ptplatform.Controller.GoogleNetworking.RetrofitClient;
 import com.qtechnetworks.ptplatform.Controller.adapters.PermissionAdapter;
-import com.qtechnetworks.ptplatform.Controller.adapters.TitleAdapter;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
-import com.qtechnetworks.ptplatform.Model.Beans.Exercises.GroupResults;
 import com.qtechnetworks.ptplatform.Model.Beans.FreePackage.FreePackageResults;
 import com.qtechnetworks.ptplatform.Model.Beans.General;
 import com.qtechnetworks.ptplatform.Model.Beans.PromoCode.PromoCodeResults;
@@ -45,15 +39,12 @@ import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
-import com.qtechnetworks.ptplatform.View.Activity.ShopTestActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import io.reactivex.disposables.Disposable;
-import retrofit2.Call;
-import retrofit2.Callback;
 
 public class SinglePackageFragment extends Fragment implements CallBack, PurchasesUpdatedListener {
 

@@ -3,7 +3,6 @@ package com.qtechnetworks.ptplatform.View.Fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,19 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.qtechnetworks.ptplatform.Controller.adapters.VideoItemAdapter;
-import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
-import com.qtechnetworks.ptplatform.Model.Beans.WorkoutVideo.VideoWorkout;
-import com.qtechnetworks.ptplatform.Model.Beans.videoExercises.VideoExercises;
-import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
-import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
-import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
-
-import java.util.HashMap;
-
-import io.reactivex.disposables.Disposable;
 
 public class WorkoutSingleFragment extends Fragment  {
 
@@ -65,10 +53,11 @@ public class WorkoutSingleFragment extends Fragment  {
         explore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (PreferencesUtils.getUserType().equalsIgnoreCase("trainee"))
-                    setFragment ( new ExercisesSingleFragment(),"Workout",id);
-                else
-                    setFragment( new ExercisesSingleFragment(),"Workout",id);
+                setFragmentWithoutBack ( new ExercisesSingleFragment(),"personal_workout",id);
+
+//                if (PreferencesUtils.getUserType().equalsIgnoreCase("trainee"))
+//                else
+//                    setFragment( new ExercisesSingleFragment(),"Workout",id);
             }
         });
 

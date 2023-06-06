@@ -6,14 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -26,9 +22,9 @@ import java.util.List;
 
 public class VideoItemAdapter extends RecyclerView.Adapter<VideoItemAdapter.ViewHolder>  {
 
-    private Context context;
-    private List <Datum> data;
-    private ExercisesSingleFragment exercisesSingleFragment;
+    private final Context context;
+    private final List <Datum> data;
+    private final ExercisesSingleFragment exercisesSingleFragment;
     TextView add_to_favourite; TextView add_to_workout; TextView add_to_log;
 
     public VideoItemAdapter(Context context, List<Datum> data, ExercisesSingleFragment exercisesSingleFragment, TextView add_to_favourite, TextView add_to_workout, TextView add_to_log) {
@@ -55,7 +51,7 @@ public class VideoItemAdapter extends RecyclerView.Adapter<VideoItemAdapter.View
         Datum current= data.get(position);
 
         if (current.getTitle() != null)
-            holder.title.setText(current.getTitle().toString());
+            holder.title.setText(current.getTitle());
         try{
             Glide.with(context).load(current.getImage()).placeholder(R.drawable.logo).into(holder.video_view);
         }catch (Exception e){
@@ -74,30 +70,32 @@ public class VideoItemAdapter extends RecyclerView.Adapter<VideoItemAdapter.View
 //            add_to_workout.setText("Remove from Workout");
 //        }
 
-
-        exercisesSingleFragment.VideoID=current.getId().toString();
-
-
         holder.video_layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 ExercisesSingleFragment.counter = -1;
-                exercisesSingleFragment.player.pause();
+                ExercisesSingleFragment.player.pause();
 
-                exercisesSingleFragment.VideoID=current.getId().toString();
+                ExercisesSingleFragment.VideoID =current.getId().toString();
+                if (current.getIsFavourite())
+                    ExercisesSingleFragment.add_to_favourite.setText(R.string.remove_favourites);
+
+                if (current.getIsWorkout())
+                    ExercisesSingleFragment.add_to_workout.setText(R.string.remove_workouts);
+
 
                 try {
-                   exercisesSingleFragment.video_view.setDefaultArtwork(exercisesSingleFragment.drawableFromUrl(current.getImage()));
+                   exercisesSingleFragment.video_view.setDefaultArtwork(ExercisesSingleFragment.drawableFromUrl(current.getImage()));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
 
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
                     if (current.getDescription() != null)
-                        exercisesSingleFragment.desc.setText(Html.fromHtml(current.getDescription().toString(),Html.FROM_HTML_MODE_LEGACY));
+                        ExercisesSingleFragment.desc.setText(Html.fromHtml(current.getDescription(),Html.FROM_HTML_MODE_LEGACY));
                 } else {
                     if (current.getDescription() != null)
-                        exercisesSingleFragment.desc.setText(Html.fromHtml(current.getDescription().toString()));
+                        ExercisesSingleFragment.desc.setText(Html.fromHtml(current.getDescription()));
                 }
 
                 exercisesSingleFragment.playinitial(current.getVideo());
@@ -117,7 +115,7 @@ public class VideoItemAdapter extends RecyclerView.Adapter<VideoItemAdapter.View
 
         public TextView title, time;
         public ImageView video_view;
-        private ConstraintLayout video_layout;
+        private final ConstraintLayout video_layout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

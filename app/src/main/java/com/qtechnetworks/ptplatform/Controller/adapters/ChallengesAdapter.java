@@ -1,20 +1,15 @@
 package com.qtechnetworks.ptplatform.Controller.adapters;
 
-import static com.qtechnetworks.ptplatform.Model.utilits.PrefKeys.userID;
-
 import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -22,17 +17,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.qtechnetworks.ptplatform.Model.Beans.Challenge.ChallengeData;
-import com.qtechnetworks.ptplatform.Model.Beans.Coach.Datum;
-import com.qtechnetworks.ptplatform.Model.Beans.FoodHome.Breakfast;
-import com.qtechnetworks.ptplatform.Model.utilits.PrefKeys;
 import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
-import com.qtechnetworks.ptplatform.View.Dialogs.CoachesDialog;
 import com.qtechnetworks.ptplatform.View.Dialogs.NoteDialog;
 import com.qtechnetworks.ptplatform.View.Fragment.ChallengesFragment;
 import com.qtechnetworks.ptplatform.View.Fragment.ChallengesSignleFragment;
-import com.qtechnetworks.ptplatform.View.Fragment.MainFragment;
 
 import java.util.List;
 

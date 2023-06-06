@@ -2,8 +2,6 @@ package com.qtechnetworks.ptplatform.Controller.networking;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -14,9 +12,6 @@ import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 import com.qtechnetworks.ptplatform.Model.Beans.Challenge.ChallengeID;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.R;
-import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
-
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
@@ -28,11 +23,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class HttpHelper {
 
@@ -639,16 +630,17 @@ public class HttpHelper {
                     public void onError(@NonNull Throwable e) {
                         dialog.dismiss();
 
-                            new Handler(Looper.getMainLooper()).post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    try {
-                                        Toast.makeText(context,((HttpException) e).response().errorBody().source().readUtf8().toString().split(":")[4].split("\"")[1],Toast.LENGTH_LONG).show();
-                                    } catch (IOException ex) {
-                                        ex.printStackTrace();
-                                    }
-                                }
-                            });
+//                        try {
+//                            Toast.makeText(context,((HttpException) e).response().errorBody().source().readUtf8().toString().split(":")[4].split("\"")[1],Toast.LENGTH_LONG).show();
+//                        } catch (IOException ex) {
+//                            ex.printStackTrace();
+//                        }
+//
+//                        new Handler(Looper.getMainLooper()).post(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                }
+//                            });
 
            //                 Toast.makeText(context,((HttpException) e).response().errorBody().source().readUtf8().toString().split(":")[3],Toast.LENGTH_LONG).show();
 

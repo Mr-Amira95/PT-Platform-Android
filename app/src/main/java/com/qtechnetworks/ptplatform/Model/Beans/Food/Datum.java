@@ -13,7 +13,7 @@ public class Datum {
     private String sku;
     @SerializedName("calorie")
     @Expose
-    private Integer calorie;
+    private double calorie;
     @SerializedName("carb")
     @Expose
     private double carb;
@@ -46,11 +46,11 @@ public class Datum {
         this.sku = sku;
     }
 
-    public Integer getCalorie() {
+    public Double getCalorie() {
         return calorie;
     }
 
-    public void setCalorie(Integer calorie) {
+    public void setCalorie(Double calorie) {
         this.calorie = calorie;
     }
 

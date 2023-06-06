@@ -2,7 +2,6 @@ package com.qtechnetworks.ptplatform.View.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,14 +11,12 @@ import android.widget.Toast;
 
 import com.google.gson.JsonObject;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
-import com.qtechnetworks.ptplatform.Model.Beans.CheckEmail.CheckEmailResults;
 import com.qtechnetworks.ptplatform.Model.Beans.General;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.R;
 
 import io.reactivex.disposables.Disposable;
-import pub.devrel.easypermissions.EasyPermissions;
 
 public class ResetPasswordActivity extends AppCompatActivity implements CallBack {
 

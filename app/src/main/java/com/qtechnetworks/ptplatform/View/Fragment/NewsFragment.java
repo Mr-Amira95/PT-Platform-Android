@@ -11,18 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.google.gson.JsonObject;
 import com.qtechnetworks.ptplatform.Controller.adapters.NewsAdapter;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.News.News;
-import com.qtechnetworks.ptplatform.Model.Beans.RegisterAndLogin.Register;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.HashMap;
 

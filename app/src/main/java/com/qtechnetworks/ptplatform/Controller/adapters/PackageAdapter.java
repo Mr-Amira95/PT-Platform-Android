@@ -6,12 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -95,7 +95,7 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHold
         } else if(packages.get(position).getStyle().equalsIgnoreCase("style_silver")){
             holder.backgroundLayout.setBackgroundResource(R.drawable.background_package_silver);
         } else {
-            holder.backgroundLayout.setBackgroundResource(R.drawable.follwous);
+            holder.backgroundLayout.setBackgroundResource(R.drawable.free_package_three);
         }
 
         holder.buyNowBtn.setOnClickListener(new View.OnClickListener() {
@@ -171,7 +171,7 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHold
         RecyclerView featureRecyclerview;
         Button buyNowBtn;
         TextView packageType,packageDesc,packageDate,packagePrice;
-        ConstraintLayout backgroundLayout;
+        ImageView backgroundLayout;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
              backgroundLayout=itemView.findViewById(R.id.background_layout);

@@ -14,18 +14,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.qtechnetworks.ptplatform.Model.Beans.Food.Datum;
-import com.qtechnetworks.ptplatform.Model.utilits.PrefKeys;
-import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
-import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
-import com.qtechnetworks.ptplatform.View.Dialogs.CoachesDialog;
 import com.qtechnetworks.ptplatform.View.Dialogs.FoodDialog;
 import com.qtechnetworks.ptplatform.View.Fragment.FoodAddFragment;
-import com.qtechnetworks.ptplatform.View.Fragment.MainFragment;
 
 import java.util.List;
 
@@ -64,7 +58,7 @@ public class FoodsAdapter extends RecyclerView.Adapter<FoodsAdapter.ViewHolder> 
                 double carb=current.getCarb() * Integer.parseInt(weightnumber_edit.getText().toString());
                 double fat=current.getFat() * Integer.parseInt(weightnumber_edit.getText().toString());
                 double protein=current.getProtein() * Integer.parseInt(weightnumber_edit.getText().toString());
-                int calories=current.getCalorie() * Integer.parseInt(weightnumber_edit.getText().toString());
+                double calories=current.getCalorie() * Integer.parseInt(weightnumber_edit.getText().toString());
                 fat_text.setText(fat+"");
                 carb_text.setText(carb+"");
                 protine_text.setText(protein+"");

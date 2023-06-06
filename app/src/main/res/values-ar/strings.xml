@@ -303,6 +303,7 @@
     <string name="no_workouts">لا يوجد مجموعات</string>
     <string name="sets">مجموعات</string>
     <string name="description">الوصف</string>
+    <string name="kilo_unit"> كيلو جرام </string>
 
     <string-array name="activity">
         <item>خامل</item>

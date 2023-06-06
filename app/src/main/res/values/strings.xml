@@ -302,6 +302,7 @@
     <string name="start_date">Start Date</string>
     <string name="sets">Sets</string>
     <string name="description">Description</string>
+    <string name="kilo_unit"> KG</string>
 
     <string-array name="activity">
         <item>little or no exercise</item>

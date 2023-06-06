@@ -2,32 +2,23 @@ package com.qtechnetworks.ptplatform.View.Dialogs;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.qtechnetworks.ptplatform.Controller.adapters.CoachesAdapter;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
-import com.qtechnetworks.ptplatform.Model.Beans.Coach.Coach;
 import com.qtechnetworks.ptplatform.Model.Beans.General;
-import com.qtechnetworks.ptplatform.Model.Beans.Progress.Progress;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
-import com.qtechnetworks.ptplatform.Model.utilits.UtilisMethods;
 import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
-import com.qtechnetworks.ptplatform.View.Fragment.ExercisesSingleFragment;
 import com.qtechnetworks.ptplatform.View.Fragment.ProgressFragment;
 
 import java.util.HashMap;

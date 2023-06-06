@@ -20,26 +20,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.MediaItem;
 import com.google.android.exoplayer2.Player;
-import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.ui.PlayerView;
-import com.qtechnetworks.ptplatform.Controller.adapters.NewsAdapter;
 import com.qtechnetworks.ptplatform.Controller.adapters.VideoItemAdapter;
 import com.qtechnetworks.ptplatform.Controller.adapters.VideoItemworkoutAdapter;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.General;
-import com.qtechnetworks.ptplatform.Model.Beans.News.News;
+import com.qtechnetworks.ptplatform.Model.Beans.WorkoutPersonal.WorkoutPersonal;
 import com.qtechnetworks.ptplatform.Model.Beans.WorkoutVideo.VideoWorkout;
-import com.qtechnetworks.ptplatform.Model.Beans.addto.Adtofavlog;
 import com.qtechnetworks.ptplatform.Model.Beans.videoExercises.VideoExercises;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
-import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 import com.qtechnetworks.ptplatform.View.Activity.MediaViewActivity;
 import com.qtechnetworks.ptplatform.View.Dialogs.AddLogDialog;
 
@@ -58,15 +53,16 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
     public PlayerView video_view;
     public static ExoPlayer player;
     ImageView expFullScreen;
-    public static TextView desc, add_to_favourite, add_to_workout, add_to_log;
+    public static TextView desc, add_to_favourite, add_to_workout;
+    TextView add_to_log;
 
     String flag, ID;
     public static int counter = 0;
 
-    public String VideoID;
+    public static String VideoID;
     boolean secondPlay = false;
 
-    String videolink, title, descrip;
+    String videolink, title, descrip, isFav, isToday;
 
     AddLogDialog addLogDialog;
 
@@ -117,6 +113,9 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
                title=getArguments().getString("title");
                descrip=getArguments().getString("description");
 
+               isFav=getArguments().getString("is_fav");
+               isToday=getArguments().getString("is_today");
+
             }
         }
     }
@@ -140,9 +139,7 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
         add_to_favourite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 addToFavorite(VideoID);
-
             }
         });
 
@@ -202,7 +199,13 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
                 getWorkoutCoach(ID);
             else
                 getWorkout(ID);
-        } else if (flag.equalsIgnoreCase("log")){
+        } else if (flag.equalsIgnoreCase("log")) {
+            if (isFav.equalsIgnoreCase("true"))
+                add_to_favourite.setText(R.string.remove_favourites);
+
+            if (isToday.equalsIgnoreCase("true"))
+                add_to_workout.setText(R.string.remove_workouts);
+
             playinitial(videolink);
 
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
@@ -211,6 +214,8 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
                 desc.setText(Html.fromHtml(descrip));
             }
 
+        } else if (flag.equalsIgnoreCase("personal_workout")) {
+            getPersonalWorkout();
         } else {
             if (PreferencesUtils.getUserType().equalsIgnoreCase("coach"))
                 getExcerisisCoach(ID);
@@ -283,8 +288,7 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
     }
 
 
-    private void
-    addToWorkout(String Videoid){
+    private void addToWorkout(String Videoid){
 
         HashMap<String ,Object> params=new HashMap<>();
 
@@ -313,11 +317,19 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
 
         params.put("exercise_id",Exid);
         params.put("coach_id", PreferencesUtils.getCoach(getContext()).getId());
-        params.put("skip","0");
 
         MyApplication.getInstance().getHttpHelper().setCallback(this);
         MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.workout_videos_URL, AppConstants.SHOW_WORKOUT_VIDS_TAG, VideoWorkout.class, params);
 
+    }
+
+    private void getPersonalWorkout(){
+        HashMap<String ,Object> params=new HashMap<>();
+
+        params.put("coach_id", PreferencesUtils.getCoach(getContext()).getId());
+
+        MyApplication.getInstance().getHttpHelper().setCallback(this);
+        MyApplication.getInstance().getHttpHelper().get(getContext(), AppConstants.SHOW_WORKOUT_VIDS+ID+"/show", AppConstants.SHOW_WORKOUT_VIDS_TAG, VideoWorkout.class, params);
     }
 
     private void getWorkoutCoach(String Exid){

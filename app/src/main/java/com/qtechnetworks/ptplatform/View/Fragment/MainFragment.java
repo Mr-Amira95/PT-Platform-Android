@@ -1,10 +1,8 @@
 package com.qtechnetworks.ptplatform.View.Fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,11 +12,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedImageView;
-import com.qtechnetworks.ptplatform.Controller.adapters.SliderAdapter;
 import com.qtechnetworks.ptplatform.Controller.adapters.SliderAdapterExample;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.Banner.Banner;
-import com.qtechnetworks.ptplatform.Model.Beans.Coach.Coach;
 import com.qtechnetworks.ptplatform.Model.Beans.Coach.SingleCoach;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
@@ -31,11 +27,8 @@ import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 
 import java.util.HashMap;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import io.reactivex.disposables.Disposable;
-import me.relex.circleindicator.CircleIndicator;
 
 public class MainFragment extends Fragment implements CallBack {
 
@@ -203,8 +196,7 @@ public class MainFragment extends Fragment implements CallBack {
         liveChatLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                setFragment( new ChatSingleFragment());
+                setFragment( new ChatFirebaseFragment(PreferencesUtils.getCoach(getContext()).getId().toString()));
             }
         });
 
@@ -310,7 +302,7 @@ public class MainFragment extends Fragment implements CallBack {
                 } else if (flag.equalsIgnoreCase("calender") || flag.equalsIgnoreCase("approved_video_chat") ){
                     setFragment(new CalendarFragment());
                 } else if (flag.equalsIgnoreCase("message")){
-                    setFragment(new ChatSingleFragment());
+                    setFragment( new ChatFirebaseFragment(PreferencesUtils.getCoach(getContext()).getId().toString()));
                 } else if (flag.equalsIgnoreCase("personal_training")){
                     setFragment(new PersonalTrainingTraineeFragment());
                 } else {

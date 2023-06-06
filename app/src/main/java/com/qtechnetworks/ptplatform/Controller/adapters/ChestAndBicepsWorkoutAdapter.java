@@ -14,12 +14,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.qtechnetworks.ptplatform.Model.Beans.workout.Exercise;
 import com.qtechnetworks.ptplatform.Model.Beans.workout.Exercise__1;
 import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
-import com.qtechnetworks.ptplatform.View.Fragment.ExercisesSingleFragment;
-import com.qtechnetworks.ptplatform.View.Fragment.SupplementSingleFragment;
 import com.qtechnetworks.ptplatform.View.Fragment.WorkoutSingleFragment;
 
 import java.util.List;

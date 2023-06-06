@@ -1,25 +1,18 @@
 package com.qtechnetworks.ptplatform.View.Fragment;
 
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
-import com.qtechnetworks.ptplatform.Model.Beans.Food.Food;
-import com.qtechnetworks.ptplatform.Model.Beans.FoodHome.Foodhome;
 import com.qtechnetworks.ptplatform.Model.Beans.General;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
@@ -28,10 +21,6 @@ import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 import com.qtechnetworks.ptplatform.View.Dialogs.FoodDialog;
 
-import org.eazegraph.lib.charts.PieChart;
-import org.eazegraph.lib.models.PieModel;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import io.reactivex.disposables.Disposable;
@@ -90,7 +79,7 @@ public class FoodAddFragment extends Fragment implements CallBack {
                     double carb= FoodDialog.food.getData().get(selectedFoodIndex).getCarb() * i;
                     double fat=FoodDialog.food.getData().get(selectedFoodIndex).getFat() * i;
                     double protein=FoodDialog.food.getData().get(selectedFoodIndex).getProtein() * i;
-                    int calories=FoodDialog.food.getData().get(selectedFoodIndex).getCalorie() * i;
+                    double calories=FoodDialog.food.getData().get(selectedFoodIndex).getCalorie() * i;
                     fat_text.setText(UtilisMethods.doubleFormat(fat));
                     carb_text.setText(UtilisMethods.doubleFormat(carb));
                     protine_text.setText(UtilisMethods.doubleFormat(protein));
@@ -115,7 +104,7 @@ public class FoodAddFragment extends Fragment implements CallBack {
                     double carb = FoodDialog.food.getData().get(selectedFoodIndex).getCarb() * i;
                     double fat = FoodDialog.food.getData().get(selectedFoodIndex).getFat() * i;
                     double protein = FoodDialog.food.getData().get(selectedFoodIndex).getProtein() * i;
-                    int calories = FoodDialog.food.getData().get(selectedFoodIndex).getCalorie() * i;
+                    double calories = FoodDialog.food.getData().get(selectedFoodIndex).getCalorie() * i;
                     fat_text.setText(UtilisMethods.doubleFormat(fat));
                     carb_text.setText(UtilisMethods.doubleFormat(carb));
                     protine_text.setText(UtilisMethods.doubleFormat(protein));

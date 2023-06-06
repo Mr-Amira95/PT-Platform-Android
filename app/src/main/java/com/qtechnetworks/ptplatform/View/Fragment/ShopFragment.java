@@ -44,6 +44,7 @@ import io.reactivex.disposables.Disposable;
 public class ShopFragment extends Fragment implements CallBack {
 
     RecyclerView subscriptionsPackageRecyclerview, ptPackagesRecyclerview;
+    TextView subscriptionsTitle, ptPackagesTitle;
     PackageAdapter packageAdapter;
     PackageAdapter subscriptionAdapter;
 
@@ -78,6 +79,9 @@ public class ShopFragment extends Fragment implements CallBack {
     private void initials(View view) {
         subscriptionsPackageRecyclerview = view.findViewById(R.id.subscription_packages_recyclerview);
         ptPackagesRecyclerview = view.findViewById(R.id.pt_packages_recyclerview);
+
+        subscriptionsTitle = view.findViewById(R.id.subscription_title);
+        ptPackagesTitle = view.findViewById(R.id.pt_title);
 
         LinearLayoutManager layoutManagerhorizantalleader = new LinearLayoutManager(getContext());
         layoutManagerhorizantalleader.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -134,6 +138,13 @@ public class ShopFragment extends Fragment implements CallBack {
                     inShopPersonal.add(false);
                 }
             }
+
+            if (packages.getData().getSubscription().size() == 0)
+                subscriptionsTitle.setVisibility(View.GONE);
+
+            if (packages.getData().getPersonalTraining().size() == 0)
+                ptPackagesTitle.setVisibility(View.GONE);
+
 
             subscriptionAdapter = new PackageAdapter(getContext(), packages.getData().getSubscription(), inShopSubscription, "subscription", id);
             packageAdapter = new PackageAdapter(getContext(), packages.getData().getPersonalTraining(), inShopPersonal, "personal", id);

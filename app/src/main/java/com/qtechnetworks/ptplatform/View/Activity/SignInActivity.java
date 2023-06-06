@@ -27,14 +27,9 @@ import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
+import java.util.TimeZone;
 
 import io.reactivex.disposables.Disposable;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 
 public class SignInActivity extends AppCompatActivity implements CallBack {
 
@@ -51,6 +46,11 @@ public class SignInActivity extends AppCompatActivity implements CallBack {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+
+        // OneSignal Initialization
+        OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
+        OneSignal.initWithContext(this);
+        OneSignal.setAppId(BuildConfig.ONESIGNAL_APP_ID);
 
 //        OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
 //
@@ -177,10 +177,10 @@ public class SignInActivity extends AppCompatActivity implements CallBack {
     private void checkLogin() {
 
         JsonObject jsonObject=new JsonObject();
-
+        
         jsonObject.addProperty("player_id",OneSignal.getDeviceState().getUserId()); //You can parameterize these values by passing them
         jsonObject.addProperty("platform", "android");
-        jsonObject.addProperty("timezone", "Asian/Amman");
+        jsonObject.addProperty("timezone", TimeZone.getDefault().getID());
         jsonObject.addProperty("app_version", BuildConfig.VERSION_CODE);
 
         JsonObject params = new JsonObject();

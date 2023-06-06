@@ -20,7 +20,6 @@ import com.qtechnetworks.ptplatform.Model.Beans.Supplement.Datum;
 import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 import com.qtechnetworks.ptplatform.View.Fragment.ExercisesSingleFragment;
-import com.qtechnetworks.ptplatform.View.Fragment.PlansSingleFragment;
 import com.qtechnetworks.ptplatform.View.Fragment.SupplementSingleFragment;
 import com.qtechnetworks.ptplatform.View.Fragment.WorkoutSingleFragment;
 

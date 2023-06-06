@@ -1,7 +1,6 @@
 package com.qtechnetworks.ptplatform.View.Fragment;
 
 import android.app.DatePickerDialog;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,7 +11,6 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,35 +18,24 @@ import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.qtechnetworks.ptplatform.Controller.NewNetworking.RetrofitClient;
-import com.qtechnetworks.ptplatform.Controller.adapters.FoodAdapter;
-import com.qtechnetworks.ptplatform.Controller.adapters.FoodDinnerAdapter;
 import com.qtechnetworks.ptplatform.Controller.adapters.FoodSnackAdapter;
-import com.qtechnetworks.ptplatform.Controller.adapters.NewsAdapter;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
-import com.qtechnetworks.ptplatform.Model.Beans.Food.Food;
 import com.qtechnetworks.ptplatform.Model.Beans.FoodHome.Foodhome;
-import com.qtechnetworks.ptplatform.Model.Beans.General;
 import com.qtechnetworks.ptplatform.Model.Beans.Target.Target;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.R;
-import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 
 import org.eazegraph.lib.charts.PieChart;
 import org.eazegraph.lib.models.PieModel;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
 import io.reactivex.disposables.Disposable;
-import retrofit2.Call;
-import retrofit2.Callback;
 
 public class FoodFragment extends Fragment implements CallBack {
 

@@ -6,7 +6,6 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +16,6 @@ import android.widget.TextView;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.BodyMeasurement.BodyMeasurement;
 import com.qtechnetworks.ptplatform.Model.Beans.Progress.Datum;
-import com.qtechnetworks.ptplatform.Model.Beans.Progress.Percentage;
 import com.qtechnetworks.ptplatform.Model.Beans.Progress.Progress;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
@@ -314,7 +312,7 @@ public class ProgressFragment extends Fragment  implements CallBack {
 
 //                            fatValue.setText(myp.getFat().toString()+"%");
 //                            Percentage percentage=myp.getPercentage();
-                            fatValue.setText(UtilisMethods.doubleFormat((myp.getFat())));
+                            fatValue.setText(UtilisMethods.doubleFormat((myp.getFat())) + getString(R.string.kilo_unit));
 //
                             if(myp.getPercentage().getType().equals("decrease")){
                                 fatDecrease.setVisibility(View.VISIBLE);
@@ -339,7 +337,7 @@ public class ProgressFragment extends Fragment  implements CallBack {
 
 //                            muscleValue.setText(myp.getMuscle().toString()+"%");
 //                            Percentage percentage=myp.getPercentage();
-                            muscleValue.setText(UtilisMethods.doubleFormat((myp.getMuscle())));
+                            muscleValue.setText(UtilisMethods.doubleFormat((myp.getMuscle())) + getString(R.string.kilo_unit));
 
 
                             if (myp.getPercentage().getType().equals("decrease")) {
@@ -366,7 +364,7 @@ public class ProgressFragment extends Fragment  implements CallBack {
 
 //                            muscleValue.setText(myp.getMuscle().toString()+"%");
 //                            Percentage percentage=myp.getPercentage();
-                            weightValue.setText(UtilisMethods.doubleFormat((myp.getWeight())));
+                            weightValue.setText(UtilisMethods.doubleFormat((myp.getWeight())) + getString(R.string.kilo_unit));
 
                             if(myp.getPercentage().getType().equals("decrease")){
                                 weightDecrease.setVisibility(View.VISIBLE);
@@ -400,7 +398,7 @@ public class ProgressFragment extends Fragment  implements CallBack {
                                 waterChart.addPieSlice(new PieModel( 1, Color.parseColor("#0000FF"))) ;
                             }
 
-                            waterValue.setText(UtilisMethods.doubleFormat((myp.getWater())));
+                            waterValue.setText(UtilisMethods.doubleFormat((myp.getWater())) + getString(R.string.kilo_unit));
 
                             if(myp.getPercentage().getType().equals("decrease")){
                                 waterDecrease.setVisibility(View.VISIBLE);

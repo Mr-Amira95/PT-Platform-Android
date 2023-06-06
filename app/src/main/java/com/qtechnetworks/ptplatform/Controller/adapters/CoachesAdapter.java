@@ -1,20 +1,15 @@
 package com.qtechnetworks.ptplatform.Controller.adapters;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.makeramen.roundedimageview.RoundedImageView;
 import com.qtechnetworks.ptplatform.Model.Beans.Coach.Datum;
 import com.qtechnetworks.ptplatform.Model.utilits.PrefKeys;
 import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;

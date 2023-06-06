@@ -5,21 +5,13 @@ import static com.qtechnetworks.ptplatform.Model.utilits.camera.Camera.captureIm
 import static com.qtechnetworks.ptplatform.Model.utilits.camera.Camera.getPath;
 
 import android.Manifest;
-import android.app.Activity;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,12 +32,9 @@ import com.qtechnetworks.ptplatform.Model.utilits.camera.Camera;
 import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 import com.qtechnetworks.ptplatform.View.Activity.SplashActivity;
-import com.qtechnetworks.ptplatform.View.Dialogs.AddProgressDialog;
 import com.qtechnetworks.ptplatform.View.Dialogs.EditProfileDialog;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.HashMap;
 
 import io.reactivex.disposables.Disposable;
@@ -53,8 +42,6 @@ import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import pub.devrel.easypermissions.EasyPermissions;
-import retrofit2.Call;
-import retrofit2.Callback;
 
 public class ProfileFragment extends Fragment implements CallBack {
 

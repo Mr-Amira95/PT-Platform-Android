@@ -10,16 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.qtechnetworks.ptplatform.Controller.adapters.ChallengesAdapter;
-import com.qtechnetworks.ptplatform.Controller.adapters.CoachAdapter;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.Challenge.Challenge;
 import com.qtechnetworks.ptplatform.Model.Beans.Challenge.ChallengeData;
-import com.qtechnetworks.ptplatform.Model.Beans.CoachCalendarResults.Datum;
-import com.qtechnetworks.ptplatform.Model.Beans.calender.CalenderTime;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;

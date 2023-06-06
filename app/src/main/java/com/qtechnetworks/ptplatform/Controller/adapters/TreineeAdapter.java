@@ -1,7 +1,6 @@
 package com.qtechnetworks.ptplatform.Controller.adapters;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,30 +8,21 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.qtechnetworks.ptplatform.Model.Beans.PersonalCoach.Datum;
-import com.qtechnetworks.ptplatform.Model.utilits.PrefKeys;
-import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
-import com.qtechnetworks.ptplatform.View.Dialogs.CoachesDialog;
 import com.qtechnetworks.ptplatform.View.Fragment.AddTraineeDetailsFragment;
 import com.qtechnetworks.ptplatform.View.Fragment.ChallengesFragment;
-import com.qtechnetworks.ptplatform.View.Fragment.ChatFragment;
-import com.qtechnetworks.ptplatform.View.Fragment.ChatSingleFragment;
+import com.qtechnetworks.ptplatform.View.Fragment.ChatFirebaseFragment;
 import com.qtechnetworks.ptplatform.View.Fragment.HistoryFragment;
-import com.qtechnetworks.ptplatform.View.Fragment.MainCoachFragment;
-import com.qtechnetworks.ptplatform.View.Fragment.MainFragment;
 import com.qtechnetworks.ptplatform.View.Fragment.ProgressFragment;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class TreineeAdapter extends RecyclerView.Adapter<TreineeAdapter.ViewHolder>  {
@@ -85,7 +75,7 @@ public class TreineeAdapter extends RecyclerView.Adapter<TreineeAdapter.ViewHold
                         setFragment(new ProgressFragment(current.getId()));
                         break;
                     case "chat":
-                        setFragment(new ChatSingleFragment(current.getId()));
+                        setFragment(new ChatFirebaseFragment(String.valueOf(current.getId())));
                         break;
                 }
 

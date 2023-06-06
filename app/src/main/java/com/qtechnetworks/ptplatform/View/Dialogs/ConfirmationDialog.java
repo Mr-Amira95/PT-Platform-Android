@@ -1,33 +1,18 @@
 package com.qtechnetworks.ptplatform.View.Dialogs;
 
-import static com.qtechnetworks.ptplatform.View.Fragment.FoodAddFragment.Foodname_spinner;
-import static com.qtechnetworks.ptplatform.View.Fragment.FoodAddFragment.calories_text;
-import static com.qtechnetworks.ptplatform.View.Fragment.FoodAddFragment.carb_text;
-import static com.qtechnetworks.ptplatform.View.Fragment.FoodAddFragment.fat_text;
-import static com.qtechnetworks.ptplatform.View.Fragment.FoodAddFragment.protine_text;
-import static com.qtechnetworks.ptplatform.View.Fragment.FoodAddFragment.weightnumber_edit;
-import static com.qtechnetworks.ptplatform.View.Fragment.VideoChatFragment.sessions;
-import static com.qtechnetworks.ptplatform.View.Fragment.VideoChatFragment.videoChatAdapter;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.qtechnetworks.ptplatform.Controller.adapters.FoodsAdapter;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
-import com.qtechnetworks.ptplatform.Model.Beans.Food.Food;
 import com.qtechnetworks.ptplatform.Model.Beans.General;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;

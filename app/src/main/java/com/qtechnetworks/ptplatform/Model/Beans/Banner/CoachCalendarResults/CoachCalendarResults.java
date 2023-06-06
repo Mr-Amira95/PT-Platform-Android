@@ -1,4 +1,4 @@
-package com.qtechnetworks.ptplatform.Model.Beans.CoachCalendarResults;
+package com.qtechnetworks.ptplatform.Model.Beans.Banner.CoachCalendarResults;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

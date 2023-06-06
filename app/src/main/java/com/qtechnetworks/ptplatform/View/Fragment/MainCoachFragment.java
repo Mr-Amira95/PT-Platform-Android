@@ -4,20 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.google.android.exoplayer2.source.dash.manifest.BaseUrl;
-import com.makeramen.roundedimageview.RoundedImageView;
-import com.qtechnetworks.ptplatform.BuildConfig;
-import com.qtechnetworks.ptplatform.Controller.adapters.SliderAdapter;
 import com.qtechnetworks.ptplatform.Controller.adapters.SliderAdapterExample;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.Banner.Banner;
@@ -28,18 +21,14 @@ import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 import com.qtechnetworks.ptplatform.View.Activity.SplashActivity;
-import com.qtechnetworks.ptplatform.View.Dialogs.CoachesDialog;
 import com.qtechnetworks.ptplatform.View.Dialogs.LanguagesDialog;
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 
 import java.util.HashMap;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import io.reactivex.disposables.Disposable;
-import me.relex.circleindicator.CircleIndicator;
 
 public class MainCoachFragment extends Fragment implements CallBack {
 

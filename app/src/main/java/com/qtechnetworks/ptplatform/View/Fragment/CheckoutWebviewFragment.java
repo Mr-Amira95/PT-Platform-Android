@@ -15,13 +15,8 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
-import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.FreePackage.FreePackageResults;
-import com.qtechnetworks.ptplatform.Model.Beans.General;
-import com.qtechnetworks.ptplatform.Model.Beans.Subscription.SubscriptionPackage;
 import com.qtechnetworks.ptplatform.R;
-
-import io.reactivex.disposables.Disposable;
 
 public class CheckoutWebviewFragment extends Fragment {
 

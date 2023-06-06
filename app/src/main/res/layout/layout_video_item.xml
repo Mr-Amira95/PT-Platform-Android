@@ -17,13 +17,14 @@
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textSize="@dimen/_10sdp"
         android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@id/video_view"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="@dimen/_10sdp"/>
+        android:layout_marginHorizontal="@dimen/_10sdp"/>
 
     <TextView
         android:id="@+id/time"

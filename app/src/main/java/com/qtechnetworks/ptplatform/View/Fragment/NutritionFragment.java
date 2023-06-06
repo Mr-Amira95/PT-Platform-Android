@@ -1,31 +1,16 @@
 package com.qtechnetworks.ptplatform.View.Fragment;
 
-import android.os.Build;
 import android.os.Bundle;
-import androidx.annotation.RequiresApi;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
-import com.qtechnetworks.ptplatform.Model.Beans.FoodHome.Foodhome;
-import com.qtechnetworks.ptplatform.Model.Beans.Target.Target;
-import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
-import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
+
 import com.qtechnetworks.ptplatform.R;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-
-import io.reactivex.disposables.Disposable;
 
 public class NutritionFragment extends Fragment {
 

@@ -60,8 +60,6 @@ public class VideoItemworkoutAdapter extends RecyclerView.Adapter<VideoItemworko
 //            ExercisesSingleFragment.add_to_workout.setText("Remove from Workout");
 //        }
 
-        exercisesSingleFragment.VideoID=current.getId().toString();
-
         try{
 
             Glide.with(context).load(current.getImage()).placeholder(R.drawable.logo).into(holder.video_view);

@@ -9,26 +9,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.exoplayer2.MediaItem;
-import com.google.android.exoplayer2.SimpleExoPlayer;
-import com.google.android.exoplayer2.ui.PlayerView;
-import com.qtechnetworks.ptplatform.Controller.adapters.ExerciseHRecordAdapter;
 import com.qtechnetworks.ptplatform.Controller.adapters.ExerciseHistoryAdapter;
-import com.qtechnetworks.ptplatform.Controller.adapters.VideoItemAdapter;
-import com.qtechnetworks.ptplatform.Controller.adapters.WorkoutHistoryAdapter;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
-import com.qtechnetworks.ptplatform.Model.Beans.FavoriteandWorkout.FavoriteandWorkout;
 import com.qtechnetworks.ptplatform.Model.Beans.WorkoutHistory.WorkoutHistoryResults;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
-import com.qtechnetworks.ptplatform.View.Dialogs.AddLogDialog;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import io.reactivex.disposables.Disposable;

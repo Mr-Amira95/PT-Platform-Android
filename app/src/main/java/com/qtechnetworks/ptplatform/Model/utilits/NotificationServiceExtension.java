@@ -1,6 +1,5 @@
 package com.qtechnetworks.ptplatform.Model.utilits;
 
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -16,7 +15,6 @@ import com.onesignal.OSNotification;
 import com.onesignal.OSMutableNotification;
 import com.onesignal.OSNotificationReceivedEvent;
 import com.onesignal.OneSignal.OSRemoteNotificationReceivedHandler;
-import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 import com.qtechnetworks.ptplatform.View.Activity.SplashActivity;
 
 import java.math.BigInteger;

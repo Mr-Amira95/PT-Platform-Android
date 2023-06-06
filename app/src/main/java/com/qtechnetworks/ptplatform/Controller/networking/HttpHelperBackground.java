@@ -1,19 +1,13 @@
 package com.qtechnetworks.ptplatform.Controller.networking;
 
-import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
-import com.qtechnetworks.ptplatform.R;
-import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
-import com.qtechnetworks.ptplatform.View.Fragment.MainFragment;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
@@ -25,7 +19,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 
 

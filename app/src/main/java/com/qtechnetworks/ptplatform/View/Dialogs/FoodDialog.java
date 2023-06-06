@@ -1,7 +1,5 @@
 package com.qtechnetworks.ptplatform.View.Dialogs;
 
-import static com.qtechnetworks.ptplatform.View.Fragment.ExercisesSingleFragment.add_to_favourite;
-import static com.qtechnetworks.ptplatform.View.Fragment.ExercisesSingleFragment.add_to_workout;
 import static com.qtechnetworks.ptplatform.View.Fragment.FoodAddFragment.*;
 
 import android.app.Activity;
@@ -15,7 +13,6 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,20 +20,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.qtechnetworks.ptplatform.Controller.adapters.CoachesAdapter;
 import com.qtechnetworks.ptplatform.Controller.adapters.FoodsAdapter;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.Food.Food;
-import com.qtechnetworks.ptplatform.Model.Beans.addto.Adtofavlog;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
-import com.qtechnetworks.ptplatform.Model.utilits.UtilisMethods;
 import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
-import com.qtechnetworks.ptplatform.View.Fragment.ExercisesSingleFragment;
 
 import java.util.HashMap;
-import java.util.Locale;
 
 import io.reactivex.disposables.Disposable;
 
@@ -139,7 +131,7 @@ public class FoodDialog extends Dialog implements CallBack {
                 double carb = food.getData().get(0).getCarb() * Integer.parseInt(weightnumber_edit.getText().toString());
                 double fat = food.getData().get(0).getFat() * Integer.parseInt(weightnumber_edit.getText().toString());
                 double protein=food.getData().get(0).getProtein() * Integer.parseInt(weightnumber_edit.getText().toString());
-                int calories=food.getData().get(0).getCalorie() * Integer.parseInt(weightnumber_edit.getText().toString());
+                double calories=food.getData().get(0).getCalorie() * Integer.parseInt(weightnumber_edit.getText().toString());
                 fat_text.setText(fat+"");
                 carb_text.setText(carb+"");
                 protine_text.setText(protein+"");

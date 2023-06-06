@@ -5,10 +5,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 
-import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
-import com.onesignal.OneSignal;
 import com.qtechnetworks.ptplatform.BuildConfig;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.device.DeviceToken;
@@ -37,11 +34,6 @@ public class SplashActivity extends AppCompatActivity implements CallBack {
 
         flag = getIntent().getStringExtra("flag");
         id = getIntent().getStringExtra("id");
-
-        // OneSignal Initialization
-        OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
-        OneSignal.initWithContext(this);
-        OneSignal.setAppId(BuildConfig.ONESIGNAL_APP_ID);
 
         new Handler().postDelayed(new Runnable() {
             @Override

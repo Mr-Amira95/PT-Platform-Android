@@ -15,19 +15,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.qtechnetworks.ptplatform.Controller.adapters.CoachAdapter;
 import com.qtechnetworks.ptplatform.Controller.adapters.CoachUserAdapter;
 import com.qtechnetworks.ptplatform.Controller.adapters.TreineeAdapter;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.Coach.Coach;
-import com.qtechnetworks.ptplatform.Model.Beans.News.News;
 import com.qtechnetworks.ptplatform.Model.Beans.PersonalCoach.PersonalCoach;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
-import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
-import com.qtechnetworks.ptplatform.View.Dialogs.CoachesDialog;
 
 import java.util.HashMap;
 

@@ -1,19 +1,16 @@
 package com.qtechnetworks.ptplatform.View.Fragment;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,18 +18,14 @@ import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.General;
 import com.qtechnetworks.ptplatform.Model.Beans.Questions.Datum;
 import com.qtechnetworks.ptplatform.Model.Beans.Questions.Question;
-import com.qtechnetworks.ptplatform.Model.Beans.calender.CalenderTime;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
 
-import org.json.JSONArray;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import io.reactivex.disposables.Disposable;
 
@@ -40,7 +33,7 @@ public class AddTraineeDetailsFragment extends Fragment implements CallBack {
 
     TextView doneBtn, header;
     LinearLayout mRlayout;
-    LinearLayout.LayoutParams mRparams;
+    LinearLayout.LayoutParams mRparams, editTextParams;
     List<EditText> questionsEt= new ArrayList<>();
 
     Integer userID;
@@ -122,6 +115,8 @@ public class AddTraineeDetailsFragment extends Fragment implements CallBack {
         doneBtn = view.findViewById(R.id.done_txt);
         mRlayout = view.findViewById(R.id.questionsLayout);
         mRparams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        editTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        editTextParams.bottomMargin = getResources().getDimensionPixelSize(R.dimen._20sdp);
 
         if (PreferencesUtils.getUserType().equalsIgnoreCase("coach")){
             header.setVisibility(View.GONE);
@@ -165,14 +160,10 @@ public class AddTraineeDetailsFragment extends Fragment implements CallBack {
                         myTextView.setText(queston.getQuestion());
 
                         EditText myEditText = new EditText(getContext());
-                        myEditText.setLayoutParams(mRparams);
+                        myEditText.setLayoutParams(editTextParams);
                         myEditText.setTextColor(Color.WHITE);
                         myEditText.setHintTextColor(Color.WHITE);
-                        myEditText.setHeight(150);
                         myEditText.setPadding(20,20,20,20);
-                        myEditText.setMaxLines(1);
-                        myEditText.setLines(1);
-                        myEditText.setSingleLine(true);
                         myEditText.setBackgroundResource(R.drawable.background_radius_10);
                         //   myEditText.setGravity(Gravity.CENTER);
                         myEditText.setId(queston.getId());

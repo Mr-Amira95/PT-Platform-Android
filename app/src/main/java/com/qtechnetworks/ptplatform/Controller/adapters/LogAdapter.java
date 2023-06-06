@@ -9,10 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -20,8 +18,6 @@ import com.qtechnetworks.ptplatform.Model.Beans.FavoriteandWorkout.Datum;
 import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 import com.qtechnetworks.ptplatform.View.Fragment.ExercisesSingleFragment;
-import com.qtechnetworks.ptplatform.View.Fragment.NewsSingleFragment;
-import com.qtechnetworks.ptplatform.View.Fragment.WorkoutSingleFragment;
 
 import java.util.List;
 
@@ -51,7 +47,7 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.ViewHolder>  {
         Datum current= data.get(position);
 
         if (current.getTitle() != null)
-        holder.logTitle.setText(current.getTitle());
+            holder.logTitle.setText(current.getTitle());
 
         try{
 
@@ -65,13 +61,13 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.ViewHolder>  {
             @Override
             public void onClick(View v) {
 //                if (current.getTitle() != null || current.getDescription() != null)
-                    setFragment(new ExercisesSingleFragment(),current.getId().toString(),current.getVideo(),current.getTitle(),current.getDescription());
+                    setFragment(new ExercisesSingleFragment(),current.getId().toString(),current.getVideo(),current.getTitle(),current.getDescription(), current.getIsFavourite(), current.getIsTodayLog());
             }
         });
 
     }
 
-    private void setFragment(Fragment fragment,String videoid,String video,String title,String description) {
+    private void setFragment(Fragment fragment, String videoid, String video, String title, String description, Boolean isFavourite, Boolean isTodayLog) {
 
         Bundle args = new Bundle();
 
@@ -82,6 +78,8 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.ViewHolder>  {
         args.putString("video",video);
         args.putString("title",title);
         args.putString("description",description);
+        args.putString("is_fav",isFavourite.toString());
+        args.putString("is_today",isTodayLog.toString());
 
         fragment.setArguments(args);
 

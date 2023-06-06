@@ -1,30 +1,20 @@
 package com.qtechnetworks.ptplatform.View.Fragment;
 
 import android.Manifest;
-import android.content.ContentResolver;
-import android.content.ContentValues;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.PermissionChecker;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.provider.CalendarContract;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.PermissionRequest;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.TextView;
@@ -33,20 +23,16 @@ import android.widget.Toast;
 import com.qtechnetworks.ptplatform.Controller.adapters.CoachTimesAdapter;
 import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
 import com.qtechnetworks.ptplatform.Model.Beans.CoachTime.CoachTime;
-import com.qtechnetworks.ptplatform.Model.Beans.Progress.Progress;
 import com.qtechnetworks.ptplatform.Model.Beans.calender.CalenderTime;
 import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
 import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
-import com.qtechnetworks.ptplatform.View.Activity.MainActivity;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.TimeZone;
 
 import io.reactivex.disposables.Disposable;
 import pub.devrel.easypermissions.EasyPermissions;

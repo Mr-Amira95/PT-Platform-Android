@@ -1,8 +1,5 @@
 package com.qtechnetworks.ptplatform.Controller.adapters;
 
-import static com.qtechnetworks.ptplatform.View.Fragment.VideoChatFragment.sessions;
-import static com.qtechnetworks.ptplatform.View.Fragment.VideoChatFragment.videoChatAdapter;
-
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -19,22 +16,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.qtechnetworks.ptplatform.Controller.networking.CallBack;
-import com.qtechnetworks.ptplatform.Model.Beans.Challenge.Challenge;
-import com.qtechnetworks.ptplatform.Model.Beans.General;
 import com.qtechnetworks.ptplatform.Model.Beans.VideoChat.Datum;
-import com.qtechnetworks.ptplatform.Model.Beans.VideoChat.VideoChat;
-import com.qtechnetworks.ptplatform.Model.basic.MyApplication;
-import com.qtechnetworks.ptplatform.Model.utilits.AppConstants;
 import com.qtechnetworks.ptplatform.Model.utilits.PreferencesUtils;
 import com.qtechnetworks.ptplatform.R;
 import com.qtechnetworks.ptplatform.View.Dialogs.ConfirmationDialog;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-
-import io.reactivex.disposables.Disposable;
 
 public class VideoChatAdapter extends RecyclerView.Adapter<VideoChatAdapter.ViewHolder> {
 

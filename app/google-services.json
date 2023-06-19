@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:942113943843:android:3be2a1ce25e1201a6d9c96",
+        "mobilesdk_app_id": "1:942113943843:android:ae8abbd1847987636d9c96",
         "android_client_info": {
-          "package_name": "com.example.chat"
+          "package_name": "com.company.ptplatform"
         }
       },
       "oauth_client": [],

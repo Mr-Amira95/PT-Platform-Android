@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.qtechnetworks.ptplatform",
+  "applicationId": "com.company.ptplatform",
   "variantName": "release",
   "elements": [
     {

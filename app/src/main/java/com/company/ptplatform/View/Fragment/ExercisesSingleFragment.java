@@ -199,11 +199,15 @@ public class ExercisesSingleFragment extends Fragment implements CallBack {
             else
                 getWorkout(ID);
         } else if (flag.equalsIgnoreCase("log")) {
-            if (isFav.equalsIgnoreCase("true"))
-                add_to_favourite.setText(R.string.remove_favourites);
+            try {
+                if (isFav.equalsIgnoreCase("true"))
+                    add_to_favourite.setText(R.string.remove_favourites);
 
-            if (isToday.equalsIgnoreCase("true"))
-                add_to_workout.setText(R.string.remove_workouts);
+                if (isToday.equalsIgnoreCase("true"))
+                    add_to_workout.setText(R.string.remove_workouts);
+            } catch (Exception e){
+
+            }
 
             playinitial(videolink);
 

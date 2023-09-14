@@ -11,8 +11,8 @@ android {
         minSdk 23
         targetSdkVersion 33
         targetSdk 33
-        versionCode 2
-        versionName "1.1"
+        versionCode 3
+        versionName "1.2"
 
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -45,6 +45,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    namespace 'com.company.ptplatform'
 }
 
 dependencies {
@@ -57,7 +58,7 @@ dependencies {
 //    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
 
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'com.google.firebase:firebase-database-ktx:20.2.2'
     testImplementation 'junit:junit:4.13.2'
@@ -82,7 +83,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-jackson:2.1.0'
 
     // GSON body parser
-    implementation 'com.google.code.gson:gson:2.8.9'
+    implementation 'com.google.code.gson:gson:2.9.0'
 
     implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.2'
 
@@ -106,8 +107,8 @@ dependencies {
     annotationProcessor 'com.google.dagger:dagger-android-processor:2.41'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.41'
 
-    implementation "com.android.billingclient:billing:5.2.0"
-    implementation "com.android.billingclient:billing-ktx:5.2.0"
+    implementation "com.android.billingclient:billing:6.0.1"
+    implementation "com.android.billingclient:billing-ktx:6.0.1"
 
     implementation "androidx.multidex:multidex:2.0.1"
 
@@ -117,7 +118,7 @@ dependencies {
     implementation 'com.ss.bannerslider:bannerslider:2.0.0'
 
     //check internet
-    implementation 'com.github.jumadeveloper:networkmanager:0.0.2'
+//    implementation 'com.github.jumadeveloper:networkmanager:0.0.2'
 
     //blur
     implementation "jp.wasabeef:glide-transformations:4.0.0"
@@ -139,7 +140,7 @@ dependencies {
     //one signal
     implementation 'com.onesignal:OneSignal:[4.0.0, 4.99.99]'
 
-    implementation 'com.google.android.gms:play-services-auth:20.5.0'
+    implementation 'com.google.android.gms:play-services-auth:20.6.0'
 
 
     //facebook login
@@ -148,9 +149,8 @@ dependencies {
     ///video player
     //implementation 'com.github.HamidrezaAmz:MagicalExoPlayer:1.0.16'
 
-    implementation 'com.google.android.exoplayer:exoplayer:2.18.6'
+    implementation 'com.google.android.exoplayer:exoplayer:2.19.0'
     implementation 'com.google.android.gms:play-services-fitness:21.1.0'
-    implementation 'com.google.android.gms:play-services-auth:20.5.0'
 
     implementation "com.github.skydoves:powerspinner:1.2.3"
 
@@ -160,9 +160,6 @@ dependencies {
     implementation ('io.socket:socket.io-client:1.0.0') {
         exclude group: 'org.json', module: 'json'
     }
-
-    implementation "com.android.billingclient:billing:5.2.0"
-    implementation "com.android.billingclient:billing-ktx:5.2.0"
 
     implementation 'com.github.smarteist:autoimageslider:1.4.0'
 

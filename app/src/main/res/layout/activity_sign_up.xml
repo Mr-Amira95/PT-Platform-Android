@@ -190,7 +190,7 @@
                 android:layout_marginHorizontal="@dimen/_20sdp"
                 android:textColorHint="@color/white"
                 app:hintTextAppearance="@style/Widget.Design.TextInputLayout"
-                android:visibility="gone">
+                android:visibility="">
 
                 <EditText
                     android:id="@+id/mobilenumber_coach_signup_edittext"
@@ -218,7 +218,7 @@
                 android:layout_marginHorizontal="@dimen/_20sdp"
                 android:textColorHint="@color/white"
                 app:hintTextAppearance="@style/Widget.Design.TextInputLayout"
-                android:visibility="gone">
+                android:visibility="">
 
                 <EditText
                     android:id="@+id/socialmedia_coach_signup_edittext"
@@ -246,7 +246,7 @@
                 android:layout_marginHorizontal="@dimen/_20sdp"
                 android:textColorHint="@color/white"
                 app:hintTextAppearance="@style/Widget.Design.TextInputLayout"
-                android:visibility="gone">
+                android:visibility="">
 
                 <EditText
                     android:id="@+id/potential_coach_signup_edittext"
